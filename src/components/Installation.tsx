@@ -7,7 +7,7 @@ export default function Installation() {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText('npm install block-builder');
+    navigator.clipboard.writeText('npm install @mushket-co/block-builder');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -36,7 +36,7 @@ export default function Installation() {
             <div className="p-6">
               <div className="relative flex items-center bg-slate-900 rounded-lg px-6 py-4">
                 <code className="flex-1 text-gray-100 font-mono">
-                  npm install block-builder
+                  npm install @mushket-co/block-builder
                 </code>
                 <button
                   onClick={handleCopy}
@@ -112,7 +112,7 @@ export default function Installation() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <a
-                href="#"
+                href="/docs"
                 className="flex items-center p-4 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 rounded-lg hover:shadow-md transition-shadow border border-primary-200 dark:border-primary-800"
               >
                 <span className="text-2xl mr-3">📚</span>
@@ -123,7 +123,9 @@ export default function Installation() {
               </a>
 
               <a
-                href="#"
+                href="https://github.com/mushket-co/block-builder"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center p-4 bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-lg hover:shadow-md transition-shadow border border-purple-200 dark:border-purple-800"
               >
                 <span className="text-2xl mr-3">💻</span>

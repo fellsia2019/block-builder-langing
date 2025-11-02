@@ -1,14 +1,16 @@
+import Logo from './Logo';
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-900 text-gray-300 py-12">
+    <footer className="bg-slate-900 text-gray-300 py-12 relative z-[100] border-t border-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <span className="text-3xl">🏗️</span>
+              <Logo size={36} />
               <span className="text-2xl font-bold text-white">BlockBuilder</span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
@@ -17,7 +19,9 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://github.com/mushket-co/block-builder"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
                 aria-label="GitHub"
               >
@@ -26,7 +30,9 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://www.npmjs.com/package/@mushket-co/block-builder"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
                 aria-label="NPM"
               >
@@ -42,23 +48,23 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-4">Документация</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Быстрый старт
+                <a href="/docs" className="text-gray-400 hover:text-white transition-colors">
+                  Документация
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  API Reference
+                <a href="/docs#core" className="text-gray-400 hover:text-white transition-colors">
+                  Core API
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Примеры
+                <a href="/docs#vue3" className="text-gray-400 hover:text-white transition-colors">
+                  Vue3
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Миграция
+                <a href="/docs#react" className="text-gray-400 hover:text-white transition-colors">
+                  React
                 </a>
               </li>
             </ul>
@@ -68,23 +74,18 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-4">Сообщество</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a href="https://github.com/mushket-co/block-builder/issues" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                   GitHub Issues
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Discord
+                <a href="https://github.com/mushket-co/block-builder" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                  GitHub
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Stack Overflow
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Changelog
+                <a href="https://www.npmjs.com/package/@mushket-co/block-builder" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                  NPM Package
                 </a>
               </li>
             </ul>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import AnimateOnScroll from './AnimateOnScroll';
+import CodeBlock from './CodeBlock';
 
 const examples = [
   {
@@ -12,7 +13,7 @@ const examples = [
 </template>
 
 <script setup>
-import { BlockBuilderComponent } from 'block-builder/vue'
+import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
 import YourTextBlock from './components/YourTextBlock.vue'
 
 const config = {
@@ -34,7 +35,7 @@ const config = {
   {
     title: 'Pure JavaScript',
     language: 'javascript',
-    code: `import { BlockBuilder } from 'block-builder'
+    code: `import { BlockBuilder } from '@mushket-co/block-builder'
 import { blockConfigs } from './block-config.js'
 
 // Создание экземпляра с автоматическим UI
@@ -51,7 +52,7 @@ const blockBuilder = new BlockBuilder({
   {
     title: 'Только API (без UI)',
     language: 'javascript',
-    code: `import { BlockBuilder } from 'block-builder'
+    code: `import { BlockBuilder } from '@mushket-co/block-builder'
 
 // Создание экземпляра только с API
 const blockBuilder = new BlockBuilder({
@@ -150,11 +151,13 @@ export default function CodeExamples() {
               </div>
               <div className="text-sm text-gray-400">{examples[activeTab].title}</div>
             </div>
-            <pre className="p-6 overflow-x-auto">
-              <code className="text-sm text-gray-100 font-mono whitespace-pre">
-                {examples[activeTab].code}
-              </code>
-            </pre>
+            <div className="px-6 pb-6">
+              <CodeBlock 
+                code={examples[activeTab].code} 
+                language={examples[activeTab].language}
+                className="rounded-none"
+              />
+            </div>
           </div>
           </AnimateOnScroll>
 
