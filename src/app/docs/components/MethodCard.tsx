@@ -6,7 +6,7 @@ interface MethodCardProps {
   name: string;
   signature: string;
   description: string;
-  color?: 'blue' | 'purple' | 'orange';
+  color?: 'blue' | 'purple' | 'orange' | 'green';
   isPro?: boolean;
 }
 
@@ -21,6 +21,7 @@ export default function MethodCard({
     blue: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
     purple: 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800',
     orange: 'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800',
+    green: 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
   };
 
   const proBorderClass = isPro ? 'border-2 border-yellow-400' : '';
