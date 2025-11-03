@@ -1,50 +1,51 @@
 'use client';
 
 import AnimateOnScroll from './AnimateOnScroll';
+import Icon from './Icon';
 
 const features = [
   {
-    icon: '🏗️',
+    iconName: 'building' as const,
     title: 'Чистая архитектура',
     description: 'Проект построен по принципам Clean Architecture с четким разделением на слои: Core, Infrastructure и UI.'
   },
   {
-    icon: '🎯',
+    iconName: 'target' as const,
     title: 'SOLID принципы',
     description: 'Каждый класс имеет одну ответственность. Код легко тестировать, расширять и поддерживать.'
   },
   {
-    icon: '🎨',
+    iconName: 'paintbrush' as const,
     title: 'Vue3 компоненты из коробки',
     description: 'Готовые Vue3 Single File Components для быстрой интеграции в ваше приложение.'
   },
   {
-    icon: '⚡',
+    iconName: 'zap' as const,
     title: 'Pure JavaScript поддержка',
     description: 'Работает как с фреймворками, так и с чистым JavaScript без зависимостей.'
   },
   {
-    icon: '🔌',
+    iconName: 'plugin' as const,
     title: 'Плагинная система',
     description: 'Легко расширяйте функциональность через кастомные типы полей и рендереры.'
   },
   {
-    icon: '📦',
+    iconName: 'package' as const,
     title: 'TypeScript',
     description: 'Полная типизация для безопасной разработки и отличной поддержки IDE.'
   },
   {
-    icon: '💾',
+    iconName: 'save' as const,
     title: 'Гибкое хранилище',
     description: 'Выбирайте между localStorage и in-memory хранилищем или создайте свою реализацию.'
   },
   {
-    icon: '🎭',
+    iconName: 'theater' as const,
     title: 'Автоматический UI',
     description: 'Встроенный UI с формами, валидацией и модальными окнами работает из коробки.'
   },
   {
-    icon: '🧪',
+    iconName: 'flask' as const,
     title: 'Покрытие тестами',
     description: 'Unit, интеграционные и E2E тесты для гарантии качества кода.'
   },
@@ -76,7 +77,9 @@ export default function Features() {
               animationTime={600}
             >
               <div className="h-full p-6 bg-gradient-to-br from-white to-gray-50 dark:from-slate-800 dark:to-slate-900 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-100 dark:border-slate-700">
-                <div className="text-4xl mb-4 transform hover:scale-110 transition-transform duration-300">{feature.icon}</div>
+                <div className="mb-4 transform hover:scale-110 transition-transform duration-300">
+                  <Icon name={feature.iconName} size={48} className="text-primary-600 dark:text-primary-400" />
+                </div>
                 <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
                   {feature.title}
                 </h3>

@@ -3,6 +3,7 @@
 import NextPageLink from '../../components/NextPageLink';
 import ProBadge from '../../components/ProBadge';
 import CodeBlock from '@/components/CodeBlock';
+import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
 
 function FieldTypeCard({ 
@@ -30,7 +31,20 @@ function FieldTypeCard({
         </div>
       )}
       <div className="flex items-center gap-3 mb-2">
-        <span className="text-2xl">{icon}</span>
+        <div className="text-2xl flex items-center">
+          {icon === '📝' && <Icon name="pen" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '📄' && <Icon name="document" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '📧' && <Icon name="email" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '🔗' && <Icon name="link" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '🔢' && <Icon name="number" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '📋' && <Icon name="clipboard" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '☑️' && <Icon name="checkbox" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '🔘' && <Icon name="radio" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '🎨' && <Icon name="paintbrush" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '🖼️' && <Icon name="image" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '🔧' && <Icon name="settings" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '🔌' && <Icon name="plugin" size={28} className="text-pink-600 dark:text-pink-400" />}
+        </div>
         <h3 className="font-bold text-gray-900 dark:text-white">
           <code className="text-pink-700 dark:text-pink-400">{name}</code>
         </h3>
@@ -359,9 +373,12 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         <div className="mb-6">
           <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Использование spacing поля</h3>
           <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 mb-3 border-l-4 border-yellow-400">
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              <strong>💡 Кастомные брекпоинты</strong> (параметр <code className="text-yellow-700 dark:text-yellow-400">breakpoints</code>) доступны только в <strong>PRO версии</strong>. 
-              В FREE версии используются только стандартные брекпоинты (desktop, tablet, mobile).
+            <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+              <Icon name="lightbulb" size={18} className="text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
+              <span>
+                <strong>Кастомные брекпоинты</strong> (параметр <code className="text-yellow-700 dark:text-yellow-400">breakpoints</code>) доступны только в <strong>PRO версии</strong>. 
+                В FREE версии используются только стандартные брекпоинты (desktop, tablet, mobile).
+              </span>
             </p>
           </div>
           <CodeBlock
@@ -415,7 +432,10 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
           </p>
           <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 mb-3 border-l-4 border-yellow-400">
             <p className="text-sm text-gray-700 dark:text-gray-300">
-              <strong>⭐ PRO:</strong> Параметр <code className="text-yellow-700 dark:text-yellow-400">breakpoints</code> в <code className="text-yellow-700 dark:text-yellow-400">config</code> 
+              <span className="flex items-center gap-1">
+                <Icon name="star" size={16} className="text-yellow-600 dark:text-yellow-400" />
+                <strong>PRO:</strong>
+              </span> Параметр <code className="text-yellow-700 dark:text-yellow-400">breakpoints</code> в <code className="text-yellow-700 dark:text-yellow-400">config</code> 
               доступен только в PRO версии. В FREE версии кастомные брекпоинты игнорируются.
             </p>
           </div>
@@ -452,10 +472,13 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
             className="mb-4"
           />
           <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 border border-yellow-200 dark:border-yellow-800">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              <strong>⚠️ Важно:</strong> Если вы используете <code className="text-yellow-700 dark:text-yellow-400">spacingOptions</code>, 
-              любые явные поля с типом <code className="text-yellow-700 dark:text-yellow-400">'spacing'</code> в массиве <code className="text-yellow-700 dark:text-yellow-400">fields</code> 
-              будут проигнорированы. Чтобы отключить автоматическое добавление, установите <code className="text-yellow-700 dark:text-yellow-400">enabled: false</code>.
+            <p className="text-sm text-gray-600 dark:text-gray-400 flex items-start gap-2">
+              <Icon name="warning" size={18} className="text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
+              <span>
+                <strong>Важно:</strong> Если вы используете <code className="text-yellow-700 dark:text-yellow-400">spacingOptions</code>, 
+                любые явные поля с типом <code className="text-yellow-700 dark:text-yellow-400">'spacing'</code> в массиве <code className="text-yellow-700 dark:text-yellow-400">fields</code> 
+                будут проигнорированы. Чтобы отключить автоматическое добавление, установите <code className="text-yellow-700 dark:text-yellow-400">enabled: false</code>.
+              </span>
             </p>
           </div>
         </div>
@@ -641,9 +664,12 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
             </div>
           </div>
           <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border-l-4 border-blue-400">
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              <strong>💡 Автоматическое извлечение URL:</strong> Все компоненты автоматически извлекают URL из значения поля. 
-              Если значение — строка, используется как есть. Если объект — извлекается поле <code className="text-blue-700 dark:text-blue-400">src</code>.
+            <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+              <Icon name="lightbulb" size={18} className="text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+              <span>
+                <strong>Автоматическое извлечение URL:</strong> Все компоненты автоматически извлекают URL из значения поля. 
+                Если значение — строка, используется как есть. Если объект — извлекается поле <code className="text-blue-700 dark:text-blue-400">src</code>.
+              </span>
             </p>
           </div>
         </div>
@@ -682,10 +708,13 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
             className="mb-4"
           />
           <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 border-l-4 border-yellow-400">
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              <strong>⚠️ Важно:</strong> При использовании <code className="text-yellow-700 dark:text-yellow-400">uploadUrl</code> через 
-              <code className="text-yellow-700 dark:text-yellow-400">responseMapper</code> <strong>ОБЯЗАТЕЛЬНО</strong> верните объект с полем 
-              <code className="text-yellow-700 dark:text-yellow-400">src</code>, содержащим URL изображения.
+            <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+              <Icon name="warning" size={18} className="text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
+              <span>
+                <strong>Важно:</strong> При использовании <code className="text-yellow-700 dark:text-yellow-400">uploadUrl</code> через 
+                <code className="text-yellow-700 dark:text-yellow-400">responseMapper</code> <strong>ОБЯЗАТЕЛЬНО</strong> верните объект с полем 
+                <code className="text-yellow-700 dark:text-yellow-400">src</code>, содержащим URL изображения.
+              </span>
             </p>
           </div>
         </div>
@@ -763,7 +792,10 @@ const imageUrl = computed(() => {
         </h2>
         <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 mb-4 border-l-4 border-yellow-400">
           <p className="text-sm text-gray-700 dark:text-gray-300">
-            <strong>⭐ PRO только:</strong> Поле типа <code className="text-yellow-700 dark:text-yellow-400">api-select</code> доступно только в PRO версии. 
+            <span className="flex items-center gap-1">
+              <Icon name="star" size={16} className="text-yellow-600 dark:text-yellow-400" />
+              <strong>PRO только:</strong>
+            </span> Поле типа <code className="text-yellow-700 dark:text-yellow-400">api-select</code> доступно только в PRO версии. 
             В FREE версии такие поля автоматически скрываются из форм.
           </p>
         </div>
@@ -996,7 +1028,10 @@ const imageUrl = computed(() => {
         </h2>
         <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 mb-4 border-l-4 border-yellow-400">
           <p className="text-sm text-gray-700 dark:text-gray-300">
-            <strong>⭐ PRO только:</strong> Кастомные рендереры и поля типа <code className="text-yellow-700 dark:text-yellow-400">custom</code> доступны только в PRO версии. 
+            <span className="flex items-center gap-1">
+              <Icon name="star" size={16} className="text-yellow-600 dark:text-yellow-400" />
+              <strong>PRO только:</strong>
+            </span> Кастомные рендереры и поля типа <code className="text-yellow-700 dark:text-yellow-400">custom</code> доступны только в PRO версии. 
             В FREE версии такие поля автоматически скрываются из форм.
           </p>
         </div>
@@ -1196,7 +1231,10 @@ blockBuilder.registerCustomFieldRenderer(new WysiwygFieldRenderer());`}
         </div>
 
         <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 border border-yellow-200 dark:border-yellow-800">
-          <h4 className="font-bold text-gray-900 dark:text-white mb-2">⚠️ Важные моменты</h4>
+          <h4 className="font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+            <Icon name="warning" size={18} className="text-yellow-600 dark:text-yellow-400" />
+            Важные моменты
+          </h4>
           <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
             <li>В методе <code className="text-yellow-700 dark:text-yellow-400">render()</code> возвращайте новый элемент в <code className="text-yellow-700 dark:text-yellow-400">result.element</code>, даже если используете переданный <code className="text-yellow-700 dark:text-yellow-400">container</code></li>
             <li>Всегда реализуйте метод <code className="text-yellow-700 dark:text-yellow-400">destroy()</code> для очистки ресурсов (event listeners, subscriptions)</li>

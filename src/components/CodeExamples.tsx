@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import AnimateOnScroll from './AnimateOnScroll';
 import CodeBlock from './CodeBlock';
+import Icon from './Icon';
 
 const examples = [
   {
@@ -164,7 +165,9 @@ export default function CodeExamples() {
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={600}>
               <div className="p-6 bg-gradient-to-br from-primary-50 to-purple-50 dark:from-primary-900/20 dark:to-purple-900/20 rounded-xl border border-primary-200 dark:border-primary-800 hover:scale-105 transition-transform">
-                <div className="text-2xl mb-2">⚡</div>
+                <div className="mb-2">
+                  <Icon name="zap" size={32} className="text-primary-600 dark:text-primary-400" />
+                </div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                   Быстрый старт
                 </h3>
@@ -175,7 +178,9 @@ export default function CodeExamples() {
             </AnimateOnScroll>
             <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={700}>
               <div className="p-6 bg-gradient-to-br from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 rounded-xl border border-green-200 dark:border-green-800 hover:scale-105 transition-transform">
-                <div className="text-2xl mb-2">🔌</div>
+                <div className="mb-2">
+                  <Icon name="plugin" size={32} className="text-green-600 dark:text-green-400" />
+                </div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                   Гибкость
                 </h3>
@@ -186,7 +191,9 @@ export default function CodeExamples() {
             </AnimateOnScroll>
             <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={800}>
               <div className="p-6 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl border border-orange-200 dark:border-orange-800 hover:scale-105 transition-transform">
-                <div className="text-2xl mb-2">🎨</div>
+                <div className="mb-2">
+                  <Icon name="paintbrush" size={32} className="text-orange-600 dark:text-orange-400" />
+                </div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                   Расширяемость
                 </h3>

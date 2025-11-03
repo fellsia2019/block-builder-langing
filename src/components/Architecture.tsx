@@ -1,6 +1,7 @@
 'use client';
 
 import AnimateOnScroll from './AnimateOnScroll';
+import Icon from './Icon';
 
 export default function Architecture() {
   return (
@@ -21,8 +22,9 @@ export default function Architecture() {
           <div className="space-y-6">
             <AnimateOnScroll animationName="FADE_IN_LEFT" animationDelay={200}>
               <div className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-l-4 border-primary-600">
-                <h3 className="text-xl font-semibold mb-3 text-primary-600 dark:text-primary-400">
-                  🎯 Core Layer (Ядро)
+                <h3 className="text-xl font-semibold mb-3 text-primary-600 dark:text-primary-400 flex items-center gap-2">
+                  <Icon name="target" size={20} />
+                  Core Layer (Ядро)
                 </h3>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                   <li>• <strong>Entities</strong> - бизнес-правила и сущности</li>
@@ -35,8 +37,9 @@ export default function Architecture() {
 
             <AnimateOnScroll animationName="FADE_IN_LEFT" animationDelay={400}>
               <div className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-l-4 border-purple-600">
-                <h3 className="text-xl font-semibold mb-3 text-purple-600 dark:text-purple-400">
-                  🔧 Infrastructure Layer
+                <h3 className="text-xl font-semibold mb-3 text-purple-600 dark:text-purple-400 flex items-center gap-2">
+                  <Icon name="settings" size={20} />
+                  Infrastructure Layer
                 </h3>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                   <li>• <strong>Repositories</strong> - реализации хранилищ</li>
@@ -48,8 +51,9 @@ export default function Architecture() {
 
             <AnimateOnScroll animationName="FADE_IN_LEFT" animationDelay={600}>
               <div className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-l-4 border-pink-600">
-                <h3 className="text-xl font-semibold mb-3 text-pink-600 dark:text-pink-400">
-                  🎨 UI Layer
+                <h3 className="text-xl font-semibold mb-3 text-pink-600 dark:text-pink-400 flex items-center gap-2">
+                  <Icon name="paintbrush" size={20} />
+                  UI Layer
                 </h3>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                   <li>• <strong>Vue3 Components</strong> - готовые компоненты</li>
@@ -97,8 +101,9 @@ export default function Architecture() {
                 </div>
 
                 <div className="mt-8 p-4 bg-green-50 dark:bg-green-900/30 rounded-lg border-2 border-green-200 dark:border-green-800">
-                  <div className="text-center text-sm font-semibold text-green-700 dark:text-green-300 mb-2">
-                    ✅ Преимущества
+                  <div className="text-center text-sm font-semibold text-green-700 dark:text-green-300 mb-2 flex items-center justify-center gap-2">
+                    <Icon name="check" size={16} />
+                    Преимущества
                   </div>
                   <ul className="text-xs text-green-600 dark:text-green-400 space-y-1">
                     <li>• Core не зависит от внешних слоев</li>
@@ -115,21 +120,27 @@ export default function Architecture() {
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
           <AnimateOnScroll animationName="ZOOM_IN" animationDelay={200}>
             <div className="text-center p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
-              <div className="text-3xl mb-2 transform hover:scale-110 transition-transform">🧪</div>
+              <div className="mb-2 transform hover:scale-110 transition-transform flex justify-center">
+                <Icon name="flask" size={48} className="text-primary-600 dark:text-primary-400" />
+              </div>
               <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-2">100%</div>
               <div className="text-gray-600 dark:text-gray-400">Покрытие тестами</div>
             </div>
           </AnimateOnScroll>
           <AnimateOnScroll animationName="ZOOM_IN" animationDelay={400}>
             <div className="text-center p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
-              <div className="text-3xl mb-2 transform hover:scale-110 transition-transform">📦</div>
+              <div className="mb-2 transform hover:scale-110 transition-transform flex justify-center">
+                <Icon name="package" size={48} className="text-purple-600 dark:text-purple-400" />
+              </div>
               <div className="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-2">TypeScript</div>
               <div className="text-gray-600 dark:text-gray-400">Полная типизация</div>
             </div>
           </AnimateOnScroll>
           <AnimateOnScroll animationName="ZOOM_IN" animationDelay={600}>
             <div className="text-center p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
-              <div className="text-3xl mb-2 transform hover:scale-110 transition-transform">⚡</div>
+              <div className="mb-2 transform hover:scale-110 transition-transform flex justify-center">
+                <Icon name="target" size={48} className="text-pink-600 dark:text-pink-400" />
+              </div>
               <div className="text-2xl font-bold text-pink-600 dark:text-pink-400 mb-2">SOLID</div>
               <div className="text-gray-600 dark:text-gray-400">Принципы разработки</div>
             </div>

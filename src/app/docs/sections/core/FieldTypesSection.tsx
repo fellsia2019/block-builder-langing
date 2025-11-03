@@ -2,6 +2,7 @@
 
 import NextPageLink from '../../components/NextPageLink';
 import CodeBlock from '@/components/CodeBlock';
+import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
 
 function FieldTypeCard({ 
@@ -20,7 +21,16 @@ function FieldTypeCard({
   return (
     <div className="bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-900/10 rounded-lg p-4 border border-pink-200 dark:border-pink-800">
       <div className="flex items-center gap-3 mb-2">
-        <span className="text-2xl">{icon}</span>
+        <div className="text-2xl flex items-center">
+          {icon === '📝' && <Icon name="pen" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '📄' && <Icon name="document" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '🔢' && <Icon name="number" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '📋' && <Icon name="clipboard" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '☑️' && <Icon name="checkbox" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '🔘' && <Icon name="radio" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '🎨' && <Icon name="paintbrush" size={28} className="text-pink-600 dark:text-pink-400" />}
+          {icon === '🖼️' && <Icon name="image" size={28} className="text-pink-600 dark:text-pink-400" />}
+        </div>
         <h3 className="font-bold text-gray-900 dark:text-white">
           <code className="text-pink-700 dark:text-pink-400">{name}</code>
         </h3>

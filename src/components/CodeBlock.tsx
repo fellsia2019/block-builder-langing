@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import Icon from './Icon';
 
 interface CodeBlockProps {
   code: string;
@@ -69,7 +70,7 @@ export default function CodeBlock({
           </span>
         ) : (
           <span className="flex items-center gap-1">
-            <span>📋</span>
+            <Icon name="clipboard" size={14} />
             <span>Копировать</span>
           </span>
         )}

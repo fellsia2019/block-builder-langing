@@ -2,6 +2,7 @@
 
 import NextPageLink from '../../components/NextPageLink';
 import CodeBlock from '@/components/CodeBlock';
+import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
 
 export default function GettingStartedCore({ nextSection, nextTitle, onNavigate }: NavigationProps) {
@@ -25,7 +26,7 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
 
       <section className="bg-gradient-to-br from-yellow-50 via-yellow-100 to-yellow-50 dark:from-yellow-900/20 dark:via-yellow-900/10 dark:to-yellow-900/20 rounded-xl p-6 border-2 border-yellow-400">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
-          <span>⭐</span>
+          <Icon name="star" size={24} className="text-yellow-600 dark:text-yellow-400" />
           FREE и PRO версии
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
@@ -61,24 +62,24 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
 
           <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/30 dark:to-yellow-900/20 rounded-lg p-4 border-2 border-yellow-400">
             <h3 className="font-bold text-lg mb-3 text-gray-900 dark:text-white flex items-center gap-2">
-              <span>⭐</span>
+              <Icon name="star" size={20} className="text-yellow-600 dark:text-yellow-400" />
               PRO версия
             </h3>
             <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
               <li className="flex items-start">
-                <span className="text-yellow-500 mr-2">⭐</span>
+                <Icon name="star" size={16} className="text-yellow-500 mr-2" />
                 <span><strong>Неограниченное</strong> количество типов блоков</span>
               </li>
               <li className="flex items-start">
-                <span className="text-yellow-500 mr-2">⭐</span>
+                <Icon name="star" size={16} className="text-yellow-500 mr-2" />
                 <span><strong>Кастомные поля</strong> (custom type)</span>
               </li>
               <li className="flex items-start">
-                <span className="text-yellow-500 mr-2">⭐</span>
+                <Icon name="star" size={16} className="text-yellow-500 mr-2" />
                 <span><strong>API Select поля</strong> для интеграции с внешними API</span>
               </li>
               <li className="flex items-start">
-                <span className="text-yellow-500 mr-2">⭐</span>
+                <Icon name="star" size={16} className="text-yellow-500 mr-2" />
                 <span><strong>Кастомные брекпоинты</strong> для spacing полей</span>
               </li>
               <li className="flex items-start">
@@ -104,7 +105,7 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
 
         <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border-2 border-green-400 mt-4">
           <h4 className="font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-            <span>🔑</span>
+            <Icon name="key" size={20} className="text-green-600 dark:text-green-400" />
             Тестовый ключ для демо и проверки
           </h4>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
@@ -115,7 +116,10 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
             <code className="text-green-400 font-mono text-sm">BB-PRO-1234-5678-ABCD</code>
           </div>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            ⚠️ Этот ключ работает только на <code className="text-gray-700 dark:text-gray-300">localhost</code>. Для production используйте ключ, полученный при покупке.
+            <span className="flex items-center gap-1">
+              <Icon name="warning" size={14} className="text-gray-600 dark:text-gray-400" />
+              Этот ключ работает только на <code className="text-gray-700 dark:text-gray-300">localhost</code>. Для production используйте ключ, полученный при покупке.
+            </span>
           </p>
         </div>
 

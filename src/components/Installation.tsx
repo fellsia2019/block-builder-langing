@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import AnimateOnScroll from './AnimateOnScroll';
+import Icon from './Icon';
 
 export default function Installation() {
   const [copied, setCopied] = useState(false);
@@ -49,7 +50,7 @@ export default function Installation() {
                     </>
                   ) : (
                     <>
-                      <span>📋</span>
+                      <Icon name="clipboard" size={16} />
                       <span>Копировать</span>
                     </>
                   )}
@@ -115,7 +116,7 @@ export default function Installation() {
                 href="/docs"
                 className="flex items-center p-4 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 rounded-lg hover:shadow-md transition-shadow border border-primary-200 dark:border-primary-800"
               >
-                <span className="text-2xl mr-3">📚</span>
+                <Icon name="book" size={32} className="mr-3 text-primary-600 dark:text-primary-400" />
                 <div>
                   <div className="font-semibold text-gray-900 dark:text-white">Документация</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Полное руководство по API</div>
@@ -128,7 +129,7 @@ export default function Installation() {
                 rel="noopener noreferrer"
                 className="flex items-center p-4 bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-lg hover:shadow-md transition-shadow border border-purple-200 dark:border-purple-800"
               >
-                <span className="text-2xl mr-3">💻</span>
+                <Icon name="monitor" size={32} className="mr-3 text-purple-600 dark:text-purple-400" />
                 <div>
                   <div className="font-semibold text-gray-900 dark:text-white">GitHub</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Исходный код и примеры</div>
@@ -139,7 +140,7 @@ export default function Installation() {
                 href="#"
                 className="flex items-center p-4 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg hover:shadow-md transition-shadow border border-green-200 dark:border-green-800"
               >
-                <span className="text-2xl mr-3">🎓</span>
+                <Icon name="graduation" size={32} className="mr-3 text-green-600 dark:text-green-400" />
                 <div>
                   <div className="font-semibold text-gray-900 dark:text-white">Примеры</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Готовые решения</div>
@@ -150,7 +151,7 @@ export default function Installation() {
                 href="#"
                 className="flex items-center p-4 bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-lg hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-800"
               >
-                <span className="text-2xl mr-3">💬</span>
+                <Icon name="message" size={32} className="mr-3 text-orange-600 dark:text-orange-400" />
                 <div>
                   <div className="font-semibold text-gray-900 dark:text-white">Поддержка</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Задайте вопрос</div>

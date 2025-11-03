@@ -2,6 +2,7 @@
 
 import NextPageLink from '../../components/NextPageLink';
 import CodeBlock from '@/components/CodeBlock';
+import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
 
 export default function ComponentsSection({ nextSection, nextTitle, onNavigate }: NavigationProps) {
@@ -290,7 +291,10 @@ const handleClick = () => {
         </div>
 
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
-          <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">💡 Важно</h3>
+          <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white flex items-center gap-2">
+            <Icon name="lightbulb" size={20} className="text-blue-600 dark:text-blue-400" />
+            Важно
+          </h3>
           <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
             <li className="flex items-start">
               <span className="text-blue-500 mr-2">•</span>

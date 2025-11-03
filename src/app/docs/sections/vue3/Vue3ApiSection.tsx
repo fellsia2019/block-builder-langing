@@ -2,6 +2,7 @@
 
 import NextPageLink from '../../components/NextPageLink';
 import CodeBlock from '@/components/CodeBlock';
+import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
 
 export default function Vue3ApiSection({ nextSection, nextTitle, onNavigate }: NavigationProps) {
@@ -386,7 +387,10 @@ await loadBlocks()`}
       </section>
 
       <section className="bg-yellow-50 dark:bg-yellow-900/20 rounded-xl p-6 border-l-4 border-yellow-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">⚠️ Важно</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+          <Icon name="warning" size={24} className="text-yellow-600 dark:text-yellow-400" />
+          Важно
+        </h2>
         <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
           <li className="flex items-start">
             <span className="text-yellow-500 mr-2">•</span>

@@ -1,6 +1,7 @@
 'use client';
 
 import AnimateOnScroll from './AnimateOnScroll';
+import Icon from './Icon';
 
 export default function Hero() {
   return (
@@ -55,20 +56,25 @@ export default function Hero() {
         <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={1000} animationTime={800}>
           {/* Key features badges */}
           <div className="flex flex-wrap gap-3 justify-center text-sm">
-            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform">
-              ✨ Clean Architecture
+            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
+              <Icon name="sparkles" size={16} className="text-primary-600 dark:text-primary-400" />
+              Clean Architecture
             </span>
-            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform">
-              🎯 SOLID принципы
+            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
+              <Icon name="target" size={16} className="text-primary-600 dark:text-primary-400" />
+              SOLID принципы
             </span>
-            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform">
-              🧪 100% покрытие тестами
+            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
+              <Icon name="flask" size={16} className="text-primary-600 dark:text-primary-400" />
+              100% покрытие тестами
             </span>
-            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform">
-              📦 TypeScript
+            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
+              <Icon name="package" size={16} className="text-primary-600 dark:text-primary-400" />
+              TypeScript
             </span>
-            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform">
-              ⚡ Vue3 Support
+            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
+              <Icon name="zap" size={16} className="text-primary-600 dark:text-primary-400" />
+              Vue3 Support
             </span>
           </div>
         </AnimateOnScroll>
