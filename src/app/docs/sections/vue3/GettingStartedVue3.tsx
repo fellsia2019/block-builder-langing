@@ -221,10 +221,18 @@ const config = {
       },
       fields: [
         {
-          name: 'src',
-          label: 'URL изображения',
-          type: 'text',
-          required: true
+          name: 'image',
+          label: 'Изображение',
+          type: 'image',
+          required: true,
+          imageUploadConfig: {
+            uploadUrl: '/api/upload',
+            maxFileSize: 5 * 1024 * 1024,
+            accept: 'image/*',
+            responseMapper: (response) => ({
+              src: response.url
+            })
+          }
         },
         {
           name: 'alt',
@@ -280,6 +288,49 @@ const config = {
         />
       </section>
 
+      <section>
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Режим редактирования/просмотра</h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          BlockBuilder поддерживает два режима работы. Используйте проп <code className="text-purple-700 dark:text-purple-400">isEdit</code> для управления режимом:
+        </p>
+        <CodeBlock
+          code={`<template>
+  <!-- Режим редактирования (по умолчанию) -->
+  <BlockBuilderComponent 
+    :config="config"
+    :isEdit="true"
+  />
+
+  <!-- Режим только просмотра -->
+  <BlockBuilderComponent 
+    :config="config"
+    :isEdit="false"
+  />
+</template>
+
+<script setup>
+import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
+
+const config = {
+  availableBlockTypes: [
+    // ваша конфигурация
+  ],
+  storage: 'localStorage'
+}
+</script>`}
+          language="vue"
+          className="mb-4"
+        />
+        <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-800">
+          <h4 className="font-bold text-gray-900 dark:text-white mb-2">Что происходит в режиме просмотра?</h4>
+          <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+            <li>Скрываются все кнопки редактирования, добавления и управления блоками</li>
+            <li>Остаётся доступной только функция копирования ID блока</li>
+            <li>На элемент <code className="text-green-700 dark:text-green-400">body</code> автоматически добавляется/удаляется CSS класс <code className="text-green-700 dark:text-green-400">bb-is-edit-mode</code></li>
+          </ul>
+        </div>
+      </section>
+
       <section className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">💡 Важные моменты</h2>
         <ul className="space-y-2 text-gray-600 dark:text-gray-400">
@@ -299,10 +350,14 @@ const config = {
             <span className="text-blue-500 mr-2">•</span>
             <span><strong>События</strong> - Подписывайтесь на события компонента для синхронизации с вашим бэкендом</span>
           </li>
+          <li className="flex items-start">
+            <span className="text-blue-500 mr-2">•</span>
+            <span><strong>Режим просмотра</strong> - Используйте <code className="text-blue-700 dark:text-blue-400">:isEdit="false"</code> для отображения блоков в режиме только просмотра без возможности редактирования</span>
+          </li>
         </ul>
       </section>
 
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} color="purple" />
+      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/vue/${nextSection}` : null} color="purple" />
     </div>
   );
 }

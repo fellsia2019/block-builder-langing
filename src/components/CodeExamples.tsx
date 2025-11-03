@@ -142,24 +142,23 @@ export default function CodeExamples() {
           </AnimateOnScroll>
 
           <AnimateOnScroll animationName="SCALE_UP" animationDelay={400}>
-            {/* Code block */}
             <div className="relative bg-slate-900 rounded-xl shadow-2xl overflow-hidden hover:shadow-3xl transition-shadow">
-            <div className="flex items-center justify-between px-6 py-3 bg-slate-800">
-              <div className="flex space-x-2">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
+              <div className="flex items-center justify-between px-6 py-3 bg-slate-800">
+                <div className="flex space-x-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                </div>
+                <div className="text-sm text-gray-400">{examples[activeTab].title}</div>
               </div>
-              <div className="text-sm text-gray-400">{examples[activeTab].title}</div>
+              <div className="px-6 pb-6">
+                <CodeBlock 
+                  code={examples[activeTab].code} 
+                  language={examples[activeTab].language}
+                  className="rounded-none"
+                />
+              </div>
             </div>
-            <div className="px-6 pb-6">
-              <CodeBlock 
-                code={examples[activeTab].code} 
-                language={examples[activeTab].language}
-                className="rounded-none"
-              />
-            </div>
-          </div>
           </AnimateOnScroll>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">

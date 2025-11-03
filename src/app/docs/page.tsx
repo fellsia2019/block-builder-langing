@@ -1,18 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 
 export default function DocsPage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    // Редирект на страницу Core по умолчанию
-    router.replace('/docs/core/getting-started');
-  }, [router]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">

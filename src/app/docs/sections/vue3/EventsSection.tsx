@@ -347,7 +347,7 @@ const handleBlockDeleted = (blockId) => {
         </ul>
       </section>
 
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} color="purple" />
+      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/vue/${nextSection}` : null} color="purple" />
     </div>
   );
 }

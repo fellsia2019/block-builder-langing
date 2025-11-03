@@ -287,14 +287,17 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
             description="Загрузка изображения с поддержкой base64 и серверной загрузки, автоматическим preview и валидацией" 
             icon="🖼️"
             example={`{
-  field: 'imageUrl',
+  field: 'image',
   label: 'Изображение',
   type: 'image',
   defaultValue: '',
   imageUploadConfig: {
     uploadUrl: '/api/upload',
     maxFileSize: 5 * 1024 * 1024,
-    accept: 'image/*'
+    accept: 'image/*',
+    responseMapper: (response) => ({
+      src: response.url
+    })
   }
 }`}
             parameters={['field', 'label', 'type', 'defaultValue', 'imageUploadConfig', 'rules']}
@@ -1245,7 +1248,7 @@ blockBuilder.registerCustomFieldRenderer(new WysiwygFieldRenderer());`}
         </div>
       </section>
 
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} color="primary" />
+      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/core/${nextSection}` : null} color="primary" />
     </div>
   );
 }

@@ -36,7 +36,7 @@ export default function ClassesSection({ nextSection, nextTitle, onNavigate }: N
         </div>
       </section>
 
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} color="primary" />
+      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/core/${nextSection}` : null} color="primary" />
     </div>
   );
 }

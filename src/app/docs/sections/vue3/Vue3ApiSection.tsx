@@ -386,6 +386,105 @@ await loadBlocks()`}
         </div>
       </section>
 
+      <section>
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Режим редактирования/просмотра</h2>
+        
+        <div className="bg-green-50 dark:bg-green-900/20 rounded-xl p-6 border-l-4 border-green-500 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+            BlockBuilder поддерживает два режима работы: <strong>режим редактирования</strong> (по умолчанию) 
+            и <strong>режим просмотра</strong>. В режиме просмотра все кнопки редактирования, добавления и управления блоками скрываются.
+          </p>
+        </div>
+
+        <div className="space-y-6">
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700">
+            <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+              <code className="text-purple-700 dark:text-purple-400">Инициализация с режимом просмотра</code>
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-3">
+              При создании экземпляра BlockBuilder можно указать режим работы:
+            </p>
+            <CodeBlock
+              code={`onMounted(() => {
+  blockBuilder.value = new BlockBuilder({
+    containerId: 'my-app',
+    blockConfigs: blockConfigs,
+    storage: 'localStorage',
+    autoRender: false,
+    isEdit: false // режим только просмотра
+  })
+})`}
+              language="javascript"
+              className="mb-2"
+            />
+          </div>
+
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700">
+            <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+              <code className="text-purple-700 dark:text-purple-400">Динамическое переключение режима</code>
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-3">
+              Используйте методы BlockBuilderFacade для переключения режима во время работы:
+            </p>
+            <CodeBlock
+              code={`<script setup>
+import { ref } from 'vue'
+import { BlockBuilderFactory } from '@mushket-co/block-builder'
+
+const facade = ref(null)
+
+onMounted(() => {
+  facade.value = BlockBuilderFactory.create({
+    containerId: 'my-app',
+    blockConfigs: blockConfigs,
+    isEdit: true // режим редактирования
+  })
+})
+
+// Переключить в режим просмотра
+const switchToViewMode = () => {
+  facade.value?.setIsEdit(false)
+}
+
+// Переключить в режим редактирования
+const switchToEditMode = () => {
+  facade.value?.setIsEdit(true)
+}
+
+// Проверить текущий режим
+const checkMode = () => {
+  const isEdit = facade.value?.getIsEdit()
+  console.log('Текущий режим:', isEdit ? 'редактирование' : 'просмотр')
+}
+</script>`}
+              language="vue"
+              className="mb-2"
+            />
+          </div>
+
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
+            <h4 className="font-bold text-gray-900 dark:text-white mb-2">CSS класс для кастомизации</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              При изменении режима на элемент <code className="text-blue-700 dark:text-blue-400">body</code> автоматически добавляется/удаляется CSS класс <code className="text-blue-700 dark:text-blue-400">bb-is-edit-mode</code>. 
+              Это позволяет кастомизировать стили в зависимости от режима:
+            </p>
+            <CodeBlock
+              code={`/* Скрыть элементы только в режиме просмотра */
+body:not(.bb-is-edit-mode) .edit-controls {
+  display: none;
+}
+
+/* Показать дополнительные элементы в режиме просмотра */
+body:not(.bb-is-edit-mode) .view-only-info {
+  display: block;
+}`}
+              language="css"
+              className="mb-2 text-xs"
+            />
+          </div>
+        </div>
+      </section>
+
       <section className="bg-yellow-50 dark:bg-yellow-900/20 rounded-xl p-6 border-l-4 border-yellow-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="warning" size={24} className="text-yellow-600 dark:text-yellow-400" />
@@ -411,7 +510,7 @@ await loadBlocks()`}
         </ul>
       </section>
 
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} color="purple" />
+      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/vue/${nextSection}` : null} color="purple" />
     </div>
   );
 }

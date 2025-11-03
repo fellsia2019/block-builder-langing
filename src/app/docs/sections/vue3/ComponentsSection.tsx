@@ -85,6 +85,25 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
                 className="mb-2 text-xs"
               />
             </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">isEdit</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Boolean, optional, default: true</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Режим редактирования. Если <code className="text-purple-700 dark:text-purple-400">false</code>, все кнопки редактирования, добавления и управления блоками скрываются. Остаётся доступной только функция копирования ID блока.
+              </p>
+              <CodeBlock
+                code={`// Режим редактирования (по умолчанию)
+<BlockBuilderComponent :config="config" :isEdit="true" />
+
+// Режим только просмотра
+<BlockBuilderComponent :config="config" :isEdit="false" />`}
+                language="vue"
+                className="mb-2 text-xs"
+              />
+            </div>
           </div>
         </div>
 
@@ -290,6 +309,57 @@ const handleClick = () => {
           />
         </div>
 
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Пример компонента с изображением</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-3">
+            При использовании поля <code className="text-purple-700 dark:text-purple-400">type: 'image'</code> в компоненте нужно обрабатывать как строку (base64), так и объект (серверная загрузка):
+          </p>
+          <CodeBlock
+            code={`<!-- components/ImageBlock.vue -->
+<template>
+  <div class="image-block">
+    <img 
+      :src="imageUrl" 
+      :alt="block.props.alt || 'Image'" 
+      :style="{ width: block.props.width + '%' }"
+    />
+  </div>
+</template>
+
+<script setup>
+import { computed } from 'vue'
+
+const props = defineProps({
+  block: {
+    type: Object,
+    required: true
+  }
+})
+
+// Автоматическое извлечение URL из строки или объекта
+const imageUrl = computed(() => {
+  const image = props.block.props.image
+  if (typeof image === 'string') {
+    return image // base64 строка
+  }
+  if (typeof image === 'object' && image !== null) {
+    return image.src || '' // объект с полем src
+  }
+  return ''
+})
+</script>
+
+<style scoped>
+.image-block {
+  padding-top: var(--spacing-padding-top, 1rem);
+  padding-bottom: var(--spacing-padding-bottom, 1rem);
+}
+</style>`}
+            language="vue"
+            className="mb-4"
+          />
+        </div>
+
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
           <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white flex items-center gap-2">
             <Icon name="lightbulb" size={20} className="text-blue-600 dark:text-blue-400" />
@@ -316,7 +386,7 @@ const handleClick = () => {
         </div>
       </section>
 
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} color="purple" />
+      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/vue/${nextSection}` : null} color="purple" />
     </div>
   );
 }
