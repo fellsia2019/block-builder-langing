@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Logo from './Logo';
 
 export default function Footer() {
@@ -9,9 +10,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <Logo size={36} />
-              <span className="text-2xl font-bold text-white">BlockBuilder</span>
+            <div className="flex items-center mb-4">
+              <Link href="/" className="hover:opacity-80 transition-opacity">
+                <Logo size={36} />
+              </Link>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
               Библиотека для создания блочных конструкторов с правильной чистой архитектурой. 
@@ -48,24 +50,24 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-4">Документация</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/docs" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/docs" className="text-gray-400 hover:text-white transition-colors">
                   Документация
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/docs#core" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/docs/core/getting-started" className="text-gray-400 hover:text-white transition-colors">
                   Core API
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/docs#vue3" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/docs/vue/getting-started" className="text-gray-400 hover:text-white transition-colors">
                   Vue3
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/docs#react" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/docs/react" className="text-gray-400 hover:text-white transition-colors">
                   React
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

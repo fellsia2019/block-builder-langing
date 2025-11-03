@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "BlockBuilder - Блочный конструктор с чистой архитектурой",
   description: "Библиотека для создания блочных конструкторов с правильной чистой архитектурой. Поддержка Vue3, Pure JavaScript и TypeScript.",
   keywords: ["block-builder", "no-code", "constructor", "vue3", "typescript", "clean architecture"],
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

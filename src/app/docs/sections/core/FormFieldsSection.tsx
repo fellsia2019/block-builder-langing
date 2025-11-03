@@ -270,28 +270,20 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
           
           <FieldTypeCard 
             name="image" 
-            description="Загрузка изображения (URL или файл)" 
+            description="Загрузка изображения с поддержкой base64 и серверной загрузки, автоматическим preview и валидацией" 
             icon="🖼️"
             example={`{
   field: 'imageUrl',
   label: 'Изображение',
   type: 'image',
-  defaultValue: ''
+  defaultValue: '',
+  imageUploadConfig: {
+    uploadUrl: '/api/upload',
+    maxFileSize: 5 * 1024 * 1024,
+    accept: 'image/*'
+  }
 }`}
-            parameters={['field', 'label', 'type', 'defaultValue', 'rules']}
-          />
-
-          <FieldTypeCard 
-            name="file" 
-            description="Загрузка файла любого типа" 
-            icon="📎"
-            example={`{
-  field: 'attachment',
-  label: 'Прикрепленный файл',
-  type: 'file',
-  defaultValue: ''
-}`}
-            parameters={['field', 'label', 'type', 'defaultValue', 'rules']}
+            parameters={['field', 'label', 'type', 'defaultValue', 'imageUploadConfig', 'rules']}
           />
 
           <FieldTypeCard 
@@ -608,6 +600,162 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
         </div>
       </section>
 
+      <section className="bg-pink-50 dark:bg-pink-900/20 rounded-xl p-6 border-l-4 border-pink-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Поле изображения (Image)</h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Поле типа <code className="text-pink-700 dark:text-pink-400">image</code> предоставляет полную поддержку работы с изображениями: 
+          загрузку файлов с preview, валидацию, поддержку двух форматов хранения (base64 строка или объект с метаданными), 
+          а также настройку серверной загрузки.
+        </p>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Два формата хранения данных</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-3">
+            Поля типа <code className="text-pink-700 dark:text-pink-400">image</code> могут работать как со строками (base64), так и с объектами (серверная загрузка):
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">Base64 изображения (строка):</h4>
+              <CodeBlock
+                code={`props: {
+  image: "data:image/jpeg;base64,/9j/4AAQSkZJRg..."
+}`}
+                language="javascript"
+                className="text-xs"
+              />
+            </div>
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">Серверная загрузка (объект):</h4>
+              <CodeBlock
+                code={`props: {
+  image: {
+    src: "https://example.com/uploads/image.jpg",
+    width: 1920,
+    height: 1080,
+    size: 245678
+  }
+}`}
+                language="javascript"
+                className="text-xs"
+              />
+            </div>
+          </div>
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border-l-4 border-blue-400">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              <strong>💡 Автоматическое извлечение URL:</strong> Все компоненты автоматически извлекают URL из значения поля. 
+              Если значение — строка, используется как есть. Если объект — извлекается поле <code className="text-blue-700 dark:text-blue-400">src</code>.
+            </p>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Конфигурация загрузки на сервер</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-3">
+            Для настройки серверной загрузки используйте параметр <code className="text-pink-700 dark:text-pink-400">imageUploadConfig</code>:
+          </p>
+          <CodeBlock
+            code={`{
+  field: 'image',
+  label: 'Изображение',
+  type: 'image',
+  imageUploadConfig: {
+    uploadUrl: '/api/upload',           // URL для загрузки
+    fileParamName: 'file',              // Имя поля в FormData (по умолчанию 'file')
+    maxFileSize: 5 * 1024 * 1024,       // Максимальный размер (5MB)
+    accept: 'image/*',                   // Разрешенные типы (по умолчанию 'image/*')
+    uploadHeaders: {                    // Заголовки запроса
+      'Authorization': 'Bearer token'
+    },
+    responseMapper: (response) => ({    // Преобразование ответа сервера
+      src: response.url,               // ОБЯЗАТЕЛЬНО! URL изображения
+      width: response.width,
+      height: response.height,
+      size: response.size
+    }),
+    onUploadError: (error) => {         // Обработка ошибок
+      console.error('Ошибка загрузки:', error);
+    }
+  },
+  defaultValue: ''
+}`}
+            language="javascript"
+            className="mb-4"
+          />
+          <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 border-l-4 border-yellow-400">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              <strong>⚠️ Важно:</strong> При использовании <code className="text-yellow-700 dark:text-yellow-400">uploadUrl</code> через 
+              <code className="text-yellow-700 dark:text-yellow-400">responseMapper</code> <strong>ОБЯЗАТЕЛЬНО</strong> верните объект с полем 
+              <code className="text-yellow-700 dark:text-yellow-400">src</code>, содержащим URL изображения.
+            </p>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Пример использования в компонентах</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-3">
+            При работе с полями изображений в ваших компонентах используйте автоматическое извлечение URL:
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">Vue компонент:</h4>
+              <CodeBlock
+                code={`<template>
+  <img :src="imageUrl" alt="Image" />
+</template>
+
+<script setup>
+import { computed } from 'vue'
+
+const props = defineProps({
+  image: [String, Object]
+})
+
+const imageUrl = computed(() => {
+  if (typeof props.image === 'string') return props.image;
+  if (typeof props.image === 'object' && props.image !== null) {
+    return props.image.src || '';
+  }
+  return '';
+})
+</script>`}
+                language="vue"
+                className="text-xs"
+              />
+            </div>
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">Pure JS шаблон:</h4>
+              <CodeBlock
+                code={`template: (props) => {
+  const getImageUrl = (img) => {
+    if (typeof img === 'string') return img;
+    if (typeof img === 'object' && img !== null) {
+      return img.src || '';
+    }
+    return '';
+  };
+  return \`<img src="\${getImageUrl(props.image)}" />\`;
+}`}
+                language="javascript"
+                className="text-xs"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Возможности</h3>
+          <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+            <li>Загрузка файлов с валидацией типа и размера</li>
+            <li>Автоматическое preview изображения с возможностью очистки</li>
+            <li>Поддержка base64 (локальное хранение) и серверной загрузки</li>
+            <li>Хранение метаданных изображения (ширина, высота, размер)</li>
+            <li>Автоматическое извлечение URL из обоих форматов</li>
+            <li>Поддержка repeater полей через data-атрибуты</li>
+            <li>Встроенная валидация размера файла и типа</li>
+          </ul>
+        </div>
+      </section>
+
       <section className="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-6 border-l-4 border-cyan-500 border-2 border-yellow-400">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           Поле выбора из API (API Select)
@@ -724,7 +872,7 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
               <code className="text-green-700 dark:text-green-400">'url'</code>, <code className="text-green-700 dark:text-green-400">'select'</code>, 
               <code className="text-green-700 dark:text-green-400">'checkbox'</code>, <code className="text-green-700 dark:text-green-400">'radio'</code>, 
               <code className="text-green-700 dark:text-green-400">'color'</code>, <code className="text-green-700 dark:text-green-400">'image'</code>, 
-              <code className="text-green-700 dark:text-green-400">'file'</code>, <code className="text-green-700 dark:text-green-400">'spacing'</code>, 
+              <code className="text-green-700 dark:text-green-400">'spacing'</code>, 
               <code className="text-green-700 dark:text-green-400">'repeater'</code>, <code className="text-green-700 dark:text-green-400">'api-select'</code>, 
               <code className="text-green-700 dark:text-green-400">'custom'</code>
             </p>
@@ -794,6 +942,20 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Конфигурация для поля повторителя. См. раздел "Поле повторителя (Repeater)" выше.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+              <code className="text-green-700 dark:text-green-400">imageUploadConfig</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для type: 'image')</span>
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Конфигурация для загрузки изображений на сервер. См. раздел "Поле изображения (Image)" выше.
+              <br />
+              Параметры: <code className="text-green-700 dark:text-green-400">uploadUrl</code>, <code className="text-green-700 dark:text-green-400">fileParamName</code>, 
+              <code className="text-green-700 dark:text-green-400">maxFileSize</code>, <code className="text-green-700 dark:text-green-400">accept</code>, 
+              <code className="text-green-700 dark:text-green-400">uploadHeaders</code>, <code className="text-green-700 dark:text-green-400">responseMapper</code>, 
+              <code className="text-green-700 dark:text-green-400">onUploadError</code>.
             </p>
           </div>
 

@@ -105,10 +105,11 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
         <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border-2 border-green-400 mt-4">
           <h4 className="font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
             <span>🔑</span>
-            Тестовый ключ для разработки
+            Тестовый ключ для демо и проверки
           </h4>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-            Для разработки на <strong>localhost</strong> доступен тестовый ключ PRO лицензии:
+            Для демо, проверки и ознакомления с возможностями на <strong>localhost</strong> доступен тестовый ключ PRO лицензии. 
+            Вы можете попробовать все функции, потыкать и посмотреть функционал:
           </p>
           <div className="bg-gray-900 dark:bg-gray-800 rounded-lg p-3 mb-2">
             <code className="text-green-400 font-mono text-sm">BB-PRO-1234-5678-ABCD</code>

@@ -1,22 +1,31 @@
 'use client';
 
-import type { Section } from '../types';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 interface SidebarProps {
-  activeSection: Section;
+  activeSection: 'core' | 'vue' | 'react';
   activeSubSection: string;
-  onSectionChange: (section: Section) => void;
-  onSubSectionChange: (sub: string) => void;
   isOpen: boolean;
 }
 
 export default function Sidebar({
   activeSection,
   activeSubSection,
-  onSectionChange,
-  onSubSectionChange,
   isOpen
 }: SidebarProps) {
+  const pathname = usePathname();
+  
+  // Определяем активную секцию из pathname
+  const currentSection = pathname.startsWith('/docs/core') ? 'core' 
+    : pathname.startsWith('/docs/vue') ? 'vue'
+    : pathname.startsWith('/docs/react') ? 'react'
+    : activeSection;
+  
+  // Определяем активный подраздел из pathname
+  const pathParts = pathname.split('/');
+  const currentSubSection = pathParts.length > 3 ? pathParts[3] : activeSubSection;
+
   return (
     <aside className={`fixed left-0 top-16 w-64 h-[calc(100vh-4rem)] bg-slate-50 dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 overflow-y-auto z-40 transition-transform ${
       isOpen ? 'translate-x-0' : '-translate-x-full'
@@ -24,53 +33,53 @@ export default function Sidebar({
       <div className="p-4 pb-20">
         {/* Section Tabs */}
         <div className="flex flex-col gap-2 mb-6">
-          <SectionButton
-            active={activeSection === 'core'}
-            onClick={() => onSectionChange('core')}
+          <SectionLink
+            active={currentSection === 'core'}
+            href="/docs/core/getting-started"
             color="primary"
           >
             Core API
-          </SectionButton>
-          <SectionButton
-            active={activeSection === 'vue3'}
-            onClick={() => onSectionChange('vue3')}
+          </SectionLink>
+          <SectionLink
+            active={currentSection === 'vue'}
+            href="/docs/vue/getting-started"
             color="purple"
           >
             Vue3
-          </SectionButton>
-          <SectionButton
-            active={activeSection === 'react'}
-            onClick={() => onSectionChange('react')}
+          </SectionLink>
+          <SectionLink
+            active={currentSection === 'react'}
+            href="/docs/react"
             color="blue"
           >
             React
-          </SectionButton>
+          </SectionLink>
         </div>
 
         {/* Navigation Links */}
         <nav className="space-y-1">
-          {activeSection === 'core' && (
+          {currentSection === 'core' && (
             <>
-              <NavLink active={activeSubSection === 'getting-started'} onClick={() => onSubSectionChange('getting-started')} color="primary">Быстрый старт</NavLink>
-              <NavLink active={activeSubSection === 'classes'} onClick={() => onSubSectionChange('classes')} color="primary">Классы</NavLink>
-              <NavLink active={activeSubSection === 'methods'} onClick={() => onSubSectionChange('methods')} color="primary">Методы</NavLink>
-              <NavLink active={activeSubSection === 'properties'} onClick={() => onSubSectionChange('properties')} color="primary">Свойства</NavLink>
-              <NavLink active={activeSubSection === 'types'} onClick={() => onSubSectionChange('types')} color="primary">Типы</NavLink>
-              <NavLink active={activeSubSection === 'form-fields'} onClick={() => onSubSectionChange('form-fields')} color="primary">Поля форм</NavLink>
+              <NavLink active={currentSubSection === 'getting-started'} href="/docs/core/getting-started" color="primary">Быстрый старт</NavLink>
+              <NavLink active={currentSubSection === 'classes'} href="/docs/core/classes" color="primary">Классы</NavLink>
+              <NavLink active={currentSubSection === 'methods'} href="/docs/core/methods" color="primary">Методы</NavLink>
+              <NavLink active={currentSubSection === 'properties'} href="/docs/core/properties" color="primary">Свойства</NavLink>
+              <NavLink active={currentSubSection === 'types'} href="/docs/core/types" color="primary">Типы</NavLink>
+              <NavLink active={currentSubSection === 'form-fields'} href="/docs/core/form-fields" color="primary">Поля форм</NavLink>
             </>
           )}
           
-          {activeSection === 'vue3' && (
+          {currentSection === 'vue' && (
             <>
-              <NavLink active={activeSubSection === 'getting-started'} onClick={() => onSubSectionChange('getting-started')} color="purple">Быстрый старт</NavLink>
-              <NavLink active={activeSubSection === 'components'} onClick={() => onSubSectionChange('components')} color="purple">Компоненты</NavLink>
-              <NavLink active={activeSubSection === 'events'} onClick={() => onSubSectionChange('events')} color="purple">События</NavLink>
-              <NavLink active={activeSubSection === 'api'} onClick={() => onSubSectionChange('api')} color="purple">API</NavLink>
+              <NavLink active={currentSubSection === 'getting-started'} href="/docs/vue/getting-started" color="purple">Быстрый старт</NavLink>
+              <NavLink active={currentSubSection === 'components'} href="/docs/vue/components" color="purple">Компоненты</NavLink>
+              <NavLink active={currentSubSection === 'events'} href="/docs/vue/events" color="purple">События</NavLink>
+              <NavLink active={currentSubSection === 'api'} href="/docs/vue/api" color="purple">API</NavLink>
             </>
           )}
 
-          {activeSection === 'react' && (
-            <NavLink active={activeSubSection === 'getting-started'} onClick={() => onSubSectionChange('getting-started')} color="blue">React поддержка</NavLink>
+          {currentSection === 'react' && (
+            <NavLink active={true} href="/docs/react" color="blue">React поддержка</NavLink>
           )}
         </nav>
       </div>
@@ -78,14 +87,14 @@ export default function Sidebar({
   );
 }
 
-function SectionButton({ 
+function SectionLink({ 
   active, 
-  onClick, 
+  href,
   color,
   children 
 }: { 
   active: boolean; 
-  onClick: () => void; 
+  href: string; 
   color: 'primary' | 'purple' | 'blue';
   children: React.ReactNode;
 }) {
@@ -95,29 +104,24 @@ function SectionButton({
     blue: active ? 'bg-blue-600 text-white' : 'bg-white dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-600',
   };
 
-  const handleClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    onClick();
-  };
-
   return (
-    <button
-      onClick={handleClick}
-      className={`px-4 py-2 rounded-lg font-semibold text-left transition-colors ${colorClasses[color]}`}
+    <Link
+      href={href}
+      className={`px-4 py-2 rounded-lg font-semibold text-left transition-colors block ${colorClasses[color]}`}
     >
       {children}
-    </button>
+    </Link>
   );
 }
 
 function NavLink({ 
   active, 
-  onClick, 
+  href,
   color,
   children 
 }: { 
   active: boolean; 
-  onClick: () => void; 
+  href: string; 
   color: 'primary' | 'purple' | 'blue';
   children: React.ReactNode;
 }) {
@@ -127,20 +131,15 @@ function NavLink({
     blue: active ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border-blue-500' : 'hover:bg-gray-100 dark:hover:bg-slate-700',
   };
 
-  const handleClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    onClick();
-  };
-
   return (
-    <button
-      onClick={handleClick}
-      className={`w-full px-4 py-2 rounded-lg text-left text-sm font-medium transition-colors border-l-4 ${
+    <Link
+      href={href}
+      className={`w-full px-4 py-2 rounded-lg text-left text-sm font-medium transition-colors border-l-4 block ${
         active ? colorClasses[color] : 'text-gray-600 dark:text-gray-400 border-transparent'
       }`}
     >
       {children}
-    </button>
+    </Link>
   );
 }
 

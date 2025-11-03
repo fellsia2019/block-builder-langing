@@ -24,23 +24,6 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // Проверяем, что это якорная ссылка на текущей странице
-    if (href.startsWith('#')) {
-      e.preventDefault();
-      const element = document.querySelector(href);
-      if (element) {
-        const navHeight = 64; // высота навигации
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - navHeight;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }
-  };
 
   return (
     <nav
@@ -52,45 +35,38 @@ export default function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity cursor-pointer">
+          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity cursor-pointer">
             <Logo size={32} />
-            <span className="text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
-              BlockBuilder
-            </span>
           </Link>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a 
-              href="#features" 
-              onClick={(e) => handleAnchorClick(e, '#features')}
+            <Link 
+              href="/#features"
               className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Возможности
-            </a>
-            <a 
-              href="#examples" 
-              onClick={(e) => handleAnchorClick(e, '#examples')}
+            </Link>
+            <Link 
+              href="/#examples"
               className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Примеры
-            </a>
-            <a 
-              href="#architecture" 
-              onClick={(e) => handleAnchorClick(e, '#architecture')}
+            </Link>
+            <Link 
+              href="/#architecture"
               className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Архитектура
-            </a>
-            <a 
-              href="#installation" 
-              onClick={(e) => handleAnchorClick(e, '#installation')}
+            </Link>
+            <Link 
+              href="/#installation"
               className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Установка
-            </a>
-            <a href="/docs" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+            </Link>
+            <Link href="/docs" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
               Документация
-            </a>
+            </Link>
             <a
               href="https://github.com/mushket-co/block-builder"
               target="_blank"

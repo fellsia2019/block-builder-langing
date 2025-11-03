@@ -1,19 +1,21 @@
 'use client';
 
+import Link from 'next/link';
+
 interface NextPageLinkProps {
   nextSection: string | null;
   nextTitle: string | null;
-  onNavigate: (sub: string) => void;
+  nextHref?: string | null;
   color?: 'primary' | 'purple' | 'blue';
 }
 
 export default function NextPageLink({ 
   nextSection, 
   nextTitle, 
-  onNavigate,
+  nextHref,
   color = 'primary' 
 }: NextPageLinkProps) {
-  if (!nextSection || !nextTitle) return null;
+  if (!nextSection || !nextTitle || !nextHref) return null;
 
   const colorClasses = {
     primary: 'bg-primary-50 dark:bg-primary-900/20 border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 text-primary-700 dark:text-primary-400',
@@ -21,16 +23,11 @@ export default function NextPageLink({
     blue: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/30 text-blue-700 dark:text-blue-400',
   };
 
-  const handleClick = () => {
-    onNavigate(nextSection);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <div className="mt-12 pt-8 border-t border-gray-200 dark:border-slate-700">
-      <button
-        onClick={handleClick}
-        className={`w-full p-6 rounded-lg border-2 transition-all ${colorClasses[color]} group`}
+      <Link
+        href={nextHref}
+        className={`w-full p-6 rounded-lg border-2 transition-all block ${colorClasses[color]} group`}
       >
         <div className="flex items-center justify-between">
           <div className="text-left">
@@ -41,7 +38,7 @@ export default function NextPageLink({
             →
           </div>
         </div>
-      </button>
+      </Link>
     </div>
   );
 }

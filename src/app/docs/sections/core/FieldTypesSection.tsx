@@ -240,15 +240,20 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
           
           <FieldTypeCard 
             name="image" 
-            description="Загрузка изображения (URL или файл)" 
+            description="Загрузка изображения с поддержкой base64 и серверной загрузки, автоматическим preview и валидацией" 
             icon="🖼️"
             example={`{
   field: 'imageUrl',
   label: 'Изображение',
   type: 'image',
-  defaultValue: ''
+  defaultValue: '',
+  imageUploadConfig: {
+    uploadUrl: '/api/upload',
+    maxFileSize: 5 * 1024 * 1024,
+    accept: 'image/*'
+  }
 }`}
-            parameters={['field', 'label', 'type', 'defaultValue', 'rules']}
+            parameters={['field', 'label', 'type', 'defaultValue', 'imageUploadConfig', 'rules']}
           />
         </div>
       </section>

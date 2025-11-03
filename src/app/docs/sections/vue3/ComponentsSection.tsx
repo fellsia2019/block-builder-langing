@@ -247,7 +247,6 @@ const saveBlocks = async (blocks) => {
 <template>
   <section 
     class="hero-block"
-    :style="blockStyles"
   >
     <div class="container">
       <h1>{{ block.props.title }}</h1>
@@ -260,23 +259,11 @@ const saveBlocks = async (blocks) => {
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { getBlockInlineStyles } from '@mushket-co/block-builder/core'
-
 const props = defineProps({
   block: {
     type: Object,
     required: true
   }
-})
-
-// Получаем стили spacing для блока
-const blockStyles = computed(() => {
-  const spacing = props.block.props?.spacing
-  if (!spacing) return {}
-  
-  // Используем утилиту из core для преобразования spacing
-  return getBlockInlineStyles(spacing, 'spacing')
 })
 
 const handleClick = () => {
@@ -288,7 +275,10 @@ const handleClick = () => {
 
 <style scoped>
 .hero-block {
-  padding: 4rem 0;
+  /* Используем CSS переменные для padding из spacing */
+  padding-top: var(--spacing-padding-top, 4rem);
+  padding-bottom: var(--spacing-padding-bottom, 4rem);
+  /* margin применяется автоматически через inline стили */
   text-align: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -308,7 +298,7 @@ const handleClick = () => {
             </li>
             <li className="flex items-start">
               <span className="text-blue-500 mr-2">•</span>
-              <span>Spacing автоматически обрабатывается через утилиты из <code className="text-blue-700 dark:text-blue-400">@mushket-co/block-builder/core</code></span>
+              <span>Spacing применяется автоматически: margin через inline стили, padding через CSS переменные (<code className="text-blue-700 dark:text-blue-400">--spacing-padding-top</code>, <code className="text-blue-700 dark:text-blue-400">--spacing-padding-bottom</code> и т.д.)</span>
             </li>
             <li className="flex items-start">
               <span className="text-blue-500 mr-2">•</span>
