@@ -1,8 +1,13 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import Logo from './Logo';
+import FeedbackModal from './FeedbackModal';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
 
   return (
     <footer className="bg-slate-900 text-gray-300 py-12 relative z-[100] border-t border-gray-300">
@@ -73,8 +78,16 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-4">Сообщество</h3>
+            <h3 className="text-white font-semibold mb-4">Контакты</h3>
             <ul className="space-y-2">
+              <li>
+                <button
+                  onClick={() => setIsFeedbackModalOpen(true)}
+                  className="text-gray-400 hover:text-white transition-colors text-left"
+                >
+                  Обратная связь
+                </button>
+              </li>
               <li>
                 <a href="https://github.com/mushket-co/block-builder/issues" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                   GitHub Issues
@@ -111,6 +124,11 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      <FeedbackModal 
+        isOpen={isFeedbackModalOpen} 
+        onClose={() => setIsFeedbackModalOpen(false)} 
+      />
     </footer>
   );
 }

@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import AnimateOnScroll from './AnimateOnScroll';
 import Icon from './Icon';
+import FeedbackModal from './FeedbackModal';
 
 export default function Installation() {
   const [copied, setCopied] = useState(false);
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText('npm install @mushket-co/block-builder');
@@ -147,21 +149,26 @@ export default function Installation() {
                 </div>
               </a>
 
-              <a
-                href="#"
-                className="flex items-center p-4 bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-lg hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-800"
+              <button
+                onClick={() => setIsFeedbackModalOpen(true)}
+                className="flex items-center p-4 bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-lg hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-800 w-full text-left cursor-pointer"
               >
                 <Icon name="message" size={32} className="mr-3 text-orange-600 dark:text-orange-400" />
                 <div>
                   <div className="font-semibold text-gray-900 dark:text-white">Поддержка</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Задайте вопрос</div>
                 </div>
-              </a>
+              </button>
             </div>
           </div>
           </AnimateOnScroll>
         </div>
       </div>
+
+      <FeedbackModal 
+        isOpen={isFeedbackModalOpen} 
+        onClose={() => setIsFeedbackModalOpen(false)} 
+      />
     </section>
   );
 }
