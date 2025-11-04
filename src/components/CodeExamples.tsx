@@ -10,41 +10,123 @@ const examples = [
     title: 'Vue3 компонент',
     language: 'vue',
     code: `<template>
-  <BlockBuilderComponent :config="config" />
+  <BlockBuilderComponent
+    :config="{ availableBlockTypes }"
+    :block-management-use-case="blockManagementUseCase"
+    :api-select-use-case="apiSelectUseCase"
+    :custom-field-renderer-registry="customFieldRendererRegistry"
+    :on-save="handleSave"
+    :initial-blocks="initialBlocks"
+    :is-edit="isEdit"
+  />
 </template>
 
 <script setup>
-import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
+import { ref } from 'vue'
+import {
+  BlockBuilderComponent,
+  createBlockManagementUseCase,
+  ApiSelectUseCase,
+  FetchHttpClient,
+  CustomFieldRendererRegistry
+} from '@mushket-co/block-builder/vue'
 import YourTextBlock from './components/YourTextBlock.vue'
 
-const config = {
-  availableBlockTypes: [
-    {
-      type: 'text',
-      label: 'Текст',
-      render: {
-        kind: 'component',
-        framework: 'vue',
-        component: YourTextBlock
-      },
-      defaultProps: { content: 'Hello' }
-    }
-  ]
+const blockManagementUseCase = createBlockManagementUseCase()
+const httpClient = new FetchHttpClient()
+const apiSelectUseCase = new ApiSelectUseCase(httpClient)
+const customFieldRendererRegistry = new CustomFieldRendererRegistry()
+
+// Регистрируем компоненты
+const componentRegistry = blockManagementUseCase.getComponentRegistry()
+componentRegistry.register('text', YourTextBlock)
+
+const availableBlockTypes = ref([
+  {
+    type: 'text',
+    label: 'Текст',
+    render: {
+      kind: 'component',
+      framework: 'vue',
+      component: YourTextBlock
+    },
+    fields: [
+      {
+        field: 'content',
+        label: 'Содержимое',
+        type: 'textarea',
+        defaultValue: 'Hello'
+      }
+    ],
+    defaultProps: { content: 'Hello' }
+  }
+])
+
+const isEdit = ref(true)
+
+const handleSave = async (blocks) => {
+  localStorage.setItem('saved-blocks', JSON.stringify(blocks))
+  return true
 }
+
+const initialBlocks = ref([])
 </script>`,
   },
   {
     title: 'Pure JavaScript',
     language: 'javascript',
     code: `import { BlockBuilder } from '@mushket-co/block-builder'
-import { blockConfigs } from './block-config.js'
+import '@mushket-co/block-builder/index.esm.css' // Импортируйте стили!
+
+// Конфигурация блоков
+const blockConfigs = {
+  text: {
+    title: 'Текстовый блок',
+    icon: '📝',
+    render: {
+      kind: 'html',
+      template: (props) => \`
+        <div style="padding: 1rem; background: white; border-radius: 4px;">
+          <p style="font-size: \${props.fontSize || 16}px; color: \${props.color || '#333'};">
+            \${props.content || 'Пустой текст'}
+          </p>
+        </div>
+      \`
+    },
+    fields: [
+      {
+        field: 'content',
+        label: 'Содержимое',
+        type: 'textarea',
+        defaultValue: 'Новый текстовый блок'
+      },
+      {
+        field: 'fontSize',
+        label: 'Размер шрифта',
+        type: 'number',
+        defaultValue: 16
+      },
+      {
+        field: 'color',
+        label: 'Цвет',
+        type: 'color',
+        defaultValue: '#333333'
+      }
+    ]
+  }
+}
 
 // Создание экземпляра с автоматическим UI
 const blockBuilder = new BlockBuilder({
-  containerId: 'my-app',
+  containerId: 'my-app', // Передаем containerId - UI инициализируется автоматически
   blockConfigs: blockConfigs,
-  storage: 'localStorage',
-  autoRender: true // UI рендерится автоматически!
+  initialBlocks: [], // Начальные блоки
+  isEdit: true, // Режим редактирования
+  onSave: async (blocks) => {
+    // Сохранение блоков через колбэк
+    localStorage.setItem('blocks', JSON.stringify(blocks))
+    return true
+  }
 })
 
 // Пользователь получает готовые кнопки, 
@@ -53,20 +135,42 @@ const blockBuilder = new BlockBuilder({
   {
     title: 'Только API (без UI)',
     language: 'javascript',
-    code: `import { BlockBuilder } from '@mushket-co/block-builder'
+    code: `import { BlockBuilder } from '@mushket-co/block-builder/core'
+// Для core версии НЕ импортируйте CSS!
+
+// Конфигурация блоков
+const blockConfigs = {
+  text: {
+    title: 'Текстовый блок',
+    fields: [
+      {
+        field: 'content',
+        label: 'Содержимое',
+        type: 'textarea',
+        defaultValue: 'Новый текстовый блок'
+      },
+      {
+        field: 'fontSize',
+        label: 'Размер шрифта',
+        type: 'number',
+        defaultValue: 16
+      }
+    ]
+  }
+}
 
 // Создание экземпляра только с API
 const blockBuilder = new BlockBuilder({
-  containerId: 'my-app',
+  // containerId НЕ передаем - UI не инициализируется
   blockConfigs: blockConfigs,
-  autoRender: false // Отключаем UI
+  autoInit: false // Ручная инициализация
 })
 
 // Используем только API
 await blockBuilder.createBlock({
   type: 'text',
-  settings: { fontSize: 16 },
-  props: { content: 'Hello World' }
+  props: { content: 'Hello World' },
+  settings: { fontSize: 16 }
 })
 
 const blocks = await blockBuilder.getAllBlocks()
@@ -95,6 +199,23 @@ export class WysiwygFieldRenderer {
       setValue: (v) => editorAPI.setValue(v),
       destroy: () => editorAPI.destroy()
     }
+  }
+}
+
+// Используем в конфигурации блока
+const blockConfigs = {
+  richText: {
+    title: 'Текстовый блок',
+    fields: [
+      {
+        field: 'content',
+        label: 'Содержимое',
+        type: 'custom',
+        customFieldConfig: {
+          rendererId: 'wysiwyg-editor'
+        }
+      }
+    ]
   }
 }
 
