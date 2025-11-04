@@ -202,6 +202,29 @@ export default function CodeExamples() {
               </div>
             </AnimateOnScroll>
           </div>
+
+          {/* Demo link card */}
+          <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={900}>
+            <a
+              href="https://demo.block-builder.ru"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-12 block p-8 bg-gradient-to-r from-primary-600 via-purple-600 to-pink-600 rounded-2xl shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 text-white text-center group"
+            >
+              <div className="flex flex-col items-center">
+                <Icon name="monitor" size={48} className="mb-4 group-hover:scale-110 transition-transform" />
+                <h3 className="text-3xl font-bold mb-2">
+                  Посмотрите живые примеры
+                </h3>
+                <p className="text-xl text-white/90 mb-4">
+                  Интерактивные демо с реальными блоками и формами
+                </p>
+                <div className="px-6 py-3 bg-white/20 backdrop-blur-sm rounded-lg font-semibold group-hover:bg-white/30 transition-colors">
+                  Перейти на demo.block-builder.ru →
+                </div>
+              </div>
+            </a>
+          </AnimateOnScroll>
         </div>
       </div>
     </section>
