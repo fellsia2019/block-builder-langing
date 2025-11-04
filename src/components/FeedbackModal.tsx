@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface FeedbackModalProps {
   isOpen: boolean;
@@ -8,6 +9,7 @@ interface FeedbackModalProps {
 }
 
 export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
+  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,6 +20,56 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Убеждаемся, что компонент смонтирован на клиенте
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    
+    if (isOpen) {
+      // Сохраняем текущую позицию скролла
+      const scrollY = window.scrollY;
+      // Устанавливаем стиль для блокировки скролла
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Восстанавливаем скролл
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      if (scrollY) {
+        window.scrollTo({
+          top: parseInt(scrollY || '0') * -1,
+          behavior: 'instant'
+        });
+      }
+    }
+
+    // Cleanup функция для восстановления скролла при размонтировании
+    return () => {
+      if (isOpen) {
+        const scrollY = document.body.style.top;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        if (scrollY) {
+          window.scrollTo({
+            top: parseInt(scrollY || '0') * -1,
+            behavior: 'instant'
+          });
+        }
+      }
+    };
+  }, [isOpen, mounted]);
 
   // Для локальной разработки используем http://localhost:3010 напрямую, для production - https://api.block-builder.ru
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 
@@ -121,11 +173,25 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
     }
   };
 
-  if (!isOpen) return null;
+  // Обработчик закрытия модалки по mousedown на backdrop
+  const handleBackdropMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Закрываем только если клик был именно на backdrop, а не на содержимом модалки
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
 
-  return (
-    <div className="fixed inset-0 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm z-[1000]">
-      <div className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+  if (!isOpen || !mounted) return null;
+
+  const modalContent = (
+    <div 
+      className="fixed inset-0 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm z-[1000]"
+      onMouseDown={handleBackdropMouseDown}
+    >
+      <div 
+        className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        onMouseDown={(e) => e.stopPropagation()}
+      >
         {/* Close button */}
         <button
           onClick={onClose}
@@ -290,5 +356,8 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
       </div>
     </div>
   );
+
+  // Рендерим модалку в конец документа через Portal (аналог Teleport во Vue3)
+  return createPortal(modalContent, document.body);
 }
 

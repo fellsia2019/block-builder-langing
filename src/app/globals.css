@@ -34,6 +34,12 @@ body {
   max-width: 100vw;
 }
 
+body.scrollbar-is-locked {
+  overflow: hidden;
+  height: var(--app-height, 100vh);
+  will-change: scroll-position;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
