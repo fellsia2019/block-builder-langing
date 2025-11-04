@@ -37,13 +37,13 @@ export default function Installation() {
               <h3 className="text-xl font-semibold text-white">Установка</h3>
             </div>
             <div className="p-6">
-              <div className="relative flex items-center bg-slate-900 rounded-lg px-6 py-4">
-                <code className="flex-1 text-gray-100 font-mono">
+              <div className="relative flex flex-col sm:flex-row sm:items-center bg-slate-900 rounded-lg px-6 py-4 gap-3 sm:gap-0">
+                <code className="flex-1 text-gray-100 font-mono break-all">
                   npm install @mushket-co/block-builder
                 </code>
                 <button
                   onClick={handleCopy}
-                  className="ml-4 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors flex items-center space-x-2"
+                  className="sm:ml-4 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors flex items-center justify-center space-x-2 w-full sm:w-auto"
                 >
                   {copied ? (
                     <>

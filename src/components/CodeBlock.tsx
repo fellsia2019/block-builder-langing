@@ -66,31 +66,36 @@ export default function CodeBlock({
         {copied ? (
           <span className="flex items-center gap-1">
             <span>✓</span>
-            <span>Скопировано</span>
+            <span className="hidden sm:inline">Скопировано</span>
           </span>
         ) : (
           <span className="flex items-center gap-1">
             <Icon name="clipboard" size={14} />
-            <span>Копировать</span>
+            <span className="hidden sm:inline">Копировать</span>
           </span>
         )}
       </button>
-      <SyntaxHighlighter
-        language={getLanguage()}
-        style={vscDarkPlus}
-        customStyle={{
-          margin: 0,
-          padding: '1.5rem',
-          fontSize: '0.875rem',
-          lineHeight: '1.5',
-          background: '#1e293b', // slate-800
-          borderRadius: isRounded ? '0.5rem' : '0',
-        }}
-        showLineNumbers={false}
-        PreTag="div"
-      >
-        {trimmedCode}
-      </SyntaxHighlighter>
+      <div className="overflow-x-auto">
+        <SyntaxHighlighter
+          language={getLanguage()}
+          style={vscDarkPlus}
+          customStyle={{
+            margin: 0,
+            padding: '1rem',
+            fontSize: '0.875rem',
+            lineHeight: '1.5',
+            background: '#1e293b', // slate-800
+            borderRadius: isRounded ? '0.5rem' : '0',
+            minWidth: 'fit-content',
+          }}
+          showLineNumbers={false}
+          PreTag="div"
+          wrapLines={false}
+          wrapLongLines={false}
+        >
+          {trimmedCode}
+        </SyntaxHighlighter>
+      </div>
     </div>
   );
 }

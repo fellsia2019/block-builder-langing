@@ -36,8 +36,8 @@ export default function MethodCard({
       <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white flex items-center gap-2">
         <code className="text-gray-900 dark:text-white">{name}</code>
       </h3>
-      <div className="bg-white dark:bg-slate-800 rounded p-3 mb-2">
-        <code className="text-sm text-gray-900 dark:text-gray-100 whitespace-pre-wrap">{signature}</code>
+      <div className="bg-white dark:bg-slate-800 rounded p-3 mb-2 overflow-x-auto">
+        <code className="text-sm text-gray-900 dark:text-gray-100 whitespace-pre-wrap break-words">{signature}</code>
       </div>
       <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
     </div>

@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero';
+import GitHubNpmBlock from '@/components/GitHubNpmBlock';
 import Features from '@/components/Features';
 import Architecture from '@/components/Architecture';
 import CodeExamples from '@/components/CodeExamples';
@@ -12,6 +13,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Navigation />
       <Hero />
+      <GitHubNpmBlock />
       <Features />
       <CodeExamples />
       <Architecture />
