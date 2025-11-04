@@ -1,6 +1,5 @@
 'use client';
 
-import NextPageLink from '../../components/NextPageLink';
 import MethodCard from '../../components/MethodCard';
 import type { NavigationProps } from '../../types';
 
@@ -51,13 +50,13 @@ export default function MethodsSection({ nextSection, nextTitle, onNavigate }: N
           Режим редактирования/просмотра
         </h2>
         <div className="space-y-4">
-          <MethodCard name="setIsEdit" signature="blockBuilderFacade.setIsEdit(isEdit: boolean): void" description="Переключает режим редактирования. При false скрываются все кнопки редактирования, добавления и управления блоками" color="green" />
-          <MethodCard name="getIsEdit" signature="blockBuilderFacade.getIsEdit(): boolean" description="Возвращает текущий режим редактирования (true - режим редактирования, false - режим просмотра)" color="green" />
+          <MethodCard name="setIsEdit" signature="blockBuilder.setIsEdit(isEdit: boolean): void" description="Переключает режим редактирования. При false скрываются все контролы редактирования, остаётся только пользовательская верстка блоков" color="green" />
+          <MethodCard name="getIsEdit" signature="blockBuilder.getIsEdit(): boolean" description="Возвращает текущий режим редактирования (true - режим редактирования, false - режим просмотра)" color="green" />
         </div>
         <div className="mt-4 bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-800">
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-            В режиме просмотра (<code className="text-green-700 dark:text-green-400">isEdit: false</code>) автоматически скрываются все кнопки редактирования, добавления и управления блоками. 
-            Остаётся доступной только функция копирования ID блока. На элемент <code className="text-green-700 dark:text-green-400">body</code> автоматически добавляется CSS класс <code className="text-green-700 dark:text-green-400">bb-is-edit-mode</code> для кастомизации стилей.
+            В режиме просмотра (<code className="text-green-700 dark:text-green-400">isEdit: false</code>) автоматически скрываются все контролы редактирования, добавления и управления блоками. 
+            Остаётся только пользовательская верстка блоков в обёртке BlockBuilder. На элемент <code className="text-green-700 dark:text-green-400">body</code> автоматически добавляется CSS класс <code className="text-green-700 dark:text-green-400">bb-is-edit-mode</code> для кастомизации стилей.
           </p>
         </div>
       </section>
@@ -81,8 +80,6 @@ export default function MethodsSection({ nextSection, nextTitle, onNavigate }: N
           <MethodCard name="unregisterCustomFieldRenderer" signature="blockBuilder.unregisterCustomFieldRenderer(id: string): boolean" description="Удаляет кастомный рендерер. Доступно только в PRO версии." color="orange" isPro={true} />
         </div>
       </section>
-
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/core/${nextSection}` : null} color="primary" />
     </div>
   );
 }

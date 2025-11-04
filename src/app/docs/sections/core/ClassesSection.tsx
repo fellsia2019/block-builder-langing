@@ -1,6 +1,5 @@
 'use client';
 
-import NextPageLink from '../../components/NextPageLink';
 import type { NavigationProps } from '../../types';
 
 export default function ClassesSection({ nextSection, nextTitle, onNavigate }: NavigationProps) {
@@ -28,15 +27,14 @@ export default function ClassesSection({ nextSection, nextTitle, onNavigate }: N
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
           <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">Параметры:</h3>
           <ul className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
-            <li><code className="text-gray-900 dark:text-gray-100">containerId</code> - ID контейнера для UI</li>
+            <li><code className="text-gray-900 dark:text-gray-100">containerId</code> - ID контейнера для UI (только для полной версии с UI)</li>
             <li><code className="text-gray-900 dark:text-gray-100">blockConfigs</code> - Конфигурация типов блоков</li>
-            <li><code className="text-gray-900 dark:text-gray-100">storage</code> - Тип хранилища (localStorage/sessionStorage)</li>
-            <li><code className="text-gray-900 dark:text-gray-100">autoRender</code> - Автоматический рендеринг UI</li>
+            <li><code className="text-gray-900 dark:text-gray-100">autoInit</code> - Автоматическая инициализация UI (по умолчанию true)</li>
+            <li><code className="text-gray-900 dark:text-gray-100">onSave</code> - Callback для сохранения блоков</li>
+            <li><code className="text-gray-900 dark:text-gray-100">isEdit</code> - Режим редактирования (по умолчанию true)</li>
           </ul>
         </div>
       </section>
-
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/core/${nextSection}` : null} color="primary" />
     </div>
   );
 }

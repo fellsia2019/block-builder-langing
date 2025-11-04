@@ -1,6 +1,5 @@
 'use client';
 
-import NextPageLink from '../../components/NextPageLink';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
@@ -51,10 +50,7 @@ const blockBuilder = ref(null)
 
 onMounted(() => {
   blockBuilder.value = new BlockBuilder({
-    containerId: 'my-app',
-    blockConfigs: blockConfigs,
-    storage: 'localStorage',
-    autoRender: false
+    blockConfigs: blockConfigs
   })
 })
 </script>`}
@@ -257,10 +253,7 @@ const blockConfigs = [
 
 onMounted(() => {
   blockBuilder.value = new BlockBuilder({
-    containerId: 'my-app',
-    blockConfigs: blockConfigs,
-    storage: 'localStorage',
-    autoRender: false
+    blockConfigs: blockConfigs
   })
   
   // Загружаем существующие блоки
@@ -353,36 +346,6 @@ blocks.value = []`}
             />
           </div>
 
-          <div className="bg-gray-50 dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
-            <h3 className="font-bold mb-2 text-gray-900 dark:text-white">
-              <code className="text-purple-700 dark:text-purple-400">saveBlocks()</code>
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-              Сохранить все блоки в storage
-            </p>
-            <CodeBlock
-              code={`await blockBuilder.value.saveBlocks()
-console.log('Блоки сохранены')`}
-              language="javascript"
-              className="text-xs"
-            />
-          </div>
-
-          <div className="bg-gray-50 dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
-            <h3 className="font-bold mb-2 text-gray-900 dark:text-white">
-              <code className="text-purple-700 dark:text-purple-400">loadBlocks()</code>
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-              Загрузить блоки из storage
-            </p>
-            <CodeBlock
-              code={`await blockBuilder.value.loadBlocks()
-// Затем перезагрузите UI
-await loadBlocks()`}
-              language="javascript"
-              className="text-xs"
-            />
-          </div>
         </div>
       </section>
 
@@ -407,10 +370,7 @@ await loadBlocks()`}
             <CodeBlock
               code={`onMounted(() => {
   blockBuilder.value = new BlockBuilder({
-    containerId: 'my-app',
     blockConfigs: blockConfigs,
-    storage: 'localStorage',
-    autoRender: false,
     isEdit: false // режим только просмотра
   })
 })`}
@@ -435,7 +395,6 @@ const facade = ref(null)
 
 onMounted(() => {
   facade.value = BlockBuilderFactory.create({
-    containerId: 'my-app',
     blockConfigs: blockConfigs,
     isEdit: true // режим редактирования
   })
@@ -503,14 +462,12 @@ body:not(.bb-is-edit-mode) .view-only-info {
             <span className="text-yellow-500 mr-2">•</span>
             <span>Используйте <code className="text-yellow-700 dark:text-yellow-400">ref()</code> для хранения экземпляра BlockBuilder, чтобы он был реактивным</span>
           </li>
-          <li className="flex items-start">
+            <li className="flex items-start">
             <span className="text-yellow-500 mr-2">•</span>
-            <span>Для управления UI вручную установите <code className="text-yellow-700 dark:text-yellow-400">autoRender: false</code></span>
+            <span>Для управления UI вручную используйте <code className="text-yellow-700 dark:text-yellow-400">autoInit: false</code> в опциях (для core версии не передавайте <code className="text-yellow-700 dark:text-yellow-400">containerId</code>)</span>
           </li>
         </ul>
       </section>
-
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/vue/${nextSection}` : null} color="purple" />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 'use client';
 
-import NextPageLink from '../../components/NextPageLink';
 import CodeBlock from '@/components/CodeBlock';
 import type { NavigationProps } from '../../types';
 
@@ -346,8 +345,6 @@ const handleBlockDeleted = (blockId) => {
           </li>
         </ul>
       </section>
-
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/vue/${nextSection}` : null} color="purple" />
     </div>
   );
 }

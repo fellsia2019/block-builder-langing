@@ -1,6 +1,5 @@
 'use client';
 
-import NextPageLink from '../../components/NextPageLink';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
@@ -45,13 +44,67 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
               </p>
               <CodeBlock
                 code={`{
-  availableBlockTypes: Array,
-  storage?: string,
-  // другие опции...
+  availableBlockTypes?: Array<IBlockType>,  // Массив типов блоков
 }`}
-                language="javascript"
+                language="typescript"
                 className="mb-2 text-xs"
               />
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                <strong>IBlockType:</strong>
+              </p>
+              <CodeBlock
+                code={`{
+  type: string,                    // Уникальный тип блока (обязательно)
+  label: string,                   // Отображаемое название (обязательно)
+  title?: string,                  // Заголовок блока
+  icon?: string,                   // Иконка блока
+  render?: {                       // Конфигурация рендеринга
+    kind: 'component' | 'html',
+    framework?: 'vue',
+    component?: Component,         // Vue компонент (для kind: 'component')
+    template?: string | Function    // HTML шаблон (для kind: 'html')
+  },
+  defaultSettings?: Record<string, any>,  // Настройки по умолчанию
+  defaultProps?: Record<string, any>,      // Свойства по умолчанию
+  fields?: Array<IFormFieldConfig>,       // Поля формы редактирования
+  spacingOptions?: {                      // Опции для spacing (опционально)
+    enabled?: boolean,
+    config?: { breakpoints?: Array<IBreakpoint> }
+  }
+}`}
+                language="typescript"
+                className="mb-2 text-xs"
+              />
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">blockManagementUseCase</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">BlockManagementUseCase, required</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Экземпляр use case для управления блоками. Создаётся через <code className="text-purple-700 dark:text-purple-400">createBlockManagementUseCase()</code>
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">apiSelectUseCase</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">ApiSelectUseCase, optional</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Экземпляр use case для работы с API select полями (требуется для PRO версии)
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">customFieldRendererRegistry</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">ICustomFieldRendererRegistry, optional</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Реестр кастомных рендереров полей (требуется для PRO версии)
+              </p>
             </div>
 
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
@@ -92,7 +145,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
                 <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Boolean, optional, default: true</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                Режим редактирования. Если <code className="text-purple-700 dark:text-purple-400">false</code>, все кнопки редактирования, добавления и управления блоками скрываются. Остаётся доступной только функция копирования ID блока.
+                Режим редактирования. Если <code className="text-purple-700 dark:text-purple-400">false</code>, все контролы редактирования скрываются, остаётся только пользовательская верстка блоков в обёртке BlockBuilder.
               </p>
               <CodeBlock
                 code={`// Режим редактирования (по умолчанию)
@@ -103,6 +156,76 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
                 language="vue"
                 className="mb-2 text-xs"
               />
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">controlsContainerClass</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">String, optional</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Кастомный CSS класс для контейнера контролов (кнопки и статистика)
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">controlsFixedPosition</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">'top' | 'bottom', optional</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Фиксирует панель управления (кнопки + статистика) сверху или снизу экрана
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">controlsOffset</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Number, optional</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Отступ от края в пикселях (по умолчанию 0)
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">controlsOffsetVar</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">String, optional</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                CSS переменная для учета высоты шапки/футера (например: <code className="text-purple-700 dark:text-purple-400">'--header-height'</code>)
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">licenseKey</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">String, optional</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Лицензионный ключ для проверки (для обратной совместимости). Рекомендуется использовать <code className="text-purple-700 dark:text-purple-400">licenseService</code>
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">licenseService</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">LicenseService, optional</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Сервис лицензии для управления PRO/FREE режимами
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">licenseInfo</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Object, optional</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Информация о лицензии: <code className="text-purple-700 dark:text-purple-400">{'{ isPro: boolean, maxBlockTypes: number, currentTypesCount: number }'}</code>
+              </p>
             </div>
           </div>
         </div>
@@ -150,8 +273,7 @@ import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
 const config = {
   availableBlockTypes: [
     // ваша конфигурация типов блоков
-  ],
-  storage: 'localStorage'
+  ]
 }
 
 const initialBlocks = ref([
@@ -190,20 +312,44 @@ const handleBlockReordered = (blocks) => {
             code={`<template>
   <BlockBuilderComponent 
     :config="config"
+    :initialBlocks="initialBlocks"
     :onSave="saveBlocks"
   />
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
 
 const config = {
   availableBlockTypes: [
     // ваша конфигурация
-  ],
-  storage: 'custom'
+  ]
 }
 
+const initialBlocks = ref([])
+
+// Загрузка сохраненных блоков с сервера при инициализации
+const loadBlocks = async () => {
+  try {
+    const response = await fetch('/api/blocks/load', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    
+    if (response.ok) {
+      const data = await response.json()
+      initialBlocks.value = data.blocks || []
+    }
+  } catch (error) {
+    console.error('Ошибка загрузки блоков:', error)
+    initialBlocks.value = []
+  }
+}
+
+// Сохранение блоков на сервер
 const saveBlocks = async (blocks) => {
   try {
     const response = await fetch('/api/blocks/save', {
@@ -224,6 +370,11 @@ const saveBlocks = async (blocks) => {
     return false
   }
 }
+
+// Загружаем блоки при монтировании компонента
+onMounted(() => {
+  loadBlocks()
+})
 </script>`}
             language="vue"
             className="mb-4"
@@ -358,6 +509,16 @@ const imageUrl = computed(() => {
             language="vue"
             className="mb-4"
           />
+          <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 border-l-4 border-yellow-400 mt-4">
+            <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+              <Icon name="warning" size={18} className="text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
+              <span>
+                <strong>Важно:</strong> При использовании <code className="text-yellow-700 dark:text-yellow-400">uploadUrl</code> (загрузка через сервер API клиента) ответ сервера <strong>ОБЯЗАТЕЛЬНО</strong> должен быть объектом с полем 
+                <code className="text-yellow-700 dark:text-yellow-400">src</code>, содержащим URL изображения. Если формат ответа отличается, используйте 
+                <code className="text-yellow-700 dark:text-yellow-400">responseMapper</code> для преобразования ответа к виду объекта с вашими полями и обязательным полем <code className="text-yellow-700 dark:text-yellow-400">src</code>.
+              </span>
+            </p>
+          </div>
         </div>
 
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
@@ -385,8 +546,6 @@ const imageUrl = computed(() => {
           </ul>
         </div>
       </section>
-
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/vue/${nextSection}` : null} color="purple" />
     </div>
   );
 }

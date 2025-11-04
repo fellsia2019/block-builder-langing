@@ -1,7 +1,7 @@
 'use client';
 
-import NextPageLink from '../../components/NextPageLink';
 import CodeBlock from '@/components/CodeBlock';
+import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
 
 export default function GettingStartedVue3({ nextSection, nextTitle, onNavigate }: NavigationProps) {
@@ -149,7 +149,6 @@ const config = {
       }
     }
   ],
-  storage: 'localStorage'
 }
 
 const handleBlockCreated = (block) => {
@@ -280,12 +279,21 @@ const config = {
       ]
     }
   ],
-  storage: 'localStorage'
 }
 </script>`}
           language="vue"
           className="mb-4"
         />
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 border-l-4 border-yellow-400 mt-4">
+          <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+            <Icon name="warning" size={18} className="text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
+            <span>
+              <strong>Важно:</strong> При использовании <code className="text-yellow-700 dark:text-yellow-400">uploadUrl</code> (загрузка через сервер API клиента) ответ сервера <strong>ОБЯЗАТЕЛЬНО</strong> должен быть объектом с полем 
+              <code className="text-yellow-700 dark:text-yellow-400">src</code>, содержащим URL изображения. Если формат ответа отличается, используйте 
+              <code className="text-yellow-700 dark:text-yellow-400">responseMapper</code> для преобразования ответа к виду объекта с вашими полями и обязательным полем <code className="text-yellow-700 dark:text-yellow-400">src</code>.
+            </span>
+          </p>
+        </div>
       </section>
 
       <section>
@@ -315,7 +323,6 @@ const config = {
   availableBlockTypes: [
     // ваша конфигурация
   ],
-  storage: 'localStorage'
 }
 </script>`}
           language="vue"
@@ -324,8 +331,8 @@ const config = {
         <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-800">
           <h4 className="font-bold text-gray-900 dark:text-white mb-2">Что происходит в режиме просмотра?</h4>
           <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
-            <li>Скрываются все кнопки редактирования, добавления и управления блоками</li>
-            <li>Остаётся доступной только функция копирования ID блока</li>
+            <li>Скрываются все контролы редактирования, добавления и управления блоками</li>
+            <li>Остаётся только пользовательская верстка блоков в обёртке BlockBuilder</li>
             <li>На элемент <code className="text-green-700 dark:text-green-400">body</code> автоматически добавляется/удаляется CSS класс <code className="text-green-700 dark:text-green-400">bb-is-edit-mode</code></li>
           </ul>
         </div>
@@ -344,7 +351,7 @@ const config = {
           </li>
           <li className="flex items-start">
             <span className="text-blue-500 mr-2">•</span>
-            <span><strong>Storage</strong> - Используйте <code className="text-blue-700 dark:text-blue-400">localStorage</code> для разработки или кастомный storage для продакшена</span>
+            <span><strong>Сохранение</strong> - Используйте колбэк <code className="text-blue-700 dark:text-blue-400">onSave</code> для сохранения блоков (localStorage для разработки или API для продакшена)</span>
           </li>
           <li className="flex items-start">
             <span className="text-blue-500 mr-2">•</span>
@@ -356,8 +363,6 @@ const config = {
           </li>
         </ul>
       </section>
-
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/vue/${nextSection}` : null} color="purple" />
     </div>
   );
 }

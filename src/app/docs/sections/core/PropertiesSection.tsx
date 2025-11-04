@@ -1,6 +1,5 @@
 'use client';
 
-import NextPageLink from '../../components/NextPageLink';
 import CodeBlock from '@/components/CodeBlock';
 import type { NavigationProps } from '../../types';
 
@@ -52,15 +51,14 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
             Режим редактирования. По умолчанию <code className="text-indigo-700 dark:text-indigo-400">true</code> (режим редактирования).
           </p>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
-            Если установлено <code className="text-indigo-700 dark:text-indigo-400">false</code>, все операции создания/редактирования/удаления блоков блокируются. 
-            Остаётся доступной только функция копирования ID блока.
+            Если установлено <code className="text-indigo-700 dark:text-indigo-400">false</code>, все контролы редактирования скрываются, остаётся только пользовательская верстка блоков в обёртке BlockBuilder.
           </p>
           <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
             <code className="text-sm text-gray-900 dark:text-gray-100">isEdit?: boolean (default: true)</code>
           </div>
           <CodeBlock
             code={`const blockBuilder = new BlockBuilder({
-  containerId: 'my-app',
+  containerId: 'my-app',  // Только для полной версии с UI
   blockConfigs: blockConfigs,
   isEdit: false // режим только просмотра
 })`}
@@ -74,8 +72,6 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
           </div>
         </div>
       </section>
-
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/core/${nextSection}` : null} color="primary" />
     </div>
   );
 }

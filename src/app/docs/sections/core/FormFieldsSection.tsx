@@ -1,6 +1,5 @@
 'use client';
 
-import NextPageLink from '../../components/NextPageLink';
 import ProBadge from '../../components/ProBadge';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
@@ -113,8 +112,8 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         placeholder: 'Введите текст...',
         defaultValue: '',
         rules: [
-          { type: 'required', message: 'Текст обязателен' },
-          { type: 'minLength', value: 1, message: 'Текст не может быть пустым' }
+          { type: 'required' },  // message опционально, есть fallback
+          { type: 'minLength', value: 1 }  // message опционально
         ]
       },
       {
@@ -534,7 +533,6 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
     removeButtonText: 'Удалить',         // Текст кнопки удаления
     min: 2,                              // Минимальное количество элементов
     max: 20,                             // Максимальное количество элементов
-    collapsible: true,                   // Можно ли сворачивать элементы
     defaultItemValue: {                  // Значения по умолчанию для нового элемента
       title: '',
       description: '',
@@ -547,7 +545,7 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
         type: 'text',
         placeholder: 'Название карточки',
         rules: [
-          { type: 'required', message: 'Заголовок обязателен' }
+          { type: 'required' }  // message опционально
         ]
       },
       {
@@ -614,14 +612,6 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
               </p>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
-                <code className="text-indigo-700 dark:text-indigo-400">collapsible</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(опциональный)</span>
-              </h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Можно ли сворачивать/разворачивать элементы в интерфейсе. По умолчанию <code className="text-indigo-700 dark:text-indigo-400">false</code>.
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -714,9 +704,9 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
             <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
               <Icon name="warning" size={18} className="text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
               <span>
-                <strong>Важно:</strong> При использовании <code className="text-yellow-700 dark:text-yellow-400">uploadUrl</code> через 
-                <code className="text-yellow-700 dark:text-yellow-400">responseMapper</code> <strong>ОБЯЗАТЕЛЬНО</strong> верните объект с полем 
-                <code className="text-yellow-700 dark:text-yellow-400">src</code>, содержащим URL изображения.
+                <strong>Важно:</strong> При использовании <code className="text-yellow-700 dark:text-yellow-400">uploadUrl</code> (загрузка через сервер API клиента) ответ сервера <strong>ОБЯЗАТЕЛЬНО</strong> должен быть объектом с полем 
+                <code className="text-yellow-700 dark:text-yellow-400">src</code>, содержащим URL изображения. Если формат ответа отличается, используйте 
+                <code className="text-yellow-700 dark:text-yellow-400">responseMapper</code> для преобразования ответа к виду объекта с вашими полями и обязательным полем <code className="text-yellow-700 dark:text-yellow-400">src</code>.
               </span>
             </p>
           </div>
@@ -950,12 +940,15 @@ const imageUrl = computed(() => {
               Массив правил валидации. Поддерживаемые типы:
             </p>
             <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-4">
-              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'required', message: '...' }`}</code> — поле обязательно</li>
-              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'minLength', value: 1, message: '...' }`}</code> — минимальная длина</li>
-              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'maxLength', value: 100, message: '...' }`}</code> — максимальная длина</li>
-              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'min', value: 0, message: '...' }`}</code> — минимальное значение (для number)</li>
-              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'max', value: 100, message: '...' }`}</code> — максимальное значение (для number)</li>
-              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'pattern', value: 'regex', message: '...' }`}</code> — регулярное выражение</li>
+              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'required', message?: '...' }`}</code> — поле обязательно (<code className="text-green-700 dark:text-green-400">message</code> опционально, есть fallback)</li>
+              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'minLength', value: 1, message?: '...' }`}</code> — минимальная длина (<code className="text-green-700 dark:text-green-400">message</code> опционально)</li>
+              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'maxLength', value: 100, message?: '...' }`}</code> — максимальная длина (<code className="text-green-700 dark:text-green-400">message</code> опционально)</li>
+              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'min', value: 0, message?: '...' }`}</code> — минимальное значение (для number, <code className="text-green-700 dark:text-green-400">message</code> опционально)</li>
+              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'max', value: 100, message?: '...' }`}</code> — максимальное значение (для number, <code className="text-green-700 dark:text-green-400">message</code> опционально)</li>
+              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'pattern', value: 'regex', message?: '...' }`}</code> — регулярное выражение (<code className="text-green-700 dark:text-green-400">message</code> опционально)</li>
+              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'email', message?: '...' }`}</code> — валидация email (<code className="text-green-700 dark:text-green-400">message</code> опционально)</li>
+              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'url', message?: '...' }`}</code> — валидация URL (<code className="text-green-700 dark:text-green-400">message</code> опционально)</li>
+              <li><code className="text-green-700 dark:text-green-400">{`{ type: 'custom', validator: (v) => boolean, message?: '...' }`}</code> — кастомная валидация (<code className="text-green-700 dark:text-green-400">message</code> опционально)</li>
             </ul>
           </div>
 
@@ -1046,132 +1039,293 @@ const imageUrl = computed(() => {
 
         <div className="mb-6">
           <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Когда использовать кастомные рендереры?</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-3">
+            Кастомные рендереры идеально подходят для случаев, когда стандартных типов полей недостаточно:
+          </p>
           <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
-            <li>Нужен WYSIWYG редактор для форматирования текста</li>
-            <li>Требуется date/time picker для выбора даты</li>
-            <li>Нужен сложный компонент выбора (например, многоуровневое меню)</li>
-            <li>Интеграция со сторонними библиотеками UI компонентов</li>
-            <li>Создание собственных интерактивных элементов управления</li>
+            <li><strong>WYSIWYG редакторы</strong> — для форматирования текста с поддержкой HTML/CSS</li>
+            <li><strong>Date/Time pickers</strong> — для выбора даты и времени с календарем</li>
+            <li><strong>Сложные компоненты выбора</strong> — многоуровневые меню, tree select, визуальные селекторы</li>
+            <li><strong>Интеграция сторонних библиотек</strong> — CodeMirror для редакторов кода, Chart.js для графиков, и т.д.</li>
+            <li><strong>Собственные интерактивные элементы</strong> — любые специфические UI компоненты вашего проекта</li>
           </ul>
         </div>
 
         <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Что нужно сделать: пошаговая инструкция</h3>
+          <div className="space-y-4">
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border-l-4 border-orange-500">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">Шаг 1: Создайте класс, реализующий интерфейс ICustomFieldRenderer</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Этот класс должен быть экспортирован из пакета BlockBuilder. Вы <strong>обязаны</strong> реализовать этот интерфейс для создания кастомного рендерера.
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                <strong>Обязательные свойства:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-4 mb-2">
+                <li><code className="text-orange-700 dark:text-orange-400">readonly id: string</code> — уникальный идентификатор рендерера (например, 'wysiwyg-editor', 'date-picker')</li>
+                <li><code className="text-orange-700 dark:text-orange-400">readonly name: string</code> — название рендерера для отображения (необязательно, но рекомендуется)</li>
+                <li><code className="text-orange-700 dark:text-orange-400">render()</code> — метод, который создает и возвращает ваш кастомный компонент</li>
+              </ul>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border-l-4 border-orange-500">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">Шаг 2: Реализуйте метод render()</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Метод <code className="text-orange-700 dark:text-orange-400">render()</code> получает два параметра:
+              </p>
+              <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-4 mb-2">
+                <li><code className="text-orange-700 dark:text-orange-400">container: HTMLElement</code> — DOM элемент, куда нужно вставить ваш компонент</li>
+                <li><code className="text-orange-700 dark:text-orange-400">context: ICustomFieldContext</code> — контекст с данными поля и callbacks</li>
+              </ul>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Метод должен вернуть объект типа <code className="text-orange-700 dark:text-orange-400">ICustomFieldRenderResult</code> с созданным элементом и опциональными методами.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border-l-4 border-orange-500">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">Шаг 3: Зарегистрируйте рендерер</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                После создания экземпляра BlockBuilder вызовите <code className="text-orange-700 dark:text-orange-400">registerCustomFieldRenderer()</code>, 
+                передав экземпляр вашего класса рендерера. <strong>Важно:</strong> регистрируйте рендереры до инициализации UI (до первого рендеринга формы).
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border-l-4 border-orange-500">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">Шаг 4: Используйте в конфигурации поля</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                В конфигурации блока создайте поле с <code className="text-orange-700 dark:text-orange-400">type: 'custom'</code> и укажите 
+                <code className="text-orange-700 dark:text-orange-400">customFieldConfig.rendererId</code> — ID вашего зарегистрированного рендерера.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-6">
           <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Интерфейс ICustomFieldRenderer</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-3">
+            Это интерфейс из пакета BlockBuilder, который вы <strong>обязаны</strong> реализовать. Он определяет структуру вашего класса рендерера:
+          </p>
           <CodeBlock
-            code={`interface ICustomFieldRenderer {
-  readonly id: string;        // Уникальный ID рендерера
+            code={`// Импортируйте из пакета BlockBuilder
+import type { ICustomFieldRenderer, ICustomFieldContext, ICustomFieldRenderResult } from '@mushket-co/block-builder';
+
+// Этот интерфейс вы должны реализовать
+interface ICustomFieldRenderer {
+  readonly id: string;        // Уникальный ID рендерера (например, 'wysiwyg-editor')
   readonly name: string;      // Название для отображения
   
+  // Главный метод - создает ваш кастомный компонент
   render(
-    container: HTMLElement,
-    context: ICustomFieldContext
+    container: HTMLElement,    // DOM элемент, куда вставлять компонент
+    context: ICustomFieldContext  // Контекст с данными и callbacks
   ): ICustomFieldRenderResult | Promise<ICustomFieldRenderResult>;
 }
 
+// Что передается в метод render() через context
 interface ICustomFieldContext {
-  fieldName: string;          // Имя поля
-  label: string;              // Лейбл поля
-  value: any;                 // Текущее значение
-  required: boolean;          // Обязательно ли поле
-  rendererId: string;        // ID renderer'а
-  options?: Record<string, any>; // Дополнительные опции
-  onChange: (value: any) => void;    // Callback при изменении
-  onError?: (error: string | null) => void;  // Callback для ошибок
+  fieldName: string;          // Имя поля (из field.field)
+  label: string;              // Метка поля (из field.label)
+  value: any;                 // Текущее значение поля
+  required: boolean;          // Обязательно ли поле (из rules)
+  options?: Record<string, any>; // Дополнительные опции из customFieldConfig.options
+  onChange: (value: any) => void;    // Callback для обновления значения (обязательно вызывать при изменении!)
+  onError?: (error: string | null) => void;  // Callback для отображения ошибок валидации
 }
 
+// Что должен вернуть метод render()
 interface ICustomFieldRenderResult {
-  element: HTMLElement | string;  // DOM элемент или HTML строка
-  getValue?: () => any;           // Получить текущее значение
-  setValue?: (value: any) => void; // Установить значение
-  validate?: () => string | null;  // Валидация (вернуть ошибку или null)
-  destroy?: () => void;           // Очистка ресурсов
+  element: HTMLElement | string;  // Созданный DOM элемент или HTML строка (обязательно!)
+  getValue?: () => any;           // Функция для получения текущего значения (опционально)
+  setValue?: (value: any) => void; // Функция для программной установки значения (опционально)
+  validate?: () => string | null;  // Функция валидации: возвращает ошибку (string) или null если валидно (опционально)
+  destroy?: () => void;           // Функция очистки ресурсов при удалении поля (опционально, но рекомендуется!)
 }`}
             language="typescript"
             className="mb-4"
           />
+          <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 mt-4">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              <strong>Важно:</strong> Интерфейс <code className="text-yellow-700 dark:text-yellow-400">ICustomFieldRenderer</code> и связанные типы нужно импортировать из пакета BlockBuilder. 
+              Они не экспортируются напрямую, но доступны через типы TypeScript.
+            </p>
+          </div>
         </div>
 
         <div className="mb-6">
-          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Пример создания кастомного рендерера</h3>
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Полный пример: WYSIWYG редактор с подробными комментариями</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-3">
+            Рассмотрим создание кастомного рендерера для WYSIWYG редактора (редактор форматированного текста) с объяснением каждого элемента:
+          </p>
           <CodeBlock
-            code={`class WysiwygFieldRenderer implements ICustomFieldRenderer {
+            code={`// 1. Создаем класс, который реализует интерфейс ICustomFieldRenderer
+// Это ОБЯЗАТЕЛЬНО - класс должен соответствовать интерфейсу из BlockBuilder
+class WysiwygFieldRenderer implements ICustomFieldRenderer {
+  // 2. Уникальный ID рендерера - используется в customFieldConfig.rendererId
   readonly id = 'wysiwyg-editor';
+  
+  // 3. Название рендерера (необязательно, но полезно для отладки)
   readonly name = 'WYSIWYG Editor';
 
+  // 4. Главный метод - создает ваш кастомный компонент
+  // container - DOM элемент, куда нужно вставить ваш компонент
+  // context - объект с данными поля и callbacks для взаимодействия
   render(container: HTMLElement, context: ICustomFieldContext) {
-    const { value, onChange, onError } = context;
+    // 5. Извлекаем нужные данные из context
+    const { 
+      value,        // Текущее значение поля (может быть пустым)
+      onChange,     // Callback для обновления значения - ОБЯЗАТЕЛЬНО вызывать при изменении!
+      onError,      // Callback для отображения ошибок валидации
+      required,     // Является ли поле обязательным
+      options       // Дополнительные опции из customFieldConfig.options
+    } = context;
     
-    // Создаем элемент для редактора
+    // 6. Создаем DOM элемент для нашего редактора
     const editorElement = document.createElement('div');
     editorElement.className = 'wysiwyg-editor';
-    editorElement.innerHTML = value || '';
-    editorElement.contentEditable = 'true';
+    editorElement.contentEditable = 'true'; // Делаем элемент редактируемым
+    editorElement.innerHTML = value || '';   // Устанавливаем начальное значение
     
-    // Обработка изменений
+    // 7. Применяем опции из конфигурации (если есть)
+    if (options?.height) {
+      editorElement.style.height = options.height;
+    }
+    
+    // 8. Вешаем обработчик события 'input' для отслеживания изменений
+    // ВАЖНО: при каждом изменении вызываем onChange() для уведомления BlockBuilder
     editorElement.addEventListener('input', () => {
       try {
         const newValue = editorElement.innerHTML;
-        onChange(newValue);
-        onError?.(null); // Очищаем ошибку при успешном изменении
+        onChange(newValue);  // Уведомляем BlockBuilder о новом значении
+        onError?.(null);      // Очищаем ошибку при успешном изменении
       } catch (error) {
-        onError?.(error.message);
+        onError?.(error.message); // Передаем ошибку в BlockBuilder для отображения
       }
     });
     
+    // 9. Обработка потери фокуса для валидации
+    editorElement.addEventListener('blur', () => {
+      if (required && !editorElement.innerHTML.trim()) {
+        onError?.('Поле обязательно для заполнения');
+      }
+    });
+    
+    // 10. Вставляем созданный элемент в контейнер
     container.appendChild(editorElement);
     
+    // 11. Возвращаем объект ICustomFieldRenderResult
+    // element - ОБЯЗАТЕЛЬНО! Созданный DOM элемент
+    // Остальные методы опциональны, но рекомендуются
     return {
-      element: editorElement,
+      element: editorElement,  // Созданный элемент (обязательно!)
+      
+      // Опционально: функция для получения текущего значения
+      // Если не указана, значение берется через onChange callback
       getValue: () => editorElement.innerHTML,
+      
+      // Опционально: функция для программной установки значения
+      // Полезно для программного обновления поля
       setValue: (val: string) => {
         editorElement.innerHTML = val || '';
       },
+      
+      // Опционально: функция валидации
+      // Возвращает строку с ошибкой или null если валидно
       validate: () => {
-        if (context.required && !editorElement.innerHTML.trim()) {
+        if (required && !editorElement.innerHTML.trim()) {
           return 'Поле обязательно для заполнения';
         }
-        return null;
+        return null; // null = валидация прошла успешно
       },
+      
+      // Опционально: функция очистки ресурсов
+      // ВАЖНО: всегда реализуйте destroy() для очистки event listeners и других ресурсов!
       destroy: () => {
-        editorElement.remove();
+        // Удаляем event listeners (в реальном коде нужно сохранить ссылки на обработчики)
+        editorElement.remove(); // Удаляем элемент из DOM
       }
     };
   }
 }
 
-// Регистрация рендерера
-const blockBuilder = new BlockBuilder({ /* ... */ });
+// 12. Регистрация рендерера после создания экземпляра BlockBuilder
+import { BlockBuilder } from '@mushket-co/block-builder';
+
+const blockBuilder = new BlockBuilder({
+  containerId: 'block-container',
+  blockConfigs: {
+    // ваши конфигурации блоков
+  },
+  license: {
+    type: 'pro', // Кастомные рендереры доступны только в PRO версии
+    key: 'your-license-key'
+  }
+});
+
+// Регистрируем наш рендерер ДО инициализации UI
 blockBuilder.registerCustomFieldRenderer(new WysiwygFieldRenderer());`}
             language="typescript"
             className="mb-4"
           />
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 mt-4">
+            <h4 className="font-bold text-gray-900 dark:text-white mb-2">Ключевые моменты из примера:</h4>
+            <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+              <li><strong>Класс реализует интерфейс:</strong> <code className="text-blue-700 dark:text-blue-400">implements ICustomFieldRenderer</code> — это обязательное требование</li>
+              <li><strong>Метод render():</strong> получает контейнер и контекст, возвращает объект с элементом и методами</li>
+              <li><strong>onChange callback:</strong> обязательно вызывайте при каждом изменении значения для синхронизации с BlockBuilder</li>
+              <li><strong>onError callback:</strong> используйте для отображения ошибок валидации пользователю</li>
+              <li><strong>Метод destroy():</strong> критически важен для очистки ресурсов и предотвращения утечек памяти</li>
+              <li><strong>Регистрация:</strong> регистрируйте рендерер до первого рендеринга формы</li>
+            </ul>
+          </div>
         </div>
 
         <div className="mb-6">
           <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Использование в конфигурации блока</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-3">
+            После регистрации рендерера вы можете использовать его в конфигурации любого блока. 
+            Для этого создайте поле с типом <code className="text-orange-700 dark:text-orange-400">'custom'</code> и укажите ID вашего рендерера в <code className="text-orange-700 dark:text-orange-400">customFieldConfig</code>:
+          </p>
           <CodeBlock
             code={`const blockConfigs = {
   richText: {
     title: 'Rich Text блок',
+    icon: '📝',
+    description: 'Блок с форматированным текстом',
     fields: [
       {
-        field: 'content',
-        label: 'Содержимое',
-        type: 'custom',
+        field: 'content',           // Имя поля - будет доступно в block.props.content
+        label: 'Содержимое',        // Метка поля в форме
+        type: 'custom',              // ОБЯЗАТЕЛЬНО: указываем тип 'custom'
         customFieldConfig: {
-          rendererId: 'wysiwyg-editor'  // ID зарегистрированного рендерера
+          rendererId: 'wysiwyg-editor',  // ID зарегистрированного рендерера (обязательно!)
+          options: {                      // Дополнительные опции передаются в context.options
+            height: '300px',             // Высота редактора
+            toolbar: true                 // Показать панель инструментов
+          }
         },
-        defaultValue: '',
-        rules: [
+        defaultValue: '',           // Начальное значение поля
+        rules: [                     // Правила валидации
           { type: 'required', message: 'Содержимое обязательно' }
         ]
       }
-    ]
+    ],
+    render: {
+      kind: 'html',
+      template: (props) => \`<div class="rich-text">\${props.content || ''}</div>\`
+    }
   }
 };`}
             language="javascript"
             className="mb-4"
           />
+          <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 mt-4">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              <strong>Важно:</strong> Значение <code className="text-yellow-700 dark:text-yellow-400">customFieldConfig.rendererId</code> 
+              должно точно совпадать с <code className="text-yellow-700 dark:text-yellow-400">id</code> вашего рендерера. 
+              Если рендерер с таким ID не зарегистрирован, поле не будет отображаться корректно.
+            </p>
+          </div>
         </div>
 
         <div className="mb-6">
@@ -1247,8 +1401,6 @@ blockBuilder.registerCustomFieldRenderer(new WysiwygFieldRenderer());`}
           </ul>
         </div>
       </section>
-
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/core/${nextSection}` : null} color="primary" />
     </div>
   );
 }

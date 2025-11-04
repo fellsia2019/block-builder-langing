@@ -1,6 +1,5 @@
 'use client';
 
-import NextPageLink from '../../components/NextPageLink';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
@@ -144,8 +143,8 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
             <p className="text-sm text-gray-600 dark:text-gray-400">Основной класс для работы с блоками</p>
           </div>
           <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 border border-purple-200 dark:border-purple-800">
-            <h3 className="font-bold text-purple-900 dark:text-purple-300 mb-2">Storage</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Хранилище для данных блоков</p>
+            <h3 className="font-bold text-purple-900 dark:text-purple-300 mb-2">onSave Callback</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Колбэк для сохранения блоков (localStorage, API и т.д.)</p>
           </div>
           <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4 border border-orange-200 dark:border-orange-800">
             <h3 className="font-bold text-orange-900 dark:text-orange-300 mb-2">Field Renderers</h3>
@@ -184,8 +183,12 @@ const blockConfigs = [
 const blockBuilder = new BlockBuilder({
   containerId: 'my-app',
   blockConfigs: blockConfigs,
-  storage: 'localStorage',
-  autoRender: true
+  autoInit: true,
+  onSave: async (blocks) => {
+    // Сохранение блоков через колбэк (например, на сервер или в localStorage)
+    localStorage.setItem('blocks', JSON.stringify(blocks))
+    return true
+  }
 })`}
           language="javascript"
           className="mb-4"
@@ -345,8 +348,6 @@ applySpacingToElement(
           </p>
         </div>
       </section>
-
-      <NextPageLink nextSection={nextSection} nextTitle={nextTitle} nextHref={nextSection ? `/docs/core/${nextSection}` : null} color="primary" />
     </div>
   );
 }
