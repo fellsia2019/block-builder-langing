@@ -35,11 +35,6 @@ const features = [
     description: 'Полная типизация для безопасной разработки и отличной поддержки IDE.'
   },
   {
-    iconName: 'save' as const,
-    title: 'Гибкое хранилище',
-    description: 'Выбирайте между localStorage и in-memory хранилищем или создайте свою реализацию.'
-  },
-  {
     iconName: 'theater' as const,
     title: 'Автоматический UI',
     description: 'Встроенный UI с формами, валидацией и модальными окнами работает из коробки.'
@@ -75,6 +70,8 @@ export default function Features() {
               animationName={animations[index % animations.length]}
               animationDelay={index * 100}
               animationTime={600}
+              className="h-full"
+              innerClassName="h-full"
             >
               <div className="h-full p-6 bg-gradient-to-br from-white to-gray-50 dark:from-slate-800 dark:to-slate-900 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-100 dark:border-slate-700">
                 <div className="mb-4 transform hover:scale-110 transition-transform duration-300">
