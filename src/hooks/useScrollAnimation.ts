@@ -104,25 +104,56 @@ export function useScrollAnimation({
   const [parallaxOffset, setParallaxOffset] = useState(0);
   const startScrollY = useRef<number | null>(null);
   const isIntersecting = useRef(false);
+  const hasTriggered = useRef(false);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
-    const observer = new IntersectionObserver(
+    // Очищаем предыдущий observer
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+      observerRef.current = null;
+    }
+
+    // Проверяем начальную видимость один раз через requestAnimationFrame
+    if (!hasTriggered.current) {
+      requestAnimationFrame(() => {
+        if (!element || hasTriggered.current) return;
+        
+        const rect = element.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+        
+        const isInViewport = 
+          rect.top < windowHeight &&
+          rect.bottom > 0 &&
+          rect.left < windowWidth &&
+          rect.right > 0;
+
+        if (isInViewport) {
+          hasTriggered.current = true;
+          setIsVisible(true);
+        }
+      });
+    }
+
+    // Создаем observer
+    observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           isIntersecting.current = entry.isIntersecting;
 
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              setIsVisible(true);
-              if (triggerOnce) {
-                observer.unobserve(element);
-              }
-            }, animationDelay);
-          } else if (!triggerOnce) {
+          if (entry.isIntersecting && !hasTriggered.current) {
+            hasTriggered.current = true;
+            setIsVisible(true);
+            if (triggerOnce && observerRef.current) {
+              observerRef.current.unobserve(element);
+            }
+          } else if (!triggerOnce && !entry.isIntersecting) {
             setIsVisible(false);
+            hasTriggered.current = false;
           }
         });
       },
@@ -132,12 +163,29 @@ export function useScrollAnimation({
       }
     );
 
-    observer.observe(element);
+    observerRef.current.observe(element);
 
     return () => {
-      observer.unobserve(element);
+      if (observerRef.current) {
+        observerRef.current.unobserve(element);
+        observerRef.current.disconnect();
+        observerRef.current = null;
+      }
     };
   }, [threshold, rootMargin, animationDelay, triggerOnce]);
+
+  // Сбрасываем состояние при размонтировании компонента
+  useEffect(() => {
+    return () => {
+      setIsVisible(false);
+      hasTriggered.current = false;
+      isIntersecting.current = false;
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!parallaxEnabled) return;
@@ -169,6 +217,7 @@ export function useScrollAnimation({
   const animationStyle = {
     ...ANIMATE_STYLES[animationName][isVisible ? 'show' : 'hide'],
     transition: `all ${animationTime}ms ease`,
+    transitionDelay: `${animationDelay}ms`,
   };
 
   const parallaxStyle = parallaxEnabled

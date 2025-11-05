@@ -74,26 +74,26 @@ export default function Hero() {
       <BlockBuilderCanvas tilt={tilt} />
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-[80px]">
-        <AnimateOnScroll animationName="FADE_IN_DOWN" animationDelay={200} animationTime={800}>
+        <AnimateOnScroll animationName="FADE_IN_DOWN" animationDelay={200} animationTime={800} rootMargin="-50px 0px">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
             BlockBuilder
           </h1>
         </AnimateOnScroll>
 
-        <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={400} animationTime={800}>
+        <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={400} animationTime={800} rootMargin="-50px 0px">
           <p className="text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-4">
             Блочный конструктор с чистой архитектурой
           </p>
         </AnimateOnScroll>
 
-        <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={600} animationTime={800}>
+        <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={600} animationTime={800} rootMargin="-50px 0px">
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto">
             Создавайте мощные no-code конструкторы с правильной архитектурой. 
             Поддержка Vue3, Pure JavaScript и TypeScript из коробки.
           </p>
         </AnimateOnScroll>
 
-        <AnimateOnScroll animationName="SCALE_UP" animationDelay={800} animationTime={600}>
+        <AnimateOnScroll animationName="SCALE_UP" animationDelay={800} animationTime={600} rootMargin="-50px 0px">
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <a
               href="#installation"
@@ -110,7 +110,7 @@ export default function Hero() {
           </div>
         </AnimateOnScroll>
 
-        <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={1000} animationTime={800}>
+        <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={1000} animationTime={800} rootMargin="-50px 0px">
           {/* Key features badges */}
           <div className="flex flex-wrap gap-3 justify-center text-sm">
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">

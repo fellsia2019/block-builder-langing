@@ -487,8 +487,18 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
 
         <div className="mb-6">
           <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Применение spacing в компонентах</h3>
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 mb-4 border-l-4 border-blue-400">
+            <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+              <Icon name="lightbulb" size={18} className="text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+              <span>
+                <strong>Важно:</strong> Утилиты для применения spacing нужны только при использовании <strong>/core</strong> версии BlockBuilder. 
+                В <strong>UI версии</strong> отступы применяются автоматически к блоку: margin применяется через inline стили на обертку блока, 
+                а padding используется через CSS переменные в вашем пользовательском компоненте.
+              </span>
+            </p>
+          </div>
           <p className="text-gray-600 dark:text-gray-400 mb-3">
-            Для применения spacing в вашем компоненте используйте утилиты BlockBuilder:
+            Для применения spacing в <strong>/core</strong> версии используйте утилиты BlockBuilder:
           </p>
           <CodeBlock
             code={`import { getBlockInlineStyles, applySpacingToElement } from '@mushket-co/block-builder/core';
@@ -510,6 +520,17 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
             language="javascript"
             className="mb-4"
           />
+          <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border-l-4 border-green-400">
+            <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+              <Icon name="lightbulb" size={18} className="text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+              <span>
+                <strong>В UI версии:</strong> Margin применяется автоматически на блок-обертку через inline стили. 
+                Для padding используйте CSS переменные (<code className="text-green-700 dark:text-green-400">--spacing-padding-top</code>, 
+                <code className="text-green-700 dark:text-green-400">--spacing-padding-bottom</code> и т.д.) в стилях вашего компонента. 
+                Подробнее об этом см. в документации по использованию UI версии.
+              </span>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -621,7 +642,8 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Поле типа <code className="text-pink-700 dark:text-pink-400">image</code> предоставляет полную поддержку работы с изображениями: 
           загрузку файлов с preview, валидацию, поддержку двух форматов хранения (base64 строка или объект с метаданными), 
-          а также настройку серверной загрузки.
+          а также настройку серверной загрузки. <strong>Рекомендуется использовать собственный API для загрузки файлов на статический сервер</strong> 
+          и хранить в блоке только ссылку на файл, а не данные в base64 формате.
         </p>
 
         <div className="mb-6">
@@ -630,8 +652,11 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
             Поля типа <code className="text-pink-700 dark:text-pink-400">image</code> могут работать как со строками (base64), так и с объектами (серверная загрузка):
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-              <h4 className="font-bold text-gray-900 dark:text-white mb-2">Base64 изображения (строка):</h4>
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border-2 border-yellow-400">
+              <div className="flex items-center gap-2 mb-2">
+                <h4 className="font-bold text-gray-900 dark:text-white">Base64 изображения (строка):</h4>
+                <span className="text-xs bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 px-2 py-1 rounded">Только для разработки</span>
+              </div>
               <CodeBlock
                 code={`props: {
   image: "data:image/jpeg;base64,/9j/4AAQSkZJRg..."
@@ -639,9 +664,16 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
                 language="javascript"
                 className="text-xs"
               />
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                ⚠️ Формат base64 предназначен <strong>только для тестирования и разработки</strong>. 
+                Не рекомендуется использовать в продакшене из-за больших размеров данных.
+              </p>
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-              <h4 className="font-bold text-gray-900 dark:text-white mb-2">Серверная загрузка (объект):</h4>
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border-2 border-green-400">
+              <div className="flex items-center gap-2 mb-2">
+                <h4 className="font-bold text-gray-900 dark:text-white">Серверная загрузка (объект):</h4>
+                <span className="text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-2 py-1 rounded">Рекомендуется</span>
+              </div>
               <CodeBlock
                 code={`props: {
   image: {
@@ -654,7 +686,20 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
                 language="javascript"
                 className="text-xs"
               />
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                ✅ <strong>Рекомендуемый подход:</strong> Загружайте файлы на статический сервер через ваш API, 
+                а в блоке храните только ссылку на файл (<code className="text-green-700 dark:text-green-400">src</code>) и метаданные.
+              </p>
             </div>
+          </div>
+          <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 border-l-4 border-yellow-400 mb-4">
+            <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+              <Icon name="warning" size={18} className="text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
+              <span>
+                <strong>Важно:</strong> Base64 формат сохранения нужен лишь для тестирования и разработки. 
+                Мы <strong>рекомендуем использовать собственный API для загрузки файлов</strong> на статический сервер и хранить в блоке только ссылку на файл (поле <code className="text-yellow-700 dark:text-yellow-400">src</code>) вместе с метаданными изображения.
+              </span>
+            </p>
           </div>
           <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border-l-4 border-blue-400">
             <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
@@ -669,6 +714,16 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
 
         <div className="mb-6">
           <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Конфигурация загрузки на сервер</h3>
+          <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 mb-4 border-l-4 border-green-400">
+            <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+              <Icon name="lightbulb" size={18} className="text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+              <span>
+                <strong>Рекомендация:</strong> Используйте собственный API для загрузки файлов на статический сервер. 
+                Это позволяет хранить в блоке только ссылку на файл (поле <code className="text-green-700 dark:text-green-400">src</code>), 
+                что значительно уменьшает размер данных и улучшает производительность приложения.
+              </span>
+            </p>
+          </div>
           <p className="text-gray-600 dark:text-gray-400 mb-3">
             Для настройки серверной загрузки используйте параметр <code className="text-pink-700 dark:text-pink-400">imageUploadConfig</code>:
           </p>
@@ -769,11 +824,12 @@ const imageUrl = computed(() => {
           <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
             <li>Загрузка файлов с валидацией типа и размера</li>
             <li>Автоматическое preview изображения с возможностью очистки</li>
-            <li>Поддержка base64 (локальное хранение) и серверной загрузки</li>
-            <li>Хранение метаданных изображения (ширина, высота, размер)</li>
+            <li>Поддержка base64 (только для разработки) и серверной загрузки (рекомендуется для продакшена)</li>
+            <li>Хранение метаданных изображения (ширина, высота, размер) при серверной загрузке</li>
             <li>Автоматическое извлечение URL из обоих форматов</li>
             <li>Поддержка repeater полей через data-атрибуты</li>
             <li>Встроенная валидация размера файла и типа</li>
+            <li>Рекомендуется использовать собственный API для загрузки файлов на статический сервер</li>
           </ul>
         </div>
       </section>

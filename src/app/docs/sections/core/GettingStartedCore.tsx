@@ -195,6 +195,232 @@ const blockBuilder = new BlockBuilder({
         />
       </section>
 
+      <section className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Структура конфигурации блока</h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Каждый блок в <code className="text-blue-700 dark:text-blue-400">blockConfigs</code> должен иметь следующую структуру:
+        </p>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Полный пример конфигурации</h3>
+          <CodeBlock
+            code={`const blockConfigs = {
+  // Ключ объекта - это type блока (обязательно, уникальный)
+  text: {
+    // Основные свойства блока
+    type: 'text',              // Тип блока (обязательно, должен совпадать с ключом)
+    label: 'Текстовый блок',   // Отображаемое название в UI (обязательно)
+    title: 'Текстовый блок',   // Альтернативное название (опционально)
+    icon: '📝',                // Иконка блока (опционально)
+    description: 'Блок для текстового контента', // Описание блока (опционально)
+    
+    // Конфигурация рендеринга блока
+    render: {
+      kind: 'html',            // 'html' для Pure JS или 'component' для Vue/React
+      template: (props) => {   // Функция шаблона (для kind: 'html')
+        return \`<div>\${props.content}</div>\`
+      },
+      // ИЛИ для Vue компонента:
+      // kind: 'component',
+      // framework: 'vue',
+      // component: TextBlockComponent
+    },
+    
+    // Поля формы редактирования
+    fields: [
+      {
+        field: 'content',      // Имя поля (обязательно)
+        label: 'Содержимое',   // Метка поля (обязательно)
+        type: 'textarea',      // Тип поля (обязательно)
+        placeholder: 'Введите текст...',
+        defaultValue: '',      // Значение по умолчанию
+        rules: [               // Правила валидации
+          { type: 'required' },
+          { type: 'minLength', value: 10 }
+        ]
+      }
+    ],
+    
+    // Свойства блока по умолчанию
+    defaultProps: {
+      content: 'Привет, мир!',
+      textAlign: 'left'
+    },
+    
+    // Настройки блока по умолчанию
+    defaultSettings: {
+      visible: true
+    },
+    
+    // Опции для автоматического добавления spacing полей
+    spacingOptions: {
+      enabled: true,                    // Включить spacing (по умолчанию true)
+      spacingTypes: [                   // Какие типы отступов доступны
+        'padding-top',
+        'padding-bottom',
+        'margin-top',
+        'margin-bottom'
+      ],
+      config: {
+        min: 0,                         // Минимальное значение (по умолчанию 0)
+        max: 200,                       // Максимальное значение (по умолчанию 200)
+        step: 4,                        // Шаг изменения (по умолчанию 1)
+        breakpoints: [                  // Кастомные брекпоинты (только PRO)
+          { name: 'desktop', label: 'Desktop', maxWidth: undefined },
+          { name: 'tablet', label: 'Tablet', maxWidth: 1024 },
+          { name: 'mobile', label: 'Mobile', maxWidth: 640 }
+        ]
+      }
+    }
+  }
+}`}
+            language="javascript"
+            className="mb-4"
+          />
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Описание свойств конфигурации</h3>
+          <div className="space-y-4">
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-blue-700 dark:text-blue-400">type</code> <span className="text-sm font-normal text-gray-500 dark:text-gray-400">(обязательный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Уникальный идентификатор типа блока. Должен совпадать с ключом объекта в <code className="text-blue-700 dark:text-blue-400">blockConfigs</code>.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-blue-700 dark:text-blue-400">label</code> <span className="text-sm font-normal text-gray-500 dark:text-gray-400">(обязательный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Отображаемое название блока в UI (например, в списке доступных типов блоков для добавления).
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-blue-700 dark:text-blue-400">title</code> <span className="text-sm font-normal text-gray-500 dark:text-gray-400">(опциональный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Альтернативное название блока. Если не указано, используется <code className="text-blue-700 dark:text-blue-400">label</code>.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-blue-700 dark:text-blue-400">icon</code> <span className="text-sm font-normal text-gray-500 dark:text-gray-400">(опциональный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Иконка блока (эмодзи или строка). Отображается в UI рядом с названием блока.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-blue-700 dark:text-blue-400">description</code> <span className="text-sm font-normal text-gray-500 dark:text-gray-400">(опциональный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Описание блока. Используется для подсказок пользователю о назначении блока.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-blue-700 dark:text-blue-400">render</code> <span className="text-sm font-normal text-gray-500 dark:text-gray-400">(обязательный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Конфигурация рендеринга блока. Определяет, как будет отображаться блок.
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Для <strong>Pure JS</strong> используйте <code className="text-blue-700 dark:text-blue-400">kind: 'html'</code> с функцией <code className="text-blue-700 dark:text-blue-400">template</code>:
+              </p>
+              <CodeBlock
+                code={`render: {
+  kind: 'html',
+  template: (props) => \`<div>\${props.content}</div>\`
+}`}
+                language="javascript"
+                className="text-xs mb-2"
+              />
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Для <strong>Vue</strong> используйте <code className="text-blue-700 dark:text-blue-400">kind: 'component'</code>:
+              </p>
+              <CodeBlock
+                code={`render: {
+  kind: 'component',
+  framework: 'vue',
+  component: TextBlockComponent // Vue компонент
+}`}
+                language="javascript"
+                className="text-xs"
+              />
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-blue-700 dark:text-blue-400">fields</code> <span className="text-sm font-normal text-gray-500 dark:text-gray-400">(опциональный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Массив полей формы для редактирования блока. Подробное описание типов полей см. в разделе "Поля форм".
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-blue-700 dark:text-blue-400">defaultProps</code> <span className="text-sm font-normal text-gray-500 dark:text-gray-400">(опциональный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Объект со значениями свойств по умолчанию для нового блока. Эти значения будут использоваться при создании блока.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-blue-700 dark:text-blue-400">defaultSettings</code> <span className="text-sm font-normal text-gray-500 dark:text-gray-400">(опциональный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Объект с настройками блока по умолчанию (например, <code className="text-blue-700 dark:text-blue-400">visible: true</code>).
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-blue-700 dark:text-blue-400">spacingOptions</code> <span className="text-sm font-normal text-gray-500 dark:text-gray-400">(опциональный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Опции для автоматического добавления spacing полей в форму редактирования. Если <code className="text-blue-700 dark:text-blue-400">enabled: true</code>, 
+                BlockBuilder автоматически добавит поля для управления отступами блока с поддержкой адаптивности.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border-l-4 border-green-400">
+          <h4 className="font-bold text-gray-900 dark:text-white mb-2">💡 Важно</h4>
+          <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+            <li className="flex items-start">
+              <span className="text-green-500 mr-2">•</span>
+              <span>Ключ объекта в <code className="text-green-700 dark:text-green-400">blockConfigs</code> должен совпадать со значением <code className="text-green-700 dark:text-green-400">type</code></span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-green-500 mr-2">•</span>
+              <span>Свойства <code className="text-green-700 dark:text-green-400">type</code> и <code className="text-green-700 dark:text-green-400">label</code> являются обязательными</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-green-500 mr-2">•</span>
+              <span>Свойство <code className="text-green-700 dark:text-green-400">render</code> обязательно для определения способа рендеринга блока</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-green-500 mr-2">•</span>
+              <span>Все остальные свойства опциональны и используются для дополнительной настройки</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <section className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 border-l-4 border-purple-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Отступы блоков (Spacing)</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
@@ -346,6 +572,275 @@ applySpacingToElement(
             BlockBuilder автоматически отслеживает изменение размера окна и обновляет отступы в зависимости от текущего брекпоинта. 
             Это происходит без перезагрузки страницы и без дополнительной настройки.
           </p>
+        </div>
+      </section>
+
+      <section className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+          <Icon name="settings" size={24} className="text-indigo-600 dark:text-indigo-400" />
+          API эндпоинты для бэкенда
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Для полноценной работы BlockBuilder в продакшене вам необходимо реализовать следующие API эндпоинты на вашем бэкенде:
+        </p>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">1. Сохранение блоков</h3>
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4 border border-gray-200 dark:border-slate-700">
+            <div className="mb-3">
+              <div className="flex items-center gap-2 mb-2">
+                <code className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded text-sm font-semibold">POST</code>
+                <code className="text-gray-700 dark:text-gray-300 font-mono text-sm">/api/blocks/save</code>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                Эндпоинт для сохранения массива блоков. Принимает JSON строку с блоками и сохраняет её в вашей базе данных.
+              </p>
+            </div>
+            
+            <div className="mb-3">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">Запрос:</h4>
+              <CodeBlock
+                code={`POST /api/blocks/save
+Content-Type: application/json
+
+{
+  "blocks": [
+    {
+      "id": "block-1",
+      "type": "text",
+      "props": {
+        "content": "Текст блока",
+        "spacing": {
+          "desktop": { "padding-top": 20, "padding-bottom": 20 }
+        }
+      }
+    }
+  ]
+}`}
+                language="http"
+                className="text-xs"
+              />
+            </div>
+
+            <div className="mb-3">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">Успешный ответ:</h4>
+              <CodeBlock
+                code={`HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "success": true,
+  "message": "Блоки успешно сохранены"
+}`}
+                language="http"
+                className="text-xs"
+              />
+            </div>
+
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 border-l-4 border-yellow-400">
+              <p className="text-xs text-gray-700 dark:text-gray-300">
+                <strong>Важно:</strong> Блоки передаются как массив объектов. Вы можете сохранять их как JSON строку в базе данных 
+                или как отдельные записи для каждого блока. Рекомендуется хранить весь массив блоков как единую JSON строку для конкретной страницы/контекста.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">2. Загрузка блоков</h3>
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4 border border-gray-200 dark:border-slate-700">
+            <div className="mb-3">
+              <div className="flex items-center gap-2 mb-2">
+                <code className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded text-sm font-semibold">GET</code>
+                <code className="text-gray-700 dark:text-gray-300 font-mono text-sm">/api/blocks/load</code>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                Эндпоинт для получения сохраненных блоков. Возвращает массив блоков в формате JSON.
+              </p>
+            </div>
+            
+            <div className="mb-3">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">Запрос:</h4>
+              <CodeBlock
+                code={`GET /api/blocks/load
+Content-Type: application/json`}
+                language="http"
+                className="text-xs"
+              />
+            </div>
+
+            <div className="mb-3">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">Успешный ответ:</h4>
+              <CodeBlock
+                code={`HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "blocks": [
+    {
+      "id": "block-1",
+      "type": "text",
+      "props": {
+        "content": "Текст блока",
+        "spacing": {
+          "desktop": { "padding-top": 20, "padding-bottom": 20 }
+        }
+      }
+    }
+  ]
+}`}
+                language="http"
+                className="text-xs"
+              />
+            </div>
+
+            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border-l-4 border-blue-400">
+              <p className="text-xs text-gray-700 dark:text-gray-300">
+                <strong>Примечание:</strong> Если блоков нет, верните пустой массив <code className="text-blue-700 dark:text-blue-400">[]</code>. 
+                Это позволит BlockBuilder корректно инициализироваться с пустым состоянием.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">3. Загрузка изображений</h3>
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4 border border-gray-200 dark:border-slate-700">
+            <div className="mb-3">
+              <div className="flex items-center gap-2 mb-2">
+                <code className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded text-sm font-semibold">POST</code>
+                <code className="text-gray-700 dark:text-gray-300 font-mono text-sm">/api/upload</code>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                Эндпоинт для загрузки статических файлов (изображений). Принимает файл через FormData и возвращает URL загруженного файла.
+              </p>
+            </div>
+            
+            <div className="mb-3">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">Запрос:</h4>
+              <CodeBlock
+                code={`POST /api/upload
+Content-Type: multipart/form-data
+
+FormData:
+  file: [изображение]
+  (опционально) Authorization: Bearer token`}
+                language="http"
+                className="text-xs"
+              />
+            </div>
+
+            <div className="mb-3">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">Успешный ответ:</h4>
+              <CodeBlock
+                code={`HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "url": "https://example.com/uploads/image.jpg",
+  "width": 1920,
+  "height": 1080,
+  "size": 245678
+}`}
+                language="http"
+                className="text-xs"
+              />
+            </div>
+
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 border-l-4 border-yellow-400 mb-3">
+              <p className="text-xs text-gray-700 dark:text-gray-300">
+                <strong>Важно:</strong> Ответ сервера <strong>ОБЯЗАТЕЛЬНО</strong> должен содержать поле <code className="text-yellow-700 dark:text-yellow-400">url</code> 
+                (или <code className="text-yellow-700 dark:text-yellow-400">src</code>) с URL загруженного файла. Если формат ответа отличается, используйте 
+                <code className="text-yellow-700 dark:text-yellow-400">responseMapper</code> в конфигурации поля image для преобразования ответа.
+              </p>
+            </div>
+
+            <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border-l-4 border-green-400">
+              <p className="text-xs text-gray-700 dark:text-gray-300">
+                <strong>Рекомендация:</strong> Загружайте файлы на статический сервер (CDN, S3, или вашу файловую систему) и возвращайте полный URL. 
+                Это позволяет хранить в блоке только ссылку на файл, а не сами данные изображения.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Дополнительные рекомендации</h3>
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+            <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+              <li className="flex items-start">
+                <span className="text-indigo-500 mr-2 mt-1">•</span>
+                <span>
+                  <strong>Валидация данных:</strong> Проверяйте структуру блоков на бэкенде перед сохранением. 
+                  Убедитесь, что все обязательные поля присутствуют и имеют корректный формат.
+                </span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-indigo-500 mr-2 mt-1">•</span>
+                <span>
+                  <strong>Обработка ошибок:</strong> Возвращайте понятные сообщения об ошибках с соответствующими HTTP статусами 
+                  (400 для ошибок валидации, 500 для серверных ошибок).
+                </span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-indigo-500 mr-2 mt-1">•</span>
+                <span>
+                  <strong>Аутентификация:</strong> При необходимости добавьте проверку авторизации для защиты эндпоинтов. 
+                  Можно использовать заголовки Authorization или токены в запросах.
+                </span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-indigo-500 mr-2 mt-1">•</span>
+                <span>
+                  <strong>Ограничения размера файлов:</strong> Для эндпоинта загрузки изображений установите разумные ограничения 
+                  на размер файла (например, 5-10MB) и проверяйте тип файла.
+                </span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-indigo-500 mr-2 mt-1">•</span>
+                <span>
+                  <strong>Хранение данных:</strong> Блоки можно хранить как единую JSON строку для конкретной страницы/контекста, 
+                  или как отдельные записи в базе данных. Выберите подход, который лучше подходит для вашей архитектуры.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-4 border-l-4 border-indigo-400">
+          <h4 className="font-bold text-gray-900 dark:text-white mb-2">Пример обработки ошибок</h4>
+          <CodeBlock
+            code={`// Ошибка валидации
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "success": false,
+  "error": "Неверный формат данных блоков",
+  "details": "Поле 'type' обязательно для каждого блока"
+}
+
+// Ошибка загрузки файла
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "success": false,
+  "error": "Файл слишком большой",
+  "maxSize": "5242880"
+}
+
+// Серверная ошибка
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json
+
+{
+  "success": false,
+  "error": "Внутренняя ошибка сервера"
+}`}
+            language="http"
+            className="text-xs"
+          />
         </div>
       </section>
     </div>
