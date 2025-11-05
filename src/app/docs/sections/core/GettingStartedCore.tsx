@@ -218,7 +218,7 @@ const blockBuilder = new BlockBuilder({
     render: {
       kind: 'html',            // 'html' для Pure JS или 'component' для Vue/React
       template: (props) => {   // Функция шаблона (для kind: 'html')
-        return \`<div>\${props.content}</div>\`
+        return '<div>' + props.content + '</div>'
       },
       // ИЛИ для Vue компонента:
       // kind: 'component',
@@ -340,7 +340,7 @@ const blockBuilder = new BlockBuilder({
               <CodeBlock
                 code={`render: {
   kind: 'html',
-  template: (props) => \`<div>\${props.content}</div>\`
+  template: (props) => '<div>' + props.content + '</div>'
 }`}
                 language="javascript"
                 className="text-xs mb-2"
@@ -520,14 +520,7 @@ export default {
       );
     }
   },
-  template: \`
-    <div :style="spacingStyles">
-      <!-- Используйте CSS переменные для padding -->
-      <div style="padding-top: var(--spacing-padding-top);">
-        {{ block.props.content }}
-      </div>
-    </div>
-  \`
+  template: '<div :style="spacingStyles"><div style="padding-top: var(--spacing-padding-top);">{{ block.props.content }}</div></div>'
 }
 
 // Pure JS

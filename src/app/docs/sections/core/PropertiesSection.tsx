@@ -100,7 +100,7 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
             Callback функция для сохранения блоков. Вызывается при сохранении через UI или программно.
           </p>
           <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">onSave?: (blocks: IBlockDto[]) => Promise&lt;boolean&gt; | boolean</code>
+            <code className="text-sm text-gray-900 dark:text-gray-100">onSave?: (blocks: IBlockDto[]) =&gt; Promise&lt;boolean&gt; | boolean</code>
           </div>
           <CodeBlock
             code={`onSave: async (blocks) => {

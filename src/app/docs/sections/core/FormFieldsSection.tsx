@@ -810,7 +810,7 @@ const imageUrl = computed(() => {
     }
     return '';
   };
-  return \`<img src="\${getImageUrl(props.image)}" />\`;
+  return '<img src="' + getImageUrl(props.image) + '" />';
 }`}
                 language="javascript"
                 className="text-xs"
@@ -1368,7 +1368,7 @@ blockBuilder.registerCustomFieldRenderer(new WysiwygFieldRenderer());`}
     ],
     render: {
       kind: 'html',
-      template: (props) => \`<div class="rich-text">\${props.content || ''}</div>\`
+      template: (props) => '<div class="rich-text">' + (props.content || '') + '</div>'
     }
   }
 };`}

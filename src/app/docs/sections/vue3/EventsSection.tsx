@@ -103,7 +103,7 @@ const handleBlockCreated = (block) => {
   })
   
   // Пример: показать уведомление
-  showNotification(\`Блок "\${block.type}" создан\`)
+  showNotification('Блок "' + block.type + '" создан')
 }`}
           />
           
@@ -116,7 +116,7 @@ const handleBlockUpdated = (block) => {
   console.log('Обновлен блок:', block)
   
   // Пример: синхронизация с сервером
-  fetch(\`/api/blocks/\${block.id}\`, {
+  fetch('/api/blocks/' + block.id, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(block)
@@ -136,7 +136,7 @@ const handleBlockDeleted = (blockId) => {
   console.log('Удален блок:', blockId)
   
   // Пример: удаление на сервере
-  fetch(\`/api/blocks/\${blockId}\`, {
+  fetch('/api/blocks/' + blockId, {
     method: 'DELETE'
   })
   
@@ -196,7 +196,7 @@ const isLoading = ref(false)
 const syncToBackend = async (block) => {
   isLoading.value = true
   try {
-    const response = await fetch(\`/api/blocks/\${block.id}\`, {
+    const response = await fetch('/api/blocks/' + block.id, {
       method: block.id.startsWith('temp-') ? 'POST' : 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(block)
@@ -216,7 +216,7 @@ const syncToBackend = async (block) => {
 
 const removeFromBackend = async (blockId) => {
   try {
-    await fetch(\`/api/blocks/\${blockId}\`, {
+    await fetch('/api/blocks/' + blockId, {
       method: 'DELETE'
     })
     console.log('Блок удален с сервера')
@@ -270,7 +270,7 @@ const savePendingBlocks = async () => {
       body: JSON.stringify({ blocks: pendingBlocks.value })
     })
     
-    console.log(\`Сохранено \${pendingBlocks.value.length} блоков\`)
+    console.log('Сохранено ' + pendingBlocks.value.length + ' блоков')
     pendingBlocks.value = []
   } catch (error) {
     console.error('Ошибка автосохранения:', error)

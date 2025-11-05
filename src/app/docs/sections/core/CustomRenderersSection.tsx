@@ -216,7 +216,7 @@ blockBuilder.registerCustomFieldRenderers([
     ],
     render: {
       kind: 'html',
-      template: (props) => \`<div class="rich-text">\${props.content || ''}</div>\`
+      template: (props) => '<div class="rich-text">' + (props.content || '') + '</div>'
     }
   }
 };`}
