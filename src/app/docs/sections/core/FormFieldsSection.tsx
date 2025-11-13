@@ -222,20 +222,22 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
           
           <FieldTypeCard 
             name="select" 
-            description="Выпадающий список для выбора одного значения из списка опций" 
+            description="Выпадающий список для выбора одного или нескольких значений из списка опций. Поддерживает одиночный и множественный выбор, клавиатурную навигацию, отключенные опции." 
             icon="📋"
             example={`{
   field: 'textAlign',
   label: 'Выравнивание',
   type: 'select',
+  multiple: false,  // true для множественного выбора
   options: [
     { value: 'left', label: 'По левому краю' },
     { value: 'center', label: 'По центру' },
-    { value: 'right', label: 'По правому краю' }
+    { value: 'right', label: 'По правому краю', disabled: true },  // disabled опция
+    { value: 42, label: 'Числовое значение' }  // value может быть string или number
   ],
   defaultValue: 'left'
 }`}
-            parameters={['field', 'label', 'type', 'options', 'defaultValue', 'rules']}
+            parameters={['field', 'label', 'type', 'options', 'multiple', 'defaultValue', 'rules']}
           />
           
           <FieldTypeCard 
@@ -852,6 +854,11 @@ const imageUrl = computed(() => {
           Поле типа <code className="text-cyan-700 dark:text-cyan-400">api-select</code> позволяет выбирать элементы из внешнего API 
           с поддержкой поиска, пагинации и множественного выбора. Идеально для интеграции с вашими бэкенд API.
         </p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          <strong>URL может быть абсолютным</strong> (например, <code className="text-cyan-700 dark:text-cyan-400">https://api.example.com/categories</code>) 
+          или <strong>относительным</strong> (например, <code className="text-cyan-700 dark:text-cyan-400">/api/categories</code>). 
+          Относительные URL автоматически обрабатываются корректно с сохранением query параметров.
+        </p>
 
         <div className="mb-6">
           <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Пример использования</h3>
@@ -861,7 +868,9 @@ const imageUrl = computed(() => {
   label: 'Категория',
   type: 'api-select',
   apiSelectConfig: {
+    // Можно использовать абсолютный URL
     url: 'https://api.example.com/categories',
+    // Или относительный URL (например, '/api/categories')
     method: 'GET',
     headers: {
       'Authorization': 'Bearer token'
@@ -981,10 +990,23 @@ const imageUrl = computed(() => {
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">
               <code className="text-green-700 dark:text-green-400">options</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для select, radio)</span>
             </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              Массив опций в формате [{`{ value: '...', label: '...', disabled?: boolean }`}].
+            </p>
+            <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-4">
+              <li><strong>value</strong> — значение, сохраняемое в props (string | number)</li>
+              <li><strong>label</strong> — отображаемый текст (string)</li>
+              <li><strong>disabled</strong> — опционально, отключает опцию для выбора (boolean)</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+              <code className="text-green-700 dark:text-green-400">multiple</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для select, опционально)</span>
+            </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Массив опций в формате <code className="text-green-700 dark:text-green-400">{`[{ value: '...', label: '...' }]`}</code>. 
-              <code className="text-green-700 dark:text-green-400">value</code> — значение, сохраняемое в props, 
-              <code className="text-green-700 dark:text-green-400">label</code> — отображаемый текст.
+              Включает множественный выбор для select поля. При multiple: true 
+              значение будет массивом выбранных значений. По умолчанию false.
             </p>
           </div>
           

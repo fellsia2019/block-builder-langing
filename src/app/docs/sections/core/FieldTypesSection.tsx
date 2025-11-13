@@ -188,20 +188,22 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
           
           <FieldTypeCard 
             name="select" 
-            description="Выпадающий список для выбора одного значения из списка опций" 
+            description="Выпадающий список для выбора одного или нескольких значений из списка опций. Поддерживает одиночный и множественный выбор, клавиатурную навигацию, отключенные опции." 
             icon="📋"
             example={`{
   field: 'textAlign',
   label: 'Выравнивание',
   type: 'select',
+  multiple: false,  // true для множественного выбора
   options: [
     { value: 'left', label: 'По левому краю' },
     { value: 'center', label: 'По центру' },
-    { value: 'right', label: 'По правому краю' }
+    { value: 'right', label: 'По правому краю', disabled: true },  // disabled опция
+    { value: 42, label: 'Числовое значение' }  // value может быть string или number
   ],
   defaultValue: 'left'
 }`}
-            parameters={['field', 'label', 'type', 'options', 'defaultValue', 'rules']}
+            parameters={['field', 'label', 'type', 'options', 'multiple', 'defaultValue', 'rules']}
           />
           
           <FieldTypeCard 
@@ -326,10 +328,23 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">
               <code className="text-green-700 dark:text-green-400">options</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для select, radio)</span>
             </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              Массив опций в формате [{`{ value: '...', label: '...', disabled?: boolean }`}].
+            </p>
+            <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-4">
+              <li><strong>value</strong> — значение, сохраняемое в props (string | number)</li>
+              <li><strong>label</strong> — отображаемый текст (string)</li>
+              <li><strong>disabled</strong> — опционально, отключает опцию для выбора (boolean)</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+              <code className="text-green-700 dark:text-green-400">multiple</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для select, опционально)</span>
+            </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Массив опций в формате <code className="text-green-700 dark:text-green-400">{`[{ value: '...', label: '...' }]`}</code>. 
-              <code className="text-green-700 dark:text-green-400">value</code> — значение, сохраняемое в props, 
-              <code className="text-green-700 dark:text-green-400">label</code> — отображаемый текст.
+              Включает множественный выбор для select поля. При multiple: true 
+              значение будет массивом выбранных значений. По умолчанию false.
             </p>
           </div>
           
