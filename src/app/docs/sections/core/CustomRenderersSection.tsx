@@ -140,6 +140,15 @@ interface ICustomFieldRenderResult {
           language="typescript"
           className="mb-4"
         />
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 mt-4 border-l-4 border-yellow-500">
+          <h4 className="font-bold text-yellow-900 dark:text-yellow-200 mb-2">⚠️ Важно для внешних библиотек:</h4>
+          <p className="text-sm text-yellow-800 dark:text-yellow-300 mb-2">
+            При использовании внешних библиотек (Jodit, TinyMCE и т.д.) <strong>храните экземпляр редактора локально в методе render</strong> (как <code className="text-yellow-700 dark:text-yellow-400">const editor = ...</code>), а не как свойство класса. Это критично для корректной работы в repeater полях, где создается несколько экземпляров редактора одновременно.
+          </p>
+          <p className="text-sm text-yellow-800 dark:text-yellow-300">
+            <strong>Пример правильного подхода:</strong> <code className="text-yellow-700 dark:text-yellow-400">const editor = new Jodit(...)</code> внутри метода <code className="text-yellow-700 dark:text-yellow-400">render()</code>, а не <code className="text-yellow-700 dark:text-yellow-400">this.editor = new Jodit(...)</code>.
+          </p>
+        </div>
       </section>
 
       <section className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6 border-l-4 border-orange-500">

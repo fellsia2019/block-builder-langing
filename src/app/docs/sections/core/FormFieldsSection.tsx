@@ -1354,6 +1354,7 @@ blockBuilder.registerCustomFieldRenderer(new WysiwygFieldRenderer());`}
               <li><strong>onError callback:</strong> используйте для отображения ошибок валидации пользователю</li>
               <li><strong>Метод destroy():</strong> критически важен для очистки ресурсов и предотвращения утечек памяти</li>
               <li><strong>Регистрация:</strong> регистрируйте рендерер до первого рендеринга формы</li>
+              <li><strong>⚠️ Важно для внешних библиотек:</strong> При использовании внешних библиотек (Jodit, TinyMCE и т.д.) храните экземпляр редактора <strong>локально в методе render</strong> (как <code className="text-blue-700 dark:text-blue-400">const editor = ...</code>), а не как свойство класса. Это критично для корректной работы в repeater полях, где создается несколько экземпляров редактора одновременно.</li>
             </ul>
           </div>
         </div>
