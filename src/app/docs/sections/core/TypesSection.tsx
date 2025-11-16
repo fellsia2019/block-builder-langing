@@ -179,6 +179,31 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+          <code className="text-teal-700 dark:text-teal-400">IRepeaterFieldConfig</code>
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Конфигурация для поля типа <code className="text-teal-700 dark:text-teal-400">repeater</code>. Свойство <code className="text-teal-700 dark:text-teal-400">countLabelVariants</code> позволяет локализовать счётчик элементов.
+        </p>
+        <CodeBlock
+          code={`interface IRepeaterFieldConfig {
+  itemTitle?: string
+  addButtonText?: string
+  removeButtonText?: string
+  min?: number
+  max?: number
+  fields: IFormFieldConfig[]
+  countLabelVariants?: { one: string; few: string; many: string; zero?: string }
+}`}
+          language="typescript"
+          className="mb-2"
+        />
+        <p className="text-xs text-gray-500 dark:text-gray-400">
+          По умолчанию UI показывает только число. Если указать <code className="text-teal-700 dark:text-teal-400">countLabelVariants</code>, будет показано «число + слово».
+        </p>
+      </section>
+
+      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           <code className="text-teal-700 dark:text-teal-400">IFormGenerationConfig</code>
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Конфигурация для генерации форм</p>

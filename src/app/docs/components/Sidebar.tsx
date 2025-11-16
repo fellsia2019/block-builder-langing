@@ -71,6 +71,7 @@ export default function Sidebar({
               <NavLink active={currentSubSection === 'properties'} href="/docs/core/properties" color="primary" onLinkClick={onLinkClick}>Свойства</NavLink>
               <NavLink active={currentSubSection === 'types'} href="/docs/core/types" color="primary" onLinkClick={onLinkClick}>Типы</NavLink>
               <NavLink active={currentSubSection === 'form-fields'} href="/docs/core/form-fields" color="primary" onLinkClick={onLinkClick}>Поля форм</NavLink>
+              <NavLink active={currentSubSection === 'utilities'} href="/docs/core/utilities" color="primary" onLinkClick={onLinkClick}>Утилиты</NavLink>
             </>
           )}
           

@@ -211,7 +211,7 @@ const blockBuilder = new BlockBuilder({
     type: 'text',              // Тип блока (обязательно, должен совпадать с ключом)
     label: 'Текстовый блок',   // Отображаемое название в UI (обязательно)
     title: 'Текстовый блок',   // Альтернативное название (опционально)
-    icon: '📝',                // Иконка блока (опционально)
+    icon: '/icons/text.svg',   // Иконка блока (URL/путь к изображению)
     description: 'Блок для текстового контента', // Описание блока (опционально)
     
     // Конфигурация рендеринга блока
@@ -314,7 +314,7 @@ const blockBuilder = new BlockBuilder({
                 <code className="text-blue-700 dark:text-blue-400">icon</code> <span className="text-sm font-normal text-gray-500 dark:text-gray-400">(опциональный)</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Иконка блока (эмодзи или строка). Отображается в UI рядом с названием блока.
+                Иконка блока — укажите <strong>URL/путь к изображению</strong> (например, <code className="text-blue-700 dark:text-blue-400">/icons/text.svg</code>) для отрисовки через <code className="text-blue-700 dark:text-blue-400">&lt;img&gt;</code> как в Vue, так и в Pure‑JS.
               </p>
             </div>
 
@@ -420,6 +420,8 @@ const blockBuilder = new BlockBuilder({
           </ul>
         </div>
       </section>
+
+
 
       <section className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 border-l-4 border-purple-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Отступы блоков (Spacing)</h2>
@@ -576,6 +578,13 @@ applySpacingToElement(
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Для полноценной работы BlockBuilder в продакшене вам необходимо реализовать следующие API эндпоинты на вашем бэкенде:
         </p>
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 mb-4 border-l-4 border-blue-400">
+          <p className="text-sm text-gray-700 dark:text-gray-300">
+            Важно: приведенные ниже URL — <strong>только примеры</strong>. Вы можете использовать <strong>любой</strong> путь/схему URL на вашем бэкенде
+            и передавать его в конфигурацию BlockBuilder (например, в <code className="text-blue-700 dark:text-blue-400">apiSelectConfig.url</code>, 
+            настройках загрузки изображений, а также в вашей логике <code className="text-blue-700 dark:text-blue-400">onSave</code>/<code className="text-blue-700 dark:text-blue-400">load</code>).
+          </p>
+        </div>
 
         <div className="mb-6">
           <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">1. Сохранение блоков</h3>

@@ -6,7 +6,8 @@ export const CORE_SECTIONS: CoreSubSection[] = [
   'methods',
   'properties',
   'types',
-  'form-fields'
+  'form-fields',
+  'utilities'
 ];
 
 export const VUE3_SECTIONS: Vue3SubSection[] = [
@@ -23,7 +24,8 @@ export const SECTION_TITLES = {
     'methods': 'Методы',
     'properties': 'Свойства',
     'types': 'Типы',
-    'form-fields': 'Поля форм'
+    'form-fields': 'Поля форм',
+    'utilities': 'Утилиты'
   },
   vue3: {
     'getting-started': 'Быстрый старт',

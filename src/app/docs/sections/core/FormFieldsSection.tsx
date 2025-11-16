@@ -635,6 +635,28 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
               </p>
             </div>
 
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-indigo-200 dark:border-indigo-800">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-indigo-700 dark:text-indigo-400">countLabelVariants</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(опциональный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Локализация счётчика элементов. По умолчанию интерфейс показывает только число. 
+                Если указать <code className="text-indigo-700 dark:text-indigo-400">countLabelVariants</code>, отображается «число + слово»:
+              </p>
+              <CodeBlock
+                code={`repeaterConfig: {
+  itemTitle: 'Слайд',
+  countLabelVariants: { one: 'элемент', few: 'элемента', many: 'элементов', zero: 'пусто' },
+  fields: [ /* ... */ ]
+}`}
+                language="javascript"
+                className="text-xs mb-2"
+              />
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Внутри используется общий util счётчика, единообразный для Vue и Pure‑JS UI.
+              </p>
+            </div>
+
           </div>
         </div>
       </section>

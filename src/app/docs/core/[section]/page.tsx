@@ -9,7 +9,8 @@ import {
   ClassesSection,
   MethodsSection,
   PropertiesSection,
-  TypesSection
+  TypesSection,
+  UtilitiesSection
 } from '../../sections/core';
 import FormFieldsSection from '../../sections/core/FormFieldsSection';
 import NextPageLink from '../../components/NextPageLink';
@@ -65,6 +66,8 @@ function getContent(
       return <TypesSection nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} />;
     case 'form-fields':
       return <FormFieldsSection nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} />;
+    case 'utilities':
+      return <UtilitiesSection nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} />;
     default:
       return (
         <div className="space-y-8">
