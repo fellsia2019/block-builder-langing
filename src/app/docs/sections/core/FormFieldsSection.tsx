@@ -602,8 +602,27 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 Массив полей, которые будут внутри каждого элемента repeater. 
-                Не поддерживаются вложенные <code className="text-indigo-700 dark:text-indigo-400">repeater</code> и <code className="text-indigo-700 dark:text-indigo-400">spacing</code> поля.
+                Не поддерживаются только поля типа <code className="text-indigo-700 dark:text-indigo-400">spacing</code>. 
+                Поддерживаются вложенные репитеры — репитеры внутри репитеров.
               </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-green-200 dark:border-green-800">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-indigo-700 dark:text-indigo-400">maxNestingDepth</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(опциональный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Максимальная глубина вложенности репитеров. По умолчанию 2 (то есть можно вкладывать репитеры внутрь репитеров).
+                Используется для предотвращения слишком глубокой вложенности и улучшения производительности.
+              </p>
+              <CodeBlock
+                code={`repeaterConfig: {
+  maxNestingDepth: 2,  // По умолчанию 2
+  fields: [ /* ... */ ]
+}`}
+                language="javascript"
+                className="text-xs mb-2"
+              />
             </div>
 
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
@@ -657,6 +676,79 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
               </p>
             </div>
 
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Вложенные репитеры</h3>
+          <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 mb-4 border-l-4 border-green-400">
+            <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+              <Icon name="lightbulb" size={18} className="text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+              <span>
+                <strong>Возможность:</strong> Поддерживаются вложенные репитеры — репитеры внутри репитеров. 
+                Это позволяет создавать сложные вложенные структуры данных, такие как категории с товарами, разделы с подразделами и т.д.
+              </span>
+            </p>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 mb-3">
+            Для создания вложенного репитера нужно добавить поле типа <code className="text-indigo-700 dark:text-indigo-400">repeater</code> 
+            в массив <code className="text-indigo-700 dark:text-indigo-400">fields</code> родительского репитера и указать конфигурацию через свойство <code className="text-indigo-700 dark:text-indigo-400">repeaterConfig</code>:
+          </p>
+          <CodeBlock
+            code={`{
+  field: 'categories',
+  label: 'Категории',
+  type: 'repeater',
+  repeaterConfig: {
+    itemTitle: 'Категория',
+    maxNestingDepth: 2,  // Максимальная глубина вложенности
+    fields: [
+      {
+        field: 'name',
+        label: 'Название категории',
+        type: 'text',
+        rules: [{ type: 'required' }]
+      },
+      {
+        field: 'products',  // Вложенный репитер
+        label: 'Товары',
+        type: 'repeater',
+        repeaterConfig: {  // Конфигурация вложенного репитера
+          itemTitle: 'Товар',
+          maxNestingDepth: 2,
+          fields: [
+            {
+              field: 'name',
+              label: 'Название товара',
+              type: 'text',
+              rules: [{ type: 'required' }]
+            },
+            {
+              field: 'price',
+              label: 'Цена',
+              type: 'number',
+              rules: [{ type: 'required' }]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  defaultValue: []
+}`}
+            language="javascript"
+            className="mb-4"
+          />
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border-l-4 border-blue-400">
+            <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+              <strong>Особенности вложенных репитеров:</strong>
+            </p>
+            <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-2">
+              <li>Автоматическое раскрытие аккордеонов при наличии ошибок валидации во вложенных репитерах</li>
+              <li>Корректная обработка вложенных путей полей вида <code className="text-blue-700 dark:text-blue-400">categories[0].products[1].name</code></li>
+              <li>Ограничение максимальной глубины вложенности через <code className="text-blue-700 dark:text-blue-400">maxNestingDepth</code></li>
+              <li>Синхронизация значений при изменении полей во вложенных репитерах</li>
+            </ul>
           </div>
         </div>
       </section>
