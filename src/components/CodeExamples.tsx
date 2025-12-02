@@ -185,20 +185,68 @@ export class WysiwygFieldRenderer {
   name = 'WYSIWYG Editor'
 
   render(container, context) {
-    const { value, onChange } = context
+    const { value, onChange, onError, required } = context
     
+    // Создаём wrapper для редактора (важно для корректной работы)
     const wrapper = document.createElement('div')
-    const editorAPI = createWysiwygEditor(wrapper, {
-      value: value || '<p></p>',
-      onChange: (newValue) => onChange(newValue)
+    wrapper.className = 'wysiwyg-field-wrapper'
+    container.appendChild(wrapper)
+    
+    // Инициализируем редактор (ControlManager гарантирует, что элемент в DOM)
+    const editor = Jodit.make(wrapper, {
+      height: 400,
+      language: 'ru',
+      toolbar: true
+    })
+    
+    // Устанавливаем начальное значение
+    if (value) {
+      editor.value = value
+    }
+    
+    // Обработка изменений
+    editor.events.on('change', () => {
+      const content = editor.value || ''
+      onChange(content)
+      
+      // Валидация при изменении (если требуется)
+      if (required && onError) {
+        const error = this.validateEditor(content)
+        onError(error)
+      }
     })
     
     return {
-      element: wrapper,
-      getValue: () => editorAPI.getValue(),
-      setValue: (v) => editorAPI.setValue(v),
-      destroy: () => editorAPI.destroy()
+      element: wrapper,  // Возвращаем wrapper, а не container
+      getValue: () => editor.value || '',
+      setValue: (newValue) => {
+        if (editor) {
+          editor.value = newValue || ''
+        }
+      },
+      validate: () => {
+        if (required) {
+          return this.validateEditor(editor.value)
+        }
+        return null
+      },
+      destroy: () => {
+        if (editor) {
+          editor.destruct()
+        }
+        if (wrapper.parentNode) {
+          wrapper.parentNode.removeChild(wrapper)
+        }
+      }
     }
+  }
+  
+  validateEditor(html) {
+    const text = html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim()
+    if (text === '' || html === '<p><br></p>') {
+      return 'Содержимое не может быть пустым'
+    }
+    return null
   }
 }
 
@@ -211,6 +259,7 @@ const blockConfigs = {
         field: 'content',
         label: 'Содержимое',
         type: 'custom',
+        required: true,
         customFieldConfig: {
           rendererId: 'wysiwyg-editor'
         }

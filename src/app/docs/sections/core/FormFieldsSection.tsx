@@ -1465,6 +1465,10 @@ blockBuilder.registerCustomFieldRenderer(new WysiwygFieldRenderer());`}
               <li><strong>Класс реализует интерфейс:</strong> <code className="text-blue-700 dark:text-blue-400">implements ICustomFieldRenderer</code> — это обязательное требование</li>
               <li><strong>Метод render():</strong> получает контейнер и контекст, возвращает объект с элементом и методами</li>
               <li><strong>onChange callback:</strong> обязательно вызывайте при каждом изменении значения для синхронизации с BlockBuilder</li>
+              <li><strong>onError callback:</strong> используйте для отображения ошибок валидации (доступен в context с версии 1.0.30+)</li>
+              <li><strong>validate() метод:</strong> опционально, но рекомендуется для кастомной валидации (доступен в ICustomFieldRenderResult с версии 1.0.30+)</li>
+              <li><strong>ControlManager (v1.0.30+):</strong> гарантирует, что элемент уже в DOM при вызове render(), не используйте setTimeout для инициализации</li>
+              <li><strong>Wrapper элемент:</strong> рекомендуется возвращать wrapper элемент, а не container напрямую, для лучшей изоляции</li>
               <li><strong>onError callback:</strong> используйте для отображения ошибок валидации пользователю</li>
               <li><strong>Метод destroy():</strong> критически важен для очистки ресурсов и предотвращения утечек памяти</li>
               <li><strong>Регистрация:</strong> регистрируйте рендерер до первого рендеринга формы</li>
