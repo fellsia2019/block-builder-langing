@@ -71,9 +71,9 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
     };
   }, [isOpen, mounted]);
 
-  // Для локальной разработки используем http://localhost:3010 напрямую, для production - https://api.block-builder.ru
+  // Для локальной разработки используем http://localhost:3010 напрямую, для production - https://api.deep-bb.ru
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 
-    (process.env.NODE_ENV === 'development' ? 'http://localhost:3010' : 'https://api.block-builder.ru');
+    (process.env.NODE_ENV === 'development' ? 'http://localhost:3010' : 'https://api.deep-bb.ru');
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
