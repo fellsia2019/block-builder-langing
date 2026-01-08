@@ -139,7 +139,7 @@ export default function Installation() {
               </a>
 
               <a
-                href="https://demo.deep-bb.ru"
+                href="https://demo.block-builder.ru"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center p-4 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg hover:shadow-md transition-shadow border border-green-200 dark:border-green-800"

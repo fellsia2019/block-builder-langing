@@ -376,7 +376,7 @@ export default function CodeExamples() {
           {/* Demo link card */}
           <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={900}>
             <a
-              href="https://demo.deep-bb.ru"
+              href="https://demo.block-builder.ru"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-12 block p-8 bg-gradient-to-r from-primary-600 via-purple-600 to-pink-600 rounded-2xl shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 text-white text-center group"
@@ -390,7 +390,7 @@ export default function CodeExamples() {
                   Интерактивные демо с реальными блоками и формами
                 </p>
                 <div className="px-6 py-3 bg-white/20 backdrop-blur-sm rounded-lg font-semibold group-hover:bg-white/30 transition-colors">
-                  Перейти на demo.deep-bb.ru →
+                  Перейти на demo.block-builder.ru →
                 </div>
               </div>
             </a>
