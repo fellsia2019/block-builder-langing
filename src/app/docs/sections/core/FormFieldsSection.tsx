@@ -1044,6 +1044,254 @@ const imageUrl = computed(() => {
         </div>
       </section>
 
+      <section className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-6 border-l-4 border-emerald-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Условное отображение полей (dependsOn)</h2>
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 mb-4 border-l-4 border-blue-400">
+          <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+            <Icon name="lightbulb" size={18} className="text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+            <span>
+              <strong>Только для Vue:</strong> Функциональность <code className="text-blue-700 dark:text-blue-400">dependsOn</code> доступна только для Vue версии библиотеки (v1.1.0+). 
+              Pure-JS версия не поддерживает условное отображение полей.
+            </span>
+          </p>
+        </div>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Свойство <code className="text-emerald-700 dark:text-emerald-400">dependsOn</code> позволяет условно отображать поля формы на основе значений других полей. 
+          Это полезно для создания динамических форм, где некоторые поля должны показываться только при определенных условиях.
+        </p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Поля с <code className="text-emerald-700 dark:text-emerald-400">dependsOn</code> автоматически скрываются, если условие не выполнено, 
+          и не участвуют в валидации, когда они скрыты.
+        </p>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Пример использования</h3>
+          <CodeBlock
+            code={`{
+  field: 'autoplay',
+  label: 'Автопрокрутка',
+  type: 'checkbox',
+  defaultValue: true
+},
+{
+  field: 'autoplayDelay',
+  label: 'Задержка (мс)',
+  type: 'number',
+  rules: [
+    { type: 'min', value: 1000, message: 'Минимум: 1000мс' },
+    { type: 'max', value: 10000, message: 'Максимум: 10000мс' }
+  ],
+  defaultValue: 3000,
+  dependsOn: {
+    field: 'autoplay',      // Имя поля, от которого зависит видимость
+    value: true,            // Ожидаемое значение
+    operator: 'equals'      // Оператор сравнения (по умолчанию 'equals')
+  }
+}`}
+            language="javascript"
+            className="mb-4"
+          />
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Параметры dependsOn</h3>
+          <div className="space-y-3">
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-emerald-700 dark:text-emerald-400">field</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(обязательный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Имя поля, от которого зависит видимость текущего поля. Должно быть полем, определенным в той же конфигурации блока или внутри того же репитера.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-emerald-700 dark:text-emerald-400">value</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(обязательный)</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Ожидаемое значение зависимого поля. Может быть <code className="text-emerald-700 dark:text-emerald-400">boolean</code>, <code className="text-emerald-700 dark:text-emerald-400">string</code> или <code className="text-emerald-700 dark:text-emerald-400">number</code>.
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Для операторов <code className="text-emerald-700 dark:text-emerald-400">in</code> и <code className="text-emerald-700 dark:text-emerald-400">notIn</code> значение должно быть массивом.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">
+                <code className="text-emerald-700 dark:text-emerald-400">operator</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(опциональный, по умолчанию 'equals')</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Оператор сравнения для проверки условия:
+              </p>
+              <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-4">
+                <li><code className="text-emerald-700 dark:text-emerald-400">'equals'</code> (по умолчанию) — поле видимо, если значение равно <code className="text-emerald-700 dark:text-emerald-400">value</code></li>
+                <li><code className="text-emerald-700 dark:text-emerald-400">'notEquals'</code> — поле видимо, если значение не равно <code className="text-emerald-700 dark:text-emerald-400">value</code></li>
+                <li><code className="text-emerald-700 dark:text-emerald-400">'in'</code> — поле видимо, если значение содержится в массиве <code className="text-emerald-700 dark:text-emerald-400">value</code></li>
+                <li><code className="text-emerald-700 dark:text-emerald-400">'notIn'</code> — поле видимо, если значение не содержится в массиве <code className="text-emerald-700 dark:text-emerald-400">value</code></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Примеры использования</h3>
+          
+          <div className="mb-4">
+            <h4 className="font-bold text-gray-900 dark:text-white mb-2">Пример 1: Зависимость от checkbox</h4>
+            <CodeBlock
+              code={`{
+  field: 'hasLink',
+  label: 'Добавить ссылку',
+  type: 'checkbox',
+  defaultValue: false
+},
+{
+  field: 'linkUrl',
+  label: 'URL ссылки',
+  type: 'text',
+  rules: [{ type: 'required', message: 'URL ссылки обязателен' }],
+  dependsOn: {
+    field: 'hasLink',
+    value: true
+  }
+},
+{
+  field: 'linkText',
+  label: 'Текст ссылки',
+  type: 'text',
+  rules: [{ type: 'required', message: 'Текст ссылки обязателен' }],
+  dependsOn: {
+    field: 'hasLink',
+    value: true
+  }
+}`}
+              language="javascript"
+              className="mb-4"
+            />
+          </div>
+
+          <div className="mb-4">
+            <h4 className="font-bold text-gray-900 dark:text-white mb-2">Пример 2: Зависимость от select</h4>
+            <CodeBlock
+              code={`{
+  field: 'layoutType',
+  label: 'Тип макета',
+  type: 'select',
+  options: [
+    { value: 'grid', label: 'Сетка' },
+    { value: 'list', label: 'Список' },
+    { value: 'carousel', label: 'Карусель' }
+  ],
+  defaultValue: 'grid'
+},
+{
+  field: 'columnsCount',
+  label: 'Количество колонок',
+  type: 'number',
+  rules: [{ type: 'required' }],
+  dependsOn: {
+    field: 'layoutType',
+    value: 'grid',
+    operator: 'equals'
+  }
+},
+{
+  field: 'slidesToShow',
+  label: 'Слайдов на экране',
+  type: 'number',
+  rules: [{ type: 'required' }],
+  dependsOn: {
+    field: 'layoutType',
+    value: 'carousel',
+    operator: 'equals'
+  }
+}`}
+              language="javascript"
+              className="mb-4"
+            />
+          </div>
+
+          <div className="mb-4">
+            <h4 className="font-bold text-gray-900 dark:text-white mb-2">Пример 3: Использование оператора in</h4>
+            <CodeBlock
+              code={`{
+  field: 'displayMode',
+  label: 'Режим отображения',
+  type: 'select',
+  options: [
+    { value: 'light', label: 'Светлый' },
+    { value: 'dark', label: 'Темный' },
+    { value: 'auto', label: 'Автоматический' }
+  ],
+  defaultValue: 'light'
+},
+{
+  field: 'customTheme',
+  label: 'Пользовательская тема',
+  type: 'color',
+  dependsOn: {
+    field: 'displayMode',
+    value: ['light', 'dark'],  // Массив значений
+    operator: 'in'              // Поле видимо, если displayMode = 'light' или 'dark'
+  }
+}`}
+              language="javascript"
+              className="mb-4"
+            />
+          </div>
+
+          <div className="mb-4">
+            <h4 className="font-bold text-gray-900 dark:text-white mb-2">Пример 4: Зависимость внутри repeater</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              <code className="text-emerald-700 dark:text-emerald-400">dependsOn</code> также работает внутри репитеров — поле проверяет значение другого поля внутри того же элемента репитера:
+            </p>
+            <CodeBlock
+              code={`{
+  field: 'items',
+  label: 'Элементы',
+  type: 'repeater',
+  repeaterConfig: {
+    fields: [
+      {
+        field: 'hasImage',
+        label: 'Есть изображение',
+        type: 'checkbox',
+        defaultValue: false
+      },
+      {
+        field: 'imageUrl',
+        label: 'URL изображения',
+        type: 'text',
+        rules: [{ type: 'required' }],
+        dependsOn: {
+          field: 'hasImage',  // Проверяет значение hasImage внутри того же элемента
+          value: true
+        }
+      }
+    ]
+  }
+}`}
+              language="javascript"
+              className="mb-4"
+            />
+          </div>
+        </div>
+
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 border border-yellow-200 dark:border-yellow-800">
+          <h4 className="font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+            <Icon name="warning" size={18} className="text-yellow-600 dark:text-yellow-400" />
+            Важные моменты
+          </h4>
+          <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+            <li>Скрытые поля не участвуют в валидации — это позволяет сохранять формы даже когда toggle отключен</li>
+            <li>Внутри репитеров поле проверяет значение другого поля внутри того же элемента репитера</li>
+            <li>Функциональность доступна только для Vue версии библиотеки (v1.1.0+)</li>
+            <li>Pure-JS версия не поддерживает условное отображение полей</li>
+          </ul>
+        </div>
+      </section>
+
       <section className="bg-green-50 dark:bg-green-900/20 rounded-xl p-6 border-l-4 border-green-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Общие параметры полей</h2>
         <div className="space-y-3">
@@ -1203,6 +1451,18 @@ const imageUrl = computed(() => {
               Конфигурация для кастомного поля. Должен содержать <code className="text-green-700 dark:text-green-400">rendererId</code> — 
               идентификатор зарегистрированного кастомного рендерера.
               <strong className="text-yellow-700 dark:text-yellow-400"> Доступно только в PRO версии.</strong>
+            </p>
+          </div>
+
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+              <code className="text-green-700 dark:text-green-400">dependsOn</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(опциональный, только Vue, v1.1.0+)</span>
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              Конфигурация условного отображения поля на основе значения другого поля. См. раздел "Условное отображение полей (dependsOn)" выше.
+            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              <strong>Доступно только для Vue версии:</strong> Pure-JS версия не поддерживает условное отображение полей.
             </p>
           </div>
         </div>

@@ -171,6 +171,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   apiSelectConfig?: IApiSelectConfig
   customFieldConfig?: any // Внутренний тип (не экспортируется)
   imageUploadConfig?: any // Внутренний тип (не экспортируется)
+  dependsOn?: IDependsOnConfig // Условное отображение поля (только для Vue) (v1.1.0+)
 }`}
           language="typescript"
           className="mb-4"
@@ -222,6 +223,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   defaultValue?: any
   rules?: IValidationRule[]
   repeaterConfig?: IRepeaterFieldConfig  // Для вложенных репитеров
+  dependsOn?: IDependsOnConfig // Условное отображение поля (только для Vue) (v1.1.0+)
   // ... другие свойства полей
 }`}
           language="typescript"
@@ -485,6 +487,39 @@ enum TLicenseType {
           language="typescript"
           className="mb-4"
         />
+      </section>
+
+      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+          <code className="text-teal-700 dark:text-teal-400">IDependsOnConfig</code>
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Конфигурация условного отображения поля на основе значения другого поля (только для Vue версии, v1.1.0+)
+        </p>
+        <CodeBlock
+          code={`interface IDependsOnConfig {
+  field: string                    // Имя поля, от которого зависит видимость
+  value: boolean | string | number // Ожидаемое значение зависимого поля
+  operator?: 'equals' | 'notEquals' | 'in' | 'notIn' // Оператор сравнения (по умолчанию 'equals')
+}`}
+          language="typescript"
+          className="mb-4"
+        />
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 mt-4">
+          <h4 className="font-bold text-gray-900 dark:text-white mb-2">Операторы:</h4>
+          <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+            <li><code className="text-blue-700 dark:text-blue-400">equals</code> (по умолчанию) - поле видимо, если значение равно <code className="text-blue-700 dark:text-blue-400">value</code></li>
+            <li><code className="text-blue-700 dark:text-blue-400">notEquals</code> - поле видимо, если значение не равно <code className="text-blue-700 dark:text-blue-400">value</code></li>
+            <li><code className="text-blue-700 dark:text-blue-400">in</code> - поле видимо, если значение содержится в массиве <code className="text-blue-700 dark:text-blue-400">value</code></li>
+            <li><code className="text-blue-700 dark:text-blue-400">notIn</code> - поле видимо, если значение не содержится в массиве <code className="text-blue-700 dark:text-blue-400">value</code></li>
+          </ul>
+        </div>
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 mt-4">
+          <p className="text-sm text-gray-700 dark:text-gray-300">
+            <strong>Важно:</strong> Функциональность <code className="text-yellow-700 dark:text-yellow-400">dependsOn</code> доступна только для Vue версии библиотеки. 
+            Pure-JS версия не поддерживает условное отображение полей.
+          </p>
+        </div>
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
