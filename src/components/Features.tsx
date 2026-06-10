@@ -16,13 +16,13 @@ const features = [
   },
   {
     iconName: 'paintbrush' as const,
-    title: 'Vue3 компоненты из коробки',
-    description: 'Готовые Vue3 Single File Components для быстрой интеграции в ваше приложение.'
+    title: 'Vue 3 и React UI',
+    description: 'Готовые компоненты BlockBuilder для Vue 3 и React, единый core API.'
   },
   {
     iconName: 'zap' as const,
-    title: 'Pure JavaScript поддержка',
-    description: 'Работает как с фреймворками, так и с чистым JavaScript без зависимостей.'
+    title: 'SSR и Nuxt / Next.js',
+    description: 'Серверный рендеринг контента блоков, примеры для Nuxt 3/4 и Next.js App Router.'
   },
   {
     iconName: 'plugin' as const,

@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import Sidebar from './Sidebar';
 
 interface DocsLayoutProps {
-  activeSection: 'core' | 'vue' | 'react';
+  activeSection: 'core' | 'vue' | 'react' | 'nuxt' | 'next';
   activeSubSection: string;
   children: React.ReactNode;
 }

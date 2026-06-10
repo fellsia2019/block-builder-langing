@@ -111,7 +111,7 @@ const props = defineProps({
             code={`<template>
   <BlockBuilderComponent 
     :config="config"
-    @block-created="handleBlockCreated"
+    @block-added="handleBlockAdded"
     @block-updated="handleBlockUpdated"
     @block-deleted="handleBlockDeleted"
   />
@@ -133,10 +133,10 @@ const config = {
       },
       fields: [
         {
-          name: 'content',
+          field: 'content',
           label: 'Содержимое',
           type: 'textarea',
-          required: true,
+          rules: [{ type: 'required', field: 'content' }],
           defaultValue: '<p>Привет, мир!</p>'
         }
       ],
@@ -151,7 +151,7 @@ const config = {
   ],
 }
 
-const handleBlockCreated = (block) => {
+const handleBlockAdded = (block) => {
   console.log('Блок создан:', block)
 }
 
@@ -193,13 +193,13 @@ const config = {
       },
       fields: [
         {
-          name: 'content',
+          field: 'content',
           label: 'Содержимое',
           type: 'textarea',
-          required: true
+          rules: [{ type: 'required', field: 'content' }]
         },
         {
-          name: 'textAlign',
+          field: 'textAlign',
           label: 'Выравнивание',
           type: 'select',
           options: [
@@ -220,10 +220,10 @@ const config = {
       },
       fields: [
         {
-          name: 'image',
+          field: 'image',
           label: 'Изображение',
           type: 'image',
-          required: true,
+          rules: [{ type: 'required', field: 'image' }],
           imageUploadConfig: {
             uploadUrl: '/api/upload',
             maxFileSize: 5 * 1024 * 1024,
@@ -234,12 +234,12 @@ const config = {
           }
         },
         {
-          name: 'alt',
+          field: 'alt',
           label: 'Альтернативный текст',
           type: 'text'
         },
         {
-          name: 'width',
+          field: 'width',
           label: 'Ширина',
           type: 'number',
           defaultValue: 100
@@ -256,18 +256,18 @@ const config = {
       },
       fields: [
         {
-          name: 'text',
+          field: 'text',
           label: 'Текст кнопки',
           type: 'text',
-          required: true
+          rules: [{ type: 'required', field: 'text' }]
         },
         {
-          name: 'url',
+          field: 'url',
           label: 'Ссылка',
           type: 'url'
         },
         {
-          name: 'variant',
+          field: 'variant',
           label: 'Стиль',
           type: 'select',
           options: [

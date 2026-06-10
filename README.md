@@ -1,6 +1,6 @@
 # BlockBuilder Landing Page
 
-Современный лендинг для npm пакета [BlockBuilder](../block-builder) - библиотеки для создания блочных конструкторов с чистой архитектурой.
+Современный лендинг для npm пакета [@mushket-co/block-builder](https://www.npmjs.com/package/@mushket-co/block-builder) — библиотеки для создания блочных конструкторов с чистой архитектурой.
 
 ## 🚀 Технологии
 

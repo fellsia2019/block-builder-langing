@@ -2,7 +2,6 @@
 
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
-import ProBadge from '../../components/ProBadge';
 import type { NavigationProps } from '../../types';
 
 export default function CustomRenderersSection({ nextSection, nextTitle, onNavigate }: NavigationProps) {
@@ -13,9 +12,6 @@ export default function CustomRenderersSection({ nextSection, nextTitle, onNavig
         <p className="text-xl text-gray-600 dark:text-gray-400">
           Создание собственных рендереров полей для расширения функциональности форм
         </p>
-        <div className="mt-4">
-          <ProBadge />
-        </div>
       </div>
 
       <section className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6 border-l-4 border-orange-500">
@@ -168,10 +164,6 @@ const blockBuilder = new BlockBuilder({
   blockConfigs: {
     // ваши конфигурации блоков
   },
-  license: {
-    type: 'pro', // Кастомные рендереры доступны только в PRO версии
-    key: 'your-license-key'
-  }
 });
 
 // Регистрация одного рендерера

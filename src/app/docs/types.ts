@@ -1,4 +1,4 @@
-export type Section = 'core' | 'vue3' | 'react';
+export type Section = 'core' | 'vue3' | 'react' | 'nuxt' | 'next';
 export type CoreSubSection = 'getting-started' | 'classes' | 'methods' | 'properties' | 'types' | 'form-fields' | 'utilities';
 export type Vue3SubSection = 'getting-started' | 'components' | 'events' | 'api';
 

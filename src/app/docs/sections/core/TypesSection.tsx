@@ -35,7 +35,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   controlsFixedPosition?: 'top' | 'bottom'
   controlsOffset?: number
   controlsOffsetVar?: string
-  license?: ILicenseConfig
+  warnOnPageLeave?: boolean
   isEdit?: boolean
 }`}
           language="typescript"
@@ -310,60 +310,6 @@ type TValidationRuleType =
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">ILicenseConfig</code>
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">Конфигурация лицензии</p>
-        <CodeBlock
-          code={`interface ILicenseConfig {
-  type?: TLicenseType
-  key?: string
-  maxBlockTypes?: number
-}
-
-enum TLicenseType {
-  FREE = 'free',
-  PRO = 'pro'
-}`}
-          language="typescript"
-          className="mb-4"
-        />
-      </section>
-
-      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">ILicenseInfo</code>
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">Информация о лицензии</p>
-        <CodeBlock
-          code={`interface ILicenseInfo {
-  isPro: boolean
-  maxBlockTypes: number
-  currentTypesCount: number
-}`}
-          language="typescript"
-          className="mb-4"
-        />
-      </section>
-
-      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">LicenseFeature</code>
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">Типы функций, которые могут быть ограничены лицензией</p>
-        <CodeBlock
-          code={`enum LicenseFeature {
-  CUSTOM_FIELDS = 'customFields',
-  API_SELECT = 'apiSelect',
-  UNLIMITED_BLOCK_TYPES = 'unlimitedBlockTypes',
-  ADVANCED_SPACING = 'advancedSpacing'
-}`}
-          language="typescript"
-          className="mb-4"
-        />
-      </section>
-
-      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           <code className="text-teal-700 dark:text-teal-400">IApiSelectItem</code>
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Элемент списка из API для api-select поля</p>
@@ -462,7 +408,9 @@ enum TLicenseType {
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           <code className="text-teal-700 dark:text-teal-400">IApiSelectConfig</code>
         </h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">Конфигурация для api-select поля (PRO функция)</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Конфигурация для api-select поля. <code>debounceMs</code> по умолчанию <code>0</code> (запрос сразу при вводе).
+        </p>
         <CodeBlock
           code={`interface IApiSelectConfig {
   url: string
@@ -472,7 +420,7 @@ enum TLicenseType {
   pageParam?: string
   limitParam?: string
   limit?: number
-  debounceMs?: number
+  debounceMs?: number  // default: 0
   multiple?: boolean
   responseMapper?: (response: any) => IApiSelectResponse
   dataPath?: string

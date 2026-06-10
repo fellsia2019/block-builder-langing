@@ -52,10 +52,9 @@ export default function EventsSection({ nextSection, nextTitle, onNavigate }: Na
           code={`<template>
   <BlockBuilderComponent 
     :config="config"
-    @block-created="handleBlockCreated"
+    @block-added="handleBlockAdded"
     @block-updated="handleBlockUpdated"
     @block-deleted="handleBlockDeleted"
-    @block-reordered="handleBlockReordered"
   />
 </template>
 
@@ -63,7 +62,7 @@ export default function EventsSection({ nextSection, nextTitle, onNavigate }: Na
 import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
 
 // Обработчики событий
-const handleBlockCreated = (block) => {
+const handleBlockAdded = (block) => {
   // block - объект созданного блока
 }
 
@@ -75,9 +74,7 @@ const handleBlockDeleted = (blockId) => {
   // blockId - ID удаленного блока
 }
 
-const handleBlockReordered = (blocks) => {
-  // blocks - массив всех блоков в новом порядке
-}
+// Переупорядочивание: отслеживайте через onSave или blockManagementUseCase
 </script>`}
           language="vue"
           className="mb-4"
@@ -88,11 +85,11 @@ const handleBlockReordered = (blocks) => {
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Доступные события</h2>
         <div className="space-y-4">
           <EventCard 
-            name="block-created" 
+            name="block-added" 
             description="Срабатывает сразу после создания нового блока пользователем"
             payload="block: IBlock - объект созданного блока"
             example={`// Обработчик события
-const handleBlockCreated = (block) => {
+const handleBlockAdded = (block) => {
   console.log('Создан блок:', block)
   
   // Пример: сохранить на сервер
@@ -145,30 +142,6 @@ const handleBlockDeleted = (blockId) => {
 }`}
           />
           
-          <EventCard 
-            name="block-reordered" 
-            description="Срабатывает при изменении порядка блоков через drag-and-drop"
-            payload="blocks: IBlock[] - массив всех блоков в новом порядке"
-            example={`// Обработчик события
-const handleBlockReordered = (blocks) => {
-  console.log('Новый порядок блоков:', blocks)
-  
-  // Пример: сохранить порядок на сервер
-  const order = blocks.map((block, index) => ({
-    id: block.id,
-    order: index
-  }))
-  
-  fetch('/api/blocks/reorder', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ order })
-  })
-  
-  // Пример: обновить локальное состояние
-  updateLocalOrder(order)
-}`}
-          />
         </div>
       </section>
 
@@ -181,7 +154,7 @@ const handleBlockReordered = (blocks) => {
             code={`<template>
   <BlockBuilderComponent 
     :config="config"
-    @block-created="syncToBackend"
+    @block-added="syncToBackend"
     @block-updated="syncToBackend"
     @block-deleted="removeFromBackend"
   />
@@ -289,7 +262,7 @@ const savePendingBlocks = async () => {
 import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
 
 // Отслеживание действий пользователя
-const handleBlockCreated = (block) => {
+const handleBlockAdded = (block) => {
   // Google Analytics
   gtag('event', 'block_created', {
     block_type: block.type,

@@ -1,10 +1,10 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 interface SidebarProps {
-  activeSection: 'core' | 'vue' | 'react';
+  activeSection: 'core' | 'vue' | 'react' | 'nuxt' | 'next';
   activeSubSection: string;
   isOpen: boolean;
   onLinkClick?: () => void;
@@ -16,17 +16,8 @@ export default function Sidebar({
   isOpen,
   onLinkClick
 }: SidebarProps) {
-  const pathname = usePathname();
-  
-  // Определяем активную секцию из pathname
-  const currentSection = pathname.startsWith('/docs/core') ? 'core' 
-    : pathname.startsWith('/docs/vue') ? 'vue'
-    : pathname.startsWith('/docs/react') ? 'react'
-    : activeSection;
-  
-  // Определяем активный подраздел из pathname
-  const pathParts = pathname.split('/');
-  const currentSubSection = pathParts.length > 3 ? pathParts[3] : activeSubSection;
+  const currentSection = activeSection;
+  const currentSubSection = activeSubSection;
 
   return (
     <aside className={`fixed left-0 top-16 w-64 h-[calc(100vh-4rem)] bg-slate-50 dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 overflow-y-auto z-40 transition-transform ${
@@ -59,6 +50,22 @@ export default function Sidebar({
           >
             React
           </SectionLink>
+          <SectionLink
+            active={currentSection === 'nuxt'}
+            href="/docs/nuxt"
+            color="green"
+            onLinkClick={onLinkClick}
+          >
+            Nuxt
+          </SectionLink>
+          <SectionLink
+            active={currentSection === 'next'}
+            href="/docs/next"
+            color="slate"
+            onLinkClick={onLinkClick}
+          >
+            Next.js
+          </SectionLink>
         </div>
 
         {/* Navigation Links */}
@@ -85,7 +92,15 @@ export default function Sidebar({
           )}
 
           {currentSection === 'react' && (
-            <NavLink active={true} href="/docs/react" color="blue" onLinkClick={onLinkClick}>React поддержка</NavLink>
+            <NavLink active={true} href="/docs/react" color="blue" onLinkClick={onLinkClick}>Быстрый старт</NavLink>
+          )}
+
+          {currentSection === 'nuxt' && (
+            <NavLink active={true} href="/docs/nuxt" color="green" onLinkClick={onLinkClick}>Быстрый старт</NavLink>
+          )}
+
+          {currentSection === 'next' && (
+            <NavLink active={true} href="/docs/next" color="slate" onLinkClick={onLinkClick}>Быстрый старт</NavLink>
           )}
         </nav>
       </div>
@@ -102,14 +117,16 @@ function SectionLink({
 }: { 
   active: boolean; 
   href: string; 
-  color: 'primary' | 'purple' | 'blue';
-  children: React.ReactNode;
+  color: 'primary' | 'purple' | 'blue' | 'green' | 'slate';
+  children: ReactNode;
   onLinkClick?: () => void;
 }) {
   const colorClasses = {
     primary: active ? 'bg-primary-600 text-white' : 'bg-white dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-600',
     purple: active ? 'bg-purple-600 text-white' : 'bg-white dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-600',
     blue: active ? 'bg-blue-600 text-white' : 'bg-white dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-600',
+    green: active ? 'bg-green-600 text-white' : 'bg-white dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-600',
+    slate: active ? 'bg-slate-700 text-white dark:bg-slate-600' : 'bg-white dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-600',
   };
 
   return (
@@ -132,14 +149,16 @@ function NavLink({
 }: { 
   active: boolean; 
   href: string; 
-  color: 'primary' | 'purple' | 'blue';
-  children: React.ReactNode;
+  color: 'primary' | 'purple' | 'blue' | 'green' | 'slate';
+  children: ReactNode;
   onLinkClick?: () => void;
 }) {
   const colorClasses = {
     primary: active ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 border-primary-500' : 'hover:bg-gray-100 dark:hover:bg-slate-700',
     purple: active ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 border-purple-500' : 'hover:bg-gray-100 dark:hover:bg-slate-700',
     blue: active ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border-blue-500' : 'hover:bg-gray-100 dark:hover:bg-slate-700',
+    green: active ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border-green-500' : 'hover:bg-gray-100 dark:hover:bg-slate-700',
+    slate: active ? 'bg-slate-200 dark:bg-slate-700/50 text-slate-800 dark:text-slate-200 border-slate-500' : 'hover:bg-gray-100 dark:hover:bg-slate-700',
   };
 
   return (

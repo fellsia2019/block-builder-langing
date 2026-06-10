@@ -66,18 +66,14 @@ export default function MethodsSection({ nextSection, nextTitle, onNavigate }: N
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-orange-500"></span>
           Кастомные рендереры
-          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 text-yellow-900 border-2 border-yellow-500 shadow-sm">
-            <span>⭐</span>
-            <span>PRO</span>
-          </span>
         </h2>
         <div className="space-y-4">
-          <MethodCard name="registerCustomFieldRenderer" signature="blockBuilder.registerCustomFieldRenderer(renderer: CustomFieldRenderer): void" description="Регистрирует кастомный рендерер поля. Доступно только в PRO версии." color="orange" isPro={true} />
-          <MethodCard name="registerCustomFieldRenderers" signature="blockBuilder.registerCustomFieldRenderers(renderers: CustomFieldRenderer[]): void" description="Массовая регистрация нескольких кастомных рендереров полей. Доступно только в PRO версии." color="orange" isPro={true} />
-          <MethodCard name="getCustomFieldRenderer" signature="blockBuilder.getCustomFieldRenderer(id: string): CustomFieldRenderer | null" description="Получает кастомный рендерер по ID. Доступно только в PRO версии." color="orange" isPro={true} />
-          <MethodCard name="hasCustomFieldRenderer" signature="blockBuilder.hasCustomFieldRenderer(id: string): boolean" description="Проверяет наличие кастомного рендерера. Доступно только в PRO версии." color="orange" isPro={true} />
-          <MethodCard name="getAllCustomFieldRenderers" signature="blockBuilder.getAllCustomFieldRenderers(): Map&lt;string, CustomFieldRenderer&gt;" description="Возвращает все зарегистрированные кастомные рендереры. Доступно только в PRO версии." color="orange" isPro={true} />
-          <MethodCard name="unregisterCustomFieldRenderer" signature="blockBuilder.unregisterCustomFieldRenderer(id: string): boolean" description="Удаляет кастомный рендерер. Доступно только в PRO версии." color="orange" isPro={true} />
+          <MethodCard name="registerCustomFieldRenderer" signature="blockBuilder.registerCustomFieldRenderer(renderer: CustomFieldRenderer): void" description="Регистрирует кастомный рендерер поля. " color="orange" />
+          <MethodCard name="registerCustomFieldRenderers" signature="blockBuilder.registerCustomFieldRenderers(renderers: CustomFieldRenderer[]): void" description="Массовая регистрация нескольких кастомных рендереров полей. " color="orange" />
+          <MethodCard name="getCustomFieldRenderer" signature="blockBuilder.getCustomFieldRenderer(id: string): CustomFieldRenderer | null" description="Получает кастомный рендерер по ID. " color="orange" />
+          <MethodCard name="hasCustomFieldRenderer" signature="blockBuilder.hasCustomFieldRenderer(id: string): boolean" description="Проверяет наличие кастомного рендерера. " color="orange" />
+          <MethodCard name="getAllCustomFieldRenderers" signature="blockBuilder.getAllCustomFieldRenderers(): Map&lt;string, CustomFieldRenderer&gt;" description="Возвращает все зарегистрированные кастомные рендереры. " color="orange" />
+          <MethodCard name="unregisterCustomFieldRenderer" signature="blockBuilder.unregisterCustomFieldRenderer(id: string): boolean" description="Удаляет кастомный рендерер. " color="orange" />
         </div>
       </section>
     </div>

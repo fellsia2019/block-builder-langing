@@ -7,14 +7,12 @@ import Icon from './Icon';
 
 const examples = [
   {
-    title: 'Vue3 компонент',
+    title: 'Vue 3',
     language: 'vue',
     code: `<template>
   <BlockBuilderComponent
     :config="{ availableBlockTypes }"
     :block-management-use-case="blockManagementUseCase"
-    :api-select-use-case="apiSelectUseCase"
-    :custom-field-renderer-registry="customFieldRendererRegistry"
     :on-save="handleSave"
     :initial-blocks="initialBlocks"
     :is-edit="isEdit"
@@ -26,51 +24,133 @@ import { ref } from 'vue'
 import {
   BlockBuilderComponent,
   createBlockManagementUseCase,
-  ApiSelectUseCase,
-  FetchHttpClient,
-  CustomFieldRendererRegistry
 } from '@mushket-co/block-builder/vue'
 import YourTextBlock from './components/YourTextBlock.vue'
 
 const blockManagementUseCase = createBlockManagementUseCase()
-const httpClient = new FetchHttpClient()
-const apiSelectUseCase = new ApiSelectUseCase(httpClient)
-const customFieldRendererRegistry = new CustomFieldRendererRegistry()
-
-// Регистрируем компоненты
-const componentRegistry = blockManagementUseCase.getComponentRegistry()
-componentRegistry.register('text', YourTextBlock)
+blockManagementUseCase.getComponentRegistry().register('text', YourTextBlock)
 
 const availableBlockTypes = ref([
   {
     type: 'text',
     label: 'Текст',
-    render: {
-      kind: 'component',
-      framework: 'vue',
-      component: YourTextBlock
-    },
+    render: { kind: 'component', framework: 'vue', component: YourTextBlock },
     fields: [
-      {
-        field: 'content',
-        label: 'Содержимое',
-        type: 'textarea',
-        defaultValue: 'Hello'
-      }
+      { field: 'content', label: 'Содержимое', type: 'textarea', defaultValue: 'Hello' }
     ],
     defaultProps: { content: 'Hello' }
   }
 ])
 
 const isEdit = ref(true)
+const initialBlocks = ref([])
 
 const handleSave = async (blocks) => {
   localStorage.setItem('saved-blocks', JSON.stringify(blocks))
   return true
 }
-
-const initialBlocks = ref([])
 </script>`,
+  },
+  {
+    title: 'React',
+    language: 'tsx',
+    code: `import '@mushket-co/block-builder/index.esm.css'
+import {
+  BlockBuilderComponent,
+  createBlockManagementUseCase,
+} from '@mushket-co/block-builder/react'
+import { TextBlock } from './components/blocks/TextBlock'
+
+const blockManagementUseCase = createBlockManagementUseCase()
+blockManagementUseCase.getComponentRegistry().register('text', TextBlock)
+
+const availableBlockTypes = [{
+  type: 'text',
+  label: 'Текст',
+  render: { kind: 'component', framework: 'react', component: TextBlock },
+  fields: [
+    { field: 'content', label: 'Содержимое', type: 'textarea',
+      rules: [{ type: 'required', field: 'content' }] },
+  ],
+}]
+
+export function App() {
+  return (
+    <BlockBuilderComponent
+      config={{ availableBlockTypes }}
+      blockManagementUseCase={blockManagementUseCase}
+      onSave={async (blocks) => { console.log(blocks); return true }}
+      initialBlocks={[]}
+      isEdit
+      warnOnPageLeave
+    />
+  )
+}`,
+  },
+  {
+    title: 'Nuxt (SSR)',
+    language: 'vue',
+    code: `<template>
+  <BlockBuilderComponent
+    :config="{ availableBlockTypes }"
+    :block-management-use-case="blockManagementUseCase"
+    :on-save="handleSave"
+    :initial-blocks="initialBlocks"
+    :is-edit="isEdit"
+    :warn-on-page-leave="true"
+  />
+</template>
+
+<script setup lang="ts">
+import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
+import { useBlockBuilder } from '~/composables/useBlockBuilder'
+
+// SSR: блоки загружаются на сервере
+const { data: initialBlocks } = await useAsyncData('bb-blocks', () =>
+  $fetch('/api/blocks')
+)
+
+const {
+  blockManagementUseCase,
+  availableBlockTypes,
+  isEdit,
+  handleSave,
+} = useBlockBuilder(initialBlocks)
+</script>`,
+  },
+  {
+    title: 'Next.js (SSR)',
+    language: 'tsx',
+    code: `// app/page.tsx — Server Component
+import { BlockBuilderEditor } from './BlockBuilderEditor'
+import { enrichBlocksForSsr } from '@/lib/enrichBlocks'
+import { readBlocksFromFile } from '@/lib/blocksFile'
+
+export default async function HomePage() {
+  const initialBlocks = enrichBlocksForSsr(await readBlocksFromFile())
+  return <BlockBuilderEditor initialBlocks={initialBlocks} />
+}
+
+// app/BlockBuilderEditor.tsx — Client Component
+'use client'
+
+import '@mushket-co/block-builder/index.esm.css'
+import { BlockBuilderComponent, createBlockManagementUseCase } from '@mushket-co/block-builder/react'
+
+export function BlockBuilderEditor({ initialBlocks }) {
+  const blockManagementUseCase = createBlockManagementUseCase()
+  // регистрация компонентов и availableBlockTypes...
+
+  return (
+    <BlockBuilderComponent
+      config={{ availableBlockTypes }}
+      blockManagementUseCase={blockManagementUseCase}
+      initialBlocks={initialBlocks}
+      isEdit
+      onSave={async (blocks) => { /* сохранение на сервер */ return true }}
+    />
+  )
+}`,
   },
   {
     title: 'Pure JavaScript',
@@ -176,102 +256,6 @@ await blockBuilder.createBlock({
 const blocks = await blockBuilder.getAllBlocks()
 console.log('Все блоки:', blocks)`,
   },
-  {
-    title: 'Кастомные поля',
-    language: 'javascript',
-    code: `// Создаём Custom Field Renderer
-export class WysiwygFieldRenderer {
-  id = 'wysiwyg-editor'
-  name = 'WYSIWYG Editor'
-
-  render(container, context) {
-    const { value, onChange, onError, required } = context
-    
-    // Создаём wrapper для редактора (важно для корректной работы)
-    const wrapper = document.createElement('div')
-    wrapper.className = 'wysiwyg-field-wrapper'
-    container.appendChild(wrapper)
-    
-    // Инициализируем редактор (ControlManager гарантирует, что элемент в DOM)
-    const editor = Jodit.make(wrapper, {
-      height: 400,
-      language: 'ru',
-      toolbar: true
-    })
-    
-    // Устанавливаем начальное значение
-    if (value) {
-      editor.value = value
-    }
-    
-    // Обработка изменений
-    editor.events.on('change', () => {
-      const content = editor.value || ''
-      onChange(content)
-      
-      // Валидация при изменении (если требуется)
-      if (required && onError) {
-        const error = this.validateEditor(content)
-        onError(error)
-      }
-    })
-    
-    return {
-      element: wrapper,  // Возвращаем wrapper, а не container
-      getValue: () => editor.value || '',
-      setValue: (newValue) => {
-        if (editor) {
-          editor.value = newValue || ''
-        }
-      },
-      validate: () => {
-        if (required) {
-          return this.validateEditor(editor.value)
-        }
-        return null
-      },
-      destroy: () => {
-        if (editor) {
-          editor.destruct()
-        }
-        if (wrapper.parentNode) {
-          wrapper.parentNode.removeChild(wrapper)
-        }
-      }
-    }
-  }
-  
-  validateEditor(html) {
-    const text = html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim()
-    if (text === '' || html === '<p><br></p>') {
-      return 'Содержимое не может быть пустым'
-    }
-    return null
-  }
-}
-
-// Используем в конфигурации блока
-const blockConfigs = {
-  richText: {
-    title: 'Текстовый блок',
-    fields: [
-      {
-        field: 'content',
-        label: 'Содержимое',
-        type: 'custom',
-        required: true,
-        customFieldConfig: {
-          rendererId: 'wysiwyg-editor'
-        }
-      }
-    ]
-  }
-}
-
-// Регистрируем renderer
-const wysiwygRenderer = new WysiwygFieldRenderer()
-blockBuilder.registerCustomFieldRenderer(wysiwygRenderer)`,
-  },
 ];
 
 export default function CodeExamples() {
@@ -361,13 +345,13 @@ export default function CodeExamples() {
             <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={800}>
               <div className="p-6 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl border border-orange-200 dark:border-orange-800 hover:scale-105 transition-transform">
                 <div className="mb-2">
-                  <Icon name="paintbrush" size={32} className="text-orange-600 dark:text-orange-400" />
+                  <Icon name="monitor" size={32} className="text-orange-600 dark:text-orange-400" />
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  Расширяемость
+                  SSR
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Создавайте свои типы полей
+                  Nuxt и Next.js — контент блоков на сервере
                 </p>
               </div>
             </AnimateOnScroll>
@@ -376,7 +360,7 @@ export default function CodeExamples() {
           {/* Demo link card */}
           <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={900}>
             <a
-              href="https://demo.block-builder.ru"
+              href="https://github.com/mushket-co/block-builder-demo"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-12 block p-8 bg-gradient-to-r from-primary-600 via-purple-600 to-pink-600 rounded-2xl shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 text-white text-center group"
@@ -390,7 +374,7 @@ export default function CodeExamples() {
                   Интерактивные демо с реальными блоками и формами
                 </p>
                 <div className="px-6 py-3 bg-white/20 backdrop-blur-sm rounded-lg font-semibold group-hover:bg-white/30 transition-colors">
-                  Перейти на demo.block-builder.ru →
+                  Открыть демо на GitHub →
                 </div>
               </div>
             </a>

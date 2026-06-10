@@ -1,6 +1,5 @@
 'use client';
 
-import ProBadge from '../../components/ProBadge';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
@@ -10,25 +9,16 @@ function FieldTypeCard({
   description, 
   icon, 
   example,
-  parameters,
-  isPro = false
+  parameters
 }: { 
   name: string; 
   description: string; 
   icon: string;
   example?: string;
   parameters?: string[];
-  isPro?: boolean;
 }) {
-  const borderClass = isPro ? 'border-2 border-yellow-400' : 'border border-pink-200 dark:border-pink-800';
-  
   return (
-    <div className={`bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-900/10 rounded-lg p-4 ${borderClass} relative`}>
-      {isPro && (
-        <div className="absolute top-2 right-2">
-          <ProBadge />
-        </div>
-      )}
+    <div className="bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-900/10 rounded-lg p-4 border border-pink-200 dark:border-pink-800 relative">
       <div className="flex items-center gap-3 mb-2">
         <div className="text-2xl flex items-center">
           {icon === '📝' && <Icon name="pen" size={28} className="text-pink-600 dark:text-pink-400" />}
@@ -318,7 +308,6 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
   defaultValue: ''
 }`}
             parameters={['field', 'label', 'type', 'customFieldConfig', 'defaultValue', 'rules']}
-            isPro={true}
           />
 
           <FieldTypeCard 
@@ -335,7 +324,6 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
   }
 }`}
             parameters={['field', 'label', 'type', 'apiSelectConfig', 'defaultValue', 'rules']}
-            isPro={true}
           />
         </div>
       </section>
@@ -380,8 +368,8 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
             <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
               <Icon name="lightbulb" size={18} className="text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
               <span>
-                <strong>Кастомные брекпоинты</strong> (параметр <code className="text-yellow-700 dark:text-yellow-400">breakpoints</code>) доступны только в <strong>PRO версии</strong>. 
-                В FREE версии используются только стандартные брекпоинты (desktop, tablet, mobile).
+                <strong>Кастомные брекпоинты</strong> (параметр <code className="text-yellow-700 dark:text-yellow-400">breakpoints</code>) доступны только в <strong>пакета</strong>. 
+                По умолчанию: desktop, tablet, mobile. Кастомные брекпоинты задаются в <code>spacingOptions.config.breakpoints</code>.
               </span>
             </p>
           </div>
@@ -395,7 +383,7 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
     min: 0,           // Минимальное значение (по умолчанию 0)
     max: 200,         // Максимальное значение (по умолчанию 200)
     step: 4,          // Шаг изменения (по умолчанию 1)
-    breakpoints: [    // Кастомные брекпоинты (только PRO)
+    breakpoints: [    // Кастомные брекпоинты (опционально)
       { name: 'xlarge', label: 'XL (Desktop)', maxWidth: undefined },
       { name: 'large', label: 'L (Laptop)', maxWidth: 1440 },
       { name: 'medium', label: 'M (Tablet)', maxWidth: 1024 },
@@ -438,9 +426,8 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
             <p className="text-sm text-gray-700 dark:text-gray-300">
               <span className="flex items-center gap-1">
                 <Icon name="star" size={16} className="text-yellow-600 dark:text-yellow-400" />
-                <strong>PRO:</strong>
-              </span> Параметр <code className="text-yellow-700 dark:text-yellow-400">breakpoints</code> в <code className="text-yellow-700 dark:text-yellow-400">config</code> 
-              доступен только в PRO версии. В FREE версии кастомные брекпоинты игнорируются.
+                <strong>Кастомные брекпоинты</strong>
+              </span> — параметр <code className="text-yellow-700 dark:text-yellow-400">breakpoints</code> в <code className="text-yellow-700 dark:text-yellow-400">config</code>.
             </p>
           </div>
           <CodeBlock
@@ -462,7 +449,7 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         min: 0,                          // Минимальное значение
         max: 120,                        // Максимальное значение
         step: 8,                         // Шаг изменения
-        breakpoints: [                   // Кастомные брекпоинты (только PRO)
+        breakpoints: [                   // Кастомные брекпоинты (опционально)
           { name: 'xlarge', label: 'XL', maxWidth: undefined },
           { name: 'large', label: 'L', maxWidth: 1440 },
           { name: 'medium', label: 'M', maxWidth: 1024 },
@@ -953,20 +940,21 @@ const imageUrl = computed(() => {
       <section className="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-6 border-l-4 border-cyan-500 border-2 border-yellow-400">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           Поле выбора из API (API Select)
-          <ProBadge />
         </h2>
         <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 mb-4 border-l-4 border-yellow-400">
           <p className="text-sm text-gray-700 dark:text-gray-300">
             <span className="flex items-center gap-1">
               <Icon name="star" size={16} className="text-yellow-600 dark:text-yellow-400" />
-              <strong>PRO только:</strong>
-            </span> Поле типа <code className="text-yellow-700 dark:text-yellow-400">api-select</code> доступно только в PRO версии. 
-            В FREE версии такие поля автоматически скрываются из форм.
+              <strong>Примечание:</strong>
+            </span> Поле типа <code className="text-yellow-700 dark:text-yellow-400">api-select</code> доступно только в пакета. 
+            Поле доступно во всех MIT-сборках пакета.
           </p>
         </div>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Поле типа <code className="text-cyan-700 dark:text-cyan-400">api-select</code> позволяет выбирать элементы из внешнего API 
           с поддержкой поиска, пагинации и множественного выбора. Идеально для интеграции с вашими бэкенд API.
+          С 1.3.1: при закрытом дропдауне показывается только label выбранного значения; поле поиска видно при открытии.
+          Кнопка «Загрузить ещё» — только при <code>hasMore: true</code> в ответе API.
         </p>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           <strong>URL может быть абсолютным</strong> (например, <code className="text-cyan-700 dark:text-cyan-400">https://api.example.com/categories</code>) 
@@ -993,7 +981,7 @@ const imageUrl = computed(() => {
     pageParam: 'page',            // Параметр для страницы (по умолчанию 'page')
     limitParam: 'limit',          // Параметр для лимита (по умолчанию 'limit')
     limit: 20,                    // Количество элементов на странице
-    debounceMs: 300,              // Задержка для поиска в мс
+    debounceMs: 0,                // Задержка поиска в мс (0 — сразу; 1500 — для демо в examples)
     multiple: false,              // Множественный выбор
     idField: 'id',                // Поле ID в ответе
     nameField: 'name',            // Поле name в ответе
@@ -1400,7 +1388,7 @@ const imageUrl = computed(() => {
               Конфигурация для поля отступов. См. раздел "Поле отступов (Spacing)" выше.
               <br />
               <strong className="text-yellow-700 dark:text-yellow-400">Примечание:</strong> Параметр <code className="text-green-700 dark:text-green-400">breakpoints</code> 
-              внутри <code className="text-green-700 dark:text-green-400">spacingConfig</code> доступен только в PRO версии.
+              внутри <code className="text-green-700 dark:text-green-400">spacingConfig</code> доступен только в пакета.
             </p>
           </div>
 
@@ -1429,28 +1417,26 @@ const imageUrl = computed(() => {
 
           <div className="relative border-2 border-yellow-400 rounded-lg p-4 bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-900/10">
             <div className="absolute top-2 right-2">
-              <ProBadge />
             </div>
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-              <code className="text-green-700 dark:text-green-400">apiSelectConfig</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для type: 'api-select', только PRO)</span>
+              <code className="text-green-700 dark:text-green-400">apiSelectConfig</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для type: 'api-select', опционально)</span>
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Конфигурация для поля выбора из API. См. раздел "Поле выбора из API (API Select)" выше. 
-              <strong className="text-yellow-700 dark:text-yellow-400"> Доступно только в PRO версии.</strong>
+              <strong className="text-yellow-700 dark:text-yellow-400"> Доступно только в пакета.</strong>
             </p>
           </div>
 
           <div className="relative border-2 border-yellow-400 rounded-lg p-4 bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-900/10">
             <div className="absolute top-2 right-2">
-              <ProBadge />
             </div>
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-              <code className="text-green-700 dark:text-green-400">customFieldConfig</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для type: 'custom', только PRO)</span>
+              <code className="text-green-700 dark:text-green-400">customFieldConfig</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для type: 'custom', опционально)</span>
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Конфигурация для кастомного поля. Должен содержать <code className="text-green-700 dark:text-green-400">rendererId</code> — 
               идентификатор зарегистрированного кастомного рендерера.
-              <strong className="text-yellow-700 dark:text-yellow-400"> Доступно только в PRO версии.</strong>
+              <strong className="text-yellow-700 dark:text-yellow-400"> Доступно только в пакета.</strong>
             </p>
           </div>
 
@@ -1472,15 +1458,14 @@ const imageUrl = computed(() => {
       <section className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6 border-l-4 border-orange-500 border-2 border-yellow-400">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           Кастомные рендереры полей
-          <ProBadge />
         </h2>
         <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 mb-4 border-l-4 border-yellow-400">
           <p className="text-sm text-gray-700 dark:text-gray-300">
             <span className="flex items-center gap-1">
               <Icon name="star" size={16} className="text-yellow-600 dark:text-yellow-400" />
-              <strong>PRO только:</strong>
-            </span> Кастомные рендереры и поля типа <code className="text-yellow-700 dark:text-yellow-400">custom</code> доступны только в PRO версии. 
-            В FREE версии такие поля автоматически скрываются из форм.
+              <strong>Примечание:</strong>
+            </span> Кастомные рендереры и поля типа <code className="text-yellow-700 dark:text-yellow-400">custom</code> доступны только в пакета. 
+            Поле доступно во всех MIT-сборках пакета.
           </p>
         </div>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
@@ -1707,10 +1692,6 @@ const blockBuilder = new BlockBuilder({
   containerId: 'block-container',
   blockConfigs: {
     // ваши конфигурации блоков
-  },
-  license: {
-    type: 'pro', // Кастомные рендереры доступны только в PRO версии
-    key: 'your-license-key'
   }
 });
 

@@ -93,7 +93,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
                 <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">ApiSelectUseCase, optional</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                Экземпляр use case для работы с API select полями (требуется для PRO версии)
+                Экземпляр use case для работы с полями <code>api-select</code>
               </p>
             </div>
 
@@ -103,7 +103,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
                 <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">ICustomFieldRendererRegistry, optional</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                Реестр кастомных рендереров полей (требуется для PRO версии)
+                Реестр кастомных рендереров полей (<code>type: &apos;custom&apos;</code>)
               </p>
             </div>
 
@@ -200,31 +200,11 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
 
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
-                <code className="text-purple-700 dark:text-purple-400">licenseKey</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">String, optional</span>
+                <code className="text-purple-700 dark:text-purple-400">warnOnPageLeave</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Boolean, optional</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                Лицензионный ключ для проверки (для обратной совместимости). Рекомендуется использовать <code className="text-purple-700 dark:text-purple-400">licenseService</code>
-              </p>
-            </div>
-
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
-              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
-                <code className="text-purple-700 dark:text-purple-400">licenseService</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">LicenseService, optional</span>
-              </h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                Сервис лицензии для управления PRO/FREE режимами
-              </p>
-            </div>
-
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
-              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
-                <code className="text-purple-700 dark:text-purple-400">licenseInfo</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Object, optional</span>
-              </h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                Информация о лицензии: <code className="text-purple-700 dark:text-purple-400">{'{ isPro: boolean, maxBlockTypes: number, currentTypesCount: number }'}</code>
+                Предупреждение при уходе со страницы с несохранёнными блоками (1.3.1+)
               </p>
             </div>
           </div>
@@ -234,8 +214,8 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
           <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Events (События)</h3>
           <div className="space-y-2 text-sm">
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 border border-gray-200 dark:border-slate-700">
-              <code className="text-purple-700 dark:text-purple-400">@block-created</code>
-              <span className="text-gray-600 dark:text-gray-400 ml-2">- Вызывается при создании нового блока</span>
+              <code className="text-purple-700 dark:text-purple-400">@block-added</code>
+              <span className="text-gray-600 dark:text-gray-400 ml-2">- Создан или продублирован блок</span>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 border border-gray-200 dark:border-slate-700">
               <code className="text-purple-700 dark:text-purple-400">@block-updated</code>
@@ -244,10 +224,6 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 border border-gray-200 dark:border-slate-700">
               <code className="text-purple-700 dark:text-purple-400">@block-deleted</code>
               <span className="text-gray-600 dark:text-gray-400 ml-2">- Вызывается при удалении блока</span>
-            </div>
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-3 border border-gray-200 dark:border-slate-700">
-              <code className="text-purple-700 dark:text-purple-400">@block-reordered</code>
-              <span className="text-gray-600 dark:text-gray-400 ml-2">- Вызывается при изменении порядка блоков</span>
             </div>
           </div>
         </div>
@@ -259,10 +235,9 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
   <BlockBuilderComponent 
     :config="config"
     :initialBlocks="initialBlocks"
-    @block-created="handleBlockCreated"
+    @block-added="handleBlockAdded"
     @block-updated="handleBlockUpdated"
     @block-deleted="handleBlockDeleted"
-    @block-reordered="handleBlockReordered"
   />
 </template>
 

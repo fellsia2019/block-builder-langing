@@ -3,11 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Logo from './Logo';
-import FeedbackModal from './FeedbackModal';
-
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
 
   useEffect(() => {
     // Проверяем начальную позицию скролла при загрузке
@@ -69,12 +66,6 @@ export default function Navigation() {
             <Link href="/docs" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
               Документация
             </Link>
-            <button
-              onClick={() => setIsFeedbackModalOpen(true)}
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-            >
-              Связаться с нами
-            </button>
             <a
               href="https://github.com/mushket-co/block-builder"
               target="_blank"
@@ -87,10 +78,6 @@ export default function Navigation() {
         </div>
       </div>
 
-      <FeedbackModal 
-        isOpen={isFeedbackModalOpen} 
-        onClose={() => setIsFeedbackModalOpen(false)} 
-      />
     </nav>
   );
 }

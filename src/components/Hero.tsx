@@ -89,7 +89,7 @@ export default function Hero() {
         <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={600} animationTime={800} rootMargin="-50px 0px">
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto">
             Создавайте мощные no-code конструкторы с правильной архитектурой. 
-            Поддержка Vue3, Pure JavaScript и TypeScript из коробки.
+            Vue 3, React 18/19, Pure JS, SSR (Nuxt, Next.js). MIT, без ограничений.
           </p>
         </AnimateOnScroll>
 

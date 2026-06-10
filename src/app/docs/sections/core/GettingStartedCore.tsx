@@ -23,112 +23,19 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
         />
       </section>
 
-      <section className="bg-gradient-to-br from-yellow-50 via-yellow-100 to-yellow-50 dark:from-yellow-900/20 dark:via-yellow-900/10 dark:to-yellow-900/20 rounded-xl p-6 border-2 border-yellow-400">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
-          <Icon name="star" size={24} className="text-yellow-600 dark:text-yellow-400" />
-          FREE и PRO версии
-        </h2>
+      <section className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/10 rounded-xl p-6 border border-green-300 dark:border-green-800">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Open Source (MIT)</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          BlockBuilder доступен в двух версиях: <strong>FREE</strong> (бесплатная демо-версия) и <strong>PRO</strong> (платная версия с полным функционалом).
+          BlockBuilder — open-source проект под лицензией MIT. Все функции доступны без ограничений.
         </p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
-            <h3 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">FREE версия</h3>
-            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-              <li className="flex items-start">
-                <span className="text-green-500 mr-2">✓</span>
-                <span>До 5 типов блоков</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-green-500 mr-2">✓</span>
-                <span>Все стандартные типы полей</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-green-500 mr-2">✓</span>
-                <span>Spacing поля с дефолтными брекпоинтами</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-green-500 mr-2">✓</span>
-                <span>Repeater поля</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-green-500 mr-2">✓</span>
-                <span>Все CRUD операции</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/30 dark:to-yellow-900/20 rounded-lg p-4 border-2 border-yellow-400">
-            <h3 className="font-bold text-lg mb-3 text-gray-900 dark:text-white flex items-center gap-2">
-              <Icon name="star" size={20} className="text-yellow-600 dark:text-yellow-400" />
-              PRO версия
-            </h3>
-            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-              <li className="flex items-start">
-                <Icon name="star" size={16} className="text-yellow-500 mr-2" />
-                <span><strong>Неограниченное</strong> количество типов блоков</span>
-              </li>
-              <li className="flex items-start">
-                <Icon name="star" size={16} className="text-yellow-500 mr-2" />
-                <span><strong>Кастомные поля</strong> (custom type)</span>
-              </li>
-              <li className="flex items-start">
-                <Icon name="star" size={16} className="text-yellow-500 mr-2" />
-                <span><strong>API Select поля</strong> для интеграции с внешними API</span>
-              </li>
-              <li className="flex items-start">
-                <Icon name="star" size={16} className="text-yellow-500 mr-2" />
-                <span><strong>Кастомные брекпоинты</strong> для spacing полей</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-green-500 mr-2">✓</span>
-                <span>Все возможности FREE версии</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
-          <h4 className="font-bold text-gray-900 dark:text-white mb-2">Автоматическая фильтрация</h4>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-            BlockBuilder автоматически скрывает недоступные функции в FREE версии:
-          </p>
-          <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-2">
-            <li>Кастомные поля (<code className="text-blue-700 dark:text-blue-400">type: 'custom'</code>) не отображаются</li>
-            <li>API Select поля (<code className="text-blue-700 dark:text-blue-400">type: 'api-select'</code>) не отображаются</li>
-            <li>Кастомные брекпоинты в spacing игнорируются, используются только дефолтные</li>
-            <li>Если типов блоков больше 5, лишние скрываются из UI</li>
-          </ul>
-        </div>
-
-        <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border-2 border-green-400 mt-4">
-          <h4 className="font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-            <Icon name="key" size={20} className="text-green-600 dark:text-green-400" />
-            Тестовый ключ для демо и проверки
-          </h4>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-            Для демо, проверки и ознакомления с возможностями на <strong>localhost</strong> доступен тестовый ключ PRO лицензии. 
-            Вы можете попробовать все функции, потыкать и посмотреть функционал:
-          </p>
-          <div className="bg-gray-900 dark:bg-gray-800 rounded-lg p-3 mb-2">
-            <code className="text-green-400 font-mono text-sm">BB-PRO-1234-5678-ABCD</code>
-          </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            <span className="flex items-center gap-1">
-              <Icon name="warning" size={14} className="text-gray-600 dark:text-gray-400" />
-              Этот ключ работает только на <code className="text-gray-700 dark:text-gray-300">localhost</code>. Для production используйте ключ, полученный при покупке.
-            </span>
-          </p>
-        </div>
-
-        <div className="mt-4 bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-800">
-          <h4 className="font-bold text-gray-900 dark:text-white mb-2">Реактивное обновление</h4>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            При переходе с FREE на PRO лицензию, UI автоматически обновляется без перезагрузки страницы. 
-            Все PRO функции становятся доступными сразу после активации лицензии.
-          </p>
-        </div>
+        <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Неограниченное количество типов блоков</li>
+          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Кастомные поля, api-select, кастомные брекпоинты spacing</li>
+          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Vue 3, React 18/19, Pure JS, SSR (Nuxt, Next.js)</li>
+        </ul>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+          Подключите стили: <code className="text-green-700 dark:text-green-400">import &apos;@mushket-co/block-builder/index.esm.css&apos;</code>
+        </p>
       </section>
 
       <section>
@@ -164,10 +71,10 @@ const blockConfigs = [
     label: 'Текстовый блок',
     fields: [
       {
-        name: 'content',
+        field: 'content',
         label: 'Содержимое',
-        type: 'text',
-        required: true
+        type: 'textarea',
+        rules: [{ type: 'required', field: 'content' }]
       }
     ],
     defaultProps: {
@@ -265,7 +172,7 @@ const blockBuilder = new BlockBuilder({
         min: 0,                         // Минимальное значение (по умолчанию 0)
         max: 200,                       // Максимальное значение (по умолчанию 200)
         step: 4,                        // Шаг изменения (по умолчанию 1)
-        breakpoints: [                  // Кастомные брекпоинты (только PRO)
+        breakpoints: [                  // Кастомные брекпоинты (опционально)
           { name: 'desktop', label: 'Desktop', maxWidth: undefined },
           { name: 'tablet', label: 'Tablet', maxWidth: 1024 },
           { name: 'mobile', label: 'Mobile', maxWidth: 640 }

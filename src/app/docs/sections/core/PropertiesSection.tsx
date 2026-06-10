@@ -188,24 +188,15 @@ const blockBuilder = new BlockBuilder({
 
         <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
           <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">license</code>
+            <code className="text-indigo-700 dark:text-indigo-400">warnOnPageLeave</code>
             <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный)</span>
           </h3>
           <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Конфигурация лицензии для активации PRO функций.
+            Предупреждение браузера при уходе со страницы с несохранёнными блоками (с 1.3.1). Не срабатывает в режиме просмотра (<code>isEdit: false</code>).
           </p>
           <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">license?: ILicenseConfig</code>
+            <code className="text-sm text-gray-900 dark:text-gray-100">warnOnPageLeave?: boolean</code>
           </div>
-          <CodeBlock
-            code={`license: {
-  type: 'pro', // или 'free'
-  key: 'your-license-key', // Ключ лицензии для PRO версии
-  maxBlockTypes?: number // Максимальное количество типов блоков (для FREE)
-}`}
-            language="javascript"
-            className="mb-2"
-          />
         </div>
 
         <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">

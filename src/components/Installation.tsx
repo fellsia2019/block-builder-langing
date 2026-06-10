@@ -3,11 +3,8 @@
 import { useState } from 'react';
 import AnimateOnScroll from './AnimateOnScroll';
 import Icon from './Icon';
-import FeedbackModal from './FeedbackModal';
-
 export default function Installation() {
   const [copied, setCopied] = useState(false);
-  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText('npm install @mushket-co/block-builder');
@@ -139,7 +136,7 @@ export default function Installation() {
               </a>
 
               <a
-                href="https://demo.block-builder.ru"
+                href="https://github.com/mushket-co/block-builder-demo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center p-4 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg hover:shadow-md transition-shadow border border-green-200 dark:border-green-800"
@@ -151,26 +148,24 @@ export default function Installation() {
                 </div>
               </a>
 
-              <button
-                onClick={() => setIsFeedbackModalOpen(true)}
-                className="flex items-center p-4 bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-lg hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-800 w-full text-left cursor-pointer"
+              <a
+                href="https://github.com/mushket-co/block-builder/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center p-4 bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-lg hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-800"
               >
                 <Icon name="message" size={32} className="mr-3 text-orange-600 dark:text-orange-400" />
                 <div>
                   <div className="font-semibold text-gray-900 dark:text-white">Поддержка</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Задайте вопрос</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">GitHub Issues</div>
                 </div>
-              </button>
+              </a>
             </div>
           </div>
           </AnimateOnScroll>
         </div>
       </div>
 
-      <FeedbackModal 
-        isOpen={isFeedbackModalOpen} 
-        onClose={() => setIsFeedbackModalOpen(false)} 
-      />
     </section>
   );
 }

@@ -1,9 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import dynamic from 'next/dynamic';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Icon from './Icon';
+
+const SyntaxHighlighter = dynamic(
+  () => import('react-syntax-highlighter').then((mod) => mod.Prism),
+  { ssr: false }
+);
 
 interface CodeBlockProps {
   code: string;
@@ -11,41 +16,35 @@ interface CodeBlockProps {
   className?: string;
 }
 
-export default function CodeBlock({ 
-  code, 
+export default function CodeBlock({
+  code,
   language = 'javascript',
-  className = '' 
+  className = '',
 }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const trimmedCode = code.trim();
   const isRounded = !className.includes('rounded-none');
-  
-  // Определяем язык для подсветки
-  // react-syntax-highlighter с Prism не поддерживает 'vue' напрямую
-  // Для Vue компонентов используем 'markup' (HTML), так как основная часть Vue - это template
+
   const getLanguage = () => {
     if (language === 'vue') {
-      // Используем markup для Vue, так как он хорошо подсвечивает HTML/XML синтаксис
-      // который является основной частью Vue компонентов (template секция)
       return 'markup';
     }
-    // Маппинг других языков если нужно
     const languageMap: Record<string, string> = {
-      'ts': 'typescript',
-      'tsx': 'tsx',
-      'js': 'javascript',
-      'jsx': 'jsx',
-      'json': 'json',
-      'bash': 'bash',
-      'shell': 'bash',
-      'html': 'markup',
-      'css': 'css',
-      'scss': 'scss',
+      ts: 'typescript',
+      tsx: 'tsx',
+      js: 'javascript',
+      jsx: 'jsx',
+      json: 'json',
+      bash: 'bash',
+      shell: 'bash',
+      html: 'markup',
+      css: 'css',
+      scss: 'scss',
     };
-    
+
     return languageMap[language] || language;
   };
-  
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(trimmedCode);
@@ -55,7 +54,17 @@ export default function CodeBlock({
       console.error('Failed to copy:', err);
     }
   };
-  
+
+  const preStyles = {
+    margin: 0,
+    padding: '1rem',
+    fontSize: '0.875rem',
+    lineHeight: '1.5',
+    background: '#1e293b',
+    borderRadius: isRounded ? '0.5rem' : '0',
+    minWidth: 'fit-content',
+  };
+
   return (
     <div className={`${isRounded ? 'rounded-lg' : ''} overflow-hidden relative group ${className}`}>
       <button
@@ -79,15 +88,7 @@ export default function CodeBlock({
         <SyntaxHighlighter
           language={getLanguage()}
           style={vscDarkPlus}
-          customStyle={{
-            margin: 0,
-            padding: '1rem',
-            fontSize: '0.875rem',
-            lineHeight: '1.5',
-            background: '#1e293b', // slate-800
-            borderRadius: isRounded ? '0.5rem' : '0',
-            minWidth: 'fit-content',
-          }}
+          customStyle={preStyles}
           showLineNumbers={false}
           PreTag="div"
           wrapLines={false}
@@ -99,4 +100,3 @@ export default function CodeBlock({
     </div>
   );
 }
-

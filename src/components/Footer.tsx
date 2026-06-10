@@ -1,13 +1,10 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import Logo from './Logo';
-import FeedbackModal from './FeedbackModal';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
 
   return (
     <footer className="bg-slate-900 text-gray-300 py-12 relative z-[100] border-t border-gray-300">
@@ -22,7 +19,7 @@ export default function Footer() {
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
               Библиотека для создания блочных конструкторов с правильной чистой архитектурой. 
-              Поддержка Vue3, Pure JavaScript и TypeScript из коробки.
+              Vue 3, React, Pure JS, SSR. Open Source (MIT).
             </p>
             <div className="flex space-x-4">
               <a
@@ -81,16 +78,8 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-4">Контакты</h3>
             <ul className="space-y-2">
               <li>
-                <button
-                  onClick={() => setIsFeedbackModalOpen(true)}
-                  className="text-gray-400 hover:text-white transition-colors text-left"
-                >
-                  Обратная связь
-                </button>
-              </li>
-              <li>
                 <a href="https://github.com/mushket-co/block-builder/issues" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                  GitHub Issues
+                  Вопросы и обратная связь
                 </a>
               </li>
               <li>
@@ -112,8 +101,8 @@ export default function Footer() {
             © {currentYear} BlockBuilder. Распространяется под лицензией MIT.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-              Лицензия
+            <a href="https://github.com/mushket-co/block-builder/blob/master/LICENSE" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-sm">
+              MIT License
             </a>
             <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
               Политика конфиденциальности
@@ -125,10 +114,6 @@ export default function Footer() {
         </div>
       </div>
 
-      <FeedbackModal 
-        isOpen={isFeedbackModalOpen} 
-        onClose={() => setIsFeedbackModalOpen(false)} 
-      />
     </footer>
   );
 }
