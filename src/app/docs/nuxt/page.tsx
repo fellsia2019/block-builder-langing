@@ -3,6 +3,11 @@
 import DocsLayout from '../components/DocsLayout';
 import CodeBlock from '@/components/CodeBlock';
 import Link from 'next/link';
+import {
+  GITHUB_EXAMPLES,
+  GITHUB_EXAMPLES_NUXT3,
+  GITHUB_EXAMPLES_NUXT4,
+} from '@/lib/urls';
 
 export default function NuxtPage() {
   return (
@@ -14,6 +19,18 @@ export default function NuxtPage() {
             Интеграция <code>@mushket-co/block-builder/vue</code> в Nuxt 3/4 с серверным рендерингом контента блоков
           </p>
         </div>
+
+        <section className="bg-green-50 dark:bg-green-900/20 rounded-xl p-5 border border-green-200 dark:border-green-800">
+          <p className="text-sm text-gray-700 dark:text-gray-300">
+            <strong>Живое SSR-демо</strong> для Nuxt нет в интерактивном demo-bb (там только Vue 3, React и Pure JS).
+            Запустите готовые проекты из репозитория пакета:{' '}
+            <a href={GITHUB_EXAMPLES_NUXT3} className="text-green-700 dark:text-green-400 hover:underline font-medium" target="_blank" rel="noopener noreferrer">examples/nuxt3</a>
+            {' '}и{' '}
+            <a href={GITHUB_EXAMPLES_NUXT4} className="text-green-700 dark:text-green-400 hover:underline font-medium" target="_blank" rel="noopener noreferrer">examples/nuxt4</a>
+            {' '}в{' '}
+            <a href={GITHUB_EXAMPLES} className="text-green-700 dark:text-green-400 hover:underline font-medium" target="_blank" rel="noopener noreferrer">block-builder/examples</a>.
+          </p>
+        </section>
 
         <section className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/10 rounded-xl p-6 border border-green-200 dark:border-green-800">
           <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Установка</h2>
@@ -118,16 +135,20 @@ export default defineEventHandler(async () => {
         </section>
 
         <section className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
-          <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Примеры в репозитории</h2>
+          <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Живые примеры в репозитории</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+            Из корня monorepo: <code className="text-green-700 dark:text-green-400">npm run example:nuxt3</code> или{' '}
+            <code className="text-green-700 dark:text-green-400">npm run example:nuxt4</code>
+          </p>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="https://github.com/mushket-co/block-builder/tree/master/examples/nuxt3" className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">
+              <a href={GITHUB_EXAMPLES_NUXT3} className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">
                 examples/nuxt3
               </a>
               {' '}— Nuxt 3, порт 3006
             </li>
             <li>
-              <a href="https://github.com/mushket-co/block-builder/tree/master/examples/nuxt4" className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">
+              <a href={GITHUB_EXAMPLES_NUXT4} className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">
                 examples/nuxt4
               </a>
               {' '}— Nuxt 4, порт 3007

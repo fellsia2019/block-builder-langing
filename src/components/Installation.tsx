@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import AnimateOnScroll from './AnimateOnScroll';
 import Icon from './Icon';
+import { DEMO_BB_URL } from '@/lib/urls';
+
 export default function Installation() {
   const [copied, setCopied] = useState(false);
 
@@ -136,15 +138,28 @@ export default function Installation() {
               </a>
 
               <a
-                href="https://github.com/mushket-co/block-builder-demo"
+                href={DEMO_BB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center p-4 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg hover:shadow-md transition-shadow border border-green-200 dark:border-green-800"
               >
                 <Icon name="graduation" size={32} className="mr-3 text-green-600 dark:text-green-400" />
                 <div>
-                  <div className="font-semibold text-gray-900 dark:text-white">Примеры</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Готовые решения</div>
+                  <div className="font-semibold text-gray-900 dark:text-white">Интерактивные демо</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Vue 3, React 19+, Pure JS (demo-bb)</div>
+                </div>
+              </a>
+
+              <a
+                href="https://github.com/mushket-co/block-builder/tree/master/examples"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center p-4 bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800/50 dark:to-slate-900/30 rounded-lg hover:shadow-md transition-shadow border border-slate-200 dark:border-slate-700"
+              >
+                <Icon name="zap" size={32} className="mr-3 text-slate-600 dark:text-slate-400" />
+                <div>
+                  <div className="font-semibold text-gray-900 dark:text-white">SSR примеры</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Nuxt 3/4 и Next.js в block-builder/examples</div>
                 </div>
               </a>
 

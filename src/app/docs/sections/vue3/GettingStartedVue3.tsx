@@ -363,6 +363,19 @@ const config = {
           </li>
         </ul>
       </section>
+
+      <section className="bg-green-50 dark:bg-green-900/20 rounded-xl p-6 border border-green-200 dark:border-green-800">
+        <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Nuxt (SSR)</h2>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Для серверного рендеринга с Nuxt 3/4 см. раздел{' '}
+          <a href="/docs/nuxt" className="text-green-600 hover:underline">Nuxt (SSR)</a>.
+          Живые примеры —{' '}
+          <a href="https://github.com/mushket-co/block-builder/tree/master/examples/nuxt3" className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">examples/nuxt3</a>
+          {' '}и{' '}
+          <a href="https://github.com/mushket-co/block-builder/tree/master/examples/nuxt4" className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">examples/nuxt4</a>
+          {' '}в репозитории block-builder (не в demo-bb).
+        </p>
+      </section>
     </div>
   );
 }

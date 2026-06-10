@@ -4,6 +4,7 @@ import { useState } from 'react';
 import AnimateOnScroll from './AnimateOnScroll';
 import CodeBlock from './CodeBlock';
 import Icon from './Icon';
+import { DEMO_BB_URL, GITHUB_EXAMPLES } from '@/lib/urls';
 
 const examples = [
   {
@@ -315,6 +316,17 @@ export default function CodeExamples() {
             </div>
           </AnimateOnScroll>
 
+          {examples[activeTab].title.includes('SSR') && (
+            <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={500}>
+              <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800 text-sm text-gray-700 dark:text-gray-300">
+                Живое SSR-демо для {examples[activeTab].title.replace(' (SSR)', '')} — в репозитории пакета, не в demo-bb:{' '}
+                <a href={GITHUB_EXAMPLES} className="text-primary-600 dark:text-primary-400 hover:underline font-medium" target="_blank" rel="noopener noreferrer">
+                  github.com/mushket-co/block-builder/tree/master/examples
+                </a>
+              </div>
+            </AnimateOnScroll>
+          )}
+
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={600}>
               <div className="p-6 bg-gradient-to-br from-primary-50 to-purple-50 dark:from-primary-900/20 dark:to-purple-900/20 rounded-xl border border-primary-200 dark:border-primary-800 hover:scale-105 transition-transform">
@@ -351,34 +363,55 @@ export default function CodeExamples() {
                   SSR
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Nuxt и Next.js — контент блоков на сервере
+                  Nuxt и Next.js — живые примеры в{' '}
+                  <a href={GITHUB_EXAMPLES} className="text-orange-600 dark:text-orange-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                    block-builder/examples
+                  </a>
                 </p>
               </div>
             </AnimateOnScroll>
           </div>
 
-          {/* Demo link card */}
-          <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={900}>
-            <a
-              href="https://github.com/mushket-co/block-builder-demo"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-12 block p-8 bg-gradient-to-r from-primary-600 via-purple-600 to-pink-600 rounded-2xl shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 text-white text-center group"
-            >
-              <div className="flex flex-col items-center">
-                <Icon name="monitor" size={48} className="mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="text-3xl font-bold mb-2">
-                  Посмотрите живые примеры
-                </h3>
-                <p className="text-xl text-white/90 mb-4">
-                  Интерактивные демо с реальными блоками и формами
-                </p>
-                <div className="px-6 py-3 bg-white/20 backdrop-blur-sm rounded-lg font-semibold group-hover:bg-white/30 transition-colors">
-                  Открыть демо на GitHub →
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={900} innerClassName="h-full" className="h-full">
+              <a
+                href={DEMO_BB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="will-change-transform block h-full p-8 bg-gradient-to-r from-primary-600 via-purple-600 to-pink-600 rounded-2xl shadow-2xl hover:shadow-3xl transition-all transform hover:scale-[1.02] text-white text-center group"
+              >
+                <div className="flex flex-col items-center">
+                  <Icon name="monitor" size={48} className="mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-2xl font-bold mb-2">Интерактивные демо</h3>
+                  <p className="text-lg text-white/90 mb-4">
+                    Vue 3, React 19+, Pure JS — block-builder-demo
+                  </p>
+                  <div className="px-6 py-3 bg-white/20 backdrop-blur-sm rounded-lg font-semibold group-hover:bg-white/30 transition-colors">
+                    Открыть demo-bb →
+                  </div>
                 </div>
-              </div>
-            </a>
-          </AnimateOnScroll>
+              </a>
+            </AnimateOnScroll>
+            <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={1000} innerClassName="h-full" className="h-full">
+              <a
+                href={GITHUB_EXAMPLES}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="will-change-transform block h-full p-8 bg-gradient-to-r from-slate-700 via-slate-800 to-slate-900 rounded-2xl shadow-2xl hover:shadow-3xl transition-all transform hover:scale-[1.02] text-white text-center group"
+              >
+                <div className="flex flex-col items-center">
+                  <Icon name="zap" size={48} className="mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-2xl font-bold mb-2">SSR Nuxt и Next.js</h3>
+                  <p className="text-lg text-white/90 mb-4">
+                    Живые примеры в репозитории block-builder/examples
+                  </p>
+                  <div className="px-6 py-3 bg-white/20 backdrop-blur-sm rounded-lg font-semibold group-hover:bg-white/30 transition-colors">
+                    Открыть examples на GitHub →
+                  </div>
+                </div>
+              </a>
+            </AnimateOnScroll>
+          </div>
         </div>
       </div>
     </section>

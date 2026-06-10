@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://block-builder-doc.vercel.app"),
   title: "BlockBuilder - Блочный конструктор с чистой архитектурой",
   description: "Библиотека для создания блочных конструкторов с правильной чистой архитектурой. Поддержка Vue3, Pure JavaScript и TypeScript.",
   keywords: ["block-builder", "no-code", "constructor", "vue3", "typescript", "clean architecture"],

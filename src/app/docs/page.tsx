@@ -35,19 +35,19 @@ export default function DocsPage() {
           />
           <DocCard
             title="React"
-            description="React 18/19, BlockBuilderComponent"
+            description="React 19+, BlockBuilderComponent"
             href="/docs/react"
             color="blue"
           />
           <DocCard
             title="Nuxt"
-            description="SSR с Nuxt 3/4, useAsyncData, Nitro API"
+            description="SSR с Nuxt 3/4. Живые примеры — examples/nuxt3 и nuxt4 в GitHub"
             href="/docs/nuxt"
             color="green"
           />
           <DocCard
             title="Next.js"
-            description="SSR с App Router, Server + Client Components"
+            description="SSR с App Router. Живой пример — examples/next в GitHub"
             href="/docs/next"
             color="slate"
           />

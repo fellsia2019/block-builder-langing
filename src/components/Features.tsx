@@ -1,9 +1,15 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import AnimateOnScroll from './AnimateOnScroll';
 import Icon from './Icon';
+import { GITHUB_EXAMPLES } from '@/lib/urls';
 
-const features = [
+const features: Array<{
+  iconName: 'building' | 'target' | 'paintbrush' | 'zap' | 'plugin' | 'package' | 'theater' | 'flask';
+  title: string;
+  description: ReactNode;
+}> = [
   {
     iconName: 'building' as const,
     title: 'Чистая архитектура',
@@ -17,12 +23,20 @@ const features = [
   {
     iconName: 'paintbrush' as const,
     title: 'Vue 3 и React UI',
-    description: 'Готовые компоненты BlockBuilder для Vue 3 и React, единый core API.'
+    description: 'Готовые компоненты BlockBuilder для Vue 3 и React 19+, единый core API.'
   },
   {
     iconName: 'zap' as const,
     title: 'SSR и Nuxt / Next.js',
-    description: 'Серверный рендеринг контента блоков, примеры для Nuxt 3/4 и Next.js App Router.'
+    description: (
+      <>
+        Серверный рендеринг контента блоков. Живые SSR-примеры — в{' '}
+        <a href={GITHUB_EXAMPLES} className="text-primary-600 dark:text-primary-400 hover:underline" target="_blank" rel="noopener noreferrer">
+          block-builder/examples
+        </a>{' '}
+        (Nuxt 3/4, Next.js).
+      </>
+    ),
   },
   {
     iconName: 'plugin' as const,

@@ -3,6 +3,7 @@
 import DocsLayout from '../components/DocsLayout';
 import CodeBlock from '@/components/CodeBlock';
 import Link from 'next/link';
+import { GITHUB_EXAMPLES, GITHUB_EXAMPLES_NEXT } from '@/lib/urls';
 
 export default function NextPage() {
   return (
@@ -12,8 +13,20 @@ export default function NextPage() {
           <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Next.js (SSR)</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">
             Интеграция <code>@mushket-co/block-builder/react</code> в App Router с серверной загрузкой блоков
+            {' '}(требуется <strong>React 19+</strong>)
           </p>
         </div>
+
+        <section className="bg-slate-100 dark:bg-slate-800/50 rounded-xl p-5 border border-slate-200 dark:border-slate-700">
+          <p className="text-sm text-gray-700 dark:text-gray-300">
+            <strong>Живое SSR-демо</strong> для Next.js нет в интерактивном demo-bb.
+            Запустите{' '}
+            <a href={GITHUB_EXAMPLES_NEXT} className="text-slate-800 dark:text-slate-200 hover:underline font-medium" target="_blank" rel="noopener noreferrer">examples/next</a>
+            {' '}из{' '}
+            <a href={GITHUB_EXAMPLES} className="text-slate-800 dark:text-slate-200 hover:underline font-medium" target="_blank" rel="noopener noreferrer">block-builder/examples</a>
+            {' '}(<code className="text-slate-700 dark:text-slate-300">npm run example:next</code>, порт 3008).
+          </p>
+        </section>
 
         <section className="bg-gradient-to-br from-slate-50 to-gray-100 dark:from-slate-800/50 dark:to-gray-900/30 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
           <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Установка</h2>
@@ -150,9 +163,9 @@ export async function POST(request: Request) {
         </section>
 
         <section className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
-          <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Пример в репозитории</h2>
+          <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Живой пример в репозитории</h2>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            <a href="https://github.com/mushket-co/block-builder/tree/master/examples/next" className="text-slate-700 dark:text-slate-300 hover:underline font-medium" target="_blank" rel="noopener noreferrer">
+            <a href={GITHUB_EXAMPLES_NEXT} className="text-slate-700 dark:text-slate-300 hover:underline font-medium" target="_blank" rel="noopener noreferrer">
               examples/next
             </a>
             {' '}— App Router, Route Handlers, порт 3008

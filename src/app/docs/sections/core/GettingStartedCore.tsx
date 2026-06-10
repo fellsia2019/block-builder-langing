@@ -3,6 +3,7 @@
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
+import { DEMO_BB_URL } from '@/lib/urls';
 
 export default function GettingStartedCore({ nextSection, nextTitle, onNavigate }: NavigationProps) {
   return (
@@ -31,8 +32,14 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
         <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
           <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Неограниченное количество типов блоков</li>
           <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Кастомные поля, api-select, кастомные брекпоинты spacing</li>
-          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Vue 3, React 18/19, Pure JS, SSR (Nuxt, Next.js)</li>
+          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Vue 3, React 19+, Pure JS, SSR (Nuxt, Next.js)</li>
         </ul>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
+          Интерактивные демо Vue/React/Pure JS — в{' '}
+          <a href={DEMO_BB_URL} className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">block-builder-demo</a>.
+          Живые SSR-примеры Nuxt и Next.js — в{' '}
+          <a href="https://github.com/mushket-co/block-builder/tree/master/examples" className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">block-builder/examples</a>.
+        </p>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
           Подключите стили: <code className="text-green-700 dark:text-green-400">import &apos;@mushket-co/block-builder/index.esm.css&apos;</code>
         </p>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { DEMO_BB_URL, GITHUB_EXAMPLES } from '@/lib/urls';
 import DocsLayout from '../components/DocsLayout';
 import CodeBlock from '@/components/CodeBlock';
 
@@ -12,6 +13,7 @@ export default function ReactPage() {
           <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Быстрый старт с React</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">
             BlockBuilder 1.3.1 — полная поддержка React UI и блоков с <code>@mushket-co/block-builder/react</code>
+            {' '}(требуется <strong>React 19+</strong>)
           </p>
         </div>
 
@@ -71,7 +73,7 @@ export function App() {
             После <code>npm install @mushket-co/block-builder</code> импортируйте из{' '}
             <code>@mushket-co/block-builder/react</code> — Vite соберёт entry из npm (исключите пакет из{' '}
             <code>optimizeDeps</code>, если нужно). Живое демо:{' '}
-            <a href="https://github.com/mushket-co/block-builder-demo" className="text-blue-600 hover:underline">block-builder-demo</a>.
+            <a href={DEMO_BB_URL} className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">block-builder-demo</a>.
             Alias на исходники — только при разработке самого пакета в monorepo.
           </p>
         </section>
@@ -79,9 +81,11 @@ export function App() {
         <section>
           <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">SSR</h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Для Next.js App Router — отдельный раздел{' '}
+            Для Next.js App Router — раздел{' '}
             <Link href="/docs/next" className="text-blue-600 hover:underline">Next.js (SSR)</Link>.
             Для Nuxt — <Link href="/docs/nuxt" className="text-blue-600 hover:underline">Nuxt (SSR)</Link>.
+            Живые SSR-примеры (не в demo-bb) — в{' '}
+            <a href={GITHUB_EXAMPLES} className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">block-builder/examples</a>.
           </p>
         </section>
 
