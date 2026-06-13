@@ -88,6 +88,32 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         </ul>
       </section>
 
+      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+          <Icon name="shield" size={22} className="text-teal-600 dark:text-teal-400" />
+          Валидация в UI (1.4.0)
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          В готовых UI (Vue, React, Pure JS) валидация работает из коробки — дополнительная настройка не нужна.
+        </p>
+        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 mb-4">
+          <li>
+            <strong>Индикатор ошибок в футере модалки</strong> — кнопка с количеством ошибок (
+            <code className="text-teal-700 dark:text-teal-400">.bb-validation-error-indicator</code>).
+            Клик скроллит к первому полю с ошибкой (тот же UX, что при «Сохранить» с ошибками).
+          </li>
+          <li>
+            <strong>Реактивная валидация</strong> — после неуспешного submit ошибки обновляются при каждом изменении поля.
+            Для кастомного UI см. <code className="text-teal-700 dark:text-teal-400">ReactiveFormValidationTracker</code> и{' '}
+            <code className="text-teal-700 dark:text-teal-400">applyFormErrors</code> в разделе «Утилиты».
+          </li>
+          <li>
+            <strong>CustomField (Vue/React)</strong> — <code>setError</code> у кастомного рендерера вызывается только при
+            изменении текста ошибки: WYSIWYG-редактор не теряет фокус при реактивной валидации.
+          </li>
+        </ul>
+      </section>
+
       <section>
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Пример использования</h2>
         <CodeBlock

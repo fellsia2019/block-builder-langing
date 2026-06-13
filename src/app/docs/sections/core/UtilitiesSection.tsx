@@ -194,6 +194,72 @@ const visibleBlocks = filterBlocksForDisplay(blocks, isEdit)`}
         />
       </section>
 
+      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+          <Icon name="shield" size={22} className="text-teal-600 dark:text-teal-400" />
+          Реактивная валидация формы (1.4.0)
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-3">
+          Для кастомного UI форм (без готового <code>BlockBuilderComponent</code>) — трекер и хелпер из{' '}
+          <code className="text-teal-700 dark:text-teal-400">@mushket-co/block-builder/core</code>.
+          В готовых UI (Vue, React, Pure JS) реактивная валидация включена автоматически: после неуспешного submit
+          ошибки обновляются при каждом изменении поля.
+        </p>
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 mb-3">
+          <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">Сигнатуры</h3>
+          <CodeBlock
+            code={`class ReactiveFormValidationTracker {
+  reset(): void
+  touch(): void
+  get isTouched(): boolean
+  revalidateIfTouched(
+    formData: IFormData,
+    formFields: IFormFieldConfig[],
+    isFieldVisible?: (field, itemData?) => boolean
+  ): Record<string, string[]> | null
+}
+
+function applyFormErrors(
+  target: Record<string, string[]>,
+  errors: Record<string, string[]>
+): void`}
+            language="typescript"
+            className="mb-2"
+          />
+          <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
+            <li><code>touch()</code> — вызывайте после неуспешного submit, чтобы включить перевалидацию на каждое изменение.</li>
+            <li><code>revalidateIfTouched</code> — возвращает актуальные ошибки или <code>null</code>, если форма ещё не «touched».</li>
+            <li><code>applyFormErrors</code> — атомарно заменяет объект ошибок (удобно для Vue <code>reactive</code> / React state).</li>
+          </ul>
+        </div>
+        <CodeBlock
+          code={`import {
+  applyFormErrors,
+  ReactiveFormValidationTracker,
+  UniversalValidator,
+} from '@mushket-co/block-builder/core'
+
+const tracker = new ReactiveFormValidationTracker()
+const formErrors: Record<string, string[]> = {}
+
+function onSubmit(formData, formFields) {
+  const { isValid, errors } = UniversalValidator.validateForm(formData, formFields)
+  if (!isValid) {
+    tracker.touch()
+    applyFormErrors(formErrors, errors)
+    return
+  }
+  tracker.reset()
+}
+
+function onFieldChange(formData, formFields) {
+  const nextErrors = tracker.revalidateIfTouched(formData, formFields)
+  if (nextErrors) applyFormErrors(formErrors, nextErrors)
+}`}
+          language="typescript"
+        />
+      </section>
+
       <section className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 border-l-4 border-purple-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="shield" size={22} className="text-purple-600 dark:text-purple-400" />

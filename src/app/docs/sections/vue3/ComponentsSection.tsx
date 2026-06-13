@@ -208,6 +208,13 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
               </p>
             </div>
           </div>
+
+          <div className="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-4 border border-teal-200 dark:border-teal-800 mt-4">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              <strong>Валидация формы (1.4.0+):</strong> индикатор ошибок в футере модалки и реактивная перевалидация
+              после неуспешного submit включены по умолчанию — отдельных props не требуется.
+            </p>
+          </div>
         </div>
 
         <div className="mb-6">
