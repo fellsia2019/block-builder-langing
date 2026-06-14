@@ -258,7 +258,7 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
   label: 'Изображение',
   type: 'image',
   defaultValue: '',
-  imageUploadConfig: {
+  fileUploadConfig: {
     uploadUrl: '/api/upload',
     maxFileSize: 5 * 1024 * 1024,
     accept: 'image/*',
@@ -267,7 +267,33 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
     })
   }
 }`}
-            parameters={['field', 'label', 'type', 'defaultValue', 'imageUploadConfig', 'rules']}
+            parameters={['field', 'label', 'type', 'defaultValue', 'fileUploadConfig', 'multiple', 'rules']}
+          />
+
+          <FieldTypeCard 
+            name="file" 
+            description="Загрузка файлов с отдельным UI (список имён, не превью). multiple и maxCount." 
+            icon="📄"
+            example={`{
+  field: 'files',
+  label: 'Файлы',
+  type: 'file',
+  multiple: true,
+  fileUploadConfig: { uploadUrl: '/api/upload', maxCount: 5 }
+}`}
+            parameters={['field', 'label', 'type', 'multiple', 'fileUploadConfig', 'rules']}
+          />
+
+          <FieldTypeCard 
+            name="block-anchor" 
+            description="Якорь #block-id или URL в форме. Скролл, preventDefault и поведение ссылки — в компоненте блока пользователя." 
+            icon="🔗"
+            example={`{
+  field: 'url',
+  type: 'block-anchor',
+  blockAnchorConfig: { allowCustomUrl: true }
+}`}
+            parameters={['field', 'label', 'type', 'blockAnchorConfig', 'rules']}
           />
         </div>
       </section>
@@ -302,7 +328,8 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
               Тип поля: <code className="text-green-700 dark:text-green-400">'text'</code>, <code className="text-green-700 dark:text-green-400">'textarea'</code>, 
               <code className="text-green-700 dark:text-green-400">'number'</code>, <code className="text-green-700 dark:text-green-400">'select'</code>, 
               <code className="text-green-700 dark:text-green-400">'checkbox'</code>, <code className="text-green-700 dark:text-green-400">'radio'</code>, 
-              <code className="text-green-700 dark:text-green-400">'color'</code>, <code className="text-green-700 dark:text-green-400">'image'</code>
+              <code className="text-green-700 dark:text-green-400">'color'</code>, <code className="text-green-700 dark:text-green-400">'image'</code>,
+              <code className="text-green-700 dark:text-green-400">'file'</code>, <code className="text-green-700 dark:text-green-400">'block-anchor'</code>
             </p>
           </div>
           

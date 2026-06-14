@@ -33,6 +33,7 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
           <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Неограниченное количество типов блоков</li>
           <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Кастомные поля, api-select, кастомные брекпоинты spacing</li>
           <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Vue 3, React 19+, Pure JS, SSR (Nuxt, Next.js)</li>
+          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Поля <code>block-anchor</code> и <code>file</code> (1.5.0+)</li>
         </ul>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
           Интерактивные демо Vue/React/Pure JS — в{' '}

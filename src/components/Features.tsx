@@ -40,6 +40,11 @@ const features: Array<{
   },
   {
     iconName: 'plugin' as const,
+    title: 'Якоря и файлы (1.5.0)',
+    description: 'Поле block-anchor для ссылок на блоки страницы и отдельный UI загрузки file/files. Скролл к якорю реализуется в ваших компонентах блоков.'
+  },
+  {
+    iconName: 'plugin' as const,
     title: 'Плагинная система',
     description: 'Легко расширяйте функциональность через кастомные типы полей и рендереры.'
   },

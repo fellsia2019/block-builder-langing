@@ -71,6 +71,21 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         </p>
       </div>
 
+      <section className="bg-violet-50 dark:bg-violet-900/20 rounded-xl p-6 border-l-4 border-violet-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что нового в 1.5.0</h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+          <li>
+            <code className="text-violet-700 dark:text-violet-400">block-anchor</code> — выбор якоря на блок страницы (
+            <code>#block-id</code>) или произвольного URL в форме. <strong>Скролл и поведение ссылки — в ваших компонентах блоков</strong>, пакет только сохраняет значение
+          </li>
+          <li>
+            <code className="text-violet-700 dark:text-violet-400">file</code> / <code className="text-violet-700 dark:text-violet-400">files</code> — отдельный UI загрузки файлов (не как у изображений), одиночный и множественный режим, <code>maxCount</code>
+          </li>
+          <li>Множественные <code>image</code> / <code>file</code> в Pure JS; исправлено сохранение upload-полей</li>
+          <li>Кнопки repeater и file-picker на общих стилях <code>bb-btn</code></li>
+        </ul>
+      </section>
+
       <section className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что такое поля форм?</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
@@ -308,7 +323,7 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
   label: 'Изображение',
   type: 'image',
   defaultValue: '',
-  imageUploadConfig: {
+  fileUploadConfig: {
     uploadUrl: '/api/upload',
     maxFileSize: 5 * 1024 * 1024,
     accept: 'image/*',
@@ -317,7 +332,44 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
     })
   }
 }`}
-            parameters={['field', 'label', 'type', 'defaultValue', 'imageUploadConfig', 'rules']}
+            parameters={['field', 'label', 'type', 'defaultValue', 'fileUploadConfig', 'multiple', 'rules']}
+          />
+
+          <FieldTypeCard 
+            name="file" 
+            description="Загрузка файлов (PDF, DOC и др.) с отдельным UI: список имён файлов, не превью изображений. Поддержка multiple и maxCount." 
+            icon="📄"
+            example={`{
+  field: 'files',
+  label: 'Файлы',
+  type: 'file',
+  multiple: true,
+  defaultValue: [],
+  fileUploadConfig: {
+    uploadUrl: '/api/upload',
+    accept: '.pdf,.doc,.docx,.zip',
+    maxCount: 5,
+    responseMapper: (response) => response.url
+  }
+}`}
+            parameters={['field', 'label', 'type', 'defaultValue', 'multiple', 'fileUploadConfig', 'rules']}
+          />
+
+          <FieldTypeCard 
+            name="block-anchor" 
+            description="Якорь на блок страницы (#id) или URL. В форме — выбор из списка блоков; скролл и поведение ссылки — в вашем компоненте блока." 
+            icon="🔗"
+            example={`{
+  field: 'url',
+  label: 'Якорь или URL',
+  type: 'block-anchor',
+  blockAnchorConfig: {
+    placeholder: 'Выберите блок на странице',
+    allowCustomUrl: true
+  },
+  defaultValue: ''
+}`}
+            parameters={['field', 'label', 'type', 'blockAnchorConfig', 'defaultValue', 'rules']}
           />
 
           <FieldTypeCard 
@@ -854,14 +906,14 @@ applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints
             </p>
           </div>
           <p className="text-gray-600 dark:text-gray-400 mb-3">
-            Для настройки серверной загрузки используйте параметр <code className="text-pink-700 dark:text-pink-400">imageUploadConfig</code>:
+            Для настройки серверной загрузки используйте параметр <code className="text-pink-700 dark:text-pink-400">fileUploadConfig</code>:
           </p>
           <CodeBlock
             code={`{
   field: 'image',
   label: 'Изображение',
   type: 'image',
-  imageUploadConfig: {
+  fileUploadConfig: {
     uploadUrl: '/api/upload',           // URL для загрузки
     fileParamName: 'file',              // Имя поля в FormData (по умолчанию 'file')
     maxFileSize: 5 * 1024 * 1024,       // Максимальный размер (5MB)
@@ -959,8 +1011,126 @@ const imageUrl = computed(() => {
             <li>Поддержка repeater полей через data-атрибуты</li>
             <li>Встроенная валидация размера файла и типа</li>
             <li>Рекомендуется использовать собственный API для загрузки файлов на статический сервер</li>
+            <li>Режим <code className="text-pink-700 dark:text-pink-400">multiple</code> и ограничение <code className="text-pink-700 dark:text-pink-400">maxCount</code> в <code className="text-pink-700 dark:text-pink-400">fileUploadConfig</code> (1.5.0+)</li>
           </ul>
         </div>
+      </section>
+
+      <section className="bg-slate-50 dark:bg-slate-900/20 rounded-xl p-6 border-l-4 border-slate-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Поле файла (File)</h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Поле <code className="text-slate-700 dark:text-slate-400">type: &apos;file&apos;</code> предназначено для документов и произвольных файлов.
+          В отличие от <code className="text-slate-700 dark:text-slate-400">image</code>, UI показывает список имён файлов с бейджем расширения, а не галерею превью.
+          Поддерживаются одиночный и множественный режим (<code>multiple: true</code>), серверная загрузка через <code>fileUploadConfig</code> и лимит <code>maxCount</code>.
+        </p>
+        <CodeBlock
+          code={`{
+  field: 'file',
+  label: 'Файл (один)',
+  type: 'file',
+  defaultValue: '',
+  fileUploadConfig: {
+    uploadUrl: '/api/upload',
+    fileParamName: 'file',
+    maxFileSize: 5 * 1024 * 1024,
+    accept: '.pdf,.doc,.docx,.zip',
+    responseMapper: (response) => response.url
+  }
+}
+
+// Несколько файлов
+{
+  field: 'files',
+  label: 'Файлы',
+  type: 'file',
+  multiple: true,
+  defaultValue: [],
+  fileUploadConfig: {
+    uploadUrl: '/api/upload',
+    maxCount: 5,
+    accept: '.pdf,.doc,.docx,.zip',
+    responseMapper: (response) => response.url
+  }
+}`}
+          language="javascript"
+          className="mb-4"
+        />
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          В <code>props</code> сохраняется URL строкой (один файл) или массивом URL (несколько файлов).
+          В компоненте блока отображайте ссылки на скачивание самостоятельно.
+        </p>
+      </section>
+
+      <section className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Поле якоря (block-anchor)</h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Поле <code className="text-indigo-700 dark:text-indigo-400">type: &apos;block-anchor&apos;</code> помогает редактору выбрать
+          ссылку на другой блок страницы (<code>#block-id</code>) или ввести произвольный URL.
+          Список опций строится из блоков на странице; в подписи показываются <code>props.title</code> / <code>props.name</code> блока и тип.
+        </p>
+
+        <div className="bg-amber-50 dark:bg-amber-900/20 rounded-lg p-4 mb-6 border-l-4 border-amber-400">
+          <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
+            <Icon name="warning" size={18} className="text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+            <span>
+              <strong>Ответственность за поведение ссылки — на стороне пользователя.</strong> BlockBuilder в форме только создаёт и сохраняет
+              значение (<code>#id</code> или URL). Пакет <strong>не выполняет скролл</strong>, не рендерит целевые блоки и не навешивает обработчики
+              в вашем приложении. Реализацию скролла к якорю, <code>preventDefault</code>, плавной прокрутки, роутинга и отображения ссылки
+              нужно добавить в <strong>ваших компонентах блоков</strong> (или в обёртке рендера), опираясь на сохранённое значение поля.
+            </span>
+          </p>
+        </div>
+
+        <CodeBlock
+          code={`{
+  field: 'url',
+  label: 'Якорь или URL',
+  type: 'block-anchor',
+  blockAnchorConfig: {
+    placeholder: 'Выберите блок на странице',
+    allowCustomUrl: true  // поле «или введите URL»
+  },
+  rules: [{ type: 'required', message: 'Укажите якорь или URL' }],
+  defaultValue: ''
+}`}
+          language="javascript"
+          className="mb-4"
+        />
+
+        <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Пример: скролл к блоку в Vue-компоненте</h3>
+        <p className="text-gray-600 dark:text-gray-400 mb-3">
+          Целевые блоки на странице должны иметь атрибут <code>data-block-id</code> (BlockBuilder выставляет его при рендере).
+          Если в <code>props.url</code> сохранён якорь <code>#block-id</code>, перехватите клик и вызовите <code>scrollIntoView</code> сами:
+        </p>
+        <CodeBlock
+          code={`<a :href="url" @click="handleClick">{{ text }}</a>
+
+<script setup>
+const props = defineProps({ url: String, text: String })
+
+const handleClick = (event) => {
+  if (!props.url?.startsWith('#')) return
+  event.preventDefault()
+  const blockId = props.url.slice(1)
+  document.querySelector(\`[data-block-id="\${blockId}"]\`)?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
+}
+</script>`}
+          language="vue"
+          className="mb-4"
+        />
+
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Для внешних URL (<code>https://...</code>) оставьте обычное поведение ссылки. То же самое относится к React, Pure JS HTML-шаблонам и SSR.
+        </p>
+
+        <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Контекст для Vue / React</h3>
+        <p className="text-gray-600 dark:text-gray-400 mb-3">
+          <code>BlockBuilder</code> передаёт в поле список блоков страницы (id, type, props). При редактировании блока он исключается из списка якорей.
+          В Pure JS контекст собирается в <code>BlockUIController.getBlockAnchorContext()</code>.
+        </p>
       </section>
 
       <section className="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-6 border-l-4 border-cyan-500 border-2 border-yellow-400">
@@ -1338,6 +1508,7 @@ const imageUrl = computed(() => {
               <code className="text-green-700 dark:text-green-400">'url'</code>, <code className="text-green-700 dark:text-green-400">'select'</code>, 
               <code className="text-green-700 dark:text-green-400">'checkbox'</code>, <code className="text-green-700 dark:text-green-400">'radio'</code>, 
               <code className="text-green-700 dark:text-green-400">'color'</code>, <code className="text-green-700 dark:text-green-400">'image'</code>, 
+              <code className="text-green-700 dark:text-green-400">'file'</code>, <code className="text-green-700 dark:text-green-400">'block-anchor'</code>, 
               <code className="text-green-700 dark:text-green-400">'spacing'</code>, 
               <code className="text-green-700 dark:text-green-400">'repeater'</code>, <code className="text-green-700 dark:text-green-400">'api-select'</code>, 
               <code className="text-green-700 dark:text-green-400">'custom'</code>
@@ -1429,15 +1600,27 @@ const imageUrl = computed(() => {
 
           <div>
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-              <code className="text-green-700 dark:text-green-400">imageUploadConfig</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для type: 'image')</span>
+              <code className="text-green-700 dark:text-green-400">fileUploadConfig</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для type: &apos;image&apos; или &apos;file&apos;)</span>
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Конфигурация для загрузки изображений на сервер. См. раздел "Поле изображения (Image)" выше.
+              Конфигурация загрузки на сервер. См. разделы «Поле изображения (Image)» и «Поле файла (File)».
               <br />
               Параметры: <code className="text-green-700 dark:text-green-400">uploadUrl</code>, <code className="text-green-700 dark:text-green-400">fileParamName</code>, 
               <code className="text-green-700 dark:text-green-400">maxFileSize</code>, <code className="text-green-700 dark:text-green-400">accept</code>, 
+              <code className="text-green-700 dark:text-green-400">maxCount</code> (для <code>multiple</code>),
               <code className="text-green-700 dark:text-green-400">uploadHeaders</code>, <code className="text-green-700 dark:text-green-400">responseMapper</code>, 
               <code className="text-green-700 dark:text-green-400">onUploadError</code>.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+              <code className="text-green-700 dark:text-green-400">blockAnchorConfig</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для type: &apos;block-anchor&apos;)</span>
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              <code className="text-green-700 dark:text-green-400">placeholder</code> — подпись пустого выбора;
+              <code className="text-green-700 dark:text-green-400"> allowCustomUrl</code> — показать поле произвольного URL.
+              Скролл и обработка клика — в компоненте блока пользователя (см. раздел «Поле якоря»).
             </p>
           </div>
 

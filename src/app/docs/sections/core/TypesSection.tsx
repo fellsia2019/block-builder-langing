@@ -170,7 +170,9 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   repeaterConfig?: any // Внутренний тип (не экспортируется)
   apiSelectConfig?: IApiSelectConfig
   customFieldConfig?: any // Внутренний тип (не экспортируется)
-  imageUploadConfig?: any // Внутренний тип (не экспортируется)
+  fileUploadConfig?: any // Внутренний тип IFileUploadConfig (не экспортируется)
+  blockAnchorConfig?: IBlockAnchorConfig // type: 'block-anchor' (1.5.0+)
+  multiple?: boolean // для image, file, select
   dependsOn?: IDependsOnConfig // Условное отображение поля (только для Vue) (v1.1.0+)
 }`}
           language="typescript"
@@ -270,7 +272,8 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   | 'color' 
   | 'file' 
   | 'image' 
-  | 'spacing' 
+  | 'block-anchor'
+  | 'spacing'
   | 'repeater' 
   | 'api-select' 
   | 'custom'`}
@@ -431,6 +434,26 @@ type TValidationRuleType =
   noResultsText?: string
   loadingText?: string
   errorText?: string
+}`}
+          language="typescript"
+          className="mb-4"
+        />
+      </section>
+
+      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+          <code className="text-teal-700 dark:text-teal-400">IBlockAnchorConfig</code>
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Конфигурация для поля <code>block-anchor</code> (1.5.0+). Форма сохраняет <code>#block-id</code> или URL в props;
+          скролл к якорю и обработка клика — в компонентах блоков пользователя.
+        </p>
+        <CodeBlock
+          code={`interface IBlockAnchorConfig {
+  placeholder?: string
+  allowCustomUrl?: boolean      // поле «или введите URL» (default: false)
+  excludeEditingBlock?: boolean // исключить редактируемый блок из списка (default: true)
+  onlyVisibleBlocks?: boolean    // только видимые блоки на странице (default: true)
 }`}
           language="typescript"
           className="mb-4"

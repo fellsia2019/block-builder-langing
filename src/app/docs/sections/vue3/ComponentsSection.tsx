@@ -209,6 +209,13 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             </div>
           </div>
 
+          <div className="bg-violet-50 dark:bg-violet-900/20 rounded-lg p-4 border border-violet-200 dark:border-violet-800 mt-4">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              <strong>Поля формы (1.5.0+):</strong> <code>block-anchor</code> для ссылок на блоки страницы — форма сохраняет
+              <code>#block-id</code> или URL; скролл и клик реализуйте в своих компонентах блоков. Отдельный UI для <code>file</code>/<code>files</code>.
+            </p>
+          </div>
+
           <div className="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-4 border border-teal-200 dark:border-teal-800 mt-4">
             <p className="text-sm text-gray-600 dark:text-gray-400">
               <strong>Валидация формы (1.4.0+):</strong> индикатор ошибок в футере модалки и реактивная перевалидация

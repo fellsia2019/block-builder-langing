@@ -224,7 +224,7 @@ const config = {
           label: 'Изображение',
           type: 'image',
           rules: [{ type: 'required', field: 'image' }],
-          imageUploadConfig: {
+          fileUploadConfig: {
             uploadUrl: '/api/upload',
             maxFileSize: 5 * 1024 * 1024,
             accept: 'image/*',
