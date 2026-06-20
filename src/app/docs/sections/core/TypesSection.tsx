@@ -172,7 +172,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   customFieldConfig?: any // Внутренний тип (не экспортируется)
   fileUploadConfig?: any // Внутренний тип IFileUploadConfig (не экспортируется)
   blockAnchorConfig?: IBlockAnchorConfig // type: 'block-anchor' (1.5.0+)
-  multiple?: boolean // для image, file, select
+  multiple?: boolean // image, file; select с multiple: true — 1.5.5+
   dependsOn?: IDependsOnConfig // Условное отображение поля (только для Vue) (v1.1.0+)
 }`}
           language="typescript"

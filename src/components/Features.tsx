@@ -6,7 +6,7 @@ import Icon from './Icon';
 import { GITHUB_EXAMPLES } from '@/lib/urls';
 
 const features: Array<{
-  iconName: 'building' | 'target' | 'paintbrush' | 'zap' | 'plugin' | 'package' | 'theater' | 'flask';
+  iconName: 'building' | 'target' | 'paintbrush' | 'zap' | 'plugin' | 'package' | 'theater' | 'flask' | 'clipboard';
   title: string;
   description: ReactNode;
 }> = [
@@ -42,6 +42,11 @@ const features: Array<{
     iconName: 'plugin' as const,
     title: 'Якоря и файлы (1.5.0)',
     description: 'Поле block-anchor для ссылок на блоки страницы и отдельный UI загрузки file/files. Скролл к якорю реализуется в ваших компонентах блоков.'
+  },
+  {
+    iconName: 'clipboard' as const,
+    title: 'Multi-select (1.5.5)',
+    description: 'Поле select с multiple: true — множественный выбор с тегами во Vue, React и Pure JS.'
   },
   {
     iconName: 'plugin' as const,

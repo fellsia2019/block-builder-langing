@@ -71,6 +71,22 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         </p>
       </div>
 
+      <section className="bg-fuchsia-50 dark:bg-fuchsia-900/20 rounded-xl p-6 border-l-4 border-fuchsia-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что нового в 1.5.5</h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+          <li>
+            <code className="text-fuchsia-700 dark:text-fuchsia-400">select</code> с{' '}
+            <code className="text-fuchsia-700 dark:text-fuchsia-400">multiple: true</code> — множественный выбор во Vue, React и Pure JS
+          </li>
+          <li>
+            Утилита <code className="text-fuchsia-700 dark:text-fuchsia-400">resolveFormFieldDefaultValue</code> — дефолт{' '}
+            <code>[]</code> для multi-select и upload-полей
+          </li>
+          <li>UX тегов и сводки выбранных значений в CustomDropdown (Vue/React)</li>
+          <li>Исправлено восстановление multi-select при редактировании блока в Pure JS</li>
+        </ul>
+      </section>
+
       <section className="bg-violet-50 dark:bg-violet-900/20 rounded-xl p-6 border-l-4 border-violet-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что нового в 1.5.0</h2>
         <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
@@ -253,20 +269,33 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
           
           <FieldTypeCard 
             name="select" 
-            description="Выпадающий список для выбора одного или нескольких значений из списка опций. Поддерживает одиночный и множественный выбор, клавиатурную навигацию, отключенные опции." 
+            description="Выпадающий список для выбора одного или нескольких значений из options. Одиночный режим — по умолчанию; множественный выбор через multiple: true (1.5.5+, Vue/React/Pure JS)." 
             icon="📋"
-            example={`{
+            example={`// Одиночный выбор
+{
   field: 'textAlign',
   label: 'Выравнивание',
   type: 'select',
-  multiple: false,  // true для множественного выбора
   options: [
     { value: 'left', label: 'По левому краю' },
     { value: 'center', label: 'По центру' },
-    { value: 'right', label: 'По правому краю', disabled: true },  // disabled опция
-    { value: 42, label: 'Числовое значение' }  // value может быть string или number
+    { value: 'right', label: 'По правому краю', disabled: true }
   ],
   defaultValue: 'left'
+}
+
+// Множественный выбор (1.5.5+)
+{
+  field: 'topics',
+  label: 'Темы',
+  type: 'select',
+  multiple: true,
+  options: [
+    { value: 'dev', label: 'Разработка' },
+    { value: 'design', label: 'Дизайн' },
+    { value: 'marketing', label: 'Маркетинг' }
+  ],
+  defaultValue: ['dev', 'design']  // массив value
 }`}
             parameters={['field', 'label', 'type', 'options', 'multiple', 'defaultValue', 'rules']}
           />
@@ -404,6 +433,103 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
             parameters={['field', 'label', 'type', 'apiSelectConfig', 'defaultValue', 'rules']}
           />
         </div>
+      </section>
+
+      <section className="bg-fuchsia-50 dark:bg-fuchsia-900/20 rounded-xl p-6 border-l-4 border-fuchsia-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Поле select (множественный выбор)</h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          С версии <strong>1.5.5</strong> для <code className="text-fuchsia-700 dark:text-fuchsia-400">type: &apos;select&apos;</code> доступен
+          режим <code className="text-fuchsia-700 dark:text-fuchsia-400">multiple: true</code> — выбор нескольких опций из статического списка{' '}
+          <code>options</code> (без API, в отличие от <code>api-select</code>).
+        </p>
+
+        <CodeBlock
+          code={`{
+  field: 'topics',
+  label: 'Темы (select, множественный выбор)',
+  type: 'select',
+  multiple: true,
+  options: [
+    { value: 'dev', label: 'Разработка' },
+    { value: 'design', label: 'Дизайн' },
+    { value: 'marketing', label: 'Маркетинг' },
+    { value: 'analytics', label: 'Аналитика' }
+  ],
+  defaultValue: ['dev', 'design'],
+  rules: [{ type: 'required', message: 'Выберите хотя бы одну тему' }]
+}`}
+          language="javascript"
+          className="mb-4"
+        />
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Поведение и хранение значения</h3>
+          <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+            <li>
+              При <code>multiple: false</code> (по умолчанию) в <code>props</code> сохраняется одно значение —{' '}
+              <code>string</code> или <code>number</code> из <code>options[].value</code>
+            </li>
+            <li>
+              При <code>multiple: true</code> в <code>props</code> сохраняется <strong>массив</strong> выбранных{' '}
+              <code>value</code>; <code>defaultValue</code> тоже массив (или пустой <code>[]</code>)
+            </li>
+            <li>
+              Если <code>defaultValue</code> не задан, пакет подставляет <code>[]</code> через{' '}
+              <code>resolveFormFieldDefaultValue</code> (так же для multi <code>api-select</code>, <code>image</code>, <code>file</code>)
+            </li>
+            <li>
+              Опции с <code>disabled: true</code> нельзя выбрать; <code>value</code> опции — <code>string</code> или{' '}
+              <code>number</code>
+            </li>
+          </ul>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">UI по платформам</h3>
+          <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+            <li>
+              <strong>Vue / React:</strong> <code>CustomDropdown</code> с toggle-выбором; в закрытом поле — сводка через запятую
+              (до 3 label + <code>+N</code>); под полем — теги с кнопкой удаления (<code>bb-api-select__tag</code>)
+            </li>
+            <li>
+              <strong>Pure JS:</strong> <code>SelectFieldRenderer</code> / <code>SelectControlInitializer</code> — toggle по клику,
+              теги, значение в hidden input как JSON-массив
+            </li>
+          </ul>
+        </div>
+
+        <div className="mb-4">
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Отображение в компоненте блока</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-3">
+            В шаблоне блока обрабатывайте массив самостоятельно — например, бейджи тем:
+          </p>
+          <CodeBlock
+            code={`// Vue
+const topicLabels = computed(() =>
+  (props.topics ?? []).map(
+    (v) => options.find((o) => o.value === v)?.label ?? v
+  )
+)
+
+// React
+const topicLabels = (props.topics ?? []).map(
+  (v) => options.find((o) => o.value === v)?.label ?? v
+)`}
+            language="javascript"
+            className="text-xs"
+          />
+        </div>
+
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          Живой пример — поле «Темы (select, множественный выбор)» в блоке <code>text</code> в{' '}
+          <a href="https://block-builder-demo.vercel.app/" className="text-fuchsia-600 hover:underline" target="_blank" rel="noopener noreferrer">
+            block-builder-demo
+          </a>{' '}
+          и в{' '}
+          <a href="https://github.com/mushket-co/block-builder/tree/master/examples" className="text-fuchsia-600 hover:underline" target="_blank" rel="noopener noreferrer">
+            block-builder/examples
+          </a>.
+        </p>
       </section>
 
       <section className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 border-l-4 border-purple-500">
@@ -1549,11 +1675,26 @@ const handleClick = (event) => {
           
           <div>
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-              <code className="text-green-700 dark:text-green-400">multiple</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для select, опционально)</span>
+              <code className="text-green-700 dark:text-green-400">multiple</code>{' '}
+              <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для select, image, file; опционально)</span>
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Включает множественный выбор для select поля. При multiple: true 
-              значение будет массивом выбранных значений. По умолчанию false.
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              Включает множественный режим. По умолчанию <code>false</code>.
+            </p>
+            <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-4">
+              <li>
+                <strong>select (1.5.5+):</strong> значение в <code>props</code> — массив <code>value</code> из{' '}
+                <code>options</code>; <code>defaultValue: []</code> или массив начальных значений
+              </li>
+              <li>
+                <strong>image / file:</strong> несколько URL или объектов загрузки; см. разделы Image и File
+              </li>
+              <li>
+                Для <code>api-select</code> множественный выбор задаётся в <code>apiSelectConfig.multiple</code>, не в корне поля
+              </li>
+            </ul>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+              Подробнее про <code>select</code> — в разделе «Поле select (множественный выбор)» выше.
             </p>
           </div>
           

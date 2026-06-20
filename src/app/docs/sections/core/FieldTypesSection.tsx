@@ -188,20 +188,32 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
           
           <FieldTypeCard 
             name="select" 
-            description="Выпадающий список для выбора одного или нескольких значений из списка опций. Поддерживает одиночный и множественный выбор, клавиатурную навигацию, отключенные опции." 
+            description="Выпадающий список для выбора одного или нескольких значений из options. Множественный выбор: multiple: true (1.5.5+)." 
             icon="📋"
-            example={`{
+            example={`// Одиночный выбор
+{
   field: 'textAlign',
   label: 'Выравнивание',
   type: 'select',
-  multiple: false,  // true для множественного выбора
   options: [
     { value: 'left', label: 'По левому краю' },
     { value: 'center', label: 'По центру' },
-    { value: 'right', label: 'По правому краю', disabled: true },  // disabled опция
-    { value: 42, label: 'Числовое значение' }  // value может быть string или number
+    { value: 'right', label: 'По правому краю', disabled: true }
   ],
   defaultValue: 'left'
+}
+
+// Множественный выбор (1.5.5+)
+{
+  field: 'topics',
+  label: 'Темы',
+  type: 'select',
+  multiple: true,
+  options: [
+    { value: 'dev', label: 'Разработка' },
+    { value: 'design', label: 'Дизайн' }
+  ],
+  defaultValue: ['dev']
 }`}
             parameters={['field', 'label', 'type', 'options', 'multiple', 'defaultValue', 'rules']}
           />
@@ -367,12 +379,21 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
           
           <div>
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-              <code className="text-green-700 dark:text-green-400">multiple</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для select, опционально)</span>
+              <code className="text-green-700 dark:text-green-400">multiple</code>{' '}
+              <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для select, image, file; опционально)</span>
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Включает множественный выбор для select поля. При multiple: true 
-              значение будет массивом выбранных значений. По умолчанию false.
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              Включает множественный режим. По умолчанию <code>false</code>.
             </p>
+            <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-4">
+              <li>
+                <strong>select (1.5.5+):</strong> в <code>props</code> — массив <code>value</code>;{' '}
+                <code>defaultValue: []</code> или массив начальных значений
+              </li>
+              <li>
+                <strong>image / file:</strong> несколько загруженных файлов
+              </li>
+            </ul>
           </div>
           
           <div>
