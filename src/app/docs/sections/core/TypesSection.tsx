@@ -496,6 +496,52 @@ type TValidationRuleType =
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+          <code className="text-teal-700 dark:text-teal-400">IBlockFormHooks</code>
+          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2">(1.7.0+, Vue/React)</span>
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Lifecycle-хуки модалки create/edit блока. Указываются в конфиге типа блока (<code>availableBlockTypes[]</code>).
+          В Pure JS (<code>BlockUIController</code>) не поддерживаются.
+        </p>
+        <CodeBlock
+          code={`interface IBlockFormOpenContext {
+  mode: 'create' | 'edit'
+  blockId?: TBlockId
+  props: Record<string, unknown>       // block.props при edit; {} при create
+  formData: Record<string, unknown>    // текущее состояние модалки
+  setField: (name: string, value: unknown) => void
+}
+
+interface IBlockFormSaveContext {
+  mode: 'create' | 'edit'
+  blockId?: TBlockId
+  formData: Record<string, unknown>    // уже прошёл validateForm
+}
+
+interface IBlockFormSaveResult {
+  props: Record<string, unknown>       // финальные props для block.props
+  cancel?: boolean                       // true — не сохранять, модалка открыта
+}
+
+interface IBlockFormHooks {
+  onFormOpen?: (ctx: IBlockFormOpenContext) => Promise<void> | void
+  onBeforeSave?: (ctx: IBlockFormSaveContext) => Promise<IBlockFormSaveResult | void> | IBlockFormSaveResult | void
+}
+
+interface IBlockTypeConfig {
+  type: string
+  label: string
+  fields?: IFormFieldConfig[]
+  formHooks?: IBlockFormHooks
+  // ...render, spacingOptions, defaultProps
+}`}
+          language="typescript"
+          className="mb-4"
+        />
+      </section>
+
+      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           <code className="text-teal-700 dark:text-teal-400">TBlockId</code>
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Тип ID блока</p>

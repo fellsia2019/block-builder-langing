@@ -45,6 +45,11 @@ const features: Array<{
   },
   {
     iconName: 'clipboard' as const,
+    title: 'Form hooks (1.7.0)',
+    description: 'formHooks.onFormOpen / onBeforeSave в конфиге типа блока — гидрация формы и side-effects перед save (Vue 3 и React; не Pure JS).'
+  },
+  {
+    iconName: 'clipboard' as const,
     title: 'Matrix-table (1.6.0)',
     description: 'Поле matrix-table — редактор таблицы в форме блока (Vue 3 и React). Демо в demo-bb и examples.'
   },

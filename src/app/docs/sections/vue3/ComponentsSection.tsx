@@ -67,6 +67,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
   defaultSettings?: Record<string, any>,  // Настройки по умолчанию
   defaultProps?: Record<string, any>,      // Свойства по умолчанию
   fields?: Array<IFormFieldConfig>,       // Поля формы редактирования
+  formHooks?: IBlockFormHooks,             // 1.7.0+, Vue/React — onFormOpen / onBeforeSave
   spacingOptions?: {                      // Опции для spacing (опционально)
     enabled?: boolean,
     config?: { breakpoints?: Array<IBreakpoint> }

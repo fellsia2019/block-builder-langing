@@ -72,6 +72,58 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         </p>
       </div>
 
+      <section className="bg-sky-50 dark:bg-sky-900/20 rounded-xl p-6 border-l-4 border-sky-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что нового в 1.7.0</h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+          <li>
+            <code className="text-sky-700 dark:text-sky-400">formHooks</code> в конфиге типа блока — lifecycle модалки create/edit:
+            <ul className="list-disc list-inside ml-4 mt-2 space-y-1">
+              <li>
+                <code>onFormOpen</code> — после defaults/props, до редактирования: async загрузка,{' '}
+                <code>setField(name, value)</code>; индикатор <code>isFormHydrating</code>
+              </li>
+              <li>
+                <code>onBeforeSave</code> — после валидации, до записи блока: финальные <code>props</code> или{' '}
+                <code>{'{ cancel: true }'}</code>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Vue 3 и React</strong> — полная поддержка; <strong>Pure JS не поддерживает</strong> <code>formHooks</code>
+          </li>
+          <li>
+            Экспорт типов: <code>IBlockFormHooks</code>, <code>IBlockFormOpenContext</code>, <code>IBlockFormSaveContext</code>,{' '}
+            <code>IBlockFormSaveResult</code>, <code>IBlockTypeConfig</code> — из <code>core</code>, <code>vue</code>, <code>react</code>
+          </li>
+          <li>
+            Кейс test-bb: блок <strong>constructor-form</strong> — repeater + <code>formHooks</code> + mock CRUD формы (без custom field редактора схемы)
+          </li>
+        </ul>
+        <div className="mt-4">
+          <CodeBlock
+            language="javascript"
+            code={`{
+  type: 'my-block',
+  label: 'Мой блок',
+  fields: [/* ... */],
+  formHooks: {
+    async onFormOpen({ props, setField, mode }) {
+      if (mode === 'edit' && props.formId) {
+        const data = await fetch(\`/api/forms/\${props.formId}\`).then(r => r.json())
+        setField('formFields', data.fields)
+      }
+    },
+    async onBeforeSave({ formData, mode, blockId }) {
+      const saved = await saveFormToApi(formData)
+      const { formFields, ...rest } = formData
+      return { props: { ...rest, formId: saved.id } }
+    },
+  },
+}`}
+          />
+        </div>
+      </section>
+
       <section className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-6 border-l-4 border-emerald-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что нового в 1.6.0</h2>
         <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
