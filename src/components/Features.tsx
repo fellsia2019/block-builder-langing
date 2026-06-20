@@ -45,6 +45,11 @@ const features: Array<{
   },
   {
     iconName: 'clipboard' as const,
+    title: 'Matrix-table (1.6.0)',
+    description: 'Поле matrix-table — редактор таблицы в форме блока (Vue 3 и React). Демо в demo-bb и examples.'
+  },
+  {
+    iconName: 'clipboard' as const,
     title: 'Multi-select (1.5.5)',
     description: 'Поле select с multiple: true — множественный выбор с тегами во Vue, React и Pure JS.'
   },

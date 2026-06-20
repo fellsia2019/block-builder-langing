@@ -2,6 +2,7 @@
 
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
+import { DEMO_BB_URL } from '@/lib/urls';
 import type { NavigationProps } from '../../types';
 
 function FieldTypeCard({ 
@@ -71,6 +72,26 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         </p>
       </div>
 
+      <section className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-6 border-l-4 border-emerald-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что нового в 1.6.0</h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+          <li>
+            <code className="text-emerald-700 dark:text-emerald-400">matrix-table</code> — редактор таблицы в форме блока
+            (колонки, строки, типы ячеек, изображения). <strong>Vue 3 и React</strong>; в Pure JS — через{' '}
+            <code>custom</code>
+          </li>
+          <li>Единый SVG-спрайт иконок в контролах (стрелки, chevron, check, loader, delete, close)</li>
+          <li>Обновлён порядок кнопок блока и UX сворачивания repeater</li>
+          <li>
+            Демо блока «Таблица» — в{' '}
+            <a href={DEMO_BB_URL} className="text-emerald-600 hover:underline" target="_blank" rel="noopener noreferrer">
+              demo-bb
+            </a>{' '}
+            (Vue/React) и в <code>block-builder/examples</code> (включая Nuxt)
+          </li>
+        </ul>
+      </section>
+
       <section className="bg-fuchsia-50 dark:bg-fuchsia-900/20 rounded-xl p-6 border-l-4 border-fuchsia-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что нового в 1.5.5</h2>
         <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
@@ -100,6 +121,36 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
           <li>Множественные <code>image</code> / <code>file</code> в Pure JS; исправлено сохранение upload-полей</li>
           <li>Кнопки repeater и file-picker на общих стилях <code>bb-btn</code></li>
         </ul>
+      </section>
+
+      <section className="bg-slate-50 dark:bg-slate-900/20 rounded-xl p-6 border-l-4 border-slate-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Pure JS: что поддерживается</h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Pure JS UI развивается <strong>выборочно</strong> вместе с пакетом — это не «замороженная» ветка 1.0.30.
+          Core API и большинство типов полей доступны; отдельные UI-фичи Vue/React переносятся только при наличии pure-js renderer/initializer.
+        </p>
+        <div className="overflow-x-auto mb-4">
+          <table className="min-w-full text-sm border border-gray-200 dark:border-gray-700">
+            <thead className="bg-gray-100 dark:bg-gray-800">
+              <tr>
+                <th className="text-left p-2 border-b">Функция</th>
+                <th className="text-center p-2 border-b">Vue</th>
+                <th className="text-center p-2 border-b">React</th>
+                <th className="text-center p-2 border-b">Pure JS</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-600 dark:text-gray-400">
+              <tr><td className="p-2 border-b"><code>block-anchor</code>, <code>file</code>, multi-upload</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓ (1.5.0+)</td></tr>
+              <tr><td className="p-2 border-b"><code>select</code> + <code>multiple: true</code></td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓ (1.5.5+)</td></tr>
+              <tr><td className="p-2 border-b"><code>matrix-table</code></td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">—</td></tr>
+              <tr><td className="p-2 border-b"><code>dependsOn</code></td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">—</td></tr>
+              <tr><td className="p-2"><code>ToggleControl</code> (checkbox + зависимые поля)</td><td className="text-center p-2">✓</td><td className="text-center p-2">✓</td><td className="text-center p-2">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Для отсутствующих в Pure JS возможностей используйте Vue/React UI или <code>type: &apos;custom&apos;</code> с собственным контролом.
+        </p>
       </section>
 
       <section className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
@@ -399,6 +450,23 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
   defaultValue: ''
 }`}
             parameters={['field', 'label', 'type', 'blockAnchorConfig', 'defaultValue', 'rules']}
+          />
+
+          <FieldTypeCard 
+            name="matrix-table" 
+            description="Редактор таблицы: колонки (тип ячейки, заголовок, nowrap, размер), строки с текстом/HTML и изображениями. Vue 3 и React UI (1.6.0+)." 
+            icon="📋"
+            example={`{
+  field: 'tableMatrix',
+  label: 'Таблица',
+  type: 'matrix-table',
+  defaultValue: { tableHead: [], tableBody: [] },
+  matrixTableConfig: {
+    imageUploadConfig: { maxFileSize: 5242880 }
+  },
+  rules: [{ type: 'required', message: 'Заполните таблицу' }]
+}`}
+            parameters={['field', 'label', 'type', 'defaultValue', 'matrixTableConfig', 'rules']}
           />
 
           <FieldTypeCard 
@@ -1259,6 +1327,45 @@ const handleClick = (event) => {
         </p>
       </section>
 
+      <section className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-6 border-l-4 border-emerald-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Поле таблицы (matrix-table)</h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Поле <code className="text-emerald-700 dark:text-emerald-400">type: &apos;matrix-table&apos;</code> (1.6.0+) — редактор таблицы в форме блока:
+          вкладки «Структура» (колонки) и «Строки», типы ячеек по колонке (<code>default</code>, <code>wyz</code>, HTML, <code>image</code>),
+          размер текстовой ячейки, nowrap, загрузка изображений в ячейки.
+        </p>
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 mb-4 border-l-4 border-blue-400">
+          <p className="text-sm text-gray-700 dark:text-gray-300">
+            <strong>Vue 3 и React UI.</strong> В Pure JS нет встроенного контрола — используйте <code>type: &apos;custom&apos;</code> или Vue/React UI.
+          </p>
+        </div>
+        <CodeBlock
+          code={`{
+  field: 'tableMatrix',
+  label: 'Таблица',
+  type: 'matrix-table',
+  defaultValue: {
+    tableHead: [
+      { id: 'col-1', type: 'default', name: 'Название', nowrap: false, size: '' }
+    ],
+    tableBody: []
+  },
+  matrixTableConfig: {
+    imageUploadConfig: { maxFileSize: 5242880 }
+  },
+  rules: [{ type: 'required', message: 'Заполните таблицу' }]
+}`}
+          language="javascript"
+          className="mb-4"
+        />
+        <p className="text-gray-600 dark:text-gray-400">
+          В <code>props</code> сохраняется объект <code>{'{ tableHead, tableBody }'}</code>.
+          Пример блока «Таблица» — в{' '}
+          <a href={DEMO_BB_URL} className="text-emerald-600 hover:underline" target="_blank" rel="noopener noreferrer">demo-bb</a>{' '}
+          (Vue/React) и <code>block-builder/examples</code>.
+        </p>
+      </section>
+
       <section className="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-6 border-l-4 border-cyan-500 border-2 border-yellow-400">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           Поле выбора из API (API Select)
@@ -1360,8 +1467,8 @@ const handleClick = (event) => {
           <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
             <Icon name="lightbulb" size={18} className="text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
             <span>
-              <strong>Только для Vue:</strong> Функциональность <code className="text-blue-700 dark:text-blue-400">dependsOn</code> доступна только для Vue версии библиотеки (v1.1.0+). 
-              Pure-JS версия не поддерживает условное отображение полей.
+              <strong>Vue 3 и React:</strong> Функциональность <code className="text-blue-700 dark:text-blue-400">dependsOn</code> доступна в UI Vue 3 и React (v1.1.0+). 
+              Pure JS не скрывает поля по <code>dependsOn</code> — все поля формы остаются видимыми.
             </span>
           </p>
         </div>
@@ -1596,8 +1703,8 @@ const handleClick = (event) => {
           <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
             <li>Скрытые поля не участвуют в валидации — это позволяет сохранять формы даже когда toggle отключен</li>
             <li>Внутри репитеров поле проверяет значение другого поля внутри того же элемента репитера</li>
-            <li>Функциональность доступна только для Vue версии библиотеки (v1.1.0+)</li>
-            <li>Pure-JS версия не поддерживает условное отображение полей</li>
+            <li>Функциональность доступна в Vue 3 и React UI (v1.1.0+)</li>
+            <li>Pure JS не поддерживает условное отображение полей (<code>dependsOn</code>)</li>
           </ul>
         </div>
       </section>
@@ -1634,7 +1741,8 @@ const handleClick = (event) => {
               <code className="text-green-700 dark:text-green-400">'url'</code>, <code className="text-green-700 dark:text-green-400">'select'</code>, 
               <code className="text-green-700 dark:text-green-400">'checkbox'</code>, <code className="text-green-700 dark:text-green-400">'radio'</code>, 
               <code className="text-green-700 dark:text-green-400">'color'</code>, <code className="text-green-700 dark:text-green-400">'image'</code>, 
-              <code className="text-green-700 dark:text-green-400">'file'</code>, <code className="text-green-700 dark:text-green-400">'block-anchor'</code>, 
+              <code className="text-green-700 dark:text-green-400">'file'</code>, <code className="text-green-700 dark:text-green-400">'block-anchor'</code>,
+              <code className="text-green-700 dark:text-green-400">'matrix-table'</code> (Vue/React, 1.6.0+),
               <code className="text-green-700 dark:text-green-400">'spacing'</code>, 
               <code className="text-green-700 dark:text-green-400">'repeater'</code>, <code className="text-green-700 dark:text-green-400">'api-select'</code>, 
               <code className="text-green-700 dark:text-green-400">'custom'</code>
@@ -1792,13 +1900,13 @@ const handleClick = (event) => {
 
           <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
             <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-              <code className="text-green-700 dark:text-green-400">dependsOn</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(опциональный, только Vue, v1.1.0+)</span>
+              <code className="text-green-700 dark:text-green-400">dependsOn</code> <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(опциональный, Vue/React UI, v1.1.0+)</span>
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
               Конфигурация условного отображения поля на основе значения другого поля. См. раздел "Условное отображение полей (dependsOn)" выше.
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              <strong>Доступно только для Vue версии:</strong> Pure-JS версия не поддерживает условное отображение полей.
+              <strong>Vue 3 и React:</strong> Pure JS не поддерживает условное отображение полей.
             </p>
           </div>
         </div>

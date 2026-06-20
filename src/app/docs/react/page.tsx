@@ -12,7 +12,7 @@ export default function ReactPage() {
         <div>
           <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Быстрый старт с React</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">
-            BlockBuilder 1.5.5 — полная поддержка React UI и блоков с <code>@mushket-co/block-builder/react</code>
+            BlockBuilder 1.6.0 — полная поддержка React UI и блоков с <code>@mushket-co/block-builder/react</code>
             {' '}(требуется <strong>React 19+</strong>)
           </p>
         </div>
@@ -89,6 +89,14 @@ export function App() {
           </p>
         </section>
 
+        <section className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-4 border border-emerald-200 dark:border-emerald-800">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            <strong>1.6.0:</strong> поле <code>matrix-table</code> — редактор таблицы в форме; демо блока «Таблица» в{' '}
+            <a href={DEMO_BB_URL} className="text-emerald-600 hover:underline" target="_blank" rel="noopener noreferrer">demo-bb</a>.
+            <code>dependsOn</code> и ToggleControl — Vue 3 и React.
+          </p>
+        </section>
+
         <section className="bg-fuchsia-50 dark:bg-fuchsia-900/20 rounded-xl p-4 border border-fuchsia-200 dark:border-fuchsia-800">
           <p className="text-sm text-gray-600 dark:text-gray-400">
             <strong>1.5.5:</strong> <code>select</code> с <code>multiple: true</code> — множественный выбор с тегами и сводкой значений.
@@ -110,7 +118,8 @@ export function App() {
 
         <section className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 border border-amber-200">
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            <code>dependsOn</code> и ToggleControl — только Vue 3. Полная документация API — в{' '}
+            Полная документация API — в разделе{' '}
+            <Link href="/docs/core/form-fields" className="text-blue-600 hover:underline">Поля форм</Link> и{' '}
             <a href="https://github.com/mushket-co/block-builder/blob/master/DOCS.md" className="text-blue-600 hover:underline">DOCS.md</a> репозитория.
           </p>
         </section>

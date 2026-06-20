@@ -172,8 +172,9 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   customFieldConfig?: any // Внутренний тип (не экспортируется)
   fileUploadConfig?: any // Внутренний тип IFileUploadConfig (не экспортируется)
   blockAnchorConfig?: IBlockAnchorConfig // type: 'block-anchor' (1.5.0+)
+  matrixTableConfig?: IMatrixTableFieldConfig // type: 'matrix-table' (1.6.0+, Vue/React UI)
   multiple?: boolean // image, file; select с multiple: true — 1.5.5+
-  dependsOn?: IDependsOnConfig // Условное отображение поля (только для Vue) (v1.1.0+)
+  dependsOn?: IDependsOnConfig // Условное отображение (Vue/React UI, v1.1.0+; не Pure JS)
 }`}
           language="typescript"
           className="mb-4"
@@ -465,7 +466,7 @@ type TValidationRuleType =
           <code className="text-teal-700 dark:text-teal-400">IDependsOnConfig</code>
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Конфигурация условного отображения поля на основе значения другого поля (только для Vue версии, v1.1.0+)
+          Конфигурация условного отображения поля на основе значения другого поля (Vue 3 и React UI, v1.1.0+; не Pure JS)
         </p>
         <CodeBlock
           code={`interface IDependsOnConfig {
@@ -487,8 +488,8 @@ type TValidationRuleType =
         </div>
         <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 mt-4">
           <p className="text-sm text-gray-700 dark:text-gray-300">
-            <strong>Важно:</strong> Функциональность <code className="text-yellow-700 dark:text-yellow-400">dependsOn</code> доступна только для Vue версии библиотеки. 
-            Pure-JS версия не поддерживает условное отображение полей.
+            <strong>Важно:</strong> Функциональность <code className="text-yellow-700 dark:text-yellow-400">dependsOn</code> работает в Vue 3 и React UI. 
+            Pure JS не скрывает поля по <code>dependsOn</code>.
           </p>
         </div>
       </section>

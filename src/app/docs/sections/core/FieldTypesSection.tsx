@@ -307,6 +307,18 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
 }`}
             parameters={['field', 'label', 'type', 'blockAnchorConfig', 'rules']}
           />
+
+          <FieldTypeCard 
+            name="matrix-table" 
+            description="Редактор таблицы (колонки + строки). Vue 3 и React UI, 1.6.0+." 
+            icon="📋"
+            example={`{
+  field: 'tableMatrix',
+  type: 'matrix-table',
+  matrixTableConfig: { imageUploadConfig: { maxFileSize: 5242880 } }
+}`}
+            parameters={['field', 'label', 'type', 'matrixTableConfig', 'defaultValue', 'rules']}
+          />
         </div>
       </section>
 
@@ -341,7 +353,8 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
               <code className="text-green-700 dark:text-green-400">'number'</code>, <code className="text-green-700 dark:text-green-400">'select'</code>, 
               <code className="text-green-700 dark:text-green-400">'checkbox'</code>, <code className="text-green-700 dark:text-green-400">'radio'</code>, 
               <code className="text-green-700 dark:text-green-400">'color'</code>, <code className="text-green-700 dark:text-green-400">'image'</code>,
-              <code className="text-green-700 dark:text-green-400">'file'</code>, <code className="text-green-700 dark:text-green-400">'block-anchor'</code>
+              <code className="text-green-700 dark:text-green-400">'file'</code>, <code className="text-green-700 dark:text-green-400">'block-anchor'</code>,
+              <code className="text-green-700 dark:text-green-400">'matrix-table'</code> (Vue/React, 1.6.0+)
             </p>
           </div>
           
