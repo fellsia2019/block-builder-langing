@@ -173,6 +173,9 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   fileUploadConfig?: any // Внутренний тип IFileUploadConfig (не экспортируется)
   blockAnchorConfig?: IBlockAnchorConfig // type: 'block-anchor' (1.5.0+)
   matrixTableConfig?: IMatrixTableFieldConfig // type: 'matrix-table' (1.6.0+, Vue/React UI)
+  optionsFrom?: IOptionsFromConfig // select — динамические options (1.8.0+, Vue/React)
+  fileImportConfig?: IFileImportConfig // type: 'file-import' (1.8.0+, Vue/React)
+  persist?: boolean // false — не сохранять в block.props (1.8.0+, Vue/React; file-import — implicit false)
   multiple?: boolean // image, file; select с multiple: true — 1.5.5+
   dependsOn?: IDependsOnConfig // Условное отображение (Vue/React UI, v1.1.0+; не Pure JS)
 }`}
@@ -272,8 +275,10 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   | 'checkbox' 
   | 'color' 
   | 'file' 
+  | 'file-import'  // 1.8.0+, Vue/React
   | 'image' 
   | 'block-anchor'
+  | 'matrix-table' // 1.6.0+, Vue/React
   | 'spacing'
   | 'repeater' 
   | 'api-select' 
@@ -492,6 +497,83 @@ type TValidationRuleType =
             Pure JS не скрывает поля по <code>dependsOn</code>.
           </p>
         </div>
+      </section>
+
+      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+          <code className="text-teal-700 dark:text-teal-400">ICustomFieldFormScope</code>
+          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2">(1.8.0+, Vue/React)</span>
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Контекст формы в <code>ICustomFieldContext.formScope</code> и в <code>fileImportConfig.onImport</code>.
+        </p>
+        <CodeBlock
+          code={`interface ICustomFieldFormScope {
+  formData: Record<string, any>
+  setField: (name: string, value: any) => void
+  repeater?: ICustomFieldRepeaterScope
+}
+
+interface ICustomFieldRepeaterScope {
+  itemIndex: number
+  updateItemField: (fieldName: string, value: any) => void
+}`}
+          language="typescript"
+          className="mb-4"
+        />
+      </section>
+
+      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+          <code className="text-teal-700 dark:text-teal-400">IOptionsFromConfig</code>
+          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2">(1.8.0+, select, Vue/React)</span>
+        </h2>
+        <CodeBlock
+          code={`interface IOptionsFromConfig {
+  source: string
+  when?: (formData: Record<string, any>) => boolean
+  map: (item: any, formData: Record<string, any>) => ISelectOption | IOptionsFromGroup
+}
+
+interface IOptionsFromGroup {
+  label: string
+  options: ISelectOption[]
+}`}
+          language="typescript"
+          className="mb-4"
+        />
+      </section>
+
+      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+          <code className="text-teal-700 dark:text-teal-400">IFileImportConfig</code>
+          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2">(1.8.0+, Vue/React)</span>
+        </h2>
+        <CodeBlock
+          code={`interface IFileImportMergeRule {
+  targetField: string
+  sourceKey?: string
+  mode?: 'append' | 'replace'
+  dedupeBy?: string | string[]
+  mapItem?: (item: any, formData: Record<string, any>) => any
+}
+
+interface IFileImportConfig {
+  uploadUrl: string
+  accept?: string | string[]
+  formDataKey?: string
+  maxSizeMb?: number
+  responseMapper?: (response: any) => any
+  merge?: IFileImportMergeRule[]
+  onImport?: (ctx: {
+    data: any
+    formScope: ICustomFieldFormScope
+    mergeStats?: Array<{ targetField: string; mode: string; added: number; skipped: number; total: number }>
+  }) => void
+}`}
+          language="typescript"
+          className="mb-4"
+        />
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">

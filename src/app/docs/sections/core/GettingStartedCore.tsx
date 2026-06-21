@@ -33,11 +33,11 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
           <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Неограниченное количество типов блоков</li>
           <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Кастомные поля, api-select, кастомные брекпоинты spacing</li>
           <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Vue 3, React 19+, Pure JS, SSR (Nuxt, Next.js)</li>
-          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Поля <code>block-anchor</code>, <code>file</code> (1.5.0+), <code>select</code> с <code>multiple</code> (1.5.5+), <code>matrix-table</code> (1.6.0+, Vue/React), <code>formHooks</code> (1.7.0+, Vue/React)</li>
+          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Поля <code>block-anchor</code>, <code>file</code> (1.5.0+), <code>select</code> с <code>multiple</code> (1.5.5+), <code>matrix-table</code> (1.6.0+, Vue/React), <code>formHooks</code> (1.7.0+, Vue/React), <code>file-import</code>, <code>optionsFrom</code>, <code>persist: false</code> (1.8.0+, Vue/React)</li>
         </ul>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 mb-3">
           <strong>Pure JS</strong> получает новые фичи выборочно (не «заморожен на 1.0.30»): есть <code>block-anchor</code>, multi-upload, multi-select;
-          нет <code>matrix-table</code>, <code>dependsOn</code>, <code>ToggleControl</code>, <code>formHooks</code>. Подробнее — в разделе «Поля форм».
+          нет <code>matrix-table</code>, <code>dependsOn</code>, <code>ToggleControl</code>, <code>formHooks</code>, <code>file-import</code>, <code>optionsFrom</code>, <code>formScope</code>. Подробнее — в разделе «Поля форм».
         </p>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
           Интерактивные демо Vue/React/Pure JS — в{' '}

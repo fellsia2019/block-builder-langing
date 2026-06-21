@@ -72,6 +72,86 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         </p>
       </div>
 
+      <section className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что нового в 1.8.0</h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+          <li>
+            <code className="text-indigo-700 dark:text-indigo-400">formScope</code> в{' '}
+            <code className="text-indigo-700 dark:text-indigo-400">ICustomFieldContext</code> — доступ custom field к{' '}
+            <code>formData</code>, <code>setField(name, value)</code> и контексту repeater (
+            <code>updateItemField</code>). Vue 3 и React
+          </li>
+          <li>
+            <code className="text-indigo-700 dark:text-indigo-400">optionsFrom</code> для <code>select</code> — динамические опции из другого поля формы
+            (в т.ч. группы через <code>group</code> на option)
+          </li>
+          <li>
+            <code className="text-indigo-700 dark:text-indigo-400">file-import</code> — action-only поле: POST multipart,{' '}
+            <code>fileImportConfig.merge</code> (append/replace + <code>dedupeBy</code>), callback{' '}
+            <code>onImport(&#123; data, formScope, mergeStats &#125;)</code>; не сохраняется в props
+          </li>
+          <li>
+            <code className="text-indigo-700 dark:text-indigo-400">persist: false</code> — поле исключается из <code>block.props</code> при save
+            (рекурсивно в repeater). У <code>file-import</code> — implicit <code>persist: false</code>
+          </li>
+          <li>
+            Утилиты из <code>core</code>: <code>mergeImportedArray</code>, <code>applyFileImportMergeRules</code>,{' '}
+            <code>formatFileImportMergeMessage</code>, <code>resolveDynamicSelectOptions</code>, <code>stripNonPersistedFields</code>
+          </li>
+          <li>
+            Демо блок <strong>formFeaturesDemo</strong> — в{' '}
+            <a href="https://block-builder-demo.vercel.app/vue3" className="text-indigo-600 hover:underline" target="_blank" rel="noopener noreferrer">demo-bb</a>{' '}
+            (Vue/React) и <code>block-builder/examples</code>
+          </li>
+        </ul>
+        <div className="mt-4">
+          <CodeBlock
+            language="javascript"
+            code={`{
+  field: '_xlsxImport',
+  label: 'Импорт из XLSX',
+  type: 'file-import',
+  fileImportConfig: {
+    accept: ['.xlsx'],
+    uploadUrl: '/api/demo/parse-xlsx',
+    formDataKey: 'file',
+    merge: [
+      {
+        targetField: 'items',
+        sourceKey: 'data.cards',
+        mode: 'append',
+        dedupeBy: 'title',
+        mapItem: card => ({ title: card.title, filters: card.filters ?? [] })
+      }
+    ],
+    onImport: ({ data, formScope }) => {
+      // Доп. merge в onImport через formScope.setField(...)
+    }
+  }
+},
+{
+  field: 'categoryFilter',
+  label: 'Фильтр',
+  type: 'select',
+  optionsFrom: {
+    source: 'filterOptions',
+    when: formData => formData.showFilterOptions,
+    map: group => ({
+      label: group.name,
+      options: group.options.map(o => ({ value: o.name, label: o.name }))
+    })
+  }
+},
+{
+  field: '_helper',
+  label: 'Служебное (не в JSON)',
+  type: 'text',
+  persist: false
+}`}
+          />
+        </div>
+      </section>
+
       <section className="bg-sky-50 dark:bg-sky-900/20 rounded-xl p-6 border-l-4 border-sky-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что нового в 1.7.0</h2>
         <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
@@ -196,6 +276,8 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
               <tr><td className="p-2 border-b"><code>select</code> + <code>multiple: true</code></td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓ (1.5.5+)</td></tr>
               <tr><td className="p-2 border-b"><code>matrix-table</code></td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">—</td></tr>
               <tr><td className="p-2 border-b"><code>dependsOn</code></td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">—</td></tr>
+              <tr><td className="p-2 border-b"><code>formHooks</code></td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">—</td></tr>
+              <tr><td className="p-2 border-b"><code>formScope</code>, <code>file-import</code>, <code>optionsFrom</code>, <code>persist: false</code></td><td className="text-center p-2 border-b">✓ (1.8.0+)</td><td className="text-center p-2 border-b">✓ (1.8.0+)</td><td className="text-center p-2 border-b">—</td></tr>
               <tr><td className="p-2"><code>ToggleControl</code> (checkbox + зависимые поля)</td><td className="text-center p-2">✓</td><td className="text-center p-2">✓</td><td className="text-center p-2">—</td></tr>
             </tbody>
           </table>
@@ -372,7 +454,7 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
           
           <FieldTypeCard 
             name="select" 
-            description="Выпадающий список для выбора одного или нескольких значений из options. Одиночный режим — по умолчанию; множественный выбор через multiple: true (1.5.5+, Vue/React/Pure JS)." 
+            description="Выпадающий список для выбора одного или нескольких значений из options. Одиночный режим — по умолчанию; множественный выбор через multiple: true (1.5.5+, Vue/React/Pure JS). С 1.8.0 — динамические options через optionsFrom из другого поля формы (Vue/React)."
             icon="📋"
             example={`// Одиночный выбор
 {
@@ -485,6 +567,37 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
   }
 }`}
             parameters={['field', 'label', 'type', 'defaultValue', 'multiple', 'fileUploadConfig', 'rules']}
+          />
+
+          <FieldTypeCard 
+            name="file-import" 
+            description="Action-only импорт файла: POST multipart на uploadUrl, декларативный merge в другие поля формы (append/replace, dedupeBy) и onImport с formScope. Не сохраняется в block.props. Vue 3 и React (1.8.0+)." 
+            icon="📥"
+            example={`{
+  field: '_import',
+  label: 'Импорт данных',
+  type: 'file-import',
+  fileImportConfig: {
+    accept: ['.xlsx', '.csv'],
+    uploadUrl: '/api/import',
+    formDataKey: 'file',
+    maxSizeMb: 10,
+    responseMapper: response => response,
+    merge: [
+      {
+        targetField: 'items',
+        sourceKey: 'data.items',
+        mode: 'append',
+        dedupeBy: 'id',
+        mapItem: item => ({ id: item.id, title: item.title })
+      }
+    ],
+    onImport: ({ data, formScope, mergeStats }) => {
+      console.log('Imported', data, mergeStats)
+    }
+  }
+}`}
+            parameters={['field', 'label', 'type', 'fileImportConfig']}
           />
 
           <FieldTypeCard 
@@ -1793,7 +1906,8 @@ const handleClick = (event) => {
               <code className="text-green-700 dark:text-green-400">'url'</code>, <code className="text-green-700 dark:text-green-400">'select'</code>, 
               <code className="text-green-700 dark:text-green-400">'checkbox'</code>, <code className="text-green-700 dark:text-green-400">'radio'</code>, 
               <code className="text-green-700 dark:text-green-400">'color'</code>, <code className="text-green-700 dark:text-green-400">'image'</code>, 
-              <code className="text-green-700 dark:text-green-400">'file'</code>, <code className="text-green-700 dark:text-green-400">'block-anchor'</code>,
+              <code className="text-green-700 dark:text-green-400">'file'</code>, <code className="text-green-700 dark:text-green-400">'file-import'</code> (Vue/React, 1.8.0+),
+              <code className="text-green-700 dark:text-green-400">'block-anchor'</code>,
               <code className="text-green-700 dark:text-green-400">'matrix-table'</code> (Vue/React, 1.6.0+),
               <code className="text-green-700 dark:text-green-400">'spacing'</code>, 
               <code className="text-green-700 dark:text-green-400">'repeater'</code>, <code className="text-green-700 dark:text-green-400">'api-select'</code>, 
@@ -1876,6 +1990,41 @@ const handleClick = (event) => {
               <li><code className="text-green-700 dark:text-green-400">{`{ type: 'url', message?: '...' }`}</code> — валидация URL (<code className="text-green-700 dark:text-green-400">message</code> опционально)</li>
               <li><code className="text-green-700 dark:text-green-400">{`{ type: 'custom', validator: (v) => boolean, message?: '...' }`}</code> — кастомная валидация (<code className="text-green-700 dark:text-green-400">message</code> опционально)</li>
             </ul>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+              <code className="text-green-700 dark:text-green-400">persist</code>{' '}
+              <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(опциональный, 1.8.0+, Vue/React)</span>
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              По умолчанию <code>true</code>. При <code>persist: false</code> поле участвует в форме, но не попадает в{' '}
+              <code>block.props</code> при save. У типа <code>file-import</code> — implicit <code>persist: false</code>.
+              Работает рекурсивно внутри <code>repeater</code>.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+              <code className="text-green-700 dark:text-green-400">optionsFrom</code>{' '}
+              <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для select, 1.8.0+, Vue/React)</span>
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Динамические опции из другого поля: <code>source</code> (имя поля), <code>when</code> (predicate),{' '}
+              <code>map</code> (преобразование в options, поддержка групп). Статический <code>options</code> используется как fallback.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+              <code className="text-green-700 dark:text-green-400">fileImportConfig</code>{' '}
+              <span className="text-gray-600 dark:text-gray-400 text-sm font-normal">(для type: &apos;file-import&apos;, 1.8.0+)</span>
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Конфигурация импорта: <code>uploadUrl</code>, <code>accept</code>, <code>merge[]</code> с{' '}
+              <code>targetField</code>, <code>sourceKey</code>, <code>mode</code>, <code>dedupeBy</code>, <code>mapItem</code>, callback{' '}
+              <code>onImport</code>. См. карточку типа <code>file-import</code> выше.
+            </p>
           </div>
 
           <div>
@@ -2078,6 +2227,16 @@ interface ICustomFieldContext {
   options?: Record<string, any>; // Дополнительные опции из customFieldConfig.options
   onChange: (value: any) => void;    // Callback для обновления значения (обязательно вызывать при изменении!)
   onError?: (error: string | null) => void;  // Callback для отображения ошибок валидации
+  formScope?: ICustomFieldFormScope;  // 1.8.0+ — formData, setField, repeater context (Vue/React)
+}
+
+interface ICustomFieldFormScope {
+  formData: Record<string, any>
+  setField: (name: string, value: any) => void
+  repeater?: {
+    itemIndex: number
+    updateItemField: (fieldName: string, value: any) => void
+  }
 }
 
 // Что должен вернуть метод render()

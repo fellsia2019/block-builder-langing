@@ -45,6 +45,11 @@ const features: Array<{
   },
   {
     iconName: 'clipboard' as const,
+    title: 'Form scope & import (1.8.0)',
+    description: 'formScope в custom fields, optionsFrom для select, file-import с merge/dedupeBy, persist: false — Vue 3 и React; демо в demo-bb.'
+  },
+  {
+    iconName: 'clipboard' as const,
     title: 'Form hooks (1.7.0)',
     description: 'formHooks.onFormOpen / onBeforeSave в конфиге типа блока — гидрация формы и side-effects перед save (Vue 3 и React; не Pure JS).'
   },
