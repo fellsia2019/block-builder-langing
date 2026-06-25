@@ -146,7 +146,7 @@ export default function Installation() {
                 <Icon name="graduation" size={32} className="mr-3 text-green-600 dark:text-green-400" />
                 <div>
                   <div className="font-semibold text-gray-900 dark:text-white">Интерактивные демо</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Vue 3, React 19+, Pure JS (demo-bb)</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Vue 3, React 19+ (demo-bb)</div>
                 </div>
               </a>
 

@@ -51,7 +51,7 @@ const features: Array<{
   {
     iconName: 'clipboard' as const,
     title: 'Form hooks (1.7.0)',
-    description: 'formHooks.onFormOpen / onBeforeSave в конфиге типа блока — гидрация формы и side-effects перед save (Vue 3 и React; не Pure JS).'
+    description: 'formHooks.onFormOpen / onBeforeSave в конфиге типа блока — гидрация формы и side-effects перед save (Vue 3 и React).'
   },
   {
     iconName: 'clipboard' as const,
@@ -61,7 +61,7 @@ const features: Array<{
   {
     iconName: 'clipboard' as const,
     title: 'Multi-select (1.5.5)',
-    description: 'Поле select с multiple: true — множественный выбор с тегами во Vue, React и Pure JS.'
+    description: 'Поле select с multiple: true — множественный выбор с тегами во Vue и React.'
   },
   {
     iconName: 'plugin' as const,

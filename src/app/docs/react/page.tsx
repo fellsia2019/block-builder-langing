@@ -100,7 +100,7 @@ export function App() {
         <section className="bg-sky-50 dark:bg-sky-900/20 rounded-xl p-4 border border-sky-200 dark:border-sky-800">
           <p className="text-sm text-gray-600 dark:text-gray-400">
             <strong>1.7.0:</strong> <code>formHooks</code> — <code>onFormOpen</code> (гидрация формы, loader) и{' '}
-            <code>onBeforeSave</code> (финальные props / <code>cancel</code>). Vue 3 и React; Pure JS не поддерживает.
+            <code>onBeforeSave</code> (финальные props / <code>cancel</code>). Vue 3 и React.
           </p>
         </section>
 

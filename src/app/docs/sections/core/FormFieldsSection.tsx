@@ -169,7 +169,7 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
             </ul>
           </li>
           <li>
-            <strong>Vue 3 и React</strong> — полная поддержка; <strong>Pure JS не поддерживает</strong> <code>formHooks</code>
+            <strong>Vue 3 и React</strong> — полная поддержка <code>formHooks</code>
           </li>
           <li>
             Экспорт типов: <code>IBlockFormHooks</code>, <code>IBlockFormOpenContext</code>, <code>IBlockFormSaveContext</code>,{' '}
@@ -209,8 +209,7 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
           <li>
             <code className="text-emerald-700 dark:text-emerald-400">matrix-table</code> — редактор таблицы в форме блока
-            (колонки, строки, типы ячеек, изображения). <strong>Vue 3 и React</strong>; в Pure JS — через{' '}
-            <code>custom</code>
+            (колонки, строки, типы ячеек, изображения). <strong>Vue 3 и React</strong>
           </li>
           <li>Единый SVG-спрайт иконок в контролах (стрелки, chevron, check, loader, delete, close)</li>
           <li>Обновлён порядок кнопок блока и UX сворачивания repeater</li>
@@ -229,14 +228,13 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
           <li>
             <code className="text-fuchsia-700 dark:text-fuchsia-400">select</code> с{' '}
-            <code className="text-fuchsia-700 dark:text-fuchsia-400">multiple: true</code> — множественный выбор во Vue, React и Pure JS
+            <code className="text-fuchsia-700 dark:text-fuchsia-400">multiple: true</code> — множественный выбор во Vue и React
           </li>
           <li>
             Утилита <code className="text-fuchsia-700 dark:text-fuchsia-400">resolveFormFieldDefaultValue</code> — дефолт{' '}
             <code>[]</code> для multi-select и upload-полей
           </li>
           <li>UX тегов и сводки выбранных значений в CustomDropdown (Vue/React)</li>
-          <li>Исправлено восстановление multi-select при редактировании блока в Pure JS</li>
         </ul>
       </section>
 
@@ -250,41 +248,9 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
           <li>
             <code className="text-violet-700 dark:text-violet-400">file</code> / <code className="text-violet-700 dark:text-violet-400">files</code> — отдельный UI загрузки файлов (не как у изображений), одиночный и множественный режим, <code>maxCount</code>
           </li>
-          <li>Множественные <code>image</code> / <code>file</code> в Pure JS; исправлено сохранение upload-полей</li>
+          <li>Исправлено сохранение upload-полей для множественных <code>image</code> / <code>file</code></li>
           <li>Кнопки repeater и file-picker на общих стилях <code>bb-btn</code></li>
         </ul>
-      </section>
-
-      <section className="bg-slate-50 dark:bg-slate-900/20 rounded-xl p-6 border-l-4 border-slate-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Pure JS: что поддерживается</h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Pure JS UI развивается <strong>выборочно</strong> вместе с пакетом — это не «замороженная» ветка 1.0.30.
-          Core API и большинство типов полей доступны; отдельные UI-фичи Vue/React переносятся только при наличии pure-js renderer/initializer.
-        </p>
-        <div className="overflow-x-auto mb-4">
-          <table className="min-w-full text-sm border border-gray-200 dark:border-gray-700">
-            <thead className="bg-gray-100 dark:bg-gray-800">
-              <tr>
-                <th className="text-left p-2 border-b">Функция</th>
-                <th className="text-center p-2 border-b">Vue</th>
-                <th className="text-center p-2 border-b">React</th>
-                <th className="text-center p-2 border-b">Pure JS</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-600 dark:text-gray-400">
-              <tr><td className="p-2 border-b"><code>block-anchor</code>, <code>file</code>, multi-upload</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓ (1.5.0+)</td></tr>
-              <tr><td className="p-2 border-b"><code>select</code> + <code>multiple: true</code></td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓ (1.5.5+)</td></tr>
-              <tr><td className="p-2 border-b"><code>matrix-table</code></td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">—</td></tr>
-              <tr><td className="p-2 border-b"><code>dependsOn</code></td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">—</td></tr>
-              <tr><td className="p-2 border-b"><code>formHooks</code></td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">✓</td><td className="text-center p-2 border-b">—</td></tr>
-              <tr><td className="p-2 border-b"><code>formScope</code>, <code>file-import</code>, <code>optionsFrom</code>, <code>persist: false</code></td><td className="text-center p-2 border-b">✓ (1.8.0+)</td><td className="text-center p-2 border-b">✓ (1.8.0+)</td><td className="text-center p-2 border-b">—</td></tr>
-              <tr><td className="p-2"><code>ToggleControl</code> (checkbox + зависимые поля)</td><td className="text-center p-2">✓</td><td className="text-center p-2">✓</td><td className="text-center p-2">—</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          Для отсутствующих в Pure JS возможностей используйте Vue/React UI или <code>type: &apos;custom&apos;</code> с собственным контролом.
-        </p>
       </section>
 
       <section className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
@@ -310,7 +276,7 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
           Валидация в UI (1.4.0)
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          В готовых UI (Vue, React, Pure JS) валидация работает из коробки — дополнительная настройка не нужна.
+          В готовых UI (Vue, React) валидация работает из коробки — дополнительная настройка не нужна.
         </p>
         <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 mb-4">
           <li>
@@ -454,7 +420,7 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
           
           <FieldTypeCard 
             name="select" 
-            description="Выпадающий список для выбора одного или нескольких значений из options. Одиночный режим — по умолчанию; множественный выбор через multiple: true (1.5.5+, Vue/React/Pure JS). С 1.8.0 — динамические options через optionsFrom из другого поля формы (Vue/React)."
+            description="Выпадающий список для выбора одного или нескольких значений из options. Одиночный режим — по умолчанию; множественный выбор через multiple: true (1.5.5+, Vue/React). С 1.8.0 — динамические options через optionsFrom из другого поля формы (Vue/React)."
             icon="📋"
             example={`// Одиночный выбор
 {
@@ -724,10 +690,6 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
               <strong>Vue / React:</strong> <code>CustomDropdown</code> с toggle-выбором; в закрытом поле — сводка через запятую
               (до 3 label + <code>+N</code>); под полем — теги с кнопкой удаления (<code>bb-api-select__tag</code>)
             </li>
-            <li>
-              <strong>Pure JS:</strong> <code>SelectFieldRenderer</code> / <code>SelectControlInitializer</code> — toggle по клику,
-              теги, значение в hidden input как JSON-массив
-            </li>
           </ul>
         </div>
 
@@ -934,7 +896,7 @@ const styles = computed(() => {
   return getBlockInlineStyles(block.props.spacing, 'spacing', customBreakpoints);
 });
 
-// В Pure JS
+// Через DOM API (например, SSR или кастомный рендер)
 const element = document.getElementById('my-block');
 applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints);
 
@@ -1340,7 +1302,7 @@ const imageUrl = computed(() => {
               />
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-              <h4 className="font-bold text-gray-900 dark:text-white mb-2">Pure JS шаблон:</h4>
+              <h4 className="font-bold text-gray-900 dark:text-white mb-2">HTML-шаблон (render kind: &apos;html&apos;):</h4>
               <CodeBlock
                 code={`template: (props) => {
   const getImageUrl = (img) => {
@@ -1482,13 +1444,12 @@ const handleClick = (event) => {
         />
 
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Для внешних URL (<code>https://...</code>) оставьте обычное поведение ссылки. То же самое относится к React, Pure JS HTML-шаблонам и SSR.
+          Для внешних URL (<code>https://...</code>) оставьте обычное поведение ссылки. То же самое относится к React, HTML-шаблонам (<code>kind: &apos;html&apos;</code>) и SSR.
         </p>
 
         <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Контекст для Vue / React</h3>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
           <code>BlockBuilder</code> передаёт в поле список блоков страницы (id, type, props). При редактировании блока он исключается из списка якорей.
-          В Pure JS контекст собирается в <code>BlockUIController.getBlockAnchorContext()</code>.
         </p>
       </section>
 
@@ -1501,7 +1462,7 @@ const handleClick = (event) => {
         </p>
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 mb-4 border-l-4 border-blue-400">
           <p className="text-sm text-gray-700 dark:text-gray-300">
-            <strong>Vue 3 и React UI.</strong> В Pure JS нет встроенного контрола — используйте <code>type: &apos;custom&apos;</code> или Vue/React UI.
+            <strong>Vue 3 и React UI.</strong> Для кастомного контрола используйте <code>type: &apos;custom&apos;</code>.
           </p>
         </div>
         <CodeBlock
@@ -1632,8 +1593,7 @@ const handleClick = (event) => {
           <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
             <Icon name="lightbulb" size={18} className="text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
             <span>
-              <strong>Vue 3 и React:</strong> Функциональность <code className="text-blue-700 dark:text-blue-400">dependsOn</code> доступна в UI Vue 3 и React (v1.1.0+). 
-              Pure JS не скрывает поля по <code>dependsOn</code> — все поля формы остаются видимыми.
+              <strong>Vue 3 и React:</strong> Функциональность <code className="text-blue-700 dark:text-blue-400">dependsOn</code> доступна в UI Vue 3 и React (v1.1.0+).
             </span>
           </p>
         </div>
@@ -1869,7 +1829,6 @@ const handleClick = (event) => {
             <li>Скрытые поля не участвуют в валидации — это позволяет сохранять формы даже когда toggle отключен</li>
             <li>Внутри репитеров поле проверяет значение другого поля внутри того же элемента репитера</li>
             <li>Функциональность доступна в Vue 3 и React UI (v1.1.0+)</li>
-            <li>Pure JS не поддерживает условное отображение полей (<code>dependsOn</code>)</li>
           </ul>
         </div>
       </section>
@@ -2105,9 +2064,6 @@ const handleClick = (event) => {
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
               Конфигурация условного отображения поля на основе значения другого поля. См. раздел "Условное отображение полей (dependsOn)" выше.
-            </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              <strong>Vue 3 и React:</strong> Pure JS не поддерживает условное отображение полей.
             </p>
           </div>
         </div>

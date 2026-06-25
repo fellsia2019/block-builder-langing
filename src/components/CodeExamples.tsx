@@ -154,66 +154,6 @@ export function BlockBuilderEditor({ initialBlocks }) {
 }`,
   },
   {
-    title: 'Pure JavaScript',
-    language: 'javascript',
-    code: `import { BlockBuilder } from '@mushket-co/block-builder'
-import '@mushket-co/block-builder/index.esm.css' // Импортируйте стили!
-
-// Конфигурация блоков
-const blockConfigs = {
-  text: {
-    title: 'Текстовый блок',
-    icon: '📝',
-    render: {
-      kind: 'html',
-      template: (props) => \`
-        <div style="padding: 1rem; background: white; border-radius: 4px;">
-          <p style="font-size: \${props.fontSize || 16}px; color: \${props.color || '#333'};">
-            \${props.content || 'Пустой текст'}
-          </p>
-        </div>
-      \`
-    },
-    fields: [
-      {
-        field: 'content',
-        label: 'Содержимое',
-        type: 'textarea',
-        defaultValue: 'Новый текстовый блок'
-      },
-      {
-        field: 'fontSize',
-        label: 'Размер шрифта',
-        type: 'number',
-        defaultValue: 16
-      },
-      {
-        field: 'color',
-        label: 'Цвет',
-        type: 'color',
-        defaultValue: '#333333'
-      }
-    ]
-  }
-}
-
-// Создание экземпляра с автоматическим UI
-const blockBuilder = new BlockBuilder({
-  containerId: 'my-app', // Передаем containerId - UI инициализируется автоматически
-  blockConfigs: blockConfigs,
-  initialBlocks: [], // Начальные блоки
-  isEdit: true, // Режим редактирования
-  onSave: async (blocks) => {
-    // Сохранение блоков через колбэк
-    localStorage.setItem('blocks', JSON.stringify(blocks))
-    return true
-  }
-})
-
-// Пользователь получает готовые кнопки, 
-// формы, валидацию из коробки`,
-  },
-  {
     title: 'Только API (без UI)',
     language: 'javascript',
     code: `import { BlockBuilder } from '@mushket-co/block-builder/core'
@@ -384,7 +324,7 @@ export default function CodeExamples() {
                   <Icon name="monitor" size={48} className="mb-4 group-hover:scale-110 transition-transform" />
                   <h3 className="text-2xl font-bold mb-2">Интерактивные демо</h3>
                   <p className="text-lg text-white/90 mb-4">
-                    Vue 3, React 19+, Pure JS — block-builder-demo
+                    Vue 3, React 19+ — block-builder-demo
                   </p>
                   <div className="px-6 py-3 bg-white/20 backdrop-blur-sm rounded-lg font-semibold group-hover:bg-white/30 transition-colors">
                     Открыть demo-bb →

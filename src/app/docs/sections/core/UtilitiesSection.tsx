@@ -202,7 +202,7 @@ const visibleBlocks = filterBlocksForDisplay(blocks, isEdit)`}
         <p className="text-gray-600 dark:text-gray-400 mb-3">
           Для кастомного UI форм (без готового <code>BlockBuilderComponent</code>) — трекер и хелпер из{' '}
           <code className="text-teal-700 dark:text-teal-400">@mushket-co/block-builder/core</code>.
-          В готовых UI (Vue, React, Pure JS) реактивная валидация включена автоматически: после неуспешного submit
+          В готовых UI (Vue, React) реактивная валидация включена автоматически: после неуспешного submit
           ошибки обновляются при каждом изменении поля.
         </p>
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 mb-3">

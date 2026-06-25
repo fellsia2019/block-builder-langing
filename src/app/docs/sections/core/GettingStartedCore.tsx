@@ -32,15 +32,11 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
         <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
           <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Неограниченное количество типов блоков</li>
           <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Кастомные поля, api-select, кастомные брекпоинты spacing</li>
-          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Vue 3, React 19+, Pure JS, SSR (Nuxt, Next.js)</li>
+          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Vue 3, React 19+, SSR (Nuxt, Next.js)</li>
           <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Поля <code>block-anchor</code>, <code>file</code> (1.5.0+), <code>select</code> с <code>multiple</code> (1.5.5+), <code>matrix-table</code> (1.6.0+, Vue/React), <code>formHooks</code> (1.7.0+, Vue/React), <code>file-import</code>, <code>optionsFrom</code>, <code>persist: false</code> (1.8.0+, Vue/React)</li>
         </ul>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 mb-3">
-          <strong>Pure JS</strong> получает новые фичи выборочно (не «заморожен на 1.0.30»): есть <code>block-anchor</code>, multi-upload, multi-select;
-          нет <code>matrix-table</code>, <code>dependsOn</code>, <code>ToggleControl</code>, <code>formHooks</code>, <code>file-import</code>, <code>optionsFrom</code>, <code>formScope</code>. Подробнее — в разделе «Поля форм».
-        </p>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
-          Интерактивные демо Vue/React/Pure JS — в{' '}
+          Интерактивные демо Vue/React — в{' '}
           <a href={DEMO_BB_URL} className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">block-builder-demo</a>.
           Живые SSR-примеры Nuxt и Next.js — в{' '}
           <a href="https://github.com/mushket-co/block-builder/tree/master/examples" className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">block-builder/examples</a>.
@@ -135,7 +131,7 @@ const blockBuilder = new BlockBuilder({
     
     // Конфигурация рендеринга блока
     render: {
-      kind: 'html',            // 'html' для Pure JS или 'component' для Vue/React
+      kind: 'html',            // 'html' для HTML-шаблона или 'component' для Vue/React
       template: (props) => {   // Функция шаблона (для kind: 'html')
         return '<div>' + props.content + '</div>'
       },
@@ -254,7 +250,7 @@ const blockBuilder = new BlockBuilder({
                 Конфигурация рендеринга блока. Определяет, как будет отображаться блок.
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                Для <strong>Pure JS</strong> используйте <code className="text-blue-700 dark:text-blue-400">kind: 'html'</code> с функцией <code className="text-blue-700 dark:text-blue-400">template</code>:
+                Для <strong>HTML-рендеринга</strong> (SSR / без фреймворка) используйте <code className="text-blue-700 dark:text-blue-400">kind: 'html'</code> с функцией <code className="text-blue-700 dark:text-blue-400">template</code>:
               </p>
               <CodeBlock
                 code={`render: {
@@ -444,7 +440,7 @@ export default {
   template: '<div :style="spacingStyles"><div style="padding-top: var(--spacing-padding-top);">{{ block.props.content }}</div></div>'
 }
 
-// Pure JS
+// Через DOM API (SSR / кастомный рендер)
 import { applySpacingToElement } from '@mushket-co/block-builder/core';
 
 const element = document.getElementById('my-block');

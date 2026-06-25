@@ -83,7 +83,7 @@ landing/
    - Hover эффекты со scale трансформацией
 
 3. **Code Examples** - Интерактивные примеры кода
-   - Табы с примерами (Vue3, Pure JS, API-only)
+   - Табы с примерами (Vue 3, React, API-only)
    - Анимация scale для блока кода
    - Hover эффекты на карточках
 

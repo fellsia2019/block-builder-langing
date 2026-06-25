@@ -19,7 +19,7 @@ export default function Footer() {
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
               Библиотека для создания блочных конструкторов с правильной чистой архитектурой. 
-              Vue 3, React 19+, Pure JS, SSR. Open Source (MIT).
+              Vue 3, React 19+, SSR. Open Source (MIT).
             </p>
             <div className="flex space-x-4">
               <a

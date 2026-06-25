@@ -177,7 +177,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   fileImportConfig?: IFileImportConfig // type: 'file-import' (1.8.0+, Vue/React)
   persist?: boolean // false — не сохранять в block.props (1.8.0+, Vue/React; file-import — implicit false)
   multiple?: boolean // image, file; select с multiple: true — 1.5.5+
-  dependsOn?: IDependsOnConfig // Условное отображение (Vue/React UI, v1.1.0+; не Pure JS)
+  dependsOn?: IDependsOnConfig // Условное отображение (Vue/React UI, v1.1.0+)
 }`}
           language="typescript"
           className="mb-4"
@@ -471,7 +471,7 @@ type TValidationRuleType =
           <code className="text-teal-700 dark:text-teal-400">IDependsOnConfig</code>
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Конфигурация условного отображения поля на основе значения другого поля (Vue 3 и React UI, v1.1.0+; не Pure JS)
+          Конфигурация условного отображения поля на основе значения другого поля (Vue 3 и React UI, v1.1.0+)
         </p>
         <CodeBlock
           code={`interface IDependsOnConfig {
@@ -493,8 +493,7 @@ type TValidationRuleType =
         </div>
         <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 mt-4">
           <p className="text-sm text-gray-700 dark:text-gray-300">
-            <strong>Важно:</strong> Функциональность <code className="text-yellow-700 dark:text-yellow-400">dependsOn</code> работает в Vue 3 и React UI. 
-            Pure JS не скрывает поля по <code>dependsOn</code>.
+            <strong>Важно:</strong> Функциональность <code className="text-yellow-700 dark:text-yellow-400">dependsOn</code> работает в Vue 3 и React UI.
           </p>
         </div>
       </section>
@@ -583,7 +582,6 @@ interface IFileImportConfig {
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Lifecycle-хуки модалки create/edit блока. Указываются в конфиге типа блока (<code>availableBlockTypes[]</code>).
-          В Pure JS (<code>BlockUIController</code>) не поддерживаются.
         </p>
         <CodeBlock
           code={`interface IBlockFormOpenContext {
