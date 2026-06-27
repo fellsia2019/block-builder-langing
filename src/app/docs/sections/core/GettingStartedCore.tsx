@@ -24,6 +24,16 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
         />
       </section>
 
+      <section className="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-6 border border-cyan-200 dark:border-cyan-800">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">1.10.0 — React 18</h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-2">
+          С версии <strong>1.10.0</strong> React UI поддерживает <strong>React 18 и 19</strong> (
+          <code>peerDependencies</code> <code>^18.0.0 || ^19.0.0</code>).
+          Интерактивное demo-bb — на React 18; примеры в monorepo — <code>examples/react19</code> и{' '}
+          <code>examples/react18</code>.
+        </p>
+      </section>
+
       <section className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-6 border border-amber-200 dark:border-amber-800">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">1.9.0 — только Core API или Vue/React UI</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-2">
@@ -49,7 +59,7 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
           </li>
           <li className="flex items-start gap-2">
             <span className="text-green-500 flex-shrink-0">✓</span>
-            <span>Vue 3, React 19+, SSR (Nuxt, Next.js); code-splitting UI (1.9.0)</span>
+            <span>Vue 3, React 18+, SSR (Nuxt, Next.js); code-splitting UI (1.9.0+)</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="text-green-500 flex-shrink-0">✓</span>

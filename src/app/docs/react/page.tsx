@@ -12,8 +12,8 @@ export default function ReactPage() {
         <div>
           <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Быстрый старт с React</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">
-            BlockBuilder 1.9.0 — React UI с code-splitting и блоками через <code>@mushket-co/block-builder/react</code>
-            {' '}(требуется <strong>React 19+</strong>)
+            BlockBuilder 1.10.0 — React UI с code-splitting и блоками через <code>@mushket-co/block-builder/react</code>
+            {' '}(peer: <strong>React 18+</strong> / 19)
           </p>
         </div>
 
@@ -86,6 +86,14 @@ export function App() {
             Для Nuxt — <Link href="/docs/nuxt" className="text-blue-600 hover:underline">Nuxt (SSR)</Link>.
             Живые SSR-примеры (не в demo-bb) — в{' '}
             <a href={GITHUB_EXAMPLES} className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">block-builder/examples</a>.
+          </p>
+        </section>
+
+        <section className="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-4 border border-cyan-200 dark:border-cyan-800">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            <strong>1.10.0:</strong> поддержка <strong>React 18</strong> (<code>peerDependencies</code>{' '}
+            <code>^18.0.0 || ^19.0.0</code>). Примеры в репозитории:{' '}
+            <code>examples/react19</code> (:3004) и <code>examples/react18</code> (:3005). Живое demo-bb на React 18.
           </p>
         </section>
 

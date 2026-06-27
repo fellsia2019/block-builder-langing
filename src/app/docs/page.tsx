@@ -35,7 +35,7 @@ export default function DocsPage() {
           />
           <DocCard
             title="React"
-            description="React 19+, BlockBuilderComponent"
+            description="React 18+, BlockBuilderComponent"
             href="/docs/react"
             color="blue"
           />

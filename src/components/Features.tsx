@@ -23,7 +23,7 @@ const features: Array<{
   {
     iconName: 'paintbrush' as const,
     title: 'Vue 3 и React UI',
-    description: 'Готовые компоненты BlockBuilder для Vue 3 и React 19+, единый core API.'
+    description: 'Готовые компоненты BlockBuilder для Vue 3 и React 18+, единый core API.'
   },
   {
     iconName: 'zap' as const,

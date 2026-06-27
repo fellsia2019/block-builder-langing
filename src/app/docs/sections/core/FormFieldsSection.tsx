@@ -72,6 +72,21 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         </p>
       </div>
 
+      <section className="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-6 border-l-4 border-cyan-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что нового в 1.10.0</h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+          <li>
+            React UI: peer <code>react</code> / <code>react-dom</code> — <code>^18.0.0 || ^19.0.0</code>
+          </li>
+          <li>
+            Примеры <code>examples/react19</code> и <code>examples/react18</code>; CI matrix-тесты на обе major-версии
+          </li>
+          <li>
+            <code>examples/react</code> переименован в <code>examples/react19</code>
+          </li>
+        </ul>
+      </section>
+
       <section className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-6 border-l-4 border-amber-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Миграция на 1.9.0</h2>
         <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">

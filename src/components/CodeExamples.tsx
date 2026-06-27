@@ -314,7 +314,7 @@ export default function CodeExamples() {
                   <Icon name="monitor" size={48} className="mb-4 group-hover:scale-110 transition-transform" />
                   <h3 className="text-2xl font-bold mb-2">Интерактивные демо</h3>
                   <p className="text-lg text-white/90 mb-4">
-                    Vue 3, React 19+ — block-builder-demo
+                    Vue 3, React 18 — block-builder-demo
                   </p>
                   <div className="px-6 py-3 bg-white/20 backdrop-blur-sm rounded-lg font-semibold group-hover:bg-white/30 transition-colors">
                     Открыть demo-bb →

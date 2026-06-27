@@ -13,7 +13,7 @@ export default function NextPage() {
           <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Next.js (SSR)</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">
             Интеграция <code>@mushket-co/block-builder/react</code> в App Router с серверной загрузкой блоков
-            {' '}(требуется <strong>React 19+</strong>)
+            {' '}(peer <strong>React 18+</strong> / 19; пример <code>examples/next</code> — на React 19)
           </p>
         </div>
 

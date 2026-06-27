@@ -22,7 +22,7 @@ export default function NuxtPage() {
 
         <section className="bg-green-50 dark:bg-green-900/20 rounded-xl p-5 border border-green-200 dark:border-green-800">
           <p className="text-sm text-gray-700 dark:text-gray-300">
-            <strong>Живое SSR-демо</strong> для Nuxt нет в интерактивном demo-bb (там только Vue 3 и React).
+            <strong>Живое SSR-демо</strong> для Nuxt нет в интерактивном demo-bb (там Vue 3 и React 18).
             Запустите готовые проекты из репозитория пакета:{' '}
             <a href={GITHUB_EXAMPLES_NUXT3} className="text-green-700 dark:text-green-400 hover:underline font-medium" target="_blank" rel="noopener noreferrer">examples/nuxt3</a>
             {' '}и{' '}
