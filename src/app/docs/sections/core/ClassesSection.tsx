@@ -6,9 +6,9 @@ export default function ClassesSection({ nextSection, nextTitle, onNavigate }: N
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Классы</h1>
+        <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">BlockBuilder</h1>
         <p className="text-xl text-gray-600 dark:text-gray-400">
-          Основные классы библиотеки BlockBuilder
+          Основной класс программного API для программной работы с блоками
         </p>
       </div>
 
@@ -17,25 +17,24 @@ export default function ClassesSection({ nextSection, nextTitle, onNavigate }: N
           <code className="text-green-700 dark:text-green-400">BlockBuilder</code>
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Основной класс для работы с блоками. Создает экземпляр конструктора с указанной конфигурацией.
+          API без UI: CRUD блоков, валидация, кастомные рендереры. Без встроенного UI — редактор
+          подключается через <code>@mushket-co/block-builder/vue</code> или <code>/react</code>.
         </p>
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
           <code className="text-sm text-gray-900 dark:text-gray-100">
-            new BlockBuilder(options: BlockBuilderOptions)
+            new BlockBuilder(options: IBlockBuilderOptions)
           </code>
         </div>
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
-          <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">Параметры:</h3>
+          <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">Основные опции:</h3>
           <ul className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
-            <li><code className="text-gray-900 dark:text-gray-100">containerId</code> - ID контейнера для UI (только для полной версии с UI)</li>
-            <li><code className="text-gray-900 dark:text-gray-100">blockConfigs</code> - Конфигурация типов блоков</li>
-            <li><code className="text-gray-900 dark:text-gray-100">autoInit</code> - Автоматическая инициализация UI (по умолчанию true)</li>
-            <li><code className="text-gray-900 dark:text-gray-100">onSave</code> - Callback для сохранения блоков</li>
-            <li><code className="text-gray-900 dark:text-gray-100">isEdit</code> - Режим редактирования (по умолчанию true)</li>
+            <li><code>blockConfigs</code> — конфигурация типов блоков</li>
+            <li><code>initialBlocks</code> — начальные блоки</li>
+            <li><code>autoInit</code> — автозагрузка initialBlocks</li>
+            <li><code>theme</code>, <code>locale</code> — тема и локализация</li>
           </ul>
         </div>
       </section>
     </div>
   );
 }
-

@@ -105,7 +105,7 @@ const inside = isChildOf(blocks, childId, parentId);`}
         />
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border-l-4 border-blue-400">
           <p className="text-xs text-gray-700 dark:text-gray-300">
-            Рекомендуется нормализовать входные данные: гарантировать уникальные <code>id</code> и согласованность связей <code>parent</code>⇄<code>children</code> перед вызовами helper’ов.
+            Рекомендуется нормализовать входные данные: гарантировать уникальные <code>id</code> и согласованность связей <code>parent</code>⇄<code>children</code> перед вызовами вспомогательных функций.
           </p>
         </div>
       </section>
@@ -113,7 +113,7 @@ const inside = isChildOf(blocks, childId, parentId);`}
       <section className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="settings" size={22} className="text-indigo-600 dark:text-indigo-400" />
-          Spacing helpers
+          Утилиты отступов (spacing)
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
           Экспортируются из <code className="text-indigo-700 dark:text-indigo-400">@mushket-co/block-builder/core</code>:
@@ -134,7 +134,7 @@ function validateSpacing(spacing: any): { valid: boolean; errors: string[] }`}
           />
           <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
             <li><code>generateSpacingCSSVariables</code> — удобно для передачи padding через CSS‑переменные в компонент.</li>
-            <li><code>generateSpacingCSS</code> — пригодно для SSR/инъекции стилей на страницу (e.g. style‑tag).</li>
+            <li><code>generateSpacingCSS</code> — пригодно для SSR/инъекции стилей на страницу (например, тег <code>&lt;style&gt;</code>).</li>
             <li><code>mergeSpacing</code> — аккуратно объединяет конфигурации (не затирая отсутствующие ключи).</li>
             <li><code>validateSpacing</code> — используйте в бек‑ или CI‑валидации конфигураций.</li>
           </ul>
@@ -149,7 +149,7 @@ const merged = mergeSpacing(baseSpacing, patch);`}
         />
         <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-3 border-l-4 border-indigo-400">
           <p className="text-xs text-gray-700 dark:text-gray-300">
-            В UI‑версии BlockBuilder применяет spacing автоматически. Эти helper’ы полезны при ручной интеграции (/core) или для генерации стилей вне UI компонентов.
+            В UI‑версии BlockBuilder применяет spacing автоматически. Эти вспомогательные функции полезны при ручной интеграции (/core) или для генерации стилей вне UI компонентов.
           </p>
         </div>
       </section>
@@ -160,7 +160,7 @@ const merged = mergeSpacing(baseSpacing, patch);`}
           Видимость блоков
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
-          <code className="text-amber-700 dark:text-amber-400">filterBlocksForDisplay(blocks, isEdit)</code> — экспорт из core (с 1.3.0).
+          <code className="text-amber-700 dark:text-amber-400">filterBlocksForDisplay(blocks, isEdit)</code> — экспорт из core.
           В режиме просмотра скрытые блоки (<code>visible: false</code>) не попадают в DOM; в редактировании остаются с классом <code>bb-opacity-hidden</code>.
         </p>
         <CodeBlock
@@ -174,7 +174,7 @@ const visibleBlocks = filterBlocksForDisplay(blocks, isEdit)`}
       <section className="bg-rose-50 dark:bg-rose-900/20 rounded-xl p-6 border-l-4 border-rose-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="warning" size={22} className="text-rose-600 dark:text-rose-400" />
-          Несохранённые изменения (1.3.1)
+          Несохранённые изменения
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
           Для кастомного UI без готового <code>BlockBuilderComponent</code> — утилиты и хуки из core / vue / react.
@@ -197,12 +197,12 @@ const visibleBlocks = filterBlocksForDisplay(blocks, isEdit)`}
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="shield" size={22} className="text-teal-600 dark:text-teal-400" />
-          Реактивная валидация формы (1.4.0)
+          Реактивная валидация формы
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
           Для кастомного UI форм (без готового <code>BlockBuilderComponent</code>) — трекер и хелпер из{' '}
           <code className="text-teal-700 dark:text-teal-400">@mushket-co/block-builder/core</code>.
-          В готовых UI (Vue, React) реактивная валидация включена автоматически: после неуспешного submit
+          В <code>BlockBuilderComponent</code> реактивная валидация включена автоматически: после неуспешного submit
           ошибки обновляются при каждом изменении поля.
         </p>
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 mb-3">

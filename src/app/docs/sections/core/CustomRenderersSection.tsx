@@ -23,10 +23,10 @@ export default function CustomRenderersSection({ nextSection, nextTitle, onNavig
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 mb-4">
           <h3 className="font-bold text-gray-900 dark:text-white mb-2">Когда использовать:</h3>
           <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
-            <li>WYSIWYG редактор для форматированного текста</li>
-            <li>Date/Time picker для выбора даты и времени</li>
+            <li>WYSIWYG-редактор для форматированного текста</li>
+            <li>Выбор даты и времени (date/time picker)</li>
             <li>Интеграция со сторонними библиотеками (например, Chart.js, CodeMirror)</li>
-            <li>Сложные компоненты выбора (многоуровневые меню, tree select)</li>
+            <li>Сложные компоненты выбора (многоуровневые меню, древовидный select)</li>
             <li>Собственные интерактивные элементы управления</li>
           </ul>
         </div>
@@ -54,8 +54,8 @@ interface ICustomFieldContext {
   value: any;                 // Текущее значение поля
   required: boolean;          // Обязательно ли поле
   options?: Record<string, any>; // Дополнительные опции из customFieldConfig.options
-  onChange: (value: any) => void;    // Callback для обновления значения
-  onError?: (error: string | null) => void;  // Callback для обработки ошибок
+  onChange: (value: any) => void;    // Обратный вызов для обновления значения
+  onError?: (error: string | null) => void;  // Обратный вызов для обработки ошибок
 }
 
 interface ICustomFieldRenderResult {
@@ -145,7 +145,7 @@ interface ICustomFieldRenderResult {
             <strong>Пример правильного подхода:</strong> <code className="text-yellow-700 dark:text-yellow-400">const editor = new Jodit(...)</code> внутри метода <code className="text-yellow-700 dark:text-yellow-400">render()</code>, а не <code className="text-yellow-700 dark:text-yellow-400">this.editor = new Jodit(...)</code>.
           </p>
           <p className="text-sm text-yellow-800 dark:text-yellow-300">
-            <strong>Важно (v1.0.30+):</strong> ControlManager гарантирует, что элемент уже находится в DOM при вызове <code className="text-yellow-700 dark:text-yellow-400">render()</code>, поэтому <strong>не используйте setTimeout</strong> для инициализации. Инициализируйте библиотеки синхронно сразу после создания элементов.
+            <strong>Важно:</strong> ControlManager гарантирует, что элемент уже находится в DOM при вызове <code className="text-yellow-700 dark:text-yellow-400">render()</code>, поэтому <strong>не используйте setTimeout</strong> для инициализации. Инициализируйте библиотеки синхронно сразу после создания элементов.
           </p>
         </div>
       </section>
@@ -160,7 +160,6 @@ interface ICustomFieldRenderResult {
 
 // Создание экземпляра BlockBuilder
 const blockBuilder = new BlockBuilder({
-  containerId: 'block-container',  // Только для полной версии с UI
   blockConfigs: {
     // ваши конфигурации блоков
   },

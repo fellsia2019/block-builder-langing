@@ -57,7 +57,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/docs/core/getting-started" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/docs/get-started" className="text-gray-400 hover:text-white transition-colors">
                   Core API
                 </Link>
               </li>
@@ -67,7 +67,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/docs/react" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/docs/react/getting-started" className="text-gray-400 hover:text-white transition-colors">
                   React
                 </Link>
               </li>

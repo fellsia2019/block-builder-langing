@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
@@ -68,8 +69,8 @@ export default function GettingStartedVue3({ nextSection, nextTitle, onNavigate 
         <div className="mb-6">
           <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">1. Создайте компонент блока</h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-            <strong>Важно:</strong> Margin автоматически применяется на UI блок-обертку над компонентом. 
-            Для padding используйте CSS переменные, которые устанавливаются автоматически.
+            <strong>Важно:</strong> внешние отступы (margin) автоматически применяются на UI блок-обёртку над компонентом.
+            Для внутренних отступов (padding) используйте CSS-переменные, которые устанавливаются автоматически.
           </p>
           <CodeBlock
             code={`<!-- components/TextBlock.vue -->
@@ -343,11 +344,11 @@ const config = {
         <ul className="space-y-2 text-gray-600 dark:text-gray-400">
           <li className="flex items-start">
             <span className="text-blue-500 mr-2">•</span>
-            <span><strong>Spacing</strong> - BlockBuilder автоматически добавляет поля spacing в форму настроек блока, если указано <code className="text-blue-700 dark:text-blue-400">spacingOptions.enabled: true</code>. Margin применяется автоматически на UI блок-обертку, для padding используйте CSS переменные: <code className="text-blue-700 dark:text-blue-400">--spacing-padding-top</code> и <code className="text-blue-700 dark:text-blue-400">--spacing-padding-bottom</code></span>
+            <span><strong>Отступы (spacing)</strong> — BlockBuilder автоматически добавляет поля отступов в форму настроек блока, если указано <code className="text-blue-700 dark:text-blue-400">spacingOptions.enabled: true</code>. Внешние отступы (margin) применяются автоматически на UI блок-обёртку; для внутренних (padding) используйте CSS-переменные: <code className="text-blue-700 dark:text-blue-400">--spacing-padding-top</code> и <code className="text-blue-700 dark:text-blue-400">--spacing-padding-bottom</code></span>
           </li>
           <li className="flex items-start">
             <span className="text-blue-500 mr-2">•</span>
-            <span><strong>Props блока</strong> - Ваш компонент получает объект <code className="text-blue-700 dark:text-blue-400">block</code> с полями <code className="text-blue-700 dark:text-blue-400">id</code>, <code className="text-blue-700 dark:text-blue-400">type</code>, <code className="text-blue-700 dark:text-blue-400">props</code>, <code className="text-blue-700 dark:text-blue-400">settings</code></span>
+            <span><strong>Свойства блока</strong> — ваш компонент получает объект <code className="text-blue-700 dark:text-blue-400">block</code> с полями <code className="text-blue-700 dark:text-blue-400">id</code>, <code className="text-blue-700 dark:text-blue-400">type</code>, <code className="text-blue-700 dark:text-blue-400">props</code>, <code className="text-blue-700 dark:text-blue-400">settings</code></span>
           </li>
           <li className="flex items-start">
             <span className="text-blue-500 mr-2">•</span>
@@ -368,7 +369,7 @@ const config = {
         <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Nuxt (SSR)</h2>
         <p className="text-sm text-gray-600 dark:text-gray-400">
           Для серверного рендеринга с Nuxt 3/4 см. раздел{' '}
-          <a href="/docs/nuxt" className="text-green-600 hover:underline">Nuxt (SSR)</a>.
+          <Link href="/docs/nuxt" className="text-green-600 hover:underline">Nuxt (SSR)</Link>.
           Живые примеры —{' '}
           <a href="https://github.com/mushket-co/block-builder/tree/master/examples/nuxt3" className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">examples/nuxt3</a>
           {' '}и{' '}

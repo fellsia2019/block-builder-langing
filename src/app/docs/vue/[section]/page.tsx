@@ -1,7 +1,6 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-import DocsLayout from '../../components/DocsLayout';
+import { useParams, useRouter } from 'next/navigation';
 import { useVue3Navigation } from '../../hooks/useNavigation';
 import type { Vue3SubSection } from '../../types';
 import GettingStartedVue3 from '../../sections/vue3/GettingStartedVue3';
@@ -10,9 +9,9 @@ import EventsSection from '../../sections/vue3/EventsSection';
 import Vue3ApiSection from '../../sections/vue3/Vue3ApiSection';
 import NextPageLink from '../../components/NextPageLink';
 import Link from 'next/link';
-
 export default function VueSectionPage() {
   const params = useParams();
+  const router = useRouter();
   const section = params.section as string;
   const subSection = section as Vue3SubSection;
   const { nextSection, nextTitle } = useVue3Navigation(subSection);
@@ -23,18 +22,15 @@ export default function VueSectionPage() {
   };
 
   return (
-    <DocsLayout 
-      activeSection="vue" 
-      activeSubSection={subSection}
-    >
-      {getContent(subSection, nextSection, nextTitle, getNextHref)}
+    <>
+      {getContent(subSection, nextSection, nextTitle, (sub) => router.push(`/docs/vue/${sub}`))}
       <NextPageLink
         nextSection={nextSection}
         nextTitle={nextTitle}
         nextHref={getNextHref(nextSection)}
         color="purple"
       />
-    </DocsLayout>
+    </>
   );
 }
 
@@ -42,12 +38,8 @@ function getContent(
   subSection: Vue3SubSection,
   nextSection: string | null,
   nextTitle: string | null,
-  getNextHref: (next: string | null) => string | null
+  handleNavigate: (sub: string) => void
 ) {
-  const handleNavigate = (sub: string) => {
-    window.location.href = `/docs/vue/${sub}`;
-  };
-
   switch (subSection) {
     case 'getting-started':
       return <GettingStartedVue3 nextSection={nextSection} nextTitle={nextTitle} onNavigate={handleNavigate} />;

@@ -188,7 +188,7 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
           
           <FieldTypeCard 
             name="select" 
-            description="Выпадающий список для выбора одного или нескольких значений из options. Множественный выбор: multiple: true (1.5.5+)." 
+            description="Выпадающий список для выбора одного или нескольких значений из options. Множественный выбор: multiple: true." 
             icon="📋"
             example={`// Одиночный выбор
 {
@@ -203,7 +203,7 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
   defaultValue: 'left'
 }
 
-// Множественный выбор (1.5.5+)
+// Множественный выбор
 {
   field: 'topics',
   label: 'Темы',
@@ -310,7 +310,7 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
 
           <FieldTypeCard 
             name="matrix-table" 
-            description="Редактор таблицы (колонки + строки). Vue 3 и React UI, 1.6.0+." 
+            description="Редактор таблицы (колонки + строки)" 
             icon="📋"
             example={`{
   field: 'tableMatrix',
@@ -354,7 +354,7 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
               <code className="text-green-700 dark:text-green-400">'checkbox'</code>, <code className="text-green-700 dark:text-green-400">'radio'</code>, 
               <code className="text-green-700 dark:text-green-400">'color'</code>, <code className="text-green-700 dark:text-green-400">'image'</code>,
               <code className="text-green-700 dark:text-green-400">'file'</code>, <code className="text-green-700 dark:text-green-400">'block-anchor'</code>,
-              <code className="text-green-700 dark:text-green-400">'matrix-table'</code> (Vue/React, 1.6.0+)
+              <code className="text-green-700 dark:text-green-400">'matrix-table'</code>
             </p>
           </div>
           
@@ -400,7 +400,7 @@ export default function FieldTypesSection({ nextSection, nextTitle, onNavigate }
             </p>
             <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-4">
               <li>
-                <strong>select (1.5.5+):</strong> в <code>props</code> — массив <code>value</code>;{' '}
+                <strong>select:</strong> в <code>props</code> — массив <code>value</code>;{' '}
                 <code>defaultValue: []</code> или массив начальных значений
               </li>
               <li>

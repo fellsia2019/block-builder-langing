@@ -3,6 +3,7 @@
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
+import DocHeading from '../../components/DocHeading';
 
 export default function ComponentsSection({ nextSection, nextTitle, onNavigate }: NavigationProps) {
   return (
@@ -15,11 +16,11 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
       </div>
 
       <section className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 border-l-4 border-purple-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+        <DocHeading id="block-builder-component">
           <code className="text-purple-700 dark:text-purple-400">BlockBuilderComponent</code>
-        </h2>
+        </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Основной компонент для работы с BlockBuilder в Vue3. Предоставляет готовый UI для управления блоками с drag-and-drop, редактированием и удалением.
+          Основной компонент для работы с BlockBuilder в Vue3. Предоставляет готовый UI для управления блоками с перетаскиванием, редактированием и удалением.
         </p>
 
         <div className="mb-6">
@@ -32,12 +33,12 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
         </div>
 
         <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Props</h3>
+          <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Свойства (props)</h3>
           <div className="space-y-4">
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">config</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Object, required</span>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Object, обязательный</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                 Конфигурация BlockBuilder с типами блоков и настройками
@@ -67,7 +68,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
   defaultSettings?: Record<string, any>,  // Настройки по умолчанию
   defaultProps?: Record<string, any>,      // Свойства по умолчанию
   fields?: Array<IFormFieldConfig>,       // Поля формы редактирования
-  formHooks?: IBlockFormHooks,             // 1.7.0+, Vue/React — onFormOpen / onBeforeSave
+  formHooks?: IBlockFormHooks,
   spacingOptions?: {                      // Опции для spacing (опционально)
     enabled?: boolean,
     config?: { breakpoints?: Array<IBreakpoint> }
@@ -81,7 +82,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">blockManagementUseCase</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">BlockManagementUseCase, required</span>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">BlockManagementUseCase, обязательный</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                 Экземпляр use case для управления блоками. Создаётся через <code className="text-purple-700 dark:text-purple-400">createBlockManagementUseCase()</code>
@@ -91,7 +92,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">apiSelectUseCase</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">ApiSelectUseCase, optional</span>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">ApiSelectUseCase, опциональный</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                 Экземпляр use case для работы с полями <code>api-select</code>
@@ -101,7 +102,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">customFieldRendererRegistry</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">ICustomFieldRendererRegistry, optional</span>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">ICustomFieldRendererRegistry, опциональный</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                 Реестр кастомных рендереров полей (<code>type: &apos;custom&apos;</code>)
@@ -111,7 +112,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">initialBlocks</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Array, optional</span>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Array, опциональный</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 Массив начальных блоков для загрузки при инициализации
@@ -121,10 +122,10 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">onSave</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Function, optional</span>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Function, опциональный</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                Callback функция для сохранения блоков (например, отправка на сервер)
+                Функция обратного вызова для сохранения блоков (например, отправка на сервер)
               </p>
               <CodeBlock
                 code={`onSave: async (blocks) => {
@@ -143,7 +144,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">isEdit</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Boolean, optional, default: true</span>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Boolean, опциональный, по умолчанию: true</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                 Режим редактирования. Если <code className="text-purple-700 dark:text-purple-400">false</code>, все контролы редактирования скрываются, остаётся только пользовательская верстка блоков в обёртке BlockBuilder.
@@ -162,7 +163,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">controlsContainerClass</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">String, optional</span>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">String, опциональный</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                 Кастомный CSS класс для контейнера контролов (кнопки и статистика)
@@ -172,7 +173,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">controlsFixedPosition</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">'top' | 'bottom', optional</span>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">'top' | 'bottom', опциональный</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                 Фиксирует панель управления (кнопки + статистика) сверху или снизу экрана
@@ -182,7 +183,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">controlsOffset</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Number, optional</span>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Number, опциональный</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                 Отступ от края в пикселях (по умолчанию 0)
@@ -192,7 +193,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">controlsOffsetVar</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">String, optional</span>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">String, опциональный</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                 CSS переменная для учета высоты шапки/футера (например: <code className="text-purple-700 dark:text-purple-400">'--header-height'</code>)
@@ -202,31 +203,30 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">warnOnPageLeave</code>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Boolean, optional</span>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Boolean, опциональный</span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                Предупреждение при уходе со страницы с несохранёнными блоками (1.3.1+)
+                Предупреждение при уходе со страницы с несохранёнными блоками
               </p>
             </div>
           </div>
 
-          <div className="bg-violet-50 dark:bg-violet-900/20 rounded-lg p-4 border border-violet-200 dark:border-violet-800 mt-4">
+          <div className="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-4 border border-teal-200 dark:border-teal-800 mt-4">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              <strong>Поля формы (1.5.0+):</strong> <code>block-anchor</code> для ссылок на блоки страницы — форма сохраняет
-              <code>#block-id</code> или URL; скролл и клик реализуйте в своих компонентах блоков. Отдельный UI для <code>file</code>/<code>files</code>.
+              Поле <code>block-anchor</code> сохраняет <code>#block-id</code> или URL; скролл и клик — в ваших компонентах блоков.
+              Отдельный UI для <code>file</code>/<code>files</code>.
             </p>
           </div>
 
           <div className="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-4 border border-teal-200 dark:border-teal-800 mt-4">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              <strong>Валидация формы (1.4.0+):</strong> индикатор ошибок в футере модалки и реактивная перевалидация
-              после неуспешного submit включены по умолчанию — отдельных props не требуется.
+              Валидация формы: индикатор ошибок в футере модалки и реактивная перевалидация после submit включены по умолчанию.
             </p>
           </div>
         </div>
 
         <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Events (События)</h3>
+          <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">События</h3>
           <div className="space-y-2 text-sm">
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 border border-gray-200 dark:border-slate-700">
               <code className="text-purple-700 dark:text-purple-400">@block-added</code>
@@ -373,7 +373,7 @@ onMounted(() => {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Ваши компоненты блоков</h2>
+        <DocHeading id="block-components">Ваши компоненты блоков</DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Каждый тип блока использует ваш Vue компонент для рендеринга. Компонент получает объект <code className="text-purple-700 dark:text-purple-400">block</code> с полной информацией о блоке.
         </p>
@@ -517,7 +517,7 @@ const imageUrl = computed(() => {
             </li>
             <li className="flex items-start">
               <span className="text-blue-500 mr-2">•</span>
-              <span>Spacing применяется автоматически: margin через inline стили, padding через CSS переменные (<code className="text-blue-700 dark:text-blue-400">--spacing-padding-top</code>, <code className="text-blue-700 dark:text-blue-400">--spacing-padding-bottom</code> и т.д.)</span>
+              <span>Отступы применяются автоматически: margin через inline стили, padding через CSS переменные (<code className="text-blue-700 dark:text-blue-400">--spacing-padding-top</code>, <code className="text-blue-700 dark:text-blue-400">--spacing-padding-bottom</code> и т.д.)</span>
             </li>
             <li className="flex items-start">
               <span className="text-blue-500 mr-2">•</span>

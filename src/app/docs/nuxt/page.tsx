@@ -1,6 +1,5 @@
 'use client';
 
-import DocsLayout from '../components/DocsLayout';
 import CodeBlock from '@/components/CodeBlock';
 import Link from 'next/link';
 import {
@@ -8,10 +7,9 @@ import {
   GITHUB_EXAMPLES_NUXT3,
   GITHUB_EXAMPLES_NUXT4,
 } from '@/lib/urls';
-
+import DocHeading from '../components/DocHeading';
 export default function NuxtPage() {
   return (
-    <DocsLayout activeSection="nuxt" activeSubSection="getting-started">
       <div className="space-y-8">
         <div>
           <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Nuxt (SSR)</h1>
@@ -33,7 +31,7 @@ export default function NuxtPage() {
         </section>
 
         <section className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/10 rounded-xl p-6 border border-green-200 dark:border-green-800">
-          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Установка</h2>
+          <DocHeading id="install">Установка</DocHeading>
           <CodeBlock code="npm install @mushket-co/block-builder" language="bash" />
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
             Стили подключайте в client-only плагине — CSS не должен попадать в SSR-бандл без необходимости.
@@ -41,7 +39,7 @@ export default function NuxtPage() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">nuxt.config</h2>
+          <DocHeading id="nuxt-config">nuxt.config</DocHeading>
           <CodeBlock
             language="ts"
             code={`export default defineNuxtConfig({
@@ -56,7 +54,7 @@ export default function NuxtPage() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Плагин стилей</h2>
+          <DocHeading id="styles-plugin">Плагин стилей</DocHeading>
           <CodeBlock
             language="ts"
             code={`// plugins/block-builder.client.ts
@@ -65,7 +63,93 @@ import '@mushket-co/block-builder/index.css'`}
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Страница с SSR</h2>
+          <DocHeading id="use-block-builder">composables/useBlockBuilder.ts</DocHeading>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+            Файл <strong>создаёте сами</strong> — в пакете composable нет. Он собирает зависимости для{' '}
+            <code>BlockBuilderComponent</code>: use case, типы блоков из <code>block-config</code>, режим редактирования
+            и сохранение на API.
+          </p>
+          <CodeBlock
+            language="ts"
+            code={`// composables/useBlockBuilder.ts
+import { type Ref, ref } from 'vue'
+import { createBlockManagementUseCase } from '@mushket-co/block-builder/vue'
+import { blockConfigs } from '~/block-config'
+import { serializeBlocksForStorage } from '~/utils/serializeBlocks'
+
+export function useBlockBuilder(initialBlocks: Ref<unknown[] | null | undefined>) {
+  // CRUD блоков + реестр Vue-компонентов для preview в редакторе
+  const blockManagementUseCase = createBlockManagementUseCase()
+
+  const componentRegistry = blockManagementUseCase.getComponentRegistry()
+  for (const [type, config] of Object.entries(blockConfigs)) {
+    if (config.render?.component) {
+      componentRegistry.register(type, config.render.component)
+    }
+  }
+
+  // Палитра блоков и схемы полей в UI
+  const availableBlockTypes = ref(
+    Object.entries(blockConfigs).map(([type, cfg]) => ({
+      type,
+      label: cfg.title,
+      icon: cfg.icon,
+      render: cfg.render,
+      fields: cfg.fields,
+      spacingOptions: cfg.spacingOptions,
+      defaultProps: Object.fromEntries(
+        (cfg.fields ?? []).map((field) => [field.field, field.defaultValue ?? null])
+      ),
+    }))
+  )
+
+  const isEdit = ref(true)
+
+  const handleSave = async (blocks: unknown[]) => {
+    try {
+      await $fetch('/api/blocks', {
+        method: 'POST',
+        body: { blocks: serializeBlocksForStorage(blocks) },
+      })
+      return true
+    } catch (error) {
+      console.error('Ошибка сохранения:', error)
+      return false
+    }
+  }
+
+  return {
+    blockManagementUseCase,
+    availableBlockTypes,
+    initialBlocks,
+    isEdit,
+    handleSave,
+  }
+}`}
+          />
+          <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 mt-4 mb-4">
+            <li><code>blockManagementUseCase</code> — создание, обновление, удаление блоков</li>
+            <li><code>availableBlockTypes</code> — конфиг типов для палитры и форм</li>
+            <li><code>initialBlocks</code> — ref из <code>useAsyncData</code>, стартовые данные страницы</li>
+            <li><code>isEdit</code> — режим редактора (<code>false</code> — только просмотр)</li>
+            <li><code>handleSave</code> — колбэк сохранения; вернуть <code>true</code> при успехе</li>
+          </ul>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            <code>serializeBlocksForStorage</code> — утилита проекта: убирает <code>render.component</code> и base64
+            перед JSON.             Пример —{' '}
+            <a href={`${GITHUB_EXAMPLES_NUXT3}/utils/serializeBlocks.ts`} className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">
+              examples/nuxt3/utils/serializeBlocks.ts
+            </a>
+            . Для api-select и кастомных полей в примере также подключают{' '}
+            <code>ApiSelectUseCase</code> и <code>CustomFieldRendererRegistry</code>.
+          </p>
+        </section>
+
+        <section>
+          <DocHeading id="ssr-page">Страница с SSR</DocHeading>
+          <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+            На сервере загружаем блоки, composable из предыдущего шага передаёт props в компонент.
+          </p>
           <CodeBlock
             language="vue"
             code={`<template>
@@ -98,7 +182,7 @@ const {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">API и сохранение</h2>
+          <DocHeading id="api-save">API и сохранение</DocHeading>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             На сервере загружайте блоки из БД/файла, при отдаче клиенту обогащайте данные для api-select блоков.
             Перед сохранением сериализуйте без <code>render.component</code> и SSR-кэша.
@@ -119,7 +203,7 @@ export default defineEventHandler(async () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">SSR-утилиты</h2>
+          <DocHeading id="ssr-utils">SSR-утилиты</DocHeading>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Экспортируются из <code>@mushket-co/block-builder/vue</code>:
           </p>
@@ -160,6 +244,5 @@ export default defineEventHandler(async () => {
           </p>
         </section>
       </div>
-    </DocsLayout>
   );
 }

@@ -10,14 +10,14 @@ export default function Vue3ApiSection({ nextSection, nextTitle, onNavigate }: N
       <div>
         <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">API в Vue3</h1>
         <p className="text-xl text-gray-600 dark:text-gray-400">
-          Использование Core API напрямую в Vue3 для программного управления блоками
+          Использование программного API напрямую в Vue3 для программного управления блоками
         </p>
       </div>
 
       <section className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 border-l-4 border-purple-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Когда использовать Core API?</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Когда использовать программный API?</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Используйте Core API напрямую, если вам нужно:
+          Используйте программный API напрямую, если вам нужно:
         </p>
         <ul className="space-y-2 text-gray-600 dark:text-gray-400 mb-4">
           <li className="flex items-start">
@@ -464,7 +464,7 @@ body:not(.bb-is-edit-mode) .view-only-info {
           </li>
             <li className="flex items-start">
             <span className="text-yellow-500 mr-2">•</span>
-            <span>Для управления UI вручную используйте <code className="text-yellow-700 dark:text-yellow-400">autoInit: false</code> в опциях (для core версии не передавайте <code className="text-yellow-700 dark:text-yellow-400">containerId</code>)</span>
+            <span>Для отложенной инициализации используйте <code className="text-yellow-700 dark:text-yellow-400">autoInit: false</code> в опциях BlockBuilder</span>
           </li>
         </ul>
       </section>

@@ -1,19 +1,17 @@
 'use client';
 
-import DocsLayout from '../components/DocsLayout';
 import CodeBlock from '@/components/CodeBlock';
 import Link from 'next/link';
 import { GITHUB_EXAMPLES, GITHUB_EXAMPLES_NEXT } from '@/lib/urls';
-
+import DocHeading from '../components/DocHeading';
 export default function NextPage() {
   return (
-    <DocsLayout activeSection="next" activeSubSection="getting-started">
       <div className="space-y-8">
         <div>
           <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Next.js (SSR)</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">
             Интеграция <code>@mushket-co/block-builder/react</code> в App Router с серверной загрузкой блоков
-            {' '}(peer <strong>React 18+</strong> / 19; пример <code>examples/next</code> — на React 19)
+            {' '}(зависимость <strong>React 18+</strong> / 19; пример <code>examples/next</code> — на React 19)
           </p>
         </div>
 
@@ -29,12 +27,12 @@ export default function NextPage() {
         </section>
 
         <section className="bg-gradient-to-br from-slate-50 to-gray-100 dark:from-slate-800/50 dark:to-gray-900/30 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
-          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Установка</h2>
+          <DocHeading id="install">Установка</DocHeading>
           <CodeBlock code="npm install @mushket-co/block-builder" language="bash" />
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">next.config</h2>
+          <DocHeading id="next-config">next.config</DocHeading>
           <CodeBlock
             language="ts"
             code={`import type { NextConfig } from 'next'
@@ -48,7 +46,7 @@ export default nextConfig`}
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Server + Client Component</h2>
+          <DocHeading id="server-client">Server + Client Component</DocHeading>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Server Component загружает и обогащает блоки → Client Component рендерит редактор с <code>initialBlocks</code>.
           </p>
@@ -124,7 +122,7 @@ export function BlockBuilderEditor({ initialBlocks }: { initialBlocks: unknown[]
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">API Route Handlers</h2>
+          <DocHeading id="api-routes">API Route Handlers</DocHeading>
           <CodeBlock
             language="ts"
             code={`// app/api/blocks/route.ts
@@ -147,7 +145,7 @@ export async function POST(request: Request) {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">SSR-утилиты</h2>
+          <DocHeading id="ssr-utils">SSR-утилиты</DocHeading>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Экспортируются из <code>@mushket-co/block-builder/react</code>:
           </p>
@@ -172,10 +170,9 @@ export async function POST(request: Request) {
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
             Базовый React API — в разделе{' '}
-            <Link href="/docs/react" className="text-slate-700 dark:text-slate-300 hover:underline">React</Link>.
+            <Link href="/docs/react/getting-started" className="text-slate-700 dark:text-slate-300 hover:underline">React</Link>.
           </p>
         </section>
       </div>
-    </DocsLayout>
   );
 }

@@ -1,37 +1,40 @@
-import type { CoreSubSection, Vue3SubSection } from './types';
+import type { CoreSubSection, Vue3SubSection, ReactSubSection } from './types';
 
 export const CORE_SECTIONS: CoreSubSection[] = [
-  'getting-started',
   'classes',
   'methods',
   'properties',
   'types',
   'form-fields',
-  'utilities'
+  'utilities',
 ];
 
 export const VUE3_SECTIONS: Vue3SubSection[] = [
   'getting-started',
   'components',
   'events',
-  'api'
+  'api',
 ];
+
+export const REACT_SECTIONS: ReactSubSection[] = ['getting-started', 'components'];
 
 export const SECTION_TITLES = {
   core: {
-    'getting-started': 'Быстрый старт',
-    'classes': 'Классы',
-    'methods': 'Методы',
-    'properties': 'Свойства',
-    'types': 'Типы',
+    classes: 'BlockBuilder',
+    methods: 'Методы',
+    properties: 'Свойства',
+    types: 'Типы',
     'form-fields': 'Поля форм',
-    'utilities': 'Утилиты'
+    utilities: 'Утилиты',
   },
   vue3: {
     'getting-started': 'Быстрый старт',
-    'components': 'Компоненты',
-    'events': 'События',
-    'api': 'API'
-  }
+    components: 'Компоненты',
+    events: 'События',
+    api: 'Программный API',
+  },
+  react: {
+    'getting-started': 'Быстрый старт',
+    components: 'Компоненты',
+  },
 };
-

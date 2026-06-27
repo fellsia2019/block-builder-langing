@@ -2,9 +2,22 @@
 const nextConfig = {
   output: 'standalone',
   eslint: {
-    // В CI не требуем наличия eslint и не падаем из-за предупреждений
     ignoreDuringBuilds: true,
   },
-}
+  async redirects() {
+    return [
+      {
+        source: '/docs/core/getting-started',
+        destination: '/docs/get-started',
+        permanent: true,
+      },
+      {
+        source: '/docs/migration',
+        destination: '/docs/get-started',
+        permanent: true,
+      },
+    ];
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

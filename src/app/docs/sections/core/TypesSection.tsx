@@ -2,6 +2,7 @@
 
 import CodeBlock from '@/components/CodeBlock';
 import type { NavigationProps } from '../../types';
+import DocHeading from '../../components/DocHeading';
 
 export default function TypesSection({ nextSection, nextTitle, onNavigate }: NavigationProps) {
   return (
@@ -14,9 +15,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
       </div>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IBlockBuilderOptions</code>
-        </h2>
+        <DocHeading id="iblock-builder-options"><code className="text-teal-700 dark:text-teal-400">IBlockBuilderOptions</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Опции для создания BlockBuilder</p>
         <CodeBlock
           code={`interface IBlockBuilderOptions {
@@ -29,7 +28,6 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   locale?: string
   autoInit?: boolean
   initialBlocks?: IBlockDto[]
-  // 1.9.0: удалены containerId, onSave, controls* — DOM UI больше нет
 }`}
           language="typescript"
           className="mb-4"
@@ -37,9 +35,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IBlock</code>
-        </h2>
+        <DocHeading id="iblock"><code className="text-teal-700 dark:text-teal-400">IBlock</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Основной интерфейс блока (доменная модель)</p>
         <CodeBlock
           code={`interface IBlock {
@@ -61,9 +57,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IBlockDto</code>
-        </h2>
+        <DocHeading id="iblock-dto"><code className="text-teal-700 dark:text-teal-400">IBlockDto</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">DTO для передачи данных блока (без бизнес-логики)</p>
         <CodeBlock
           code={`interface IBlockDto {
@@ -86,9 +80,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">ICreateBlockDto</code>
-        </h2>
+        <DocHeading id="icreate-block-dto"><code className="text-teal-700 dark:text-teal-400">ICreateBlockDto</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">DTO для создания блока (без ID и метаданных)</p>
         <CodeBlock
           code={`interface ICreateBlockDto {
@@ -109,9 +101,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IUpdateBlockDto</code>
-        </h2>
+        <DocHeading id="iupdate-block-dto"><code className="text-teal-700 dark:text-teal-400">IUpdateBlockDto</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">DTO для обновления блока</p>
         <CodeBlock
           code={`interface IUpdateBlockDto {
@@ -129,9 +119,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IBlockMetadata</code>
-        </h2>
+        <DocHeading id="iblock-metadata"><code className="text-teal-700 dark:text-teal-400">IBlockMetadata</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Метаданные блока</p>
         <CodeBlock
           code={`interface IBlockMetadata {
@@ -146,9 +134,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IFormFieldConfig</code>
-        </h2>
+        <DocHeading id="iform-field-config"><code className="text-teal-700 dark:text-teal-400">IFormFieldConfig</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Конфигурация поля формы</p>
         <CodeBlock
           code={`interface IFormFieldConfig {
@@ -164,13 +150,13 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   apiSelectConfig?: IApiSelectConfig
   customFieldConfig?: any // Внутренний тип (не экспортируется)
   fileUploadConfig?: any // Внутренний тип IFileUploadConfig (не экспортируется)
-  blockAnchorConfig?: IBlockAnchorConfig // type: 'block-anchor' (1.5.0+)
-  matrixTableConfig?: IMatrixTableFieldConfig // type: 'matrix-table' (1.6.0+, Vue/React UI)
-  optionsFrom?: IOptionsFromConfig // select — динамические options (1.8.0+, Vue/React)
-  fileImportConfig?: IFileImportConfig // type: 'file-import' (1.8.0+, Vue/React)
-  persist?: boolean // false — не сохранять в block.props (1.8.0+, Vue/React; file-import — implicit false)
-  multiple?: boolean // image, file; select с multiple: true — 1.5.5+
-  dependsOn?: IDependsOnConfig // Условное отображение (Vue/React UI, v1.1.0+)
+  blockAnchorConfig?: IBlockAnchorConfig // type: 'block-anchor'
+  matrixTableConfig?: IMatrixTableFieldConfig // type: 'matrix-table'
+  optionsFrom?: IOptionsFromConfig // select — динамические options
+  fileImportConfig?: IFileImportConfig // type: 'file-import'
+  persist?: boolean // false — не сохранять в block.props
+  multiple?: boolean // image, file; select с multiple: true
+  dependsOn?: IDependsOnConfig // Условное отображение полей
 }`}
           language="typescript"
           className="mb-4"
@@ -178,9 +164,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IRepeaterFieldConfig</code>
-        </h2>
+        <DocHeading id="irepeater-field-config"><code className="text-teal-700 dark:text-teal-400">IRepeaterFieldConfig</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Конфигурация для поля типа <code className="text-teal-700 dark:text-teal-400">repeater</code>. Свойство <code className="text-teal-700 dark:text-teal-400">countLabelVariants</code> позволяет локализовать счётчик элементов.
           Свойство <code className="text-teal-700 dark:text-teal-400">maxNestingDepth</code> ограничивает максимальную глубину вложенности репитеров.
@@ -206,9 +190,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IRepeaterItemFieldConfig</code>
-        </h2>
+        <DocHeading id="irepeater-item-field-config"><code className="text-teal-700 dark:text-teal-400">IRepeaterItemFieldConfig</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Конфигурация поля внутри репитера. Поля типа <code className="text-teal-700 dark:text-teal-400">repeater</code> 
           внутри репитера могут иметь собственную конфигурацию через свойство <code className="text-teal-700 dark:text-teal-400">repeaterConfig</code> для создания вложенных репитеров.
@@ -222,7 +204,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   defaultValue?: any
   rules?: IValidationRule[]
   repeaterConfig?: IRepeaterFieldConfig  // Для вложенных репитеров
-  dependsOn?: IDependsOnConfig // Условное отображение поля (только для Vue) (v1.1.0+)
+  dependsOn?: IDependsOnConfig // Условное отображение поля
   // ... другие свойства полей
 }`}
           language="typescript"
@@ -235,9 +217,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IFormGenerationConfig</code>
-        </h2>
+        <DocHeading id="iform-generation-config"><code className="text-teal-700 dark:text-teal-400">IFormGenerationConfig</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Конфигурация для генерации форм</p>
         <CodeBlock
           code={`interface IFormGenerationConfig {
@@ -253,9 +233,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">TFieldType</code>
-        </h2>
+        <DocHeading id="tfield-type"><code className="text-teal-700 dark:text-teal-400">TFieldType</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Типы полей форм</p>
         <CodeBlock
           code={`type TFieldType = 
@@ -268,10 +246,10 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   | 'checkbox' 
   | 'color' 
   | 'file' 
-  | 'file-import'  // 1.8.0+, Vue/React
+  | 'file-import'
   | 'image' 
   | 'block-anchor'
-  | 'matrix-table' // 1.6.0+, Vue/React
+  | 'matrix-table'
   | 'spacing'
   | 'repeater' 
   | 'api-select' 
@@ -282,9 +260,7 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IValidationRule</code>
-        </h2>
+        <DocHeading id="ivalidation-rule"><code className="text-teal-700 dark:text-teal-400">IValidationRule</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Правило валидации поля</p>
         <CodeBlock
           code={`interface IValidationRule {
@@ -311,9 +287,7 @@ type TValidationRuleType =
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IApiSelectItem</code>
-        </h2>
+        <DocHeading id="iapi-select-item"><code className="text-teal-700 dark:text-teal-400">IApiSelectItem</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Элемент списка из API для api-select поля</p>
         <CodeBlock
           code={`interface IApiSelectItem {
@@ -326,9 +300,7 @@ type TValidationRuleType =
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IApiSelectResponse</code>
-        </h2>
+        <DocHeading id="iapi-select-response"><code className="text-teal-700 dark:text-teal-400">IApiSelectResponse</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Ответ от API для api-select поля</p>
         <CodeBlock
           code={`interface IApiSelectResponse {
@@ -343,9 +315,7 @@ type TValidationRuleType =
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IApiRequestParams</code>
-        </h2>
+        <DocHeading id="iapi-request-params"><code className="text-teal-700 dark:text-teal-400">IApiRequestParams</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Параметры для HTTP запроса к API</p>
         <CodeBlock
           code={`interface IApiRequestParams {
@@ -360,9 +330,7 @@ type TValidationRuleType =
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">THttpMethod</code>
-        </h2>
+        <DocHeading id="thttp-method"><code className="text-teal-700 dark:text-teal-400">THttpMethod</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Метод HTTP запроса</p>
         <CodeBlock
           code={`type THttpMethod = 'GET' | 'POST'`}
@@ -372,9 +340,7 @@ type TValidationRuleType =
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IFieldValidationConfig</code>
-        </h2>
+        <DocHeading id="ifield-validation-config"><code className="text-teal-700 dark:text-teal-400">IFieldValidationConfig</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Конфигурация поля с расширенной валидацией</p>
         <CodeBlock
           code={`interface IFieldValidationConfig {
@@ -392,9 +358,7 @@ type TValidationRuleType =
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IValidationResult</code>
-        </h2>
+        <DocHeading id="ivalidation-result"><code className="text-teal-700 dark:text-teal-400">IValidationResult</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Результат валидации</p>
         <CodeBlock
           code={`interface IValidationResult {
@@ -407,9 +371,7 @@ type TValidationRuleType =
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IApiSelectConfig</code>
-        </h2>
+        <DocHeading id="iapi-select-config"><code className="text-teal-700 dark:text-teal-400">IApiSelectConfig</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Конфигурация для api-select поля. <code>debounceMs</code> по умолчанию <code>0</code> (запрос сразу при вводе).
         </p>
@@ -422,7 +384,7 @@ type TValidationRuleType =
   pageParam?: string
   limitParam?: string
   limit?: number
-  debounceMs?: number  // default: 0
+  debounceMs?: number  // по умолчанию: 0
   multiple?: boolean
   responseMapper?: (response: any) => IApiSelectResponse
   dataPath?: string
@@ -440,19 +402,17 @@ type TValidationRuleType =
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IBlockAnchorConfig</code>
-        </h2>
+        <DocHeading id="iblock-anchor-config"><code className="text-teal-700 dark:text-teal-400">IBlockAnchorConfig</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Конфигурация для поля <code>block-anchor</code> (1.5.0+). Форма сохраняет <code>#block-id</code> или URL в props;
+          Конфигурация для поля <code>block-anchor</code>. Форма сохраняет <code>#block-id</code> или URL в props;
           скролл к якорю и обработка клика — в компонентах блоков пользователя.
         </p>
         <CodeBlock
           code={`interface IBlockAnchorConfig {
   placeholder?: string
-  allowCustomUrl?: boolean      // поле «или введите URL» (default: false)
-  excludeEditingBlock?: boolean // исключить редактируемый блок из списка (default: true)
-  onlyVisibleBlocks?: boolean    // только видимые блоки на странице (default: true)
+  allowCustomUrl?: boolean      // поле «или введите URL» (по умолчанию: false)
+  excludeEditingBlock?: boolean // исключить редактируемый блок из списка (по умолчанию: true)
+  onlyVisibleBlocks?: boolean    // только видимые блоки на странице (по умолчанию: true)
 }`}
           language="typescript"
           className="mb-4"
@@ -460,11 +420,9 @@ type TValidationRuleType =
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">IDependsOnConfig</code>
-        </h2>
+        <DocHeading id="idepends-on-config"><code className="text-teal-700 dark:text-teal-400">IDependsOnConfig</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Конфигурация условного отображения поля на основе значения другого поля (Vue 3 и React UI, v1.1.0+)
+          Конфигурация условного отображения поля на основе значения другого поля
         </p>
         <CodeBlock
           code={`interface IDependsOnConfig {
@@ -484,17 +442,12 @@ type TValidationRuleType =
             <li><code className="text-blue-700 dark:text-blue-400">notIn</code> - поле видимо, если значение не содержится в массиве <code className="text-blue-700 dark:text-blue-400">value</code></li>
           </ul>
         </div>
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 mt-4">
-          <p className="text-sm text-gray-700 dark:text-gray-300">
-            <strong>Важно:</strong> Функциональность <code className="text-yellow-700 dark:text-yellow-400">dependsOn</code> работает в Vue 3 и React UI.
-          </p>
-        </div>
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           <code className="text-teal-700 dark:text-teal-400">ICustomFieldFormScope</code>
-          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2">(1.8.0+, Vue/React)</span>
+          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2"></span>
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Контекст формы в <code>ICustomFieldContext.formScope</code> и в <code>fileImportConfig.onImport</code>.
@@ -518,7 +471,7 @@ interface ICustomFieldRepeaterScope {
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           <code className="text-teal-700 dark:text-teal-400">IOptionsFromConfig</code>
-          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2">(1.8.0+, select, Vue/React)</span>
+          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2"></span>
         </h2>
         <CodeBlock
           code={`interface IOptionsFromConfig {
@@ -539,7 +492,7 @@ interface IOptionsFromGroup {
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           <code className="text-teal-700 dark:text-teal-400">IFileImportConfig</code>
-          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2">(1.8.0+, Vue/React)</span>
+          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2"></span>
         </h2>
         <CodeBlock
           code={`interface IFileImportMergeRule {
@@ -571,7 +524,7 @@ interface IFileImportConfig {
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           <code className="text-teal-700 dark:text-teal-400">IBlockFormHooks</code>
-          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2">(1.7.0+, Vue/React)</span>
+          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2"></span>
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Lifecycle-хуки модалки create/edit блока. Указываются в конфиге типа блока (<code>availableBlockTypes[]</code>).
@@ -614,9 +567,7 @@ interface IBlockTypeConfig {
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          <code className="text-teal-700 dark:text-teal-400">TBlockId</code>
-        </h2>
+        <DocHeading id="tblock-id"><code className="text-teal-700 dark:text-teal-400">TBlockId</code></DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">Тип ID блока</p>
         <CodeBlock
           code={`type TBlockId = string`}

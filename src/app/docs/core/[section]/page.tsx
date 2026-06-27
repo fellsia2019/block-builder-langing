@@ -1,16 +1,14 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import DocsLayout from '../../components/DocsLayout';
 import { useCoreNavigation } from '../../hooks/useNavigation';
 import type { CoreSubSection } from '../../types';
 import {
-  GettingStartedCore,
   ClassesSection,
   MethodsSection,
   PropertiesSection,
   TypesSection,
-  UtilitiesSection
+  UtilitiesSection,
 } from '../../sections/core';
 import FormFieldsSection from '../../sections/core/FormFieldsSection';
 import NextPageLink from '../../components/NextPageLink';
@@ -22,69 +20,49 @@ export default function CoreSectionPage() {
   const subSection = section as CoreSubSection;
   const { nextSection, nextTitle } = useCoreNavigation(subSection);
 
-  const getNextHref = (next: string | null) => {
-    if (!next) return null;
-    return `/docs/core/${next}`;
-  };
-
-  const handleNavigate = (next: string) => {
-    window.location.href = `/docs/core/${next}`;
-  };
+  const getNextHref = (next: string | null) => (next ? `/docs/core/${next}` : null);
 
   return (
-    <DocsLayout 
-      activeSection="core" 
-      activeSubSection={subSection}
-    >
-      {getContent(subSection, nextSection, nextTitle, handleNavigate)}
+    <>
+      {getContent(subSection)}
       <NextPageLink
         nextSection={nextSection}
         nextTitle={nextTitle}
         nextHref={getNextHref(nextSection)}
         color="primary"
       />
-    </DocsLayout>
+    </>
   );
 }
 
-function getContent(
-  subSection: CoreSubSection,
-  nextSection: string | null,
-  nextTitle: string | null,
-  onNavigate: (sub: string) => void
-) {
+function getContent(subSection: CoreSubSection) {
+  const noop = () => {};
+  const nav = { nextSection: null, nextTitle: null, onNavigate: noop };
+
   switch (subSection) {
-    case 'getting-started':
-      return <GettingStartedCore nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} />;
     case 'classes':
-      return <ClassesSection nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} />;
+      return <ClassesSection {...nav} />;
     case 'methods':
-      return <MethodsSection nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} />;
+      return <MethodsSection {...nav} />;
     case 'properties':
-      return <PropertiesSection nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} />;
+      return <PropertiesSection {...nav} />;
     case 'types':
-      return <TypesSection nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} />;
+      return <TypesSection {...nav} />;
     case 'form-fields':
-      return <FormFieldsSection nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} />;
+      return <FormFieldsSection {...nav} />;
     case 'utilities':
-      return <UtilitiesSection nextSection={nextSection} nextTitle={nextTitle} onNavigate={onNavigate} />;
+      return <UtilitiesSection {...nav} />;
     default:
       return (
         <div className="space-y-8">
-          <div>
-            <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Страница не найдена</h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">
-              Раздел "{subSection}" не найден.
-            </p>
-            <Link 
-              href="/docs/core/getting-started"
-              className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors inline-block"
-            >
-              Вернуться к началу
-            </Link>
-          </div>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Страница не найдена</h1>
+          <Link
+            href="/docs/get-started"
+            className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 inline-block"
+          >
+            К документации
+          </Link>
         </div>
       );
   }
 }
-

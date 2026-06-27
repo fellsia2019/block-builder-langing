@@ -106,11 +106,11 @@ export function App() {
 import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
 import { useBlockBuilder } from '~/composables/useBlockBuilder'
 
-// SSR: блоки загружаются на сервере
 const { data: initialBlocks } = await useAsyncData('bb-blocks', () =>
   $fetch('/api/blocks')
 )
 
+// composable — ваш файл (use case, типы блоков, handleSave): /docs/nuxt#use-block-builder
 const {
   blockManagementUseCase,
   availableBlockTypes,

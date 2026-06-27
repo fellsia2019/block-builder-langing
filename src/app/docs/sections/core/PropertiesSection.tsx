@@ -9,7 +9,7 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
       <div>
         <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Свойства</h1>
         <p className="text-xl text-gray-600 dark:text-gray-400">
-          Публичные свойства класса BlockBuilder
+          Публичные свойства и опции инициализации программного API (<code>BlockBuilder</code>)
         </p>
       </div>
 
@@ -17,9 +17,7 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           <code className="text-indigo-700 dark:text-indigo-400">theme</code>
         </h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-2">
-          Текущая тема интерфейса (light/dark)
-        </p>
+        <p className="text-gray-600 dark:text-gray-400 mb-2">Текущая тема (light/dark)</p>
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
           <code className="text-sm text-gray-900 dark:text-gray-100">readonly theme: string</code>
         </div>
@@ -29,9 +27,7 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           <code className="text-indigo-700 dark:text-indigo-400">locale</code>
         </h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-2">
-          Текущая локализация интерфейса
-        </p>
+        <p className="text-gray-600 dark:text-gray-400 mb-2">Текущая локализация</p>
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4">
           <code className="text-sm text-gray-900 dark:text-gray-100">readonly locale: string</code>
         </div>
@@ -39,284 +35,71 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
 
       <section>
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Опции инициализации</h2>
-        <p className="text-xl text-gray-600 dark:text-gray-400 mb-4">
-          Параметры, передаваемые при создании экземпляра BlockBuilder
-        </p>
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">blockConfigs</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(обязательный)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Конфигурация типов блоков. Объект, где ключ — это тип блока (type), а значение — конфигурация блока.
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">blockConfigs: Record&lt;string, IBlockConfig&gt;</code>
-          </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-            Подробное описание структуры конфигурации блока см. в разделе "Конфигурация блоков".
-          </p>
-        </div>
-
-        <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-6 border-l-4 border-amber-500 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-amber-700 dark:text-amber-400">containerId</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(удалено в 1.9.0)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            С 1.9.0 встроенный DOM UI удалён — параметр <code>containerId</code> больше не используется.
-            Готовый UI подключайте через <code>@mushket-co/block-builder/vue</code> или <code>/react</code>.
-          </p>
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6 opacity-75">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">containerId</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(до 1.8.x)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            ID HTML элемента, в который рендерился встроенный DOM UI BlockBuilder.
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">containerId?: string</code>
-          </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Для <code className="text-indigo-700 dark:text-indigo-400">/core</code> версии этот параметр не требуется.
-          </p>
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">autoInit</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный, default: true)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Автоматическая загрузка <code>initialBlocks</code> при создании экземпляра BlockBuilder (core API).
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">autoInit?: boolean (default: true)</code>
-          </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Если <code className="text-indigo-700 dark:text-indigo-400">false</code>, начальные блоки нужно загрузить вручную через API.
-          </p>
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">onSave</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Callback функция для сохранения блоков. Вызывается при сохранении через UI или программно.
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">onSave?: (blocks: IBlockDto[]) =&gt; Promise&lt;boolean&gt; | boolean</code>
-          </div>
-          <CodeBlock
-            code={`onSave: async (blocks) => {
-  // Сохранение на сервер
-  try {
-    await fetch('/api/blocks/save', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ blocks })
-    })
-    return true // Успешное сохранение
-  } catch (error) {
-    console.error('Ошибка сохранения:', error)
-    return false // Ошибка сохранения
-  }
-}`}
-            language="javascript"
-            className="mb-2"
-          />
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">initialBlocks</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Массив начальных блоков для загрузки при инициализации. Используется для восстановления ранее сохраненных блоков.
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">initialBlocks?: IBlockDto[]</code>
-          </div>
-          <CodeBlock
-            code={`// Загрузка блоков с сервера
-const loadBlocks = async () => {
-  const response = await fetch('/api/blocks/load')
-  const data = await response.json()
-  return data.blocks || []
-}
-
-const blockBuilder = new BlockBuilder({
-  containerId: 'my-app',
-  blockConfigs: blockConfigs,
-  initialBlocks: await loadBlocks()
-})`}
-            language="javascript"
-            className="mb-2"
-          />
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">theme</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Тема интерфейса BlockBuilder. По умолчанию используется системная тема.
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">theme?: 'light' | 'dark'</code>
-          </div>
-          <CodeBlock
-            code={`const blockBuilder = new BlockBuilder({
-  containerId: 'my-app',
-  blockConfigs: blockConfigs,
-  theme: 'dark' // или 'light'
-})`}
-            language="javascript"
-            className="mb-2"
-          />
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">locale</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Локализация интерфейса BlockBuilder. По умолчанию используется 'ru'.
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">locale?: string</code>
-          </div>
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">warnOnPageLeave</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Предупреждение браузера при уходе со страницы с несохранёнными блоками (с 1.3.1). Не срабатывает в режиме просмотра (<code>isEdit: false</code>).
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">warnOnPageLeave?: boolean</code>
-          </div>
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">controlsContainerClass</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Кастомный CSS класс для контейнера контролов (кнопки добавления блоков и статистика).
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">controlsContainerClass?: string</code>
-          </div>
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">controlsFixedPosition</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Фиксирует панель управления (кнопки + статистика) сверху или снизу экрана при прокрутке.
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">controlsFixedPosition?: 'top' | 'bottom'</code>
-          </div>
-          <CodeBlock
-            code={`const blockBuilder = new BlockBuilder({
-  containerId: 'my-app',
-  blockConfigs: blockConfigs,
-  controlsFixedPosition: 'top' // или 'bottom'
-})`}
-            language="javascript"
-            className="mb-2"
-          />
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">controlsOffset</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Отступ панели управления от края экрана в пикселях (при использовании controlsFixedPosition).
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">controlsOffset?: number (default: 0)</code>
-          </div>
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">controlsOffsetVar</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный)</span>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            CSS переменная для учета высоты шапки/футера при фиксированной позиции контролов. Используется вместо controlsOffset для динамического отступа.
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">controlsOffsetVar?: string</code>
-          </div>
-          <CodeBlock
-            code={`// В CSS
-:root {
-  --header-height: 80px;
-}
-
-// В JavaScript
-const blockBuilder = new BlockBuilder({
-  containerId: 'my-app',
-  blockConfigs: blockConfigs,
-  controlsFixedPosition: 'top',
-  controlsOffsetVar: '--header-height' // Панель будет учитывать высоту шапки
-})`}
-            language="javascript"
-            className="mb-2"
-          />
-        </div>
-
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">isEdit</code>
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Режим редактирования. По умолчанию <code className="text-indigo-700 dark:text-indigo-400">true</code> (режим редактирования).
-          </p>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
-            Если установлено <code className="text-indigo-700 dark:text-indigo-400">false</code>, все контролы редактирования скрываются, остаётся только пользовательская верстка блоков в обёртке BlockBuilder.
-          </p>
-          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
-            <code className="text-sm text-gray-900 dark:text-gray-100">isEdit?: boolean (default: true)</code>
-          </div>
-          <CodeBlock
-            code={`const blockBuilder = new BlockBuilder({
-  containerId: 'my-app',  // Только для полной версии с UI
-  blockConfigs: blockConfigs,
-  isEdit: false // режим только просмотра
-})`}
-            language="javascript"
-            className="mb-2"
-          />
-          <div className="mt-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              При изменении режима на элемент <code className="text-blue-700 dark:text-blue-400">body</code> автоматически добавляется/удаляется CSS класс <code className="text-blue-700 dark:text-blue-400">bb-is-edit-mode</code> для возможности кастомизации стилей в зависимости от режима работы.
+        <div className="space-y-6">
+          <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
+            <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+              <code className="text-indigo-700 dark:text-indigo-400">blockConfigs</code>
+              <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(обязательный)</span>
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-2">
+              Конфигурация типов блоков: ключ — <code>type</code>, значение — конфиг полей и метаданных.
             </p>
+            <code className="text-sm bg-white dark:bg-slate-800 rounded p-3 block">
+              blockConfigs: Record&lt;string, IBlockConfig&gt;
+            </code>
+          </div>
+
+          <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
+            <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+              <code className="text-indigo-700 dark:text-indigo-400">autoInit</code>
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-2">
+              Автозагрузка <code>initialBlocks</code> при создании экземпляра (по умолчанию: <code>true</code>).
+            </p>
+            <code className="text-sm bg-white dark:bg-slate-800 rounded p-3 block">autoInit?: boolean</code>
+          </div>
+
+          <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
+            <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+              <code className="text-indigo-700 dark:text-indigo-400">initialBlocks</code>
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              Начальный набор блоков при инициализации.
+            </p>
+            <CodeBlock
+              language="javascript"
+              code={`const blockBuilder = new BlockBuilder({
+  blockConfigs,
+  initialBlocks: await loadBlocksFromApi(),
+})`}
+            />
+          </div>
+
+          <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
+            <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+              <code className="text-indigo-700 dark:text-indigo-400">theme</code> /{' '}
+              <code className="text-indigo-700 dark:text-indigo-400">locale</code>
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              Опциональные настройки темы и локали при создании.
+            </p>
+            <CodeBlock
+              language="javascript"
+              code={`new BlockBuilder({
+  blockConfigs,
+  theme: 'dark',
+  locale: 'ru',
+})`}
+            />
           </div>
         </div>
+
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-6">
+          UI-опции (<code>onSave</code>, <code>isEdit</code>, панель контролов) — в{' '}
+          <code>BlockBuilderComponent</code>, см. разделы компонентов.
+        </p>
       </section>
     </div>
   );
 }
-

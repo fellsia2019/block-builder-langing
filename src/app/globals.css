@@ -40,9 +40,42 @@ body.scrollbar-is-locked {
   will-change: scroll-position;
 }
 
+.docs-content h2[id],
+.docs-content h3[id] {
+  scroll-margin-top: var(--docs-scroll-offset, 5rem);
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .docs-search-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(148 163 184 / 0.5) transparent;
+  }
+
+  .docs-search-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .docs-search-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .docs-search-scroll::-webkit-scrollbar-thumb {
+    background-color: rgb(148 163 184 / 0.45);
+    border-radius: 9999px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .docs-search-scroll {
+      scrollbar-color: rgb(100 116 139 / 0.6) transparent;
+    }
+
+    .docs-search-scroll::-webkit-scrollbar-thumb {
+      background-color: rgb(100 116 139 / 0.55);
+    }
   }
 }
 
