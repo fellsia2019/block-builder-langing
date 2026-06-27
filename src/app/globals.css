@@ -40,7 +40,8 @@ body.scrollbar-is-locked {
 
 .docs-content h2[id],
 .docs-content h3[id],
-.docs-content li[id] {
+.docs-content li[id],
+.docs-content div[id] {
   scroll-margin-top: var(--docs-scroll-offset, 5rem);
 }
 

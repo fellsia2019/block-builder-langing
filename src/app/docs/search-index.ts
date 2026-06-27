@@ -12,42 +12,157 @@ const SIDEBAR_ENTRIES: DocsSearchEntry[] = DOCS_SIDEBAR.flatMap((group) =>
     title: item.title,
     href: item.href,
     group: group.title,
-  }))
+  })),
 );
 
-export const DOCS_SEARCH_INDEX: DocsSearchEntry[] = [
-  ...SIDEBAR_ENTRIES,
-  { title: 'BlockBuilderComponent', href: '/docs/vue/components#block-builder-component', group: 'Vue 3', keywords: 'свойства события компонент' },
-  { title: 'BlockBuilderComponent', href: '/docs/react/components#block-builder-component', group: 'React', keywords: 'свойства колбэки компонент' },
-  { title: 'Поля форм — select', href: '/docs/core/form-fields#select', group: 'Справочник API', keywords: 'multiple optionsFrom' },
-  { title: 'Поля форм — repeater', href: '/docs/core/form-fields#repeater', group: 'Справочник API', keywords: 'nested items' },
-  { title: 'Поля форм — spacing', href: '/docs/core/form-fields#spacing', group: 'Справочник API', keywords: 'margin padding breakpoints' },
-  { title: 'Поля форм — api-select', href: '/docs/core/form-fields#api-select', group: 'Справочник API', keywords: 'dropdown remote' },
-  { title: 'Поля форм — matrix-table', href: '/docs/core/form-fields#matrix-table', group: 'Справочник API', keywords: 'table grid' },
-  { title: 'Поля форм — кастомные рендереры', href: '/docs/core/form-fields#custom-renderers', group: 'Справочник API', keywords: 'custom ICustomFieldRenderer formScope rendererId' },
-  { title: 'IFormFieldConfig', href: '/docs/core/types#i-form-field-config', group: 'Типы', keywords: 'typescript interface field' },
-  { title: 'IBlockFormHooks', href: '/docs/core/types#i-block-form-hooks', group: 'Типы', keywords: 'onFormOpen onBeforeSave' },
-  { title: 'Обзор API — BlockBuilder', href: '/docs/core/classes', group: 'Справочник API', keywords: 'core headless createBlockManagementUseCase' },
-  { title: 'prepareBlocksForDisplay', href: '/docs/react/components#prepare-blocks-for-display', group: 'React', keywords: 'ssr next nuxt server hydration' },
-  { title: 'prepareBlocksForDisplay', href: '/docs/next#prepare-blocks-for-display', group: 'Next.js (SSR)', keywords: 'server hydration ssr-utils' },
-  { title: 'prepareBlocksForDisplay', href: '/docs/nuxt#prepare-blocks-for-display', group: 'Nuxt (SSR)', keywords: 'server hydration ssr-utils vue' },
-  { title: 'enrichBlockForDisplay', href: '/docs/react/components#enrich-block-for-display', group: 'React', keywords: 'ssr server hydration' },
-  { title: 'seedRepositoryFromBlocks', href: '/docs/react/components#seed-repository-from-blocks', group: 'React', keywords: 'ssr server hydration repository' },
+const CORE = '/docs/core';
+const TYPES = `${CORE}/types`;
+const FIELDS = `${CORE}/form-fields`;
+const UTILS = `${CORE}/utilities`;
+const METHODS = `${CORE}/methods`;
+
+function type(name: string, id: string, keywords?: string): DocsSearchEntry {
+  return { title: name, href: `${TYPES}#${id}`, group: 'Типы', keywords };
+}
+
+function field(title: string, id: string, keywords?: string): DocsSearchEntry {
+  return { title, href: `${FIELDS}#${id}`, group: 'Поля форм', keywords };
+}
+
+function util(title: string, id: string, keywords?: string): DocsSearchEntry {
+  return { title, href: `${UTILS}#${id}`, group: 'Утилиты', keywords };
+}
+
+function method(name: string, keywords?: string): DocsSearchEntry {
+  return { title: name, href: `${METHODS}#${name}`, group: 'Методы API', keywords };
+}
+
+const EXTRA_ENTRIES: DocsSearchEntry[] = [
+  // —— Обзор API ——
+  { title: 'BlockBuilder (core)', href: `${CORE}/classes`, group: 'Справочник API', keywords: 'headless createBlockManagementUseCase программный api' },
+  { title: 'Импорт и конструктор', href: `${CORE}/classes#import`, group: 'Справочник API', keywords: 'new BlockBuilder import constructor' },
+  { title: 'blockConfigs', href: `${CORE}/properties`, group: 'Справочник API', keywords: 'конфигурация типов блоков initialBlocks autoInit' },
+
+  // —— Валидация ——
+  field('Валидация в UI', 'validation', 'validation validate валидация ошибки required pattern custom rules'),
+  util('UniversalValidator', 'universal-validator', 'validation validate валидация правила required email url min max pattern'),
+  util('ReactiveFormValidationTracker', 'reactive-form-validation', 'validation validate валидация ошибки форма touch revalidate'),
+  type('IValidationRule', 'ivalidation-rule', 'validation validate required min max pattern custom'),
+  type('IFieldValidationConfig', 'ifield-validation-config', 'validation rules валидация'),
+  type('IValidationResult', 'ivalidation-result', 'validation errors isValid'),
+
+  // —— Поля форм ——
+  field('Обзор полей форм', 'overview', 'form fields IFormFieldConfig props'),
+  field('Стандартные типы полей', 'field-types', 'text number checkbox radio textarea color range'),
+  field('Параметры полей', 'field-params', 'label placeholder defaultValue required hidden disabled'),
+  field('select', 'select', 'список options multiple optionsFrom ISelectOption'),
+  field('repeater', 'repeater', 'повторитель nested items вложенные'),
+  field('spacing', 'spacing', 'margin padding breakpoints отступы DEFAULT_BREAKPOINTS'),
+  field('image', 'image', 'изображение upload url preview'),
+  field('file', 'file', 'файл upload import IFileImportConfig'),
+  field('block-anchor', 'block-anchor', 'якорь anchor scroll hash ссылка'),
+  field('matrix-table', 'matrix-table', 'таблица grid matrix'),
+  field('api-select', 'api-select', 'api dropdown remote fetch autocomplete'),
+  field('dependsOn', 'depends-on', 'условное отображение visible when operator equals'),
+  field('Кастомные рендереры', 'custom-renderers', 'ICustomFieldRenderer custom rendererId formScope'),
+  field('Регистрация кастомного рендерера', 'custom-register', 'registerCustomFieldRenderer rendererId'),
+
+  // —— Типы ——
+  type('IBlock', 'iblock', 'block id type props metadata'),
+  type('IBlockDto', 'iblock-dto', 'dto serialize storage json'),
+  type('ICreateBlockDto', 'icreate-block-dto', 'create block dto'),
+  type('IUpdateBlockDto', 'iupdate-block-dto', 'update block dto'),
+  type('IBlockMetadata', 'iblock-metadata', 'metadata visible locked'),
+  type('IBlockBuilderOptions', 'iblock-builder-options', 'options constructor init'),
+  type('IFormFieldConfig', 'iform-field-config', 'field config type label validation'),
+  type('IRepeaterFieldConfig', 'irepeater-field-config', 'repeater nested fields'),
+  type('IRepeaterItemFieldConfig', 'irepeater-item-field-config', 'repeater item field'),
+  type('IFormGenerationConfig', 'iform-generation-config', 'form generation'),
+  type('TFieldType', 'tfield-type', 'field type text select repeater spacing'),
+  type('IApiSelectConfig', 'iapi-select-config', 'api-select url method headers'),
+  type('IApiSelectItem', 'iapi-select-item', 'api select item label value'),
+  type('IApiSelectResponse', 'iapi-select-response', 'api select response items total'),
+  type('IApiRequestParams', 'iapi-request-params', 'api request params search page'),
+  type('THttpMethod', 'thttp-method', 'GET POST PUT DELETE http'),
+  type('IBlockAnchorConfig', 'iblock-anchor-config', 'block anchor config'),
+  type('IDependsOnConfig', 'idepends-on-config', 'dependsOn field operator value'),
+  type('IBlockFormHooks', 'iblock-form-hooks', 'onFormOpen onBeforeSave formHooks lifecycle'),
+  type('ICustomFieldFormScope', 'icustom-field-form-scope', 'custom renderer formScope setField repeater'),
+  type('IOptionsFromConfig', 'ioptions-from-config', 'select optionsFrom dynamic options'),
+  type('IFileImportConfig', 'ifile-import-config', 'file import upload merge onImport'),
+  type('TBlockId', 'tblock-id', 'block id string'),
+
+  // —— Методы ——
+  method('createBlock', 'создать блок crud'),
+  method('getBlock', 'получить блок по id'),
+  method('getAllBlocks', 'список всех блоков'),
+  method('updateBlock', 'обновить блок'),
+  method('deleteBlock', 'удалить блок'),
+  method('duplicateBlock', 'дублировать копировать'),
+  method('exportBlocks', 'экспорт json'),
+  method('importBlocks', 'импорт json'),
+  method('setIsEdit', 'режим редактирования isEdit preview просмотр'),
+  method('getIsEdit', 'режим редактирования isEdit'),
+  method('registerCustomFieldRenderer', 'кастомный рендерер поля'),
+  method('registerCustomFieldRenderers', 'кастомные рендереры массово'),
+
+  // —— Утилиты ——
+  util('Блокировка скролла', 'scroll-lock', 'scroll lock modal lockBodyScroll setScrollLockHandlers'),
+  util('buildBlockHierarchy', 'block-hierarchy-utils', 'hierarchy parent children cloneBlock getAllChildren isChildOf'),
+  util('generateSpacingCSS', 'spacing-utils', 'spacing margin padding breakpoints css variables validateSpacing'),
+  util('filterBlocksForDisplay', 'filter-blocks', 'visible hidden isEdit opacity'),
+  util('haveBlocksChanged', 'unsaved-changes', 'несохранённые изменения page leave warnOnPageLeave tracker'),
+  util('usePageLeaveWarning', 'unsaved-changes', 'vue react warn leave beforeunload'),
+
+  // —— Vue ——
+  { title: 'BlockBuilderComponent', href: '/docs/vue/components#block-builder-component', group: 'Vue 3', keywords: 'компонент props события emit' },
+  { title: 'onSave', href: '/docs/vue/events', group: 'Vue 3', keywords: 'сохранение save blocks sync backend' },
+  { title: 'onBlockAdded', href: '/docs/vue/events', group: 'Vue 3', keywords: 'событие added created duplicate' },
+  { title: 'createBlockManagementUseCase', href: '/docs/vue/getting-started', group: 'Vue 3', keywords: 'use case composable setup' },
+
+  // —— React ——
+  { title: 'BlockBuilderComponent', href: '/docs/react/components#block-builder-component', group: 'React', keywords: 'компонент props колбэки' },
+  { title: 'onSave', href: '/docs/react/events', group: 'React', keywords: 'сохранение save blocks sync backend' },
+  { title: 'onBlockAdded', href: '/docs/react/events', group: 'React', keywords: 'колбэк added created duplicate' },
+  { title: 'onBlockUpdated', href: '/docs/react/events', group: 'React', keywords: 'колбэк updated changed' },
+  { title: 'onBlockDeleted', href: '/docs/react/events', group: 'React', keywords: 'колбэк deleted removed' },
+  { title: 'createBlockManagementUseCase', href: '/docs/react/getting-started', group: 'React', keywords: 'use case useMemo hook' },
+
+  // —— SSR ——
+  { title: 'prepareBlocksForDisplay', href: '/docs/react/components#prepare-blocks-for-display', group: 'React', keywords: 'ssr server hydration render' },
+  { title: 'prepareBlocksForDisplay', href: '/docs/next#prepare-blocks-for-display', group: 'Next.js (SSR)', keywords: 'ssr server hydration' },
+  { title: 'prepareBlocksForDisplay', href: '/docs/nuxt#prepare-blocks-for-display', group: 'Nuxt (SSR)', keywords: 'ssr server hydration vue' },
+  { title: 'enrichBlockForDisplay', href: '/docs/react/components#enrich-block-for-display', group: 'React', keywords: 'ssr enrich display' },
+  { title: 'seedRepositoryFromBlocks', href: '/docs/react/components#seed-repository-from-blocks', group: 'React', keywords: 'ssr repository hydration' },
+  { title: 'enableViewportBreakpointDetection', href: '/docs/react/components#enable-viewport-breakpoint-detection', group: 'React', keywords: 'ssr spacing breakpoints viewport' },
+  { title: 'Next.js SSR', href: '/docs/next#server-client', group: 'Next.js (SSR)', keywords: 'app router server client component' },
+  { title: 'Nuxt SSR', href: '/docs/nuxt#ssr-page', group: 'Nuxt (SSR)', keywords: 'nuxt server ssr page' },
+  { title: 'serializeBlocksForStorage', href: '/docs/next#api-routes', group: 'Next.js (SSR)', keywords: 'save storage api route json' },
 ];
 
-export function searchDocs(query: string, limit = 12): DocsSearchEntry[] {
+export const DOCS_SEARCH_INDEX: DocsSearchEntry[] = [...SIDEBAR_ENTRIES, ...EXTRA_ENTRIES];
+
+export function searchDocs(query: string, limit = 16): DocsSearchEntry[] {
   const q = query.trim().toLowerCase();
   if (!q) return DOCS_SEARCH_INDEX.slice(0, limit);
+
+  const words = q.split(/\s+/).filter((word) => word.length > 1);
 
   const scored = DOCS_SEARCH_INDEX.map((entry) => {
     const haystack = `${entry.title} ${entry.group} ${entry.keywords ?? ''} ${entry.href}`.toLowerCase();
     let score = 0;
-    if (entry.title.toLowerCase().startsWith(q)) score += 10;
-    if (entry.title.toLowerCase().includes(q)) score += 5;
-    if (haystack.includes(q)) score += 2;
-    q.split(/\s+/).forEach((word) => {
-      if (word.length > 1 && haystack.includes(word)) score += 1;
-    });
+
+    if (entry.title.toLowerCase() === q) score += 20;
+    else if (entry.title.toLowerCase().startsWith(q)) score += 12;
+    else if (entry.title.toLowerCase().includes(q)) score += 6;
+
+    if (haystack.includes(q)) score += 3;
+
+    for (const word of words) {
+      if (entry.title.toLowerCase().includes(word)) score += 4;
+      if (haystack.includes(word)) score += 2;
+    }
+
     return { entry, score };
   })
     .filter(({ score }) => score > 0)
@@ -56,7 +171,7 @@ export function searchDocs(query: string, limit = 12): DocsSearchEntry[] {
   const seen = new Set<string>();
   const results: DocsSearchEntry[] = [];
   for (const { entry } of scored) {
-    const key = `${entry.href}|${entry.title}`;
+    const key = `${entry.href}|${entry.title}|${entry.group}`;
     if (seen.has(key)) continue;
     seen.add(key);
     results.push(entry);

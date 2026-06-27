@@ -445,10 +445,9 @@ type TValidationRuleType =
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+        <DocHeading id="icustom-field-form-scope">
           <code className="text-teal-700 dark:text-teal-400">ICustomFieldFormScope</code>
-          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2"></span>
-        </h2>
+        </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Контекст формы в <code>ICustomFieldContext.formScope</code> и в <code>fileImportConfig.onImport</code>.
         </p>
@@ -469,10 +468,9 @@ interface ICustomFieldRepeaterScope {
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+        <DocHeading id="ioptions-from-config">
           <code className="text-teal-700 dark:text-teal-400">IOptionsFromConfig</code>
-          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2"></span>
-        </h2>
+        </DocHeading>
         <CodeBlock
           code={`interface IOptionsFromConfig {
   source: string
@@ -490,10 +488,9 @@ interface IOptionsFromGroup {
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+        <DocHeading id="ifile-import-config">
           <code className="text-teal-700 dark:text-teal-400">IFileImportConfig</code>
-          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2"></span>
-        </h2>
+        </DocHeading>
         <CodeBlock
           code={`interface IFileImportMergeRule {
   targetField: string
@@ -522,10 +519,9 @@ interface IFileImportConfig {
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+        <DocHeading id="iblock-form-hooks">
           <code className="text-teal-700 dark:text-teal-400">IBlockFormHooks</code>
-          <span className="text-base font-normal text-gray-500 dark:text-gray-400 ml-2"></span>
-        </h2>
+        </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Lifecycle-хуки модалки create/edit блока. Указываются в конфиге типа блока (<code>availableBlockTypes[]</code>).
         </p>

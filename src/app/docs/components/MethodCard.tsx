@@ -21,7 +21,7 @@ export default function MethodCard({
   };
 
   return (
-    <div className={`rounded-lg p-4 border ${colorClasses[color]}`}>
+    <div id={name} className={`rounded-lg p-4 border ${colorClasses[color]}`}>
       <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white flex items-center gap-2">
         <code className="text-gray-900 dark:text-white">{name}</code>
       </h3>

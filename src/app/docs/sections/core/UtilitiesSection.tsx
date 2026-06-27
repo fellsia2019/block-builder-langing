@@ -72,10 +72,10 @@ unlockBodyScroll();`}
       </section>
 
       <section className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+        <DocHeading id="block-hierarchy-utils" level={2} className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="layers" size={22} className="text-blue-600 dark:text-blue-400" />
           Вспомогательные функции блоков
-        </h2>
+        </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
           Экспортируются из <code className="text-blue-700 dark:text-blue-400">@mushket-co/block-builder/core</code>:
           <code className="text-blue-700 dark:text-blue-400"> buildBlockHierarchy, cloneBlock, getAllChildren, isChildOf</code>.
@@ -115,10 +115,10 @@ const inside = isChildOf(blocks, childId, parentId);`}
       </section>
 
       <section className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+        <DocHeading id="spacing-utils" level={2} className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="settings" size={22} className="text-indigo-600 dark:text-indigo-400" />
           Утилиты отступов (spacing)
-        </h2>
+        </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
           Экспортируются из <code className="text-indigo-700 dark:text-indigo-400">@mushket-co/block-builder/core</code>:
           <code className="text-indigo-700 dark:text-indigo-400"> DEFAULT_BREAKPOINTS, generateSpacingCSS, generateSpacingCSSVariables, getSpacingValue, mergeSpacing, setSpacingValue, validateSpacing</code>.
@@ -159,10 +159,10 @@ const merged = mergeSpacing(baseSpacing, patch);`}
       </section>
 
       <section className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-6 border-l-4 border-amber-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+        <DocHeading id="filter-blocks" level={2} className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="target" size={22} className="text-amber-600 dark:text-amber-400" />
           Видимость блоков
-        </h2>
+        </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
           <code className="text-amber-700 dark:text-amber-400">filterBlocksForDisplay(blocks, isEdit)</code> — экспорт из core.
           В режиме просмотра скрытые блоки (<code>visible: false</code>) не попадают в DOM; в редактировании остаются с классом <code>bb-opacity-hidden</code>.
@@ -176,10 +176,10 @@ const visibleBlocks = filterBlocksForDisplay(blocks, isEdit)`}
       </section>
 
       <section className="bg-rose-50 dark:bg-rose-900/20 rounded-xl p-6 border-l-4 border-rose-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+        <DocHeading id="unsaved-changes" level={2} className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="warning" size={22} className="text-rose-600 dark:text-rose-400" />
           Несохранённые изменения
-        </h2>
+        </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
           Для кастомного UI без готового <code>BlockBuilderComponent</code> — утилиты и хуки из core / vue / react.
           Опция <code>warnOnPageLeave</code> в компонентах включает нативное предупреждение браузера.
@@ -199,10 +199,10 @@ const visibleBlocks = filterBlocksForDisplay(blocks, isEdit)`}
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+        <DocHeading id="reactive-form-validation" level={2} className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="shield" size={22} className="text-teal-600 dark:text-teal-400" />
           Реактивная валидация формы
-        </h2>
+        </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
           Для кастомного UI форм (без готового <code>BlockBuilderComponent</code>) — трекер и хелпер из{' '}
           <code className="text-teal-700 dark:text-teal-400">@mushket-co/block-builder/core</code>.
@@ -265,10 +265,10 @@ function onFieldChange(formData, formFields) {
       </section>
 
       <section className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 border-l-4 border-purple-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+        <DocHeading id="universal-validator" level={2} className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="shield" size={22} className="text-purple-600 dark:text-purple-400" />
           UniversalValidator
-        </h2>
+        </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
           Единый валидатор для форм; экспортируется из <code className="text-purple-700 dark:text-purple-400">@mushket-co/block-builder/core</code>.
         </p>
