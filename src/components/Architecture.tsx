@@ -56,7 +56,7 @@ export default function Architecture() {
                   UI Layer
                 </h3>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <li>• <strong>Vue3 Components</strong> - готовые компоненты</li>
+                  <li>• <strong>UI Components</strong> - готовые компоненты</li>
                   <li>• <strong>Controllers</strong> - управление UI</li>
                   <li>• <strong>Services</strong> - UI сервисы</li>
                 </ul>

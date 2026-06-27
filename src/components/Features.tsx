@@ -40,49 +40,14 @@ const features: Array<{
   },
   {
     iconName: 'plugin' as const,
-    title: 'Якоря и файлы (1.5.0)',
-    description: 'Поле block-anchor для ссылок на блоки страницы и отдельный UI загрузки file/files. Скролл к якорю реализуется в ваших компонентах блоков.'
-  },
-  {
-    iconName: 'clipboard' as const,
-    title: 'Form scope & import (1.8.0)',
-    description: 'formScope в custom fields, optionsFrom для select, file-import с merge/dedupeBy, persist: false — Vue 3 и React; демо в demo-bb.'
-  },
-  {
-    iconName: 'clipboard' as const,
-    title: 'Form hooks (1.7.0)',
-    description: 'formHooks.onFormOpen / onBeforeSave в конфиге типа блока — гидрация формы и side-effects перед save (Vue 3 и React).'
-  },
-  {
-    iconName: 'clipboard' as const,
-    title: 'Matrix-table (1.6.0)',
-    description: 'Поле matrix-table — редактор таблицы в форме блока (Vue 3 и React). Демо в demo-bb и examples.'
-  },
-  {
-    iconName: 'clipboard' as const,
-    title: 'Multi-select (1.5.5)',
-    description: 'Поле select с multiple: true — множественный выбор с тегами во Vue и React.'
-  },
-  {
-    iconName: 'plugin' as const,
     title: 'Плагинная система',
     description: 'Легко расширяйте функциональность через кастомные типы полей и рендереры.'
-  },
-  {
-    iconName: 'package' as const,
-    title: 'TypeScript',
-    description: 'Полная типизация для безопасной разработки и отличной поддержки IDE.'
   },
   {
     iconName: 'theater' as const,
     title: 'Автоматический UI',
     description: 'Встроенный UI с формами, валидацией и модальными окнами работает из коробки.'
-  },
-  {
-    iconName: 'flask' as const,
-    title: 'Покрытие тестами',
-    description: 'Unit, интеграционные и E2E тесты для гарантии качества кода.'
-  },
+  }
 ];
 
 const animations = ['FADE_IN_UP', 'FADE_IN_LEFT', 'FADE_IN_RIGHT', 'ZOOM_IN', 'SCALE_UP'] as const;

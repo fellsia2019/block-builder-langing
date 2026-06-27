@@ -412,9 +412,9 @@ onMounted(() => {
     <div class="container">
       <h1>{{ block.props.title }}</h1>
       <p>{{ block.props.subtitle }}</p>
-      <button v-if="block.props.buttonText" @click="handleClick">
+      <a v-if="block.props.buttonText && block.props.buttonUrl" :href="block.props.buttonUrl">
         {{ block.props.buttonText }}
-      </button>
+      </a>
     </div>
   </section>
 </template>
@@ -426,12 +426,6 @@ const props = defineProps({
     required: true
   }
 })
-
-const handleClick = () => {
-  if (props.block.props.buttonUrl) {
-    window.location.href = props.block.props.buttonUrl
-  }
-}
 </script>
 
 <style scoped>

@@ -159,7 +159,6 @@ export function BlockBuilderEditor({ initialBlocks }) {
     code: `import { BlockBuilder } from '@mushket-co/block-builder/core'
 // Для core версии НЕ импортируйте CSS!
 
-// Конфигурация блоков
 const blockConfigs = {
   text: {
     title: 'Текстовый блок',
@@ -169,29 +168,20 @@ const blockConfigs = {
         label: 'Содержимое',
         type: 'textarea',
         defaultValue: 'Новый текстовый блок'
-      },
-      {
-        field: 'fontSize',
-        label: 'Размер шрифта',
-        type: 'number',
-        defaultValue: 16
       }
     ]
   }
 }
 
-// Создание экземпляра только с API
 const blockBuilder = new BlockBuilder({
-  // containerId НЕ передаем - UI не инициализируется
-  blockConfigs: blockConfigs,
-  autoInit: false // Ручная инициализация
+  blockConfigs,
+  autoInit: false
 })
 
-// Используем только API
 await blockBuilder.createBlock({
   type: 'text',
   props: { content: 'Hello World' },
-  settings: { fontSize: 16 }
+  settings: {}
 })
 
 const blocks = await blockBuilder.getAllBlocks()
@@ -268,8 +258,8 @@ export default function CodeExamples() {
           )}
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={600}>
-              <div className="p-6 bg-gradient-to-br from-primary-50 to-purple-50 dark:from-primary-900/20 dark:to-purple-900/20 rounded-xl border border-primary-200 dark:border-primary-800 hover:scale-105 transition-transform">
+            <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={600} className='h-full' innerClassName='h-full'>
+              <div className="h-full p-6 bg-gradient-to-br from-primary-50 to-purple-50 dark:from-primary-900/20 dark:to-purple-900/20 rounded-xl border border-primary-200 dark:border-primary-800 hover:scale-105 transition-transform">
                 <div className="mb-2">
                   <Icon name="zap" size={32} className="text-primary-600 dark:text-primary-400" />
                 </div>
@@ -281,8 +271,8 @@ export default function CodeExamples() {
                 </p>
               </div>
             </AnimateOnScroll>
-            <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={700}>
-              <div className="p-6 bg-gradient-to-br from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 rounded-xl border border-green-200 dark:border-green-800 hover:scale-105 transition-transform">
+            <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={700} className='h-full' innerClassName='h-full'>
+              <div className="h-full p-6 bg-gradient-to-br from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 rounded-xl border border-green-200 dark:border-green-800 hover:scale-105 transition-transform">
                 <div className="mb-2">
                   <Icon name="plugin" size={32} className="text-green-600 dark:text-green-400" />
                 </div>
@@ -294,8 +284,8 @@ export default function CodeExamples() {
                 </p>
               </div>
             </AnimateOnScroll>
-            <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={800}>
-              <div className="p-6 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl border border-orange-200 dark:border-orange-800 hover:scale-105 transition-transform">
+            <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={800} className='h-full' innerClassName='h-full'>
+              <div className="h-full p-6 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl border border-orange-200 dark:border-orange-800 hover:scale-105 transition-transform">
                 <div className="mb-2">
                   <Icon name="monitor" size={32} className="text-orange-600 dark:text-orange-400" />
                 </div>

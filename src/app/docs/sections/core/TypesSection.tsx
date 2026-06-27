@@ -20,23 +20,16 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
         <p className="text-gray-600 dark:text-gray-400 mb-4">Опции для создания BlockBuilder</p>
         <CodeBlock
           code={`interface IBlockBuilderOptions {
-  containerId?: string
   blockConfigs: Record<string, any>
-  repository?: any // Внутренний тип IBlockRepository (не экспортируется)
-  componentRegistry?: any // Внутренний тип IComponentRegistry (не экспортируется)
-  httpClient?: any // Внутренний тип IHttpClient (не экспортируется)
-  customFieldRendererRegistry?: any // Внутренний тип ICustomFieldRendererRegistry (не экспортируется)
+  repository?: any
+  componentRegistry?: any
+  httpClient?: any
+  customFieldRendererRegistry?: any
   theme?: 'light' | 'dark'
   locale?: string
   autoInit?: boolean
-  onSave?: (blocks: IBlockDto[]) => Promise<boolean> | boolean
   initialBlocks?: IBlockDto[]
-  controlsContainerClass?: string
-  controlsFixedPosition?: 'top' | 'bottom'
-  controlsOffset?: number
-  controlsOffsetVar?: string
-  warnOnPageLeave?: boolean
-  isEdit?: boolean
+  // 1.9.0: удалены containerId, onSave, controls* — DOM UI больше нет
 }`}
           language="typescript"
           className="mb-4"

@@ -12,7 +12,7 @@ export default function ReactPage() {
         <div>
           <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Быстрый старт с React</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">
-            BlockBuilder 1.8.0 — полная поддержка React UI и блоков с <code>@mushket-co/block-builder/react</code>
+            BlockBuilder 1.9.0 — React UI с code-splitting и блоками через <code>@mushket-co/block-builder/react</code>
             {' '}(требуется <strong>React 19+</strong>)
           </p>
         </div>
@@ -86,6 +86,14 @@ export function App() {
             Для Nuxt — <Link href="/docs/nuxt" className="text-blue-600 hover:underline">Nuxt (SSR)</Link>.
             Живые SSR-примеры (не в demo-bb) — в{' '}
             <a href={GITHUB_EXAMPLES} className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">block-builder/examples</a>.
+          </p>
+        </section>
+
+        <section className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 border border-amber-200 dark:border-amber-800">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            <strong>1.9.0 (BREAKING):</strong> встроенный Pure JS / DOM UI удалён. Готовый UI — только{' '}
+            <code>@mushket-co/block-builder/react</code> + <code>index.esm.css</code>. Core API —{' '}
+            <code>@mushket-co/block-builder/core</code>. Тяжёлые form controls подгружаются lazy при открытии формы.
           </p>
         </section>
 

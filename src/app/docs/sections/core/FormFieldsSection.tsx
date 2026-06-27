@@ -72,6 +72,31 @@ export default function FormFieldsSection({ nextSection, nextTitle, onNavigate }
         </p>
       </div>
 
+      <section className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-6 border-l-4 border-amber-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Миграция на 1.9.0</h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+          <li>
+            <strong>Pure JS / встроенный DOM UI удалён.</strong> Используйте{' '}
+            <code>@mushket-co/block-builder/vue</code> или <code>/react</code> + <code>index.esm.css</code>
+          </li>
+          <li>
+            <code>BlockBuilder</code> из <code>/core</code> — только программный API (CRUD блоков, валидация, утилиты). Без{' '}
+            <code>containerId</code>, <code>onSave</code> UI-колбэков и DOM-методов
+          </li>
+          <li>Vue/React UI: code-splitting тяжёлых controls — меньший initial bundle</li>
+        </ul>
+      </section>
+
+      <section className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что нового в 1.9.0</h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+          <li>Code-splitting UI: repeater, matrix-table, api-select, image upload и др. грузятся при открытии формы</li>
+          <li>Initial bundle Vue/React ~на 50% меньше (тяжёлые chunks — async)</li>
+          <li><code>npm run size</code> в репозитории пакета — отчёт initial vs async chunks</li>
+          <li>Удалены Pure JS примеры и встроенный DOM UI; core entry — тонкий реэкспорт API</li>
+        </ul>
+      </section>
+
       <section className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Что нового в 1.8.0</h2>
         <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
@@ -889,16 +914,12 @@ const topicLabels = (props.topics ?? []).map(
             Для применения spacing в <strong>/core</strong> версии используйте утилиты BlockBuilder:
           </p>
           <CodeBlock
-            code={`import { getBlockInlineStyles, applySpacingToElement } from '@mushket-co/block-builder/core';
+            code={`import { getBlockInlineStyles } from '@mushket-co/block-builder/core';
 
 // В Vue компоненте
 const styles = computed(() => {
   return getBlockInlineStyles(block.props.spacing, 'spacing', customBreakpoints);
 });
-
-// Через DOM API (например, SSR или кастомный рендер)
-const element = document.getElementById('my-block');
-applySpacingToElement(element, block.props.spacing, 'spacing', customBreakpoints);
 
 // Результат: CSS переменные для padding и inline стили для margin
 // --spacing-padding-top: 20px;
@@ -2311,16 +2332,16 @@ class WysiwygFieldRenderer implements ICustomFieldRenderer {
 }
 
 // 12. Регистрация рендерера после создания экземпляра BlockBuilder
-import { BlockBuilder } from '@mushket-co/block-builder';
+import { BlockBuilder } from '@mushket-co/block-builder/core';
 
 const blockBuilder = new BlockBuilder({
-  containerId: 'block-container',
   blockConfigs: {
     // ваши конфигурации блоков
-  }
+  },
+  autoInit: false
 });
 
-// Регистрируем наш рендерер ДО инициализации UI
+// Регистрируем наш рендерер до использования в Vue/React UI
 blockBuilder.registerCustomFieldRenderer(new WysiwygFieldRenderer());`}
             language="typescript"
             className="mb-4"

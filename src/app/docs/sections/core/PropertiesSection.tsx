@@ -59,13 +59,24 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
           </p>
         </div>
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6">
+        <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-6 border-l-4 border-amber-500 mb-6">
           <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-            <code className="text-indigo-700 dark:text-indigo-400">containerId</code>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный)</span>
+            <code className="text-amber-700 dark:text-amber-400">containerId</code>
+            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(удалено в 1.9.0)</span>
           </h3>
           <p className="text-gray-600 dark:text-gray-400 mb-2">
-            ID HTML элемента, в который будет рендериться UI BlockBuilder. Необходим только для полной версии с UI.
+            С 1.9.0 встроенный DOM UI удалён — параметр <code>containerId</code> больше не используется.
+            Готовый UI подключайте через <code>@mushket-co/block-builder/vue</code> или <code>/react</code>.
+          </p>
+        </div>
+
+        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500 mb-6 opacity-75">
+          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+            <code className="text-indigo-700 dark:text-indigo-400">containerId</code>
+            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(до 1.8.x)</span>
+          </h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-2">
+            ID HTML элемента, в который рендерился встроенный DOM UI BlockBuilder.
           </p>
           <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
             <code className="text-sm text-gray-900 dark:text-gray-100">containerId?: string</code>
@@ -81,13 +92,13 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
             <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(опциональный, default: true)</span>
           </h3>
           <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Автоматическая инициализация UI при создании экземпляра BlockBuilder.
+            Автоматическая загрузка <code>initialBlocks</code> при создании экземпляра BlockBuilder (core API).
           </p>
           <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4">
             <code className="text-sm text-gray-900 dark:text-gray-100">autoInit?: boolean (default: true)</code>
           </div>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            Если установлено <code className="text-indigo-700 dark:text-indigo-400">false</code>, UI нужно будет инициализировать вручную через метод <code className="text-indigo-700 dark:text-indigo-400">init()</code>.
+            Если <code className="text-indigo-700 dark:text-indigo-400">false</code>, начальные блоки нужно загрузить вручную через API.
           </p>
         </div>
 

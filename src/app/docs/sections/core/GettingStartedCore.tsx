@@ -24,16 +24,42 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
         />
       </section>
 
+      <section className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-6 border border-amber-200 dark:border-amber-800">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">1.9.0 — только Core API или Vue/React UI</h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-2">
+          С версии <strong>1.9.0</strong> встроенный DOM UI и Pure JS entry удалены.{' '}
+          <code>BlockBuilder</code> из <code>@mushket-co/block-builder/core</code> — программный API без форм и модалок.
+          Готовый UI — <code>@mushket-co/block-builder/vue</code> или <code>/react</code>.
+        </p>
+      </section>
+
       <section className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/10 rounded-xl p-6 border border-green-300 dark:border-green-800">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Open Source (MIT)</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           BlockBuilder — open-source проект под лицензией MIT. Все функции доступны без ограничений.
         </p>
         <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Неограниченное количество типов блоков</li>
-          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Кастомные поля, api-select, кастомные брекпоинты spacing</li>
-          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Vue 3, React 19+, SSR (Nuxt, Next.js)</li>
-          <li className="flex items-start"><span className="text-green-500 mr-2">✓</span>Поля <code>block-anchor</code>, <code>file</code> (1.5.0+), <code>select</code> с <code>multiple</code> (1.5.5+), <code>matrix-table</code> (1.6.0+, Vue/React), <code>formHooks</code> (1.7.0+, Vue/React), <code>file-import</code>, <code>optionsFrom</code>, <code>persist: false</code> (1.8.0+, Vue/React)</li>
+          <li className="flex items-start gap-2">
+            <span className="text-green-500 flex-shrink-0">✓</span>
+            <span>Неограниченное количество типов блоков</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-green-500 flex-shrink-0">✓</span>
+            <span>Кастомные поля, api-select, кастомные брекпоинты spacing</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-green-500 flex-shrink-0">✓</span>
+            <span>Vue 3, React 19+, SSR (Nuxt, Next.js); code-splitting UI (1.9.0)</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-green-500 flex-shrink-0">✓</span>
+            <span>
+              Поля <code>block-anchor</code>, <code>file</code> (1.5.0+), <code>select</code> с{' '}
+              <code>multiple</code> (1.5.5+), <code>matrix-table</code> (1.6.0+, Vue/React),{' '}
+              <code>formHooks</code> (1.7.0+, Vue/React), <code>file-import</code>, <code>optionsFrom</code>,{' '}
+              <code>persist: false</code> (1.8.0+, Vue/React)
+            </span>
+          </li>
         </ul>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
           Интерактивные демо Vue/React — в{' '}
@@ -71,12 +97,11 @@ export default function GettingStartedCore({ nextSection, nextTitle, onNavigate 
       <section>
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Пример использования</h2>
         <CodeBlock
-          code={`import { BlockBuilder } from '@mushket-co/block-builder'
+          code={`import { BlockBuilder } from '@mushket-co/block-builder/core'
 
-const blockConfigs = [
-  {
-    type: 'text',
-    label: 'Текстовый блок',
+const blockConfigs = {
+  text: {
+    title: 'Текстовый блок',
     fields: [
       {
         field: 'content',
@@ -84,27 +109,23 @@ const blockConfigs = [
         type: 'textarea',
         rules: [{ type: 'required', field: 'content' }]
       }
-    ],
-    defaultProps: {
-      content: 'Привет, мир!'
-    },
-    spacingOptions: {  // Автоматически добавит поле spacing в форму
-      enabled: true,
-      spacingTypes: ['padding-top', 'padding-bottom']
-    }
+    ]
   }
-]
+}
 
 const blockBuilder = new BlockBuilder({
-  containerId: 'my-app',
-  blockConfigs: blockConfigs,
-  autoInit: true,
-  onSave: async (blocks) => {
-    // Сохранение блоков через колбэк (например, на сервер или в localStorage)
-    localStorage.setItem('blocks', JSON.stringify(blocks))
-    return true
-  }
-})`}
+  blockConfigs,
+  autoInit: false
+})
+
+await blockBuilder.createBlock({
+  type: 'text',
+  props: { content: 'Hello World' },
+  settings: {}
+})
+
+const blocks = await blockBuilder.getAllBlocks()
+console.log('Все блоки:', blocks)`}
           language="javascript"
           className="mb-4"
         />
@@ -440,16 +461,8 @@ export default {
   template: '<div :style="spacingStyles"><div style="padding-top: var(--spacing-padding-top);">{{ block.props.content }}</div></div>'
 }
 
-// Через DOM API (SSR / кастомный рендер)
-import { applySpacingToElement } from '@mushket-co/block-builder/core';
-
-const element = document.getElementById('my-block');
-applySpacingToElement(
-  element, 
-  block.props.spacing, 
-  'spacing',
-  customBreakpoints // опционально
-);`}
+// Для margin/padding в компоненте блока используйте getBlockInlineStyles
+// и CSS-переменные --spacing-padding-* в ваших стилях`}
             language="javascript"
             className="mb-4"
           />
