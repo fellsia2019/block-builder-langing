@@ -28,12 +28,12 @@ export const DOCS_SIDEBAR: DocsNavGroup[] = [
   {
     title: 'Справочник API',
     items: [
-      { title: 'BlockBuilder', href: '/docs/core/classes' },
+      { title: 'Обзор API', href: '/docs/core/classes' },
       { title: 'Методы', href: '/docs/core/methods' },
       { title: 'Свойства', href: '/docs/core/properties' },
-      { title: 'Типы', href: '/docs/core/types' },
       { title: 'Поля форм', href: '/docs/core/form-fields' },
       { title: 'Утилиты', href: '/docs/core/utilities' },
+      { title: 'Типы', href: '/docs/core/types' },
     ],
   },
   {

@@ -4,9 +4,9 @@ export const CORE_SECTIONS: CoreSubSection[] = [
   'classes',
   'methods',
   'properties',
-  'types',
   'form-fields',
   'utilities',
+  'types',
 ];
 
 export const VUE3_SECTIONS: Vue3SubSection[] = [
@@ -20,7 +20,7 @@ export const REACT_SECTIONS: ReactSubSection[] = ['getting-started', 'components
 
 export const SECTION_TITLES = {
   core: {
-    classes: 'BlockBuilder',
+    classes: 'Обзор API',
     methods: 'Методы',
     properties: 'Свойства',
     types: 'Типы',

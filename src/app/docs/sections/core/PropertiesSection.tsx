@@ -13,6 +13,7 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
         </p>
       </div>
 
+      {/* theme / locale — в API есть, но пока не влияют на поведение
       <section className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           <code className="text-indigo-700 dark:text-indigo-400">theme</code>
@@ -32,6 +33,7 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
           <code className="text-sm text-gray-900 dark:text-gray-100">readonly locale: string</code>
         </div>
       </section>
+      */}
 
       <section>
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Опции инициализации</h2>
@@ -76,6 +78,7 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
             />
           </div>
 
+          {/* theme / locale — зарезервировано в пакете, пока без эффекта
           <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
             <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
               <code className="text-indigo-700 dark:text-indigo-400">theme</code> /{' '}
@@ -93,7 +96,7 @@ export default function PropertiesSection({ nextSection, nextTitle, onNavigate }
 })`}
             />
           </div>
-        </div>
+          */}        </div>
 
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-6">
           UI-опции (<code>onSave</code>, <code>isEdit</code>, панель контролов) — в{' '}

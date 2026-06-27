@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
@@ -467,6 +468,15 @@ body:not(.bb-is-edit-mode) .view-only-info {
             <span>Для отложенной инициализации используйте <code className="text-yellow-700 dark:text-yellow-400">autoInit: false</code> в опциях BlockBuilder</span>
           </li>
         </ul>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-4 pt-3 border-t border-yellow-200 dark:border-yellow-800">
+          <Link href="/docs/vue/getting-started" className="text-primary-600 dark:text-primary-400 hover:underline">
+            Подробнее — быстрый старт Vue →
+          </Link>
+          {' · '}
+          <Link href="/docs/core/properties" className="text-primary-600 dark:text-primary-400 hover:underline">
+            свойства BlockBuilder →
+          </Link>
+        </p>
       </section>
     </div>
   );

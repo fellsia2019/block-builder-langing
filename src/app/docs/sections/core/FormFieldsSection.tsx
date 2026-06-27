@@ -1,11 +1,17 @@
 'use client';
 
+import Link from 'next/link';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
+import {
+  GITHUB_EXAMPLES,
+  GITHUB_EXAMPLES_API_USAGE,
+} from '@/lib/urls';
 import type { NavigationProps } from '../../types';
 import DocHeading from '../../components/DocHeading';
 import type { ReactNode } from 'react';
 import DocAnchor from '../../components/DocAnchor';
+import DocImportantNote from '../../components/DocImportantNote';
 
 function ParamDoc({
   name,
@@ -713,6 +719,14 @@ const topicLabels = (props.topics ?? []).map(
           language="javascript"
           className="mb-4"
         />
+        <DocImportantNote>
+          <strong>Важно:</strong> при <code className="text-yellow-700 dark:text-yellow-400">uploadUrl</code> ответ
+          сервера для <code className="text-yellow-700 dark:text-yellow-400">image</code> должен содержать{' '}
+          <code className="text-yellow-700 dark:text-yellow-400">src</code> с URL. Другой формат API —{' '}
+          <code className="text-yellow-700 dark:text-yellow-400">responseMapper</code> в{' '}
+          <code className="text-yellow-700 dark:text-yellow-400">fileUploadConfig</code>.{' '}
+          <DocAnchor id="file">Подробнее — поле file →</DocAnchor>
+        </DocImportantNote>
         <CodeBlock
           code={`// URL из string или object.src
 const imageUrl = typeof props.image === 'string'
@@ -934,41 +948,156 @@ const handleClick = (event) => {
       <section className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6 border-l-4 border-orange-500">
         <DocHeading id="custom-renderers">Кастомные рендереры полей</DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Для <code>type: &apos;custom&apos;</code>: реализуйте <code>ICustomFieldRenderer</code>, зарегистрируйте через{' '}
-          <code>registerCustomFieldRenderer</code> до первого рендера формы.
+          Поле <code>type: &apos;custom&apos;</code> — когда стандартных типов из раздела{' '}
+          <DocAnchor id="field-types">Стандартные типы полей</DocAnchor> недостаточно: свой виджет,
+          интеграция библиотеки, сложный интерактив. Это <strong>не</strong> отдельный тип блока и не замена
+          компонента блока на канвасе — только UI поля в модалке create/edit.
         </p>
 
-        <CodeBlock
-          code={`import type { ICustomFieldRenderer, ICustomFieldContext, ICustomFieldRenderResult } from '@mushket-co/block-builder';
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4 border border-orange-200 dark:border-orange-800">
+          <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">Когда нужен custom</h3>
+          <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+            <li>Рейтинг, color picker, карта координат, редактор кода</li>
+            <li>Данные из вашего API внутри одного поля (не путать с <DocAnchor id="api-select">api-select</DocAnchor>)</li>
+            <li>Сначала проверьте <code>select</code>, <code>repeater</code>, <code>matrix-table</code> — часто хватает без custom</li>
+          </ul>
+        </div>
 
-class StarRatingRenderer implements ICustomFieldRenderer {
-  readonly id = 'star-rating';
-  readonly name = 'Star Rating';
+        <DocHeading id="custom-flow" level={3}>
+          Цепочка: конфиг → регистрация → форма
+        </DocHeading>
+        <ol className="list-decimal list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <li>Класс с <code>ICustomFieldRenderer</code> (уникальный <code>id</code>)</li>
+          <li>Регистрация в реестре <strong>до</strong> первого открытия формы</li>
+          <li>В <code>fields</code> — <code>type: &apos;custom&apos;</code> и <code>customFieldConfig.rendererId</code></li>
+        </ol>
+
+        <DocHeading id="custom-interface" level={3}>
+          ICustomFieldRenderer и контекст
+        </DocHeading>
+        <CodeBlock
+          code={`interface ICustomFieldRenderer {
+  readonly id: string
+  readonly name: string
+  render(
+    container: HTMLElement,
+    context: ICustomFieldContext
+  ): ICustomFieldRenderResult | Promise<ICustomFieldRenderResult>
+}
+
+interface ICustomFieldContext {
+  fieldName: string
+  label: string
+  value: unknown
+  required: boolean
+  options?: Record<string, unknown>  // из customFieldConfig.options
+  error?: string                      // текст ошибки валидации
+  formScope?: ICustomFieldFormScope    // formData, setField, repeater
+  onChange: (value: unknown) => void
+  onError?: (error: string | null) => void
+}
+
+interface ICustomFieldRenderResult {
+  element: HTMLElement | string
+  getValue?: () => unknown
+  setValue?: (value: unknown) => void
+  setError?: (error: string | null) => void  // без пересоздания DOM
+  validate?: () => string | null
+  destroy?: () => void
+}`}
+          language="typescript"
+          className="mb-4"
+        />
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <code>formScope.setField</code> — изменить другое поле формы (например, сбросить зависимое).
+          В repeater доступны <code>formScope.repeater.updateItemField</code> и live-ссылка на <code>item</code>.
+          <code>setError</code> на результате вызывается фреймворком при смене текста ошибки — не дублируйте
+          лишние перерисовки.
+        </p>
+
+        <DocHeading id="custom-register" level={3}>
+          Регистрация
+        </DocHeading>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+          <strong>Core / свой UI:</strong>
+        </p>
+        <CodeBlock
+          code={`import { BlockBuilder } from '@mushket-co/block-builder/core'
+
+const blockBuilder = new BlockBuilder({ blockConfigs })
+blockBuilder.registerCustomFieldRenderer(new StarRatingRenderer())`}
+          language="typescript"
+          className="mb-4"
+        />
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+          <strong>Vue / React</strong> — отдельный реестр, проп{' '}
+          <code>customFieldRendererRegistry</code> у <code>BlockBuilderComponent</code>:
+        </p>
+        <CodeBlock
+          code={`import {
+  BlockBuilderComponent,
+  createBlockManagementUseCase,
+  CustomFieldRendererRegistry,
+} from '@mushket-co/block-builder/vue' // или /react
+
+const registry = new CustomFieldRendererRegistry()
+registry.register(new StarRatingRenderer())
+
+<BlockBuilderComponent
+  customFieldRendererRegistry={registry}
+  blockManagementUseCase={createBlockManagementUseCase()}
+  /* ... */
+/>`}
+          language="tsx"
+          className="mb-4"
+        />
+
+        <DocImportantNote>
+          <strong>Важно:</strong> регистрируйте рендереры <strong>до</strong> первого открытия формы. При внешних
+          библиотеках храните инстанс локально в <code className="text-yellow-700 dark:text-yellow-400">render()</code>,
+          не в свойстве класса; инициализируйте синхронно — без <code className="text-yellow-700 dark:text-yellow-400">setTimeout</code>.{' '}
+          <DocAnchor id="custom-register">Подробнее — регистрация →</DocAnchor>
+        </DocImportantNote>
+
+        <DocHeading id="custom-example" level={3}>
+          Пример: star-rating
+        </DocHeading>
+        <CodeBlock
+          code={`class StarRatingRenderer implements ICustomFieldRenderer {
+  readonly id = 'star-rating'
+  readonly name = 'Star Rating'
 
   render(container: HTMLElement, context: ICustomFieldContext): ICustomFieldRenderResult {
-    const { value, onChange } = context;
-    const root = document.createElement('div');
+    const { value, onChange, options } = context
+    const max = Number(options?.max ?? 5)
+    const root = document.createElement('div')
+    root.className = 'flex gap-1'
 
-    // ваш UI: React/Vue mount, сторонняя библиотека, plain DOM — на выбор
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.min = '0';
-    input.max = '5';
-    input.value = String(value ?? 0);
-    input.addEventListener('input', () => onChange(Number(input.value)));
+    const setRating = (n: number) => {
+      root.querySelectorAll('button').forEach((btn, i) => {
+        btn.setAttribute('aria-pressed', String(i < n))
+      })
+      onChange(n)
+    }
 
-    root.appendChild(input);
-    container.appendChild(root);
+    for (let i = 1; i <= max; i++) {
+      const btn = document.createElement('button')
+      btn.type = 'button'
+      btn.textContent = '★'
+      btn.addEventListener('click', () => setRating(i))
+      root.appendChild(btn)
+    }
+
+    setRating(Number(value ?? 0))
+    container.appendChild(root)
 
     return {
       element: root,
-      getValue: () => Number(input.value),
+      getValue: () => Number(value ?? 0),
       destroy: () => root.remove(),
-    };
+    }
   }
-}
-
-blockBuilder.registerCustomFieldRenderer(new StarRatingRenderer());`}
+}`}
           language="typescript"
           className="mb-4"
         />
@@ -980,20 +1109,53 @@ blockBuilder.registerCustomFieldRenderer(new StarRatingRenderer());`}
   type: 'custom',
   customFieldConfig: {
     rendererId: 'star-rating',
-    options: { max: 5 }
+    options: { max: 5 },
   },
   defaultValue: 0,
-  rules: [{ type: 'required' }]
+  rules: [{ type: 'required' }],
 }`}
           language="javascript"
           className="mb-4"
         />
 
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          API: <code>registerCustomFieldRenderer</code>, <code>registerCustomFieldRenderers</code>,{' '}
+        <ParamDoc name="customFieldConfig">
+          <ul className="list-disc list-inside space-y-1 text-sm">
+            <li>
+              <code>rendererId</code> — совпадает с <code>ICustomFieldRenderer.id</code>
+            </li>
+            <li>
+              <code>options</code> — произвольный объект, доступен в <code>context.options</code>
+            </li>
+          </ul>
+        </ParamDoc>
+
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
+          API реестра: <code>registerCustomFieldRenderer</code>, <code>registerCustomFieldRenderers</code>,{' '}
           <code>getCustomFieldRenderer</code>, <code>hasCustomFieldRenderer</code>,{' '}
-          <code>unregisterCustomFieldRenderer</code>, <code>getAllCustomFieldRenderers</code>.
-          В repeater храните экземпляр редактора локально в <code>render()</code>, не в поле класса.
+          <code>unregisterCustomFieldRenderer</code>, <code>getAllCustomFieldRenderers</code> — см.{' '}
+          <Link href="/docs/core/methods" className="text-primary-600 hover:underline">
+            Методы
+          </Link>
+          . В repeater храните DOM/инстанс виджета локально в <code>render()</code>, в <code>destroy</code> снимайте
+          слушатели. Живые примеры —{' '}
+          <a
+            href={`${GITHUB_EXAMPLES}/vue3`}
+            className="text-primary-600 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            examples/vue3
+          </a>
+          ,{' '}
+          <a
+            href={GITHUB_EXAMPLES_API_USAGE}
+            className="text-primary-600 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            examples/api-usage
+          </a>
+          .
         </p>
       </section>
     </div>

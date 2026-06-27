@@ -45,9 +45,6 @@ export default function EventsSection({ nextSection, nextTitle, onNavigate }: Na
 
       <section className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Общее использование</h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Все события используются через директиву <code className="text-blue-700 dark:text-blue-400">@</code> в Vue:
-        </p>
         <CodeBlock
           code={`<template>
   <BlockBuilderComponent 
@@ -127,7 +124,7 @@ const handleBlockUpdated = (block) => {
           <EventCard 
             name="block-deleted" 
             description="Срабатывает после удаления блока пользователем"
-            payload="blockId: string - ID удаленного блока"
+            payload="blockId: TBlockId — id удалённого блока (строка)"
             example={`// Обработчик события
 const handleBlockDeleted = (blockId) => {
   console.log('Удален блок:', blockId)

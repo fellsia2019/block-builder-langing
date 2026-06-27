@@ -3,6 +3,9 @@
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
+import DocHeading from '../../components/DocHeading';
+import DocImportantNote from '../../components/DocImportantNote';
+import DocAnchor from '../../components/DocAnchor';
 
 export default function UtilitiesSection({ nextSection, nextTitle, onNavigate }: NavigationProps) {
   return (
@@ -15,10 +18,10 @@ export default function UtilitiesSection({ nextSection, nextTitle, onNavigate }:
       </div>
 
       <section className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-6 border-l-4 border-emerald-500">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+        <DocHeading id="scroll-lock" level={2} className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="lock" size={22} className="text-emerald-600 dark:text-emerald-400" />
           Блокировка скролла
-        </h2>
+        </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
           Управление блокировкой прокрутки документа. Экспортируется из <code className="text-emerald-700 dark:text-emerald-400">@mushket-co/block-builder/core</code>.
         </p>
@@ -59,11 +62,12 @@ unlockBodyScroll();`}
               <li>При кастомной реализации учитывайте компенсацию ширины скроллбара (padding-right).</li>
             </ul>
           </div>
-          <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 border-l-4 border-yellow-400">
-            <p className="text-xs text-gray-700 dark:text-gray-300">
-              Если ваш фреймворк уже управляет блокировкой (например, сторонняя библиотека модалок), переопределите хендлеры через <code>setScrollLockHandlers</code> и делегируйте в библиотеку.
-            </p>
-          </div>
+          <DocImportantNote className="">
+            Если ваш фреймворк уже управляет блокировкой (например, сторонняя библиотека модалок), переопределите
+            хендлеры через <code className="text-yellow-700 dark:text-yellow-400">setScrollLockHandlers</code> и
+            делегируйте в библиотеку.{' '}
+            <DocAnchor id="scroll-lock">Подробнее — API и пример →</DocAnchor>
+          </DocImportantNote>
         </div>
       </section>
 

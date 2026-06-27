@@ -48,7 +48,7 @@ export default function ReactComponentsSection({ nextSection, nextTitle, onNavig
           <code className="text-blue-700 dark:text-blue-400">BlockBuilderComponent</code>
         </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Основной компонент редактора: перетаскивание, формы создания/редактирования, сохранение.
+          Готовый UI редактора: добавление, редактирование, удаление и смена порядка блоков (кнопки вверх/вниз), формы полей, сохранение.
         </p>
 
         <div className="mb-6">
@@ -140,20 +140,42 @@ export default function ReactComponentsSection({ nextSection, nextTitle, onNavig
         <div className="mb-6">
           <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Колбэки</h3>
           <div className="space-y-2 text-sm">
-            {[
-              ['onBlockAdded', 'Создан или продублирован блок'],
-              ['onBlockUpdated', 'Обновлён блок'],
-              ['onBlockDeleted', 'Удалён блок'],
-            ].map(([name, desc]) => (
+            {(
+              [
+                {
+                  name: 'onBlockAdded',
+                  signature: '(block: IBlock) => void',
+                  description: 'Создан или продублирован блок — полный объект блока',
+                },
+                {
+                  name: 'onBlockUpdated',
+                  signature: '(block: IBlock) => void',
+                  description: 'Обновлён блок — актуальный объект после изменения',
+                },
+                {
+                  name: 'onBlockDeleted',
+                  signature: '(blockId: TBlockId) => void',
+                  description: 'Удалён блок — только id (строка), не объект',
+                },
+              ] as const
+            ).map(({ name, signature, description }) => (
               <div
                 key={name}
                 className="bg-white dark:bg-slate-800 rounded-lg p-3 border border-gray-200 dark:border-slate-700"
               >
-                <code className="text-blue-700 dark:text-blue-400">{name}</code>
-                <span className="text-gray-600 dark:text-gray-400 ml-2">— {desc}</span>
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                  <code className="text-blue-700 dark:text-blue-400">{name}</code>
+                  <code className="text-xs text-gray-500 dark:text-gray-400">{signature}</code>
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 mt-1">{description}</p>
               </div>
             ))}
           </div>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
+            <Link href="/docs/core/types#iblock" className="text-primary-600 dark:text-primary-400 hover:underline">
+              тип IBlock →
+            </Link>
+          </p>
         </div>
 
         <div>
@@ -175,6 +197,9 @@ export default function ReactComponentsSection({ nextSection, nextTitle, onNavig
       initialBlocks={[]}
       isEdit
       onSave={async (blocks) => true}
+      onBlockAdded={(block) => console.log('added', block)}
+      onBlockUpdated={(block) => console.log('updated', block)}
+      onBlockDeleted={(blockId) => console.log('deleted', blockId)}
     />
   )
 }`}

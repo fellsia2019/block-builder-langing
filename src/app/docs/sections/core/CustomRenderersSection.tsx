@@ -1,7 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
+import DocImportantNote from '../../components/DocImportantNote';
 import type { NavigationProps } from '../../types';
 
 export default function CustomRenderersSection({ nextSection, nextTitle, onNavigate }: NavigationProps) {
@@ -136,18 +138,15 @@ interface ICustomFieldRenderResult {
           language="typescript"
           className="mb-4"
         />
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 mt-4 border-l-4 border-yellow-500">
-          <h4 className="font-bold text-yellow-900 dark:text-yellow-200 mb-2">⚠️ Важно для внешних библиотек:</h4>
-          <p className="text-sm text-yellow-800 dark:text-yellow-300 mb-2">
-            При использовании внешних библиотек (Jodit, TinyMCE и т.д.) <strong>храните экземпляр редактора локально в методе render</strong> (как <code className="text-yellow-700 dark:text-yellow-400">const editor = ...</code>), а не как свойство класса. Это критично для корректной работы в repeater полях, где создается несколько экземпляров редактора одновременно.
-          </p>
-          <p className="text-sm text-yellow-800 dark:text-yellow-300 mb-2">
-            <strong>Пример правильного подхода:</strong> <code className="text-yellow-700 dark:text-yellow-400">const editor = new Jodit(...)</code> внутри метода <code className="text-yellow-700 dark:text-yellow-400">render()</code>, а не <code className="text-yellow-700 dark:text-yellow-400">this.editor = new Jodit(...)</code>.
-          </p>
-          <p className="text-sm text-yellow-800 dark:text-yellow-300">
-            <strong>Важно:</strong> ControlManager гарантирует, что элемент уже находится в DOM при вызове <code className="text-yellow-700 dark:text-yellow-400">render()</code>, поэтому <strong>не используйте setTimeout</strong> для инициализации. Инициализируйте библиотеки синхронно сразу после создания элементов.
-          </p>
-        </div>
+        <DocImportantNote>
+          <strong>Важно для внешних библиотек:</strong> храните экземпляр редактора локально в методе{' '}
+          <code className="text-yellow-700 dark:text-yellow-400">render()</code>, а не как свойство класса — критично
+          для repeater. ControlManager гарантирует DOM при вызове <code className="text-yellow-700 dark:text-yellow-400">render()</code>
+          : инициализируйте синхронно, без <code className="text-yellow-700 dark:text-yellow-400">setTimeout</code>.{' '}
+          <Link href="/docs/core/form-fields#custom-renderers" className="text-primary-600 dark:text-primary-400 hover:underline font-medium">
+            Подробнее — кастомные рендереры →
+          </Link>
+        </DocImportantNote>
       </section>
 
       <section className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6 border-l-4 border-orange-500">
@@ -177,15 +176,14 @@ blockBuilder.registerCustomFieldRenderers([
           language="typescript"
           className="mb-4"
         />
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 border-l-4 border-yellow-400 mt-4">
-          <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
-            <Icon name="warning" size={18} className="text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
-            <span>
-              <strong>Важно:</strong> Регистрируйте рендереры <strong>ДО</strong> инициализации UI (до вызова <code className="text-yellow-700 dark:text-yellow-400">autoInit: true</code> или создания компонентов). 
-              Если используется <code className="text-yellow-700 dark:text-yellow-400">autoInit: false</code>, регистрируйте рендереры перед первым рендерингом формы.
-            </span>
-          </p>
-        </div>
+        <DocImportantNote>
+          <strong>Важно:</strong> регистрируйте рендереры <strong>ДО</strong> инициализации UI (до{' '}
+          <code className="text-yellow-700 dark:text-yellow-400">autoInit: true</code> или создания компонентов). При{' '}
+          <code className="text-yellow-700 dark:text-yellow-400">autoInit: false</code> — перед первым рендерингом формы.{' '}
+          <Link href="/docs/core/form-fields#custom-register" className="text-primary-600 dark:text-primary-400 hover:underline font-medium">
+            Подробнее — регистрация →
+          </Link>
+        </DocImportantNote>
       </section>
 
       <section className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6 border-l-4 border-orange-500">

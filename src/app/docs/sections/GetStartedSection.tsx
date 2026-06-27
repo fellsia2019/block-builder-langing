@@ -31,7 +31,8 @@ export default function GetStartedSection() {
           <div className="rounded-xl p-5 border-2 border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/10">
             <h3 className="font-bold text-primary-800 dark:text-primary-300 mb-2">Программный API</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-              <code>@mushket-co/block-builder/core</code> — программный CRUD блоков, валидация, утилиты. Без UI.
+              <code>@mushket-co/block-builder/core</code> — доменная логика без редактора. Опционально: свой UI или
+              только работа с JSON блоков.
             </p>
             <Link href="/docs/core/classes" className="text-sm text-primary-600 hover:underline">
               Справочник API →
@@ -40,7 +41,7 @@ export default function GetStartedSection() {
           <div className="rounded-xl p-5 border-2 border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-900/10">
             <h3 className="font-bold text-purple-800 dark:text-purple-300 mb-2">Vue 3 UI</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-              <code>@mushket-co/block-builder/vue</code> — готовый редактор с перетаскиванием и формами.
+              <code>@mushket-co/block-builder/vue</code> — готовый редактор core + vue ui.
             </p>
             <Link href="/docs/vue/getting-started" className="text-sm text-purple-600 hover:underline">
               Документация Vue →
@@ -49,7 +50,7 @@ export default function GetStartedSection() {
           <div className="rounded-xl p-5 border-2 border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-900/10">
             <h3 className="font-bold text-blue-800 dark:text-blue-300 mb-2">React UI</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-              <code>@mushket-co/block-builder/react</code> — React 18+ / 19, раздельная загрузка панели управления.
+              <code>@mushket-co/block-builder/react</code> — готовый редактор core + react ui.
             </p>
             <Link href="/docs/react/getting-started" className="text-sm text-blue-600 hover:underline">
               Документация React →

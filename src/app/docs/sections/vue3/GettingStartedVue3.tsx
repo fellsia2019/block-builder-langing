@@ -4,6 +4,7 @@ import Link from 'next/link';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
+import UploadUrlImportantNote from '../../components/UploadUrlImportantNote';
 
 export default function GettingStartedVue3({ nextSection, nextTitle, onNavigate }: NavigationProps) {
   return (
@@ -70,7 +71,10 @@ export default function GettingStartedVue3({ nextSection, nextTitle, onNavigate 
           <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">1. Создайте компонент блока</h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
             <strong>Важно:</strong> внешние отступы (margin) автоматически применяются на UI блок-обёртку над компонентом.
-            Для внутренних отступов (padding) используйте CSS-переменные, которые устанавливаются автоматически.
+            Для внутренних отступов (padding) используйте CSS-переменные, которые устанавливаются автоматически.{' '}
+            <Link href="/docs/core/form-fields#spacing" className="text-primary-600 dark:text-primary-400 hover:underline">
+              Подробнее об отступах (spacing) →
+            </Link>
           </p>
           <CodeBlock
             code={`<!-- components/TextBlock.vue -->
@@ -285,16 +289,7 @@ const config = {
           language="vue"
           className="mb-4"
         />
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 border-l-4 border-yellow-400 mt-4">
-          <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
-            <Icon name="warning" size={18} className="text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
-            <span>
-              <strong>Важно:</strong> При использовании <code className="text-yellow-700 dark:text-yellow-400">uploadUrl</code> (загрузка через сервер API клиента) ответ сервера <strong>ОБЯЗАТЕЛЬНО</strong> должен быть объектом с полем 
-              <code className="text-yellow-700 dark:text-yellow-400">src</code>, содержащим URL изображения. Если формат ответа отличается, используйте 
-              <code className="text-yellow-700 dark:text-yellow-400">responseMapper</code> для преобразования ответа к виду объекта с вашими полями и обязательным полем <code className="text-yellow-700 dark:text-yellow-400">src</code>.
-            </span>
-          </p>
-        </div>
+        <UploadUrlImportantNote />
       </section>
 
       <section>

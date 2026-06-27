@@ -1,18 +1,31 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import { useCoreNavigation } from '../../hooks/useNavigation';
 import type { CoreSubSection } from '../../types';
-import {
-  ClassesSection,
-  MethodsSection,
-  PropertiesSection,
-  TypesSection,
-  UtilitiesSection,
-} from '../../sections/core';
-import FormFieldsSection from '../../sections/core/FormFieldsSection';
+import DocsSectionFallback from '../../components/DocsSectionFallback';
 import NextPageLink from '../../components/NextPageLink';
 import Link from 'next/link';
+
+const ClassesSection = dynamic(() => import('../../sections/core/ClassesSection'), {
+  loading: () => <DocsSectionFallback />,
+});
+const MethodsSection = dynamic(() => import('../../sections/core/MethodsSection'), {
+  loading: () => <DocsSectionFallback />,
+});
+const PropertiesSection = dynamic(() => import('../../sections/core/PropertiesSection'), {
+  loading: () => <DocsSectionFallback />,
+});
+const TypesSection = dynamic(() => import('../../sections/core/TypesSection'), {
+  loading: () => <DocsSectionFallback />,
+});
+const FormFieldsSection = dynamic(() => import('../../sections/core/FormFieldsSection'), {
+  loading: () => <DocsSectionFallback />,
+});
+const UtilitiesSection = dynamic(() => import('../../sections/core/UtilitiesSection'), {
+  loading: () => <DocsSectionFallback />,
+});
 
 export default function CoreSectionPage() {
   const params = useParams();

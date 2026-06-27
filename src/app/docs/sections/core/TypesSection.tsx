@@ -24,8 +24,8 @@ export default function TypesSection({ nextSection, nextTitle, onNavigate }: Nav
   componentRegistry?: any
   httpClient?: any
   customFieldRendererRegistry?: any
-  theme?: 'light' | 'dark'
-  locale?: string
+  // theme?: 'light' | 'dark'   // зарезервировано, пока не используется
+  // locale?: string
   autoInit?: boolean
   initialBlocks?: IBlockDto[]
 }`}

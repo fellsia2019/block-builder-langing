@@ -14,7 +14,6 @@ interface DocsLayoutProps {
 
 export default function DocsLayout({ children }: DocsLayoutProps) {
   const contentRef = useRef<HTMLDivElement>(null);
-  const tocAnchorRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const toc = useAutoToc(contentRef, pathname);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -79,23 +78,16 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
           />
         )}
 
-        <div className="flex-1 min-w-0 transition-all md:ml-64 min-h-[calc(100vh-4rem)]">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 xl:px-8 pt-8 pb-24">
-            <div className={toc.length > 0 ? 'flex justify-center gap-8 xl:gap-10' : undefined}>
-              <div
-                ref={contentRef}
-                className={`docs-content w-full max-w-4xl ${toc.length === 0 ? 'mx-auto' : ''}`}
-              >
-                {children}
-              </div>
-              {toc.length > 0 && (
-                <div ref={tocAnchorRef} className="hidden xl:block w-52 shrink-0" aria-hidden="true" />
-              )}
-            </div>
+        <div className={`flex-1 min-w-0 md:ml-64 min-h-[calc(100vh-4rem)] ${toc.length ? 'xl:pr-[15rem]' : ''}`}>
+          <div
+            ref={contentRef}
+            className="docs-content mx-auto w-full max-w-4xl px-4 sm:px-6 pt-8 pb-24"
+          >
+            {children}
           </div>
         </div>
 
-        {toc.length > 0 && <TableOfContents items={toc} anchorRef={tocAnchorRef} />}
+        {toc.length > 0 && <TableOfContents items={toc} />}
       </div>
     </div>
   );

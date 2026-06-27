@@ -24,10 +24,10 @@ export const DOCS_SEARCH_INDEX: DocsSearchEntry[] = [
   { title: 'Поля форм — spacing', href: '/docs/core/form-fields#spacing', group: 'Справочник API', keywords: 'margin padding breakpoints' },
   { title: 'Поля форм — api-select', href: '/docs/core/form-fields#api-select', group: 'Справочник API', keywords: 'dropdown remote' },
   { title: 'Поля форм — matrix-table', href: '/docs/core/form-fields#matrix-table', group: 'Справочник API', keywords: 'table grid' },
-  { title: 'Поля форм — кастомные рендереры', href: '/docs/core/form-fields#custom-renderers', group: 'Справочник API', keywords: 'wysiwyg custom field' },
+  { title: 'Поля форм — кастомные рендереры', href: '/docs/core/form-fields#custom-renderers', group: 'Справочник API', keywords: 'custom ICustomFieldRenderer formScope rendererId' },
   { title: 'IFormFieldConfig', href: '/docs/core/types#i-form-field-config', group: 'Типы', keywords: 'typescript interface field' },
   { title: 'IBlockFormHooks', href: '/docs/core/types#i-block-form-hooks', group: 'Типы', keywords: 'onFormOpen onBeforeSave' },
-  { title: 'createBlockManagementUseCase', href: '/docs/core/classes', group: 'Справочник API', keywords: 'use case registry' },
+  { title: 'Обзор API — BlockBuilder', href: '/docs/core/classes', group: 'Справочник API', keywords: 'core headless createBlockManagementUseCase' },
   { title: 'SSR prepareBlocksForDisplay', href: '/docs/react/components', group: 'React', keywords: 'next nuxt server hydration' },
 ];
 

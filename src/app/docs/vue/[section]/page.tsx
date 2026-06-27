@@ -1,14 +1,26 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useParams, useRouter } from 'next/navigation';
 import { useVue3Navigation } from '../../hooks/useNavigation';
 import type { Vue3SubSection } from '../../types';
-import GettingStartedVue3 from '../../sections/vue3/GettingStartedVue3';
-import ComponentsSection from '../../sections/vue3/ComponentsSection';
-import EventsSection from '../../sections/vue3/EventsSection';
-import Vue3ApiSection from '../../sections/vue3/Vue3ApiSection';
+import DocsSectionFallback from '../../components/DocsSectionFallback';
 import NextPageLink from '../../components/NextPageLink';
 import Link from 'next/link';
+
+const GettingStartedVue3 = dynamic(() => import('../../sections/vue3/GettingStartedVue3'), {
+  loading: () => <DocsSectionFallback />,
+});
+const ComponentsSection = dynamic(() => import('../../sections/vue3/ComponentsSection'), {
+  loading: () => <DocsSectionFallback />,
+});
+const EventsSection = dynamic(() => import('../../sections/vue3/EventsSection'), {
+  loading: () => <DocsSectionFallback />,
+});
+const Vue3ApiSection = dynamic(() => import('../../sections/vue3/Vue3ApiSection'), {
+  loading: () => <DocsSectionFallback />,
+});
+
 export default function VueSectionPage() {
   const params = useParams();
   const router = useRouter();
@@ -55,9 +67,9 @@ function getContent(
           <div>
             <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Страница не найдена</h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">
-              Раздел "{subSection}" не найден.
+              Раздел &quot;{subSection}&quot; не найден.
             </p>
-            <Link 
+            <Link
               href="/docs/vue/getting-started"
               className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors inline-block"
             >
@@ -68,4 +80,3 @@ function getContent(
       );
   }
 }
-

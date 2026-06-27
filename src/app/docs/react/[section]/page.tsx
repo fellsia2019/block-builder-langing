@@ -1,12 +1,19 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import { useReactNavigation } from '../../hooks/useNavigation';
 import type { ReactSubSection } from '../../types';
-import GettingStartedReact from '../../sections/react/GettingStartedReact';
-import ReactComponentsSection from '../../sections/react/ComponentsSection';
+import DocsSectionFallback from '../../components/DocsSectionFallback';
 import NextPageLink from '../../components/NextPageLink';
 import Link from 'next/link';
+
+const GettingStartedReact = dynamic(() => import('../../sections/react/GettingStartedReact'), {
+  loading: () => <DocsSectionFallback />,
+});
+const ReactComponentsSection = dynamic(() => import('../../sections/react/ComponentsSection'), {
+  loading: () => <DocsSectionFallback />,
+});
 
 export default function ReactSectionPage() {
   const params = useParams();

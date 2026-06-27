@@ -4,6 +4,8 @@ import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
 import DocHeading from '../../components/DocHeading';
+import UploadUrlImportantNote from '../../components/UploadUrlImportantNote';
+import Link from 'next/link';
 
 export default function ComponentsSection({ nextSection, nextTitle, onNavigate }: NavigationProps) {
   return (
@@ -20,7 +22,7 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
           <code className="text-purple-700 dark:text-purple-400">BlockBuilderComponent</code>
         </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Основной компонент для работы с BlockBuilder в Vue3. Предоставляет готовый UI для управления блоками с перетаскиванием, редактированием и удалением.
+          Основной компонент для работы с BlockBuilder в Vue3. Готовый UI: список блоков, формы создания и редактирования, смена порядка кнопками, удаление.
         </p>
 
         <div className="mb-6">
@@ -228,19 +230,46 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
         <div className="mb-6">
           <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">События</h3>
           <div className="space-y-2 text-sm">
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-3 border border-gray-200 dark:border-slate-700">
-              <code className="text-purple-700 dark:text-purple-400">@block-added</code>
-              <span className="text-gray-600 dark:text-gray-400 ml-2">- Создан или продублирован блок</span>
-            </div>
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-3 border border-gray-200 dark:border-slate-700">
-              <code className="text-purple-700 dark:text-purple-400">@block-updated</code>
-              <span className="text-gray-600 dark:text-gray-400 ml-2">- Вызывается при обновлении блока</span>
-            </div>
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-3 border border-gray-200 dark:border-slate-700">
-              <code className="text-purple-700 dark:text-purple-400">@block-deleted</code>
-              <span className="text-gray-600 dark:text-gray-400 ml-2">- Вызывается при удалении блока</span>
-            </div>
+            {(
+              [
+                {
+                  name: '@block-added',
+                  signature: '(block: IBlock) => void',
+                  description: 'Создан или продублирован блок — в колбек приходит полный объект блока',
+                },
+                {
+                  name: '@block-updated',
+                  signature: '(block: IBlock) => void',
+                  description: 'Обновлён блок — актуальный объект после изменения props, settings и т.д.',
+                },
+                {
+                  name: '@block-deleted',
+                  signature: '(blockId: TBlockId) => void',
+                  description: 'Удалён блок — только id (строка), не объект',
+                },
+              ] as const
+            ).map(({ name, signature, description }) => (
+              <div
+                key={name}
+                className="bg-white dark:bg-slate-800 rounded-lg p-3 border border-gray-200 dark:border-slate-700"
+              >
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                  <code className="text-purple-700 dark:text-purple-400">{name}</code>
+                  <code className="text-xs text-gray-500 dark:text-gray-400">{signature}</code>
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 mt-1">{description}</p>
+              </div>
+            ))}
           </div>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
+            <Link href="/docs/vue/events" className="text-primary-600 dark:text-primary-400 hover:underline">
+              Подробнее о событиях →
+            </Link>
+            {' · '}
+            <Link href="/docs/core/types#iblock" className="text-primary-600 dark:text-primary-400 hover:underline">
+              тип IBlock →
+            </Link>
+          </p>
         </div>
 
         <div className="mb-6">
@@ -275,7 +304,7 @@ const initialBlocks = ref([
   }
 ])
 
-const handleBlockCreated = (block) => {
+const handleBlockAdded = (block) => {
   console.log('Создан:', block)
 }
 
@@ -285,10 +314,6 @@ const handleBlockUpdated = (block) => {
 
 const handleBlockDeleted = (blockId) => {
   console.log('Удален:', blockId)
-}
-
-const handleBlockReordered = (blocks) => {
-  console.log('Новый порядок:', blocks)
 }
 </script>`}
             language="vue"
@@ -493,16 +518,7 @@ const imageUrl = computed(() => {
             language="vue"
             className="mb-4"
           />
-          <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 border-l-4 border-yellow-400 mt-4">
-            <p className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
-              <Icon name="warning" size={18} className="text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
-              <span>
-                <strong>Важно:</strong> При использовании <code className="text-yellow-700 dark:text-yellow-400">uploadUrl</code> (загрузка через сервер API клиента) ответ сервера <strong>ОБЯЗАТЕЛЬНО</strong> должен быть объектом с полем 
-                <code className="text-yellow-700 dark:text-yellow-400">src</code>, содержащим URL изображения. Если формат ответа отличается, используйте 
-                <code className="text-yellow-700 dark:text-yellow-400">responseMapper</code> для преобразования ответа к виду объекта с вашими полями и обязательным полем <code className="text-yellow-700 dark:text-yellow-400">src</code>.
-              </span>
-            </p>
-          </div>
+          <UploadUrlImportantNote />
         </div>
 
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
@@ -528,6 +544,11 @@ const imageUrl = computed(() => {
               <span>Компонент должен быть реактивным - изменения в props автоматически обновляют блок</span>
             </li>
           </ul>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-4 pt-3 border-t border-blue-200 dark:border-blue-800">
+            <Link href="/docs/core/form-fields#spacing" className="text-primary-600 dark:text-primary-400 hover:underline">
+              Подробнее об отступах (spacing) →
+            </Link>
+          </p>
         </div>
       </section>
     </div>
