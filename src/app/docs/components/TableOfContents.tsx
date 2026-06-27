@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { getDocsScrollOffset } from './docsScrollOffset';
+import { scrollToDocHeading } from './docsScrollOffset';
 import { useScrollSpy } from './useScrollSpy';
 
 export interface TocItem {
@@ -39,10 +39,7 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
   if (items.length === 0) return null;
 
   const scrollToHeading = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - getDocsScrollOffset();
-    window.scrollTo({ top, behavior: 'smooth' });
+    if (!scrollToDocHeading(id)) return;
     history.replaceState(null, '', `#${id}`);
   };
 

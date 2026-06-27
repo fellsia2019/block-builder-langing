@@ -2,14 +2,24 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { searchDocs } from '../search-index';
+import { scrollToDocHeading } from './docsScrollOffset';
+
+function normalizeDocsPath(path: string): string {
+  const withoutHash = path.split('#')[0] ?? path;
+  return withoutHash.replace(/\/$/, '') || '/';
+}
 
 export default function DocsSearch() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const pendingSamePageScrollRef = useRef<string | null>(null);
+  const scrollLockYRef = useRef(0);
 
   const trimmedQuery = query.trim();
   const results = trimmedQuery ? searchDocs(trimmedQuery) : [];
@@ -18,6 +28,36 @@ export default function DocsSearch() {
     setOpen(false);
     setQuery('');
   }, []);
+
+  const navigateToResult = useCallback(
+    (href: string) => {
+      const hashIdx = href.indexOf('#');
+      if (hashIdx === -1) {
+        pendingSamePageScrollRef.current = null;
+        close();
+        router.push(href);
+        return;
+      }
+
+      const path = href.slice(0, hashIdx);
+      const id = href.slice(hashIdx + 1);
+
+      if (normalizeDocsPath(path) === normalizeDocsPath(pathname)) {
+        const currentHash = window.location.hash.slice(1);
+        if (currentHash !== id) {
+          window.history.replaceState(null, '', `#${id}`);
+        }
+        pendingSamePageScrollRef.current = id;
+        close();
+        return;
+      }
+
+      pendingSamePageScrollRef.current = null;
+      close();
+      router.push(href, { scroll: false });
+    },
+    [close, pathname, router],
+  );
 
   useEffect(() => {
     setMounted(true);
@@ -36,11 +76,38 @@ export default function DocsSearch() {
   }, [close]);
 
   useEffect(() => {
-    if (open) {
-      requestAnimationFrame(() => inputRef.current?.focus());
-      document.body.classList.add('scrollbar-is-locked');
-      return () => document.body.classList.remove('scrollbar-is-locked');
-    }
+    if (!open) return;
+
+    scrollLockYRef.current = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollLockYRef.current}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.classList.add('scrollbar-is-locked');
+
+    requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true }));
+
+    return () => {
+      const lockedScrollY = scrollLockYRef.current;
+      const pendingId = pendingSamePageScrollRef.current;
+      pendingSamePageScrollRef.current = null;
+
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      document.body.classList.remove('scrollbar-is-locked');
+
+      window.scrollTo({ top: lockedScrollY, behavior: 'instant' });
+
+      if (pendingId) {
+        requestAnimationFrame(() => {
+          scrollToDocHeading(pendingId, 'smooth', { highlight: true, forceHighlight: true });
+        });
+      }
+    };
   }, [open]);
 
   const modal =
@@ -96,15 +163,15 @@ export default function DocsSearch() {
                   </li>
                 ) : (
                   results.map((item) => (
-                    <li key={`${item.href}-${item.title}`}>
-                      <Link
-                        href={item.href}
-                        onClick={close}
-                        className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-gray-100 dark:hover:bg-slate-800"
+                    <li key={`${item.href}|${item.title}|${item.group}`}>
+                      <button
+                        type="button"
+                        onClick={() => navigateToResult(item.href)}
+                        className="block w-full rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-gray-100 dark:hover:bg-slate-800"
                       >
                         <div className="text-sm font-medium text-gray-900 dark:text-white">{item.title}</div>
                         <div className="text-xs text-gray-500 dark:text-slate-400">{item.group}</div>
-                      </Link>
+                      </button>
                     </li>
                   ))
                 )}

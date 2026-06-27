@@ -150,10 +150,10 @@ export async function POST(request: Request) {
             Экспортируются из <code>@mushket-co/block-builder/react</code>:
           </p>
           <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-            <li><code>prepareBlocksForDisplay</code> — восстанавливает <code>render</code> из конфигурации типов</li>
-            <li><code>enrichBlockForDisplay</code> — обогащение одного блока</li>
-            <li><code>seedRepositoryFromBlocks</code> — синхронизация репозитория после гидрации</li>
-            <li><code>enableViewportBreakpointDetection</code> — spacing после гидрации</li>
+            <li id="prepare-blocks-for-display"><code>prepareBlocksForDisplay</code> — восстанавливает <code>render</code> из конфигурации типов</li>
+            <li id="enrich-block-for-display"><code>enrichBlockForDisplay</code> — обогащение одного блока</li>
+            <li id="seed-repository-from-blocks"><code>seedRepositoryFromBlocks</code> — синхронизация репозитория после гидрации</li>
+            <li id="enable-viewport-breakpoint-detection"><code>enableViewportBreakpointDetection</code> — spacing после гидрации</li>
           </ul>
           <p className="text-gray-600 dark:text-gray-400 mt-4 text-sm">
             <code>enrichBlocksForSsr</code> в примере — проектная функция для предзагрузки api-select данных (newsList и т.п.) на сервере.

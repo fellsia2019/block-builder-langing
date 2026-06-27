@@ -10,24 +10,24 @@ import DocsSearch from './DocsSearch';
 function getBreadcrumbs(pathname: string): { label: string; href: string }[] {
   if (!pathname.startsWith('/docs')) return [];
 
-  const crumbs: { label: string; href: string }[] = [
-    { label: 'Документация', href: '/docs/get-started' },
-  ];
+  const docRoot = { label: 'Документация', href: '/docs/get-started' };
 
   for (const group of DOCS_SIDEBAR) {
     for (const item of group.items) {
       if (pathname === item.href || pathname.startsWith(`${item.href}/`)) {
-        crumbs.push({ label: item.title, href: item.href });
-        return crumbs;
+        if (item.href === docRoot.href) {
+          return [{ label: item.title, href: item.href }];
+        }
+        return [docRoot, { label: item.title, href: item.href }];
       }
     }
   }
 
   if (pathname.startsWith('/docs/core/')) {
-    crumbs.push({ label: 'Справочник API', href: '/docs/core/classes' });
+    return [docRoot, { label: 'Справочник API', href: '/docs/core/classes' }];
   }
 
-  return crumbs;
+  return [docRoot];
 }
 
 export default function DocsTopNav() {
@@ -47,7 +47,7 @@ export default function DocsTopNav() {
           <span className="hidden sm:inline text-gray-300 dark:text-slate-600">/</span>
           <nav className="hidden sm:flex items-center gap-1 min-w-0 text-sm truncate">
             {breadcrumbs.map((crumb, i) => (
-              <span key={crumb.href} className="flex items-center gap-1 min-w-0">
+              <span key={`${crumb.href}-${crumb.label}`} className="flex items-center gap-1 min-w-0">
                 {i > 0 && <span className="text-gray-300 dark:text-slate-600">/</span>}
                 <Link
                   href={crumb.href}

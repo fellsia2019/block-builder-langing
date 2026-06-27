@@ -39,8 +39,102 @@ body.scrollbar-is-locked {
 }
 
 .docs-content h2[id],
-.docs-content h3[id] {
+.docs-content h3[id],
+.docs-content li[id] {
   scroll-margin-top: var(--docs-scroll-offset, 5rem);
+}
+
+.docs-content li.docs-anchor-highlight {
+  list-style-position: outside;
+  margin-left: 0.25rem;
+  padding: 0.2rem 0.5rem 0.2rem 0.25rem;
+}
+
+.docs-content .docs-anchor-highlight {
+  position: relative;
+  z-index: 0;
+  border-radius: 0.5rem;
+  animation: docs-anchor-highlight 4s ease-out forwards;
+}
+
+.docs-content .docs-anchor-highlight::before {
+  content: '';
+  position: absolute;
+  inset: -0.35rem -0.5rem;
+  z-index: -1;
+  border-radius: inherit;
+  border-left: 4px solid rgb(59 130 246);
+  background: linear-gradient(
+    90deg,
+    rgb(59 130 246 / 0.16) 0%,
+    rgb(59 130 246 / 0.06) 55%,
+    transparent 100%
+  );
+  box-shadow: 0 0 0 1px rgb(59 130 246 / 0.12);
+  animation: docs-anchor-highlight-glow 4s ease-out forwards;
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .docs-content .docs-anchor-highlight::before {
+    border-left-color: rgb(96 165 250);
+    background: linear-gradient(
+      90deg,
+      rgb(96 165 250 / 0.22) 0%,
+      rgb(96 165 250 / 0.08) 55%,
+      transparent 100%
+    );
+    box-shadow: 0 0 0 1px rgb(96 165 250 / 0.18);
+  }
+}
+
+@keyframes docs-anchor-highlight {
+  0% {
+    transform: translateX(0);
+  }
+  8% {
+    transform: translateX(3px);
+  }
+  16% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes docs-anchor-highlight-glow {
+  0% {
+    opacity: 1;
+    filter: brightness(1.05);
+  }
+  65% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+    filter: brightness(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-content .docs-anchor-highlight {
+    animation: none;
+  }
+
+  .docs-content .docs-anchor-highlight::before {
+    animation: docs-anchor-highlight-reduced 4s ease-out forwards;
+  }
+
+  @keyframes docs-anchor-highlight-reduced {
+    0%,
+    20% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 }
 
 @layer utilities {

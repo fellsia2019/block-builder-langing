@@ -1,7 +1,7 @@
 'use client';
 
 import type { MouseEvent, ReactNode } from 'react';
-import { getDocsScrollOffset } from './docsScrollOffset';
+import { scrollToDocHeading } from './docsScrollOffset';
 
 interface DocAnchorProps {
   id: string;
@@ -11,10 +11,7 @@ interface DocAnchorProps {
 export default function DocAnchor({ id, children }: DocAnchorProps) {
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const el = document.getElementById(id);
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - getDocsScrollOffset();
-    window.scrollTo({ top, behavior: 'smooth' });
+    if (!scrollToDocHeading(id)) return;
     history.replaceState(null, '', `#${id}`);
   };
 

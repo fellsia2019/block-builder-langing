@@ -7,6 +7,7 @@ import Sidebar from './Sidebar';
 import TableOfContents from './TableOfContents';
 import { useAutoToc } from './useAutoToc';
 import { getDocsScrollOffset } from './docsScrollOffset';
+import { useHashScroll } from './useHashScroll';
 
 interface DocsLayoutProps {
   children: ReactNode;
@@ -16,6 +17,7 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const toc = useAutoToc(contentRef, pathname);
+  useHashScroll();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {

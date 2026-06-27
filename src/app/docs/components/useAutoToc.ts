@@ -3,35 +3,12 @@
 import { useEffect, useState, type RefObject } from 'react';
 import type { TocItem } from './TableOfContents';
 
-function slugify(text: string): string {
-  return (
-    text
-      .trim()
-      .toLowerCase()
-      .replace(/[^a-z0-9\u0400-\u04ff]+/gi, '-')
-      .replace(/^-+|-+$/g, '')
-      .slice(0, 80) || 'section'
-  );
-}
-
 function collectTocItems(container: HTMLElement): TocItem[] {
-  const used = new Set<string>();
   const items: TocItem[] = [];
 
-  container.querySelectorAll('h2, h3').forEach((node) => {
-    if (!(node instanceof HTMLElement)) return;
+  container.querySelectorAll('h2[id], h3[id]').forEach((node) => {
+    if (!(node instanceof HTMLElement) || !node.id) return;
 
-    if (!node.id) {
-      const base = slugify(node.textContent ?? 'section');
-      let id = base;
-      let n = 2;
-      while (used.has(id) || document.getElementById(id)) {
-        id = `${base}-${n++}`;
-      }
-      node.id = id;
-    }
-
-    used.add(node.id);
     items.push({
       id: node.id,
       title: node.textContent?.replace(/\s+/g, ' ').trim() ?? node.id,
@@ -62,8 +39,6 @@ export function useAutoToc(
     observer.observe(container, {
       childList: true,
       subtree: true,
-      attributes: true,
-      attributeFilter: ['id'],
     });
 
     window.addEventListener('resize', update, { passive: true });

@@ -217,16 +217,16 @@ export default function ReactComponentsSection({ nextSection, nextTitle, onNavig
           Экспортируются из <code>@mushket-co/block-builder/react</code>:
         </p>
         <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
-          <li>
+          <li id="prepare-blocks-for-display">
             <code>prepareBlocksForDisplay</code> — восстанавливает render из конфигурации типов
           </li>
-          <li>
+          <li id="enrich-block-for-display">
             <code>enrichBlockForDisplay</code> — обогащение одного блока
           </li>
-          <li>
+          <li id="seed-repository-from-blocks">
             <code>seedRepositoryFromBlocks</code> — синхронизация репозитория после гидрации
           </li>
-          <li>
+          <li id="enable-viewport-breakpoint-detection">
             <code>enableViewportBreakpointDetection</code> — spacing после гидрации
           </li>
         </ul>

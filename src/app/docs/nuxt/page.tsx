@@ -208,10 +208,10 @@ export default defineEventHandler(async () => {
             Экспортируются из <code>@mushket-co/block-builder/vue</code>:
           </p>
           <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-            <li><code>prepareBlocksForDisplay</code> — восстанавливает <code>render</code> из <code>availableBlockTypes</code></li>
-            <li><code>enrichBlockForDisplay</code> — обогащение одного блока</li>
-            <li><code>seedRepositoryFromBlocks</code> — синхронизация in-memory репозитория</li>
-            <li><code>enableViewportBreakpointDetection</code> — пересчёт spacing после гидрации</li>
+            <li id="prepare-blocks-for-display"><code>prepareBlocksForDisplay</code> — восстанавливает <code>render</code> из <code>availableBlockTypes</code></li>
+            <li id="enrich-block-for-display"><code>enrichBlockForDisplay</code> — обогащение одного блока</li>
+            <li id="seed-repository-from-blocks"><code>seedRepositoryFromBlocks</code> — синхронизация in-memory репозитория</li>
+            <li id="enable-viewport-breakpoint-detection"><code>enableViewportBreakpointDetection</code> — пересчёт spacing после гидрации</li>
           </ul>
           <p className="text-gray-600 dark:text-gray-400 mt-4 text-sm">
             <code>prepareBlocksForDisplay</code> и <code>seedRepositoryFromBlocks</code> вызываются внутри компонента автоматически.
