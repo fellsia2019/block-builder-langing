@@ -83,8 +83,8 @@ const handleBlockDeleted = (blockId) => {
         <div className="space-y-4">
           <EventCard 
             name="block-added" 
-            description="Срабатывает сразу после создания нового блока пользователем"
-            payload="block: IBlock - объект созданного блока"
+            description="Срабатывает после создания нового блока или дублирования существующего"
+            payload="block: IBlock — полный объект блока"
             example={`// Обработчик события
 const handleBlockAdded = (block) => {
   console.log('Создан блок:', block)

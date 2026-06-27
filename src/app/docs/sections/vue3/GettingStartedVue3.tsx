@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
+import { GITHUB_EXAMPLES_VUE3_CORE_API } from '@/lib/urls';
 import type { NavigationProps } from '../../types';
 import UploadUrlImportantNote from '../../components/UploadUrlImportantNote';
 
@@ -358,6 +359,51 @@ const config = {
             <span><strong>Режим просмотра</strong> - Используйте <code className="text-blue-700 dark:text-blue-400">:isEdit="false"</code> для отображения блоков в режиме только просмотра без возможности редактирования</span>
           </li>
         </ul>
+      </section>
+
+      <section className="rounded-xl p-6 border border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/10">
+        <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Core без BlockBuilderComponent</h2>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          Если нужен свой UI редактора, используйте{' '}
+          <code className="text-primary-700 dark:text-primary-400">@mushket-co/block-builder/core</code> напрямую.
+          Во Vue создайте экземпляр в <code className="text-primary-700 dark:text-primary-400">onMounted</code>, храните
+          в <code className="text-primary-700 dark:text-primary-400">ref</code>, вызывайте методы через{' '}
+          <code className="text-primary-700 dark:text-primary-400">await blockBuilder.value?.createBlock(...)</code>.
+        </p>
+        <CodeBlock
+          language="vue"
+          className="mb-4 text-xs"
+          code={`<script setup>
+import { onMounted, ref } from 'vue'
+import { BlockBuilder } from '@mushket-co/block-builder/core'
+
+const blockBuilder = ref(null)
+
+onMounted(() => {
+  blockBuilder.value = new BlockBuilder({ blockConfigs })
+})
+</script>`}
+        />
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Справочник методов и типов —{' '}
+          <Link href="/docs/core/classes" className="text-primary-600 hover:underline">
+            Обзор API
+          </Link>
+          ,{' '}
+          <Link href="/docs/core/methods" className="text-primary-600 hover:underline">
+            Методы
+          </Link>
+          . Пример —{' '}
+          <a
+            href={GITHUB_EXAMPLES_VUE3_CORE_API}
+            className="text-primary-600 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            examples/vue3-core-api
+          </a>
+          .
+        </p>
       </section>
 
       <section className="bg-green-50 dark:bg-green-900/20 rounded-xl p-6 border border-green-200 dark:border-green-800">

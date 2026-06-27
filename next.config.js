@@ -16,6 +16,11 @@ const nextConfig = {
         destination: '/docs/get-started',
         permanent: true,
       },
+      {
+        source: '/docs/vue/api',
+        destination: '/docs/core/classes',
+        permanent: true,
+      },
     ];
   },
 };

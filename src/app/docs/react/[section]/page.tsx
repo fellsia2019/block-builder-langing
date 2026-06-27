@@ -14,6 +14,9 @@ const GettingStartedReact = dynamic(() => import('../../sections/react/GettingSt
 const ReactComponentsSection = dynamic(() => import('../../sections/react/ComponentsSection'), {
   loading: () => <DocsSectionFallback />,
 });
+const ReactEventsSection = dynamic(() => import('../../sections/react/EventsSection'), {
+  loading: () => <DocsSectionFallback />,
+});
 
 export default function ReactSectionPage() {
   const params = useParams();
@@ -42,6 +45,8 @@ function getContent(subSection: ReactSubSection) {
       return <GettingStartedReact nextSection={null} nextTitle={null} onNavigate={() => {}} />;
     case 'components':
       return <ReactComponentsSection nextSection={null} nextTitle={null} onNavigate={() => {}} />;
+    case 'events':
+      return <ReactEventsSection nextSection={null} nextTitle={null} onNavigate={() => {}} />;
     default:
       return (
         <div className="space-y-8">

@@ -9,14 +9,9 @@ export const CORE_SECTIONS: CoreSubSection[] = [
   'types',
 ];
 
-export const VUE3_SECTIONS: Vue3SubSection[] = [
-  'getting-started',
-  'components',
-  'events',
-  'api',
-];
+export const VUE3_SECTIONS: Vue3SubSection[] = ['getting-started', 'components', 'events'];
 
-export const REACT_SECTIONS: ReactSubSection[] = ['getting-started', 'components'];
+export const REACT_SECTIONS: ReactSubSection[] = ['getting-started', 'components', 'events'];
 
 export const SECTION_TITLES = {
   core: {
@@ -31,10 +26,10 @@ export const SECTION_TITLES = {
     'getting-started': 'Быстрый старт',
     components: 'Компоненты',
     events: 'События',
-    api: 'Программный API',
   },
   react: {
     'getting-started': 'Быстрый старт',
     components: 'Компоненты',
+    events: 'Колбэки',
   },
 };

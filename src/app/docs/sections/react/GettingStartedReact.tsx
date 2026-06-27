@@ -103,6 +103,12 @@ export function App() {
           </li>
           <li>
             →{' '}
+            <Link href="/docs/react/events" className="text-blue-600 hover:underline">
+              Колбэки onBlockAdded / Updated / Deleted
+            </Link>
+          </li>
+          <li>
+            →{' '}
             <Link href="/docs/core/form-fields" className="text-blue-600 hover:underline">
               Поля форм
             </Link>

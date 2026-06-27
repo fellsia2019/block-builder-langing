@@ -172,6 +172,10 @@ export default function ReactComponentsSection({ nextSection, nextTitle, onNavig
             ))}
           </div>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
+            <Link href="/docs/react/events" className="text-primary-600 dark:text-primary-400 hover:underline">
+              Подробнее о колбэках →
+            </Link>
+            {' · '}
             <Link href="/docs/core/types#iblock" className="text-primary-600 dark:text-primary-400 hover:underline">
               тип IBlock →
             </Link>
@@ -261,6 +265,10 @@ export function TextBlock({ block }: BlockProps) {
           Полный список props типов блоков — в{' '}
           <Link href="/docs/core/form-fields" className="text-blue-600 hover:underline">
             Поля форм
+          </Link>
+          . Отступы (margin/padding) —{' '}
+          <Link href="/docs/core/form-fields#spacing" className="text-blue-600 hover:underline">
+            spacing
           </Link>
           .
         </p>

@@ -42,7 +42,6 @@ export const DOCS_SIDEBAR: DocsNavGroup[] = [
       { title: 'Быстрый старт', href: '/docs/vue/getting-started' },
       { title: 'Компоненты', href: '/docs/vue/components' },
       { title: 'События', href: '/docs/vue/events' },
-      { title: 'Программный API', href: '/docs/vue/api' },
       { title: 'Nuxt (SSR)', href: '/docs/nuxt' },
     ],
   },
@@ -51,6 +50,7 @@ export const DOCS_SIDEBAR: DocsNavGroup[] = [
     items: [
       { title: 'Быстрый старт', href: '/docs/react/getting-started' },
       { title: 'Компоненты', href: '/docs/react/components' },
+      { title: 'Колбэки', href: '/docs/react/events' },
       { title: 'Next.js (SSR)', href: '/docs/next' },
     ],
   },

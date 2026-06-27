@@ -17,9 +17,6 @@ const ComponentsSection = dynamic(() => import('../../sections/vue3/ComponentsSe
 const EventsSection = dynamic(() => import('../../sections/vue3/EventsSection'), {
   loading: () => <DocsSectionFallback />,
 });
-const Vue3ApiSection = dynamic(() => import('../../sections/vue3/Vue3ApiSection'), {
-  loading: () => <DocsSectionFallback />,
-});
 
 export default function VueSectionPage() {
   const params = useParams();
@@ -59,8 +56,6 @@ function getContent(
       return <ComponentsSection nextSection={nextSection} nextTitle={nextTitle} onNavigate={handleNavigate} />;
     case 'events':
       return <EventsSection nextSection={nextSection} nextTitle={nextTitle} onNavigate={handleNavigate} />;
-    case 'api':
-      return <Vue3ApiSection nextSection={nextSection} nextTitle={nextTitle} onNavigate={handleNavigate} />;
     default:
       return (
         <div className="space-y-8">
