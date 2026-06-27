@@ -17,34 +17,35 @@ export function useScrollSpy(ids: string[]): string {
   useEffect(() => {
     if (ids.length === 0) return;
 
+    let rafId = 0;
+
     const update = () => {
       const scrollLine = window.scrollY + getDocsScrollOffset();
       const nearBottom =
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 48;
 
-      if (nearBottom) {
-        setActiveId(ids[ids.length - 1]);
-        return;
-      }
+      const next = nearBottom
+        ? ids[ids.length - 1]
+        : ids.reduce((current, id) => {
+            const el = document.getElementById(id);
+            return el && getHeadingTop(el) <= scrollLine ? id : current;
+          }, ids[0]);
 
-      let current = ids[0];
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && getHeadingTop(el) <= scrollLine) {
-          current = id;
-        }
-      }
-      setActiveId(current);
+      setActiveId((prev) => (prev === next ? prev : next));
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(update);
     };
 
     update();
-    window.addEventListener('scroll', update, { passive: true });
-    document.addEventListener('scroll', update, { passive: true, capture: true });
-    window.addEventListener('resize', update, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', update);
-      document.removeEventListener('scroll', update, true);
-      window.removeEventListener('resize', update);
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
     };
   }, [ids.join('|')]);
 

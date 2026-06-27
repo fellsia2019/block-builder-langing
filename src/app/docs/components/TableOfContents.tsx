@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, type RefObject } from 'react';
 import { getDocsScrollOffset } from './docsScrollOffset';
 import { useScrollSpy } from './useScrollSpy';
 
@@ -12,21 +12,55 @@ export interface TocItem {
 
 interface TableOfContentsProps {
   items: TocItem[];
+  anchorRef: RefObject<HTMLElement | null>;
 }
 
-export default function TableOfContents({ items }: TableOfContentsProps) {
+export default function TableOfContents({ items, anchorRef }: TableOfContentsProps) {
   const ids = items.map((item) => item.id);
   const activeId = useScrollSpy(ids);
   const navRef = useRef<HTMLElement>(null);
+  const [left, setLeft] = useState<number | null>(null);
+
+  useEffect(() => {
+    const anchor = anchorRef.current;
+    if (!anchor) return;
+
+    const sync = () => {
+      setLeft(anchor.getBoundingClientRect().left);
+    };
+
+    sync();
+    window.addEventListener('resize', sync, { passive: true });
+    window.addEventListener('scroll', sync, { passive: true });
+
+    const observer = new ResizeObserver(sync);
+    observer.observe(anchor);
+
+    return () => {
+      window.removeEventListener('resize', sync);
+      window.removeEventListener('scroll', sync);
+      observer.disconnect();
+    };
+  }, [anchorRef, items.length]);
 
   useEffect(() => {
     const nav = navRef.current;
     if (!nav || !activeId) return;
     const link = nav.querySelector<HTMLElement>(`[data-toc-id="${activeId}"]`);
-    link?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    if (!link) return;
+
+    const linkTop = link.offsetTop;
+    const linkBottom = linkTop + link.offsetHeight;
+    const { scrollTop, clientHeight } = nav;
+
+    if (linkTop < scrollTop) {
+      nav.scrollTop = linkTop;
+    } else if (linkBottom > scrollTop + clientHeight) {
+      nav.scrollTop = linkBottom - clientHeight;
+    }
   }, [activeId]);
 
-  if (items.length === 0) return null;
+  if (items.length === 0 || left === null) return null;
 
   const scrollToHeading = (id: string) => {
     const el = document.getElementById(id);
@@ -40,9 +74,10 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
     <nav
       ref={navRef}
       aria-label="На этой странице"
-      className="docs-search-scroll sticky w-full overflow-y-auto pr-1"
+      className="docs-search-scroll hidden xl:block fixed z-30 w-52 overflow-y-auto"
       style={{
         top: 'var(--docs-scroll-offset, 5rem)',
+        left,
         maxHeight: 'calc(100vh - var(--docs-scroll-offset, 5rem) - 1.5rem)',
       }}
     >
