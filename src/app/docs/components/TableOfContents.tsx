@@ -40,7 +40,7 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
     <nav
       ref={navRef}
       aria-label="На этой странице"
-      className="docs-search-scroll hidden xl:block fixed right-6 w-52 overflow-y-auto"
+      className="docs-search-scroll sticky w-full overflow-y-auto pr-1"
       style={{
         top: 'var(--docs-scroll-offset, 5rem)',
         maxHeight: 'calc(100vh - var(--docs-scroll-offset, 5rem) - 1.5rem)',

@@ -79,15 +79,22 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
         )}
 
         <div className="flex-1 transition-all md:ml-64 min-h-[calc(100vh-4rem)] w-0 overflow-x-hidden">
-          <div
-            ref={contentRef}
-            className={`docs-content max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-24 ${toc.length ? 'xl:mr-56' : ''}`}
-          >
-            {children}
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 xl:px-10 pt-8 pb-24">
+            <div className={toc.length > 0 ? 'flex gap-8 xl:gap-12' : undefined}>
+              <div
+                ref={contentRef}
+                className={`docs-content min-w-0 flex-1 max-w-4xl ${toc.length === 0 ? 'mx-auto' : ''}`}
+              >
+                {children}
+              </div>
+              {toc.length > 0 && (
+                <aside className="hidden xl:block w-52 shrink-0">
+                  <TableOfContents items={toc} />
+                </aside>
+              )}
+            </div>
           </div>
         </div>
-
-        {toc.length > 0 && <TableOfContents items={toc} />}
       </div>
     </div>
   );
