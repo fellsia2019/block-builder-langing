@@ -127,7 +127,7 @@ export default function Hero() {
             </span>
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
               <Icon name="star" size={16} className="text-primary-600 dark:text-primary-400" />
-              v1.10.0
+              v1.11.0
             </span>
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
               <Icon name="package" size={16} className="text-primary-600 dark:text-primary-400" />
@@ -136,6 +136,11 @@ export default function Hero() {
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
               <Icon name="zap" size={16} className="text-primary-600 dark:text-primary-400" />
               Vue3 Support
+            </span>
+
+            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
+              <Icon name="zap" size={16} className="text-primary-600 dark:text-primary-400" />
+              React 18+ Support
             </span>
           </div>
         </AnimateOnScroll>

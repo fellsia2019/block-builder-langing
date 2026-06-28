@@ -204,6 +204,51 @@ export default function ComponentsSection({ nextSection, nextTitle, onNavigate }
 
             <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
               <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">locale</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">&apos;ru&apos; | &apos;en&apos;, по умолчанию ru</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Встроенная локализация UI BlockBuilder (кнопки, подписи контролов, confirm-тексты). Подписи полей блоков задаёт приложение.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">uiStrings</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Partial&lt;IUiStrings&gt;, опциональный</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Точечные переопределения строк поверх пресета <code>locale</code>.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">theme</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">&apos;dark&apos;, опциональный</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Встроенный тёмный пресет — CSS variables на <code>.bb-app</code>.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
+                <code className="text-purple-700 dark:text-purple-400">themeVars</code>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Record&lt;--bb-*&gt;, опциональный</span>
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                Переопределение design tokens (<code>--bb-color-primary</code>, <code>--bb-color-surface</code>, radius, spacing…).
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                <Link href="/docs/core/theming-localization" className="text-primary-600 dark:text-primary-400 hover:underline">
+                  Темизация и локализация →
+                </Link>
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+              <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                 <code className="text-purple-700 dark:text-purple-400">warnOnPageLeave</code>
                 <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">Boolean, опциональный</span>
               </h4>

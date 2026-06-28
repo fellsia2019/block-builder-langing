@@ -2,6 +2,16 @@ import Link from 'next/link';
 
 const RELEASES = [
   {
+    version: '1.11.0',
+    date: '2026-06-28',
+    highlights: [
+      'Локализация UI: locale ru/en, uiStrings, без внешних i18n-библиотек',
+      'Темизация через CSS variables: theme="dark", themeVars на .bb-app',
+      'Токен --bb-color-surface, readBbThemeVarsFromClosestApp для teleported dropdown',
+      'ValidationErrorHandler: раскрытие nested repeater произвольной глубины',
+    ],
+  },
+  {
     version: '1.10.0',
     date: '2026-06-27',
     highlights: [

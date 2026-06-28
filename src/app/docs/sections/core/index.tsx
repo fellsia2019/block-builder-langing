@@ -3,4 +3,4 @@ export { default as MethodsSection } from './MethodsSection';
 export { default as PropertiesSection } from './PropertiesSection';
 export { default as TypesSection } from './TypesSection';
 export { default as UtilitiesSection } from './UtilitiesSection';
-
+export { default as ThemingLocalizationSection } from './ThemingLocalizationSection';

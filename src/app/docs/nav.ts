@@ -32,6 +32,7 @@ export const DOCS_SIDEBAR: DocsNavGroup[] = [
       { title: 'Методы', href: '/docs/core/methods' },
       { title: 'Свойства', href: '/docs/core/properties' },
       { title: 'Поля форм', href: '/docs/core/form-fields' },
+      { title: 'Темизация и локализация', href: '/docs/core/theming-localization' },
       { title: 'Утилиты', href: '/docs/core/utilities' },
       { title: 'Типы', href: '/docs/core/types' },
     ],

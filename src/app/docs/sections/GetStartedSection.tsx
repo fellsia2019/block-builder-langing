@@ -142,6 +142,12 @@ const onSave = async (blocks) => { console.log(blocks); return true }
         <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
           <li>
             →{' '}
+            <Link href="/docs/core/theming-localization" className="text-primary-600 hover:underline">
+              Темизация и локализация UI (1.11)
+            </Link>
+          </li>
+          <li>
+            →{' '}
             <Link href="/docs/core/form-fields" className="text-primary-600 hover:underline">
               Поля форм и кастомные рендереры
             </Link>

@@ -5,6 +5,7 @@ export const CORE_SECTIONS: CoreSubSection[] = [
   'methods',
   'properties',
   'form-fields',
+  'theming-localization',
   'utilities',
   'types',
 ];
@@ -20,6 +21,7 @@ export const SECTION_TITLES = {
     properties: 'Свойства',
     types: 'Типы',
     'form-fields': 'Поля форм',
+    'theming-localization': 'Темизация и локализация',
     utilities: 'Утилиты',
   },
   vue3: {

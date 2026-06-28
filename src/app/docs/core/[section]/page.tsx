@@ -26,6 +26,10 @@ const FormFieldsSection = dynamic(() => import('../../sections/core/FormFieldsSe
 const UtilitiesSection = dynamic(() => import('../../sections/core/UtilitiesSection'), {
   loading: () => <DocsSectionFallback />,
 });
+const ThemingLocalizationSection = dynamic(
+  () => import('../../sections/core/ThemingLocalizationSection'),
+  { loading: () => <DocsSectionFallback /> }
+);
 
 export default function CoreSectionPage() {
   const params = useParams();
@@ -63,6 +67,8 @@ function getContent(subSection: CoreSubSection) {
       return <TypesSection {...nav} />;
     case 'form-fields':
       return <FormFieldsSection {...nav} />;
+    case 'theming-localization':
+      return <ThemingLocalizationSection {...nav} />;
     case 'utilities':
       return <UtilitiesSection {...nav} />;
     default:

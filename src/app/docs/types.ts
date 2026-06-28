@@ -1,4 +1,11 @@
-export type CoreSubSection = 'classes' | 'methods' | 'properties' | 'types' | 'form-fields' | 'utilities';
+export type CoreSubSection =
+  | 'classes'
+  | 'methods'
+  | 'properties'
+  | 'types'
+  | 'form-fields'
+  | 'utilities'
+  | 'theming-localization';
 export type Vue3SubSection = 'getting-started' | 'components' | 'events';
 export type ReactSubSection = 'getting-started' | 'components' | 'events';
 

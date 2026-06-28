@@ -114,6 +114,11 @@ const EXTRA_ENTRIES: DocsSearchEntry[] = [
   util('haveBlocksChanged', 'unsaved-changes', 'несохранённые изменения page leave warnOnPageLeave tracker'),
   util('usePageLeaveWarning', 'unsaved-changes', 'vue react warn leave beforeunload'),
 
+  // —— Темизация / локализация ——
+  { title: 'Темизация и локализация UI', href: '/docs/core/theming-localization', group: 'Справочник API', keywords: 'theme themeVars locale uiStrings dark glass css variables i18n' },
+  { title: 'themeVars', href: '/docs/core/theming-localization#theme-vars', group: 'Справочник API', keywords: 'bb-color-primary surface custom theme' },
+  { title: 'locale uiStrings', href: '/docs/core/theming-localization#locale-ui-strings', group: 'Справочник API', keywords: 'локализация i18n ru en UI_STRINGS' },
+
   // —— Vue ——
   { title: 'BlockBuilderComponent', href: '/docs/vue/components#block-builder-component', group: 'Vue 3', keywords: 'компонент props события emit' },
   { title: 'onSave', href: '/docs/vue/events', group: 'Vue 3', keywords: 'сохранение save blocks sync backend' },

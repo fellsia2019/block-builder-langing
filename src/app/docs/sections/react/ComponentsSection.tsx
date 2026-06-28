@@ -110,6 +110,26 @@ export default function ReactComponentsSection({ nextSection, nextTitle, onNavig
               description="Режим редактирования (по умолчанию: true). false — только просмотр блоков"
             />
             <PropCard
+              name="locale"
+              type="'ru' | 'en'"
+              description="Локализация UI BlockBuilder (по умолчанию ru). Подписи полей в block-config — на стороне приложения."
+            />
+            <PropCard
+              name="uiStrings"
+              type="Partial<IUiStrings>"
+              description="Переопределение отдельных строк UI поверх locale"
+            />
+            <PropCard
+              name="theme"
+              type="'dark'"
+              description="Встроенный тёмный пресет CSS variables на .bb-app"
+            />
+            <PropCard
+              name="themeVars"
+              type="Record<'--bb-*', string>"
+              description="Кастомные design tokens (--bb-color-primary, --bb-color-surface, radius…)"
+            />
+            <PropCard
               name="warnOnPageLeave"
               type="boolean"
               description="Предупреждение при уходе с несохранёнными блоками"
@@ -135,6 +155,11 @@ export default function ReactComponentsSection({ nextSection, nextTitle, onNavig
               description="CSS-переменная для учёта высоты header/footer"
             />
           </div>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
+            <Link href="/docs/core/theming-localization" className="text-blue-600 hover:underline">
+              Темизация, locale и themeVars →
+            </Link>
+          </p>
         </div>
 
         <div className="mb-6">
