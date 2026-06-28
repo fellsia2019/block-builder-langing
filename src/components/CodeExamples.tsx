@@ -1,14 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 import AnimateOnScroll from './AnimateOnScroll';
 import CodeBlock from './CodeBlock';
 import Icon from './Icon';
+import { routing } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 import { DEMO_BB_URL, GITHUB_EXAMPLES } from '@/lib/urls';
 
-const examples = [
+type LocalizedSamples = {
+  nextRegisterComponents: string;
+  nextSaveToServer: string;
+  apiOnlyNoCssComment: string;
+  apiOnlyBlockTitle: string;
+  apiOnlyFieldLabel: string;
+  apiOnlyDefaultValue: string;
+  apiOnlyLogMessage: string;
+  vue3BlockLabel: string;
+  vue3FieldLabel: string;
+};
+
+function buildExamples(samples: LocalizedSamples) {
+  return [
   {
-    title: 'Vue 3',
+    tabKey: 'vue3' as const,
     language: 'vue',
     code: `<template>
   <BlockBuilderComponent
@@ -34,10 +50,10 @@ blockManagementUseCase.getComponentRegistry().register('text', YourTextBlock)
 const availableBlockTypes = ref([
   {
     type: 'text',
-    label: 'Текст',
+    label: '${samples.vue3BlockLabel}',
     render: { kind: 'component', framework: 'vue', component: YourTextBlock },
     fields: [
-      { field: 'content', label: 'Содержимое', type: 'textarea', defaultValue: 'Hello' }
+      { field: 'content', label: '${samples.vue3FieldLabel}', type: 'textarea', defaultValue: 'Hello' }
     ],
     defaultProps: { content: 'Hello' }
   }
@@ -53,7 +69,7 @@ const handleSave = async (blocks) => {
 </script>`,
   },
   {
-    title: 'React',
+    tabKey: 'react' as const,
     language: 'tsx',
     code: `import '@mushket-co/block-builder/index.esm.css'
 import {
@@ -67,10 +83,10 @@ blockManagementUseCase.getComponentRegistry().register('text', TextBlock)
 
 const availableBlockTypes = [{
   type: 'text',
-  label: 'Текст',
+  label: '${samples.vue3BlockLabel}',
   render: { kind: 'component', framework: 'react', component: TextBlock },
   fields: [
-    { field: 'content', label: 'Содержимое', type: 'textarea',
+    { field: 'content', label: '${samples.vue3FieldLabel}', type: 'textarea',
       rules: [{ type: 'required', field: 'content' }] },
   ],
 }]
@@ -89,7 +105,8 @@ export function App() {
 }`,
   },
   {
-    title: 'Nuxt (SSR)',
+    tabKey: 'nuxt' as const,
+    isSsr: true,
     language: 'vue',
     code: `<template>
   <BlockBuilderComponent
@@ -110,7 +127,6 @@ const { data: initialBlocks } = await useAsyncData('bb-blocks', () =>
   $fetch('/api/blocks')
 )
 
-// composable — ваш файл (use case, типы блоков, handleSave): /docs/nuxt#use-block-builder
 const {
   blockManagementUseCase,
   availableBlockTypes,
@@ -120,7 +136,8 @@ const {
 </script>`,
   },
   {
-    title: 'Next.js (SSR)',
+    tabKey: 'next' as const,
+    isSsr: true,
     language: 'tsx',
     code: `// app/page.tsx — Server Component
 import { BlockBuilderEditor } from './BlockBuilderEditor'
@@ -140,7 +157,7 @@ import { BlockBuilderComponent, createBlockManagementUseCase } from '@mushket-co
 
 export function BlockBuilderEditor({ initialBlocks }) {
   const blockManagementUseCase = createBlockManagementUseCase()
-  // регистрация компонентов и availableBlockTypes...
+  ${samples.nextRegisterComponents}
 
   return (
     <BlockBuilderComponent
@@ -148,26 +165,26 @@ export function BlockBuilderEditor({ initialBlocks }) {
       blockManagementUseCase={blockManagementUseCase}
       initialBlocks={initialBlocks}
       isEdit
-      onSave={async (blocks) => { /* сохранение на сервер */ return true }}
+      onSave={async (blocks) => { ${samples.nextSaveToServer} return true }}
     />
   )
 }`,
   },
   {
-    title: 'Только API (без UI)',
+    tabKey: 'apiOnly' as const,
     language: 'javascript',
     code: `import { BlockBuilder } from '@mushket-co/block-builder/core'
-// Для core версии НЕ импортируйте CSS!
+${samples.apiOnlyNoCssComment}
 
 const blockConfigs = {
   text: {
-    title: 'Текстовый блок',
+    title: '${samples.apiOnlyBlockTitle}',
     fields: [
       {
         field: 'content',
-        label: 'Содержимое',
+        label: '${samples.apiOnlyFieldLabel}',
         type: 'textarea',
-        defaultValue: 'Новый текстовый блок'
+        defaultValue: '${samples.apiOnlyDefaultValue}'
       }
     ]
   }
@@ -185,12 +202,41 @@ await blockBuilder.createBlock({
 })
 
 const blocks = await blockBuilder.getAllBlocks()
-console.log('Все блоки:', blocks)`,
+console.log('${samples.apiOnlyLogMessage}', blocks)`,
   },
-];
+  ] as const;
+}
 
 export default function CodeExamples() {
+  const t = useTranslations('codeExamples');
+  const locale = useLocale();
+  const docsLink =
+    locale === routing.defaultLocale
+      ? '/docs/nuxt#use-block-builder'
+      : `/${locale}/docs/nuxt#use-block-builder`;
+  const nuxtCommentPrefix = t('samples.nuxtComposableCommentPrefix');
+  const nuxtPlainComment = `${nuxtCommentPrefix}${docsLink}`;
+  const examples = useMemo(
+    () =>
+      buildExamples({
+        nextRegisterComponents: t('samples.nextRegisterComponents'),
+        nextSaveToServer: t('samples.nextSaveToServer'),
+        apiOnlyNoCssComment: t('samples.apiOnlyNoCssComment'),
+        apiOnlyBlockTitle: t('samples.apiOnlyBlockTitle'),
+        apiOnlyFieldLabel: t('samples.apiOnlyFieldLabel'),
+        apiOnlyDefaultValue: t('samples.apiOnlyDefaultValue'),
+        apiOnlyLogMessage: t('samples.apiOnlyLogMessage'),
+        vue3BlockLabel: t('samples.vue3BlockLabel'),
+        vue3FieldLabel: t('samples.vue3FieldLabel'),
+      }),
+    [t],
+  );
   const [activeTab, setActiveTab] = useState(0);
+  const activeExample = examples[activeTab];
+  const isNuxtExample = activeExample.tabKey === 'nuxt';
+  const nuxtCopyText = isNuxtExample
+    ? `${nuxtPlainComment}\n${activeExample.code.trim()}`
+    : undefined;
 
   return (
     <section id="examples" className="py-20 bg-white dark:bg-slate-900 overflow-hidden">
@@ -198,21 +244,18 @@ export default function CodeExamples() {
         <AnimateOnScroll animationName="FADE_IN_DOWN" animationDelay={100}>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-              Примеры использования
+              {t('title')}
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Быстрый старт с готовыми примерами кода
-            </p>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">{t('subtitle')}</p>
           </div>
         </AnimateOnScroll>
 
         <div className="max-w-5xl mx-auto">
           <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={200}>
-            {/* Tabs */}
             <div className="flex flex-wrap gap-2 mb-6">
             {examples.map((example, index) => (
               <button
-                key={index}
+                key={example.tabKey}
                 onClick={() => setActiveTab(index)}
                 className={`px-6 py-3 rounded-lg font-semibold transition-all ${
                   activeTab === index
@@ -220,7 +263,7 @@ export default function CodeExamples() {
                     : 'bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-700'
                 }`}
               >
-                {example.title}
+                {t(`tabs.${example.tabKey}`)}
               </button>
             ))}
           </div>
@@ -234,22 +277,35 @@ export default function CodeExamples() {
                   <div className="w-3 h-3 rounded-full bg-yellow-500" />
                   <div className="w-3 h-3 rounded-full bg-green-500" />
                 </div>
-                <div className="text-sm text-gray-400">{examples[activeTab].title}</div>
+                <div className="text-sm text-gray-400">{t(`tabs.${activeExample.tabKey}`)}</div>
               </div>
               <div className="px-6 pb-6">
-                <CodeBlock 
-                  code={examples[activeTab].code} 
-                  language={examples[activeTab].language}
+                {isNuxtExample && (
+                  <div className="font-mono text-sm leading-6 px-4 pt-4 bg-[#1e293b] text-[#6a9955]">
+                    {nuxtCommentPrefix}
+                    <Link
+                      href="/docs/nuxt#use-block-builder"
+                      className="text-[#9cdcfe] hover:underline"
+                    >
+                      {docsLink}
+                    </Link>
+                  </div>
+                )}
+                <CodeBlock
+                  code={activeExample.code}
+                  language={activeExample.language}
                   className="rounded-none"
+                  copyText={nuxtCopyText}
+                  denseTop={isNuxtExample}
                 />
               </div>
             </div>
           </AnimateOnScroll>
 
-          {examples[activeTab].title.includes('SSR') && (
+          {'isSsr' in activeExample && activeExample.isSsr && (
             <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={500}>
               <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800 text-sm text-gray-700 dark:text-gray-300">
-                Живое SSR-демо для {examples[activeTab].title.replace(' (SSR)', '')} — в репозитории пакета, не в demo-bb:{' '}
+                {t('ssrNote', { framework: t(`tabs.${activeExample.tabKey}`).replace(' (SSR)', '') })}{' '}
                 <a href={GITHUB_EXAMPLES} className="text-primary-600 dark:text-primary-400 hover:underline font-medium" target="_blank" rel="noopener noreferrer">
                   github.com/mushket-co/block-builder/tree/master/examples
                 </a>
@@ -264,10 +320,10 @@ export default function CodeExamples() {
                   <Icon name="zap" size={32} className="text-primary-600 dark:text-primary-400" />
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  Быстрый старт
+                  {t('cards.quickStart.title')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Готовые компоненты и UI из коробки
+                  {t('cards.quickStart.description')}
                 </p>
               </div>
             </AnimateOnScroll>
@@ -277,10 +333,10 @@ export default function CodeExamples() {
                   <Icon name="plugin" size={32} className="text-green-600 dark:text-green-400" />
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  Гибкость
+                  {t('cards.flexibility.title')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Используйте с UI или только API
+                  {t('cards.flexibility.description')}
                 </p>
               </div>
             </AnimateOnScroll>
@@ -290,13 +346,16 @@ export default function CodeExamples() {
                   <Icon name="monitor" size={32} className="text-orange-600 dark:text-orange-400" />
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  SSR
+                  {t('cards.ssr.title')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Nuxt и Next.js — живые примеры в{' '}
-                  <a href={GITHUB_EXAMPLES} className="text-orange-600 dark:text-orange-400 hover:underline" target="_blank" rel="noopener noreferrer">
-                    block-builder/examples
-                  </a>
+                  {t.rich('cards.ssr.description', {
+                    link: (chunks) => (
+                      <a href={GITHUB_EXAMPLES} className="text-orange-600 dark:text-orange-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                        {chunks}
+                      </a>
+                    ),
+                  })}
                 </p>
               </div>
             </AnimateOnScroll>
@@ -312,12 +371,10 @@ export default function CodeExamples() {
               >
                 <div className="flex flex-col items-center">
                   <Icon name="monitor" size={48} className="mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-2xl font-bold mb-2">Интерактивные демо</h3>
-                  <p className="text-lg text-white/90 mb-4">
-                    Vue 3, React 18 — block-builder-demo
-                  </p>
+                  <h3 className="text-2xl font-bold mb-2">{t('demo.title')}</h3>
+                  <p className="text-lg text-white/90 mb-4">{t('demo.subtitle')}</p>
                   <div className="px-6 py-3 bg-white/20 backdrop-blur-sm rounded-lg font-semibold group-hover:bg-white/30 transition-colors">
-                    Открыть demo-bb →
+                    {t('demo.cta')}
                   </div>
                 </div>
               </a>
@@ -331,12 +388,10 @@ export default function CodeExamples() {
               >
                 <div className="flex flex-col items-center">
                   <Icon name="zap" size={48} className="mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-2xl font-bold mb-2">SSR Nuxt и Next.js</h3>
-                  <p className="text-lg text-white/90 mb-4">
-                    Живые примеры в репозитории block-builder/examples
-                  </p>
+                  <h3 className="text-2xl font-bold mb-2">{t('ssrExamples.title')}</h3>
+                  <p className="text-lg text-white/90 mb-4">{t('ssrExamples.subtitle')}</p>
                   <div className="px-6 py-3 bg-white/20 backdrop-blur-sm rounded-lg font-semibold group-hover:bg-white/30 transition-colors">
-                    Открыть examples на GitHub →
+                    {t('ssrExamples.cta')}
                   </div>
                 </div>
               </a>

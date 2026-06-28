@@ -1,20 +1,21 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import AnimateOnScroll from './AnimateOnScroll';
 import Icon from './Icon';
 
 export default function Architecture() {
+  const t = useTranslations('architecture');
+
   return (
     <section id="architecture" className="py-20 bg-gradient-to-br from-gray-50 to-white dark:from-slate-800 dark:to-slate-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll animationName="FADE_IN_DOWN" animationDelay={100}>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-              Архитектура
+              {t('title')}
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Построено по принципам Clean Architecture
-            </p>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">{t('subtitle')}</p>
           </div>
         </AnimateOnScroll>
 
@@ -24,13 +25,13 @@ export default function Architecture() {
               <div className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-l-4 border-primary-600">
                 <h3 className="text-xl font-semibold mb-3 text-primary-600 dark:text-primary-400 flex items-center gap-2">
                   <Icon name="target" size={20} />
-                  Core Layer (Ядро)
+                  {t('core.title')}
                 </h3>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <li>• <strong>Entities</strong> - бизнес-правила и сущности</li>
-                  <li>• <strong>Use Cases</strong> - сценарии использования</li>
-                  <li>• <strong>Ports</strong> - интерфейсы для внешнего мира</li>
-                  <li>• <strong>DTO</strong> - объекты передачи данных</li>
+                  <li>• {t('core.entities')}</li>
+                  <li>• {t('core.useCases')}</li>
+                  <li>• {t('core.ports')}</li>
+                  <li>• {t('core.dto')}</li>
                 </ul>
               </div>
             </AnimateOnScroll>
@@ -39,12 +40,12 @@ export default function Architecture() {
               <div className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-l-4 border-purple-600">
                 <h3 className="text-xl font-semibold mb-3 text-purple-600 dark:text-purple-400 flex items-center gap-2">
                   <Icon name="settings" size={20} />
-                  Infrastructure Layer
+                  {t('infrastructure.title')}
                 </h3>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <li>• <strong>Repositories</strong> - реализации хранилищ</li>
-                  <li>• <strong>HTTP Clients</strong> - работа с API</li>
-                  <li>• <strong>Registries</strong> - регистры компонентов</li>
+                  <li>• {t('infrastructure.repositories')}</li>
+                  <li>• {t('infrastructure.http')}</li>
+                  <li>• {t('infrastructure.registries')}</li>
                 </ul>
               </div>
             </AnimateOnScroll>
@@ -53,29 +54,27 @@ export default function Architecture() {
               <div className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-l-4 border-pink-600">
                 <h3 className="text-xl font-semibold mb-3 text-pink-600 dark:text-pink-400 flex items-center gap-2">
                   <Icon name="paintbrush" size={20} />
-                  UI Layer
+                  {t('ui.title')}
                 </h3>
                 <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <li>• <strong>UI Components</strong> - готовые компоненты</li>
-                  <li>• <strong>Controllers</strong> - управление UI</li>
-                  <li>• <strong>Services</strong> - UI сервисы</li>
+                  <li>• {t('ui.components')}</li>
+                  <li>• {t('ui.controllers')}</li>
+                  <li>• {t('ui.services')}</li>
                 </ul>
               </div>
             </AnimateOnScroll>
           </div>
 
-          <AnimateOnScroll 
-            animationName="FADE_IN_RIGHT" 
+          <AnimateOnScroll
+            animationName="FADE_IN_RIGHT"
             animationDelay={300}
             parallaxEnabled={true}
             deltaPercent={0.05}
           >
             <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-2xl hover:shadow-3xl transition-shadow">
               <div className="space-y-4">
-                <div className="text-center text-sm text-gray-600 dark:text-gray-400 mb-6">
-                  Направление зависимостей
-                </div>
-                
+                <div className="text-center text-sm text-gray-600 dark:text-gray-400 mb-6">{t('diagram.title')}</div>
+
                 <div className="flex items-center justify-center space-x-4">
                   <div className="flex-1 p-4 bg-pink-100 dark:bg-pink-900 rounded-lg text-center">
                     <div className="font-semibold text-pink-700 dark:text-pink-300">UI</div>
@@ -103,13 +102,13 @@ export default function Architecture() {
                 <div className="mt-8 p-4 bg-green-50 dark:bg-green-900/30 rounded-lg border-2 border-green-200 dark:border-green-800">
                   <div className="text-center text-sm font-semibold text-green-700 dark:text-green-300 mb-2 flex items-center justify-center gap-2">
                     <Icon name="check" size={16} />
-                    Преимущества
+                    {t('diagram.benefits')}
                   </div>
                   <ul className="text-xs text-green-600 dark:text-green-400 space-y-1">
-                    <li>• Core не зависит от внешних слоев</li>
-                    <li>• Легко тестировать и мокать</li>
-                    <li>• Простая замена реализаций</li>
-                    <li>• Четкое разделение ответственности</li>
+                    <li>• {t('diagram.benefit1')}</li>
+                    <li>• {t('diagram.benefit2')}</li>
+                    <li>• {t('diagram.benefit3')}</li>
+                    <li>• {t('diagram.benefit4')}</li>
                   </ul>
                 </div>
               </div>
@@ -124,7 +123,7 @@ export default function Architecture() {
                 <Icon name="flask" size={48} className="text-primary-600 dark:text-primary-400" />
               </div>
               <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-2">100%</div>
-              <div className="text-gray-600 dark:text-gray-400">Покрытие тестами</div>
+              <div className="text-gray-600 dark:text-gray-400">{t('stats.tests')}</div>
             </div>
           </AnimateOnScroll>
           <AnimateOnScroll animationName="ZOOM_IN" animationDelay={400}>
@@ -133,7 +132,7 @@ export default function Architecture() {
                 <Icon name="package" size={48} className="text-purple-600 dark:text-purple-400" />
               </div>
               <div className="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-2">TypeScript</div>
-              <div className="text-gray-600 dark:text-gray-400">Полная типизация</div>
+              <div className="text-gray-600 dark:text-gray-400">{t('stats.typescript')}</div>
             </div>
           </AnimateOnScroll>
           <AnimateOnScroll animationName="ZOOM_IN" animationDelay={600}>
@@ -142,7 +141,7 @@ export default function Architecture() {
                 <Icon name="target" size={48} className="text-pink-600 dark:text-pink-400" />
               </div>
               <div className="text-2xl font-bold text-pink-600 dark:text-pink-400 mb-2">SOLID</div>
-              <div className="text-gray-600 dark:text-gray-400">Принципы разработки</div>
+              <div className="text-gray-600 dark:text-gray-400">{t('stats.solid')}</div>
             </div>
           </AnimateOnScroll>
         </div>

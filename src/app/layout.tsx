@@ -1,27 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { ReactNode } from 'react';
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://block-builder-doc.vercel.app"),
-  title: "BlockBuilder - Блочный конструктор с чистой архитектурой",
-  description: "Библиотека для создания блочных конструкторов с правильной чистой архитектурой. Vue 3, React 18+, TypeScript.",
-  keywords: ["block-builder", "no-code", "constructor", "vue3", "typescript", "clean architecture"],
-  icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
-  },
+type Props = {
+  children: ReactNode;
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="ru">
-      <body className="antialiased">{children}</body>
-    </html>
-  );
+export default function RootLayout({ children }: Props) {
+  return children;
 }
-

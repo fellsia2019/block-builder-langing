@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import AnimateOnScroll from './AnimateOnScroll';
 import Icon from './Icon';
 import BlockBuilderCanvas from './BlockBuilderCanvas';
 
 export default function Hero() {
+  const t = useTranslations('hero');
   const sectionRef = useRef<HTMLElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const animationFrameRef = useRef<number>();
@@ -19,16 +21,14 @@ export default function Hero() {
       const rect = section.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      
-      // Вычисляем отклонение от центра (от -1 до 1)
+
       const x = (e.clientX - centerX) / (rect.width / 2);
       const y = (e.clientY - centerY) / (rect.height / 2);
-      
-      // Ограничиваем и применяем легкий наклон (максимум 3 градуса для более тонкого эффекта)
+
       const maxTilt = 3;
       targetTiltRef.current = {
         x: Math.max(-1, Math.min(1, x)) * maxTilt,
-        y: Math.max(-1, Math.min(1, y)) * -maxTilt, // Инвертируем Y для естественного эффекта
+        y: Math.max(-1, Math.min(1, y)) * -maxTilt,
       };
     };
 
@@ -36,9 +36,8 @@ export default function Hero() {
       targetTiltRef.current = { x: 0, y: 0 };
     };
 
-    // Плавная интерполяция для более мягкого эффекта
     const animate = () => {
-      setTilt(prev => {
+      setTilt((prev) => {
         const diffX = targetTiltRef.current.x - prev.x;
         const diffY = targetTiltRef.current.y - prev.y;
         return {
@@ -63,16 +62,14 @@ export default function Hero() {
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
     >
-      {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-purple-900" />
-      
-      {/* Canvas animation - Block Builder concept */}
+
       <BlockBuilderCanvas tilt={tilt} />
-      
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-[80px]">
         <AnimateOnScroll animationName="FADE_IN_DOWN" animationDelay={200} animationTime={800} rootMargin="-50px 0px">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
@@ -81,16 +78,11 @@ export default function Hero() {
         </AnimateOnScroll>
 
         <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={400} animationTime={800} rootMargin="-50px 0px">
-          <p className="text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-4">
-            Блочный конструктор с чистой архитектурой
-          </p>
+          <p className="text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-4">{t('subtitle')}</p>
         </AnimateOnScroll>
 
         <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={600} animationTime={800} rootMargin="-50px 0px">
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto">
-            Создавайте мощные no-code конструкторы с правильной архитектурой. 
-            Vue 3, React 18+, SSR (Nuxt, Next.js). MIT, без ограничений.
-          </p>
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto">{t('description')}</p>
         </AnimateOnScroll>
 
         <AnimateOnScroll animationName="SCALE_UP" animationDelay={800} animationTime={600} rootMargin="-50px 0px">
@@ -99,19 +91,18 @@ export default function Hero() {
               href="#installation"
               className="px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transform hover:scale-105 transition-all shadow-lg hover:shadow-xl"
             >
-              Начать работу
+              {t('ctaStart')}
             </a>
             <a
               href="#examples"
               className="px-8 py-4 bg-white dark:bg-slate-800 text-primary-600 dark:text-primary-400 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-slate-700 transform hover:scale-105 transition-all shadow-lg hover:shadow-xl border-2 border-primary-200 dark:border-primary-800"
             >
-              Посмотреть примеры
+              {t('ctaExamples')}
             </a>
           </div>
         </AnimateOnScroll>
 
         <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={1000} animationTime={800} rootMargin="-50px 0px">
-          {/* Key features badges */}
           <div className="flex flex-wrap gap-3 justify-center text-sm">
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
               <Icon name="sparkles" size={16} className="text-primary-600 dark:text-primary-400" />
@@ -119,11 +110,11 @@ export default function Hero() {
             </span>
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
               <Icon name="target" size={16} className="text-primary-600 dark:text-primary-400" />
-              SOLID принципы
+              {t('badges.solid')}
             </span>
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
               <Icon name="flask" size={16} className="text-primary-600 dark:text-primary-400" />
-              100% покрытие тестами
+              {t('badges.tests')}
             </span>
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
               <Icon name="star" size={16} className="text-primary-600 dark:text-primary-400" />
@@ -137,7 +128,6 @@ export default function Hero() {
               <Icon name="zap" size={16} className="text-primary-600 dark:text-primary-400" />
               Vue3 Support
             </span>
-
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
               <Icon name="zap" size={16} className="text-primary-600 dark:text-primary-400" />
               React 18+ Support
@@ -146,7 +136,6 @@ export default function Hero() {
         </AnimateOnScroll>
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-primary-600 dark:border-primary-400 rounded-full flex items-start justify-center p-2">
           <div className="w-1 h-3 bg-primary-600 dark:bg-primary-400 rounded-full animate-pulse" />
@@ -155,4 +144,3 @@ export default function Hero() {
     </section>
   );
 }
-

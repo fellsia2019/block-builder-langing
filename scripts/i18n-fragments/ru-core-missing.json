@@ -1,0 +1,198 @@
+{
+  "classes": {
+    "title": "Обзор API",
+    "subtitle": "Headless-слой <code>@mushket-co/block-builder/core</code> — открытая доменная логика без готового редактора. Vue/React UI поверх него — опция, не обязательный путь.",
+    "why": {
+      "title": "Что такое core",
+      "p1": "<code>BlockBuilder</code> — фасад: CRUD блоков, схема полей, валидация, кастомные рендереры форм, import/export. Без готовой панели редактора — её дают <code>@mushket-co/block-builder/vue</code> и <code>/react</code>, используя те же правила и типы.",
+      "p2": "Core не «заставляет» отказываться от UI. Это запасной чистый слой: хотите — собираете свой редактор или работаете только с данными; устраивает готовый — берите компонент из Vue/React."
+    },
+    "when": {
+      "title": "Когда что использовать",
+      "intro": "Выбор за вами. Ниже — типичные сценарии, не догма.",
+      "componentDesc": "Готовый редактор «из коробки» — быстрый старт, если вас устраивает его UX и UI.",
+      "componentSsrPrefix": "SSR публичных страниц — в",
+      "componentSsrSuffix": "(рендер блоков на сервере + гидратация редактора в админке)",
+      "componentDocs": "— документация по компоненту",
+      "coreDesc": "Когда готовый UI не подходит или редактор вообще не нужен — только логика и данные.",
+      "coreAdminUi": "Свой админ-UI: дизайн-система сайта, жёсткие макеты — встроенный редактор не вписывается",
+      "coreCustomEditor": "Свой редактор на core (формы, списки, порядок блоков — как решите вы)",
+      "coreDataOnly": "Только данные: скрипты, тесты, API без монтирования UI (Node и браузер)",
+      "coreExamples": "Примеры:"
+    },
+    "import": {
+      "title": "Импорт и конструктор",
+      "noteBeforeTypes": "Полный тип опций —",
+      "noteBeforeProperties": ". Публичные поля экземпляра — в разделе",
+      "noteAfterProperties": ".",
+      "code": {
+        "blockConfigsComment": "обязательно: схема типов блоков и fields",
+        "initialBlocksComment": "опционально: IBlockDto[]",
+        "autoInitComment": "по умолчанию — загрузить initialBlocks при создании"
+      }
+    },
+    "example": {
+      "title": "Минимальный пример",
+      "intro": "Конфиг типа блока задаёт поля формы; методы создают и обновляют блоки в репозитории (по умолчанию — in-memory).",
+      "noteBeforeFormFields": "Схема полей — в",
+      "noteBeforeMethods": ". Список методов —",
+      "noteAfterMethods": ".",
+      "code": {
+        "blockTitle": "Текст",
+        "fieldLabel": "Содержимое",
+        "sampleContent": "<p>Привет</p>"
+      }
+    },
+    "map": {
+      "title": "Карта раздела «Справочник API»",
+      "methods": "— CRUD, режим редактирования, кастомные рендереры",
+      "properties": "— опции конструктора (<code>blockConfigs</code>, <code>initialBlocks</code>, …)",
+      "types": "— TypeScript-интерфейсы",
+      "formFields": "— типы полей, валидация, кастомные рендереры",
+      "utilities": "— spacing, scroll lock, валидация форм"
+    }
+  },
+  "methods": {
+    "title": "Методы",
+    "subtitle": "API методы для работы с блоками",
+    "crud": {
+      "title": "CRUD операции",
+      "createBlock": "Создает новый блок с указанными параметрами",
+      "getBlock": "Возвращает блок по идентификатору",
+      "getAllBlocks": "Возвращает список всех созданных блоков",
+      "updateBlock": "Обновляет существующий блок по идентификатору",
+      "deleteBlock": "Удаляет блок по идентификатору"
+    },
+    "utility": {
+      "title": "Утилиты",
+      "duplicateBlock": "Дублирует блок",
+      "getBlocksCount": "Возвращает количество блоков",
+      "getBlocksByType": "Возвращает блоки по типу",
+      "exportBlocks": "Экспортирует блоки в JSON",
+      "importBlocks": "Импортирует блоки из JSON"
+    },
+    "editMode": {
+      "title": "Режим редактирования/просмотра",
+      "setIsEdit": "Переключает режим редактирования. При false скрываются все контролы редактирования, остаётся только пользовательская верстка блоков",
+      "getIsEdit": "Возвращает текущий режим редактирования (true — режим редактирования, false — режим просмотра)",
+      "note": "В режиме просмотра (<code>isEdit: false</code>) автоматически скрываются все контролы редактирования, добавления и управления блоками. Остаётся только пользовательская верстка блоков в обёртке BlockBuilder. На элемент <code>body</code> автоматически добавляется CSS класс <code>bb-is-edit-mode</code> для кастомизации стилей."
+    },
+    "customRenderers": {
+      "title": "Кастомные рендереры",
+      "registerCustomFieldRenderer": "Регистрирует кастомный рендерер поля. ",
+      "registerCustomFieldRenderers": "Массовая регистрация нескольких кастомных рендереров полей. ",
+      "getCustomFieldRenderer": "Получает кастомный рендерер по ID. ",
+      "hasCustomFieldRenderer": "Проверяет наличие кастомного рендерера. ",
+      "getAllCustomFieldRenderers": "Возвращает все зарегистрированные кастомные рендереры. ",
+      "unregisterCustomFieldRenderer": "Удаляет кастомный рендерер. "
+    }
+  },
+  "properties": {
+    "title": "Свойства",
+    "subtitle": "Публичные свойства и опции инициализации программного API (<code>BlockBuilder</code>)",
+    "initOptions": {
+      "title": "Опции инициализации",
+      "blockConfigs": {
+        "required": "(обязательный)",
+        "description": "Конфигурация типов блоков: ключ — <code>type</code>, значение — конфиг полей и метаданных."
+      },
+      "autoInit": {
+        "description": "Автозагрузка <code>initialBlocks</code> при создании экземпляра (по умолчанию: <code>true</code>)."
+      },
+      "initialBlocks": {
+        "description": "Начальный набор блоков при инициализации."
+      },
+      "uiNote": "UI-опции (<code>onSave</code>, <code>isEdit</code>, панель контролов) — в <code>BlockBuilderComponent</code>, см. разделы компонентов."
+    }
+  },
+  "themingLocalization": {
+    "title": "Темизация и локализация UI",
+    "subtitle": "BlockBuilder (Vue/React) поддерживает встроенную локализацию строк и переопределение внешнего вида через CSS custom properties на <code>.bb-app</code>.",
+    "locale": {
+      "title": "Локализация UI",
+      "p1": "Пакет локализует только свой UI (кнопки, подписи контролов, сообщения валидации). Подписи полей в <code>block-config</code> задаёт приложение.",
+      "localeItem": "<code>locale</code> — <code>'ru'</code> (по умолчанию) или <code>'en'</code>",
+      "uiStringsItem": "<code>uiStrings</code> / <code>:ui-strings</code> — точечные переопределения отдельных строк",
+      "exportsItem": "Экспорт: <code>UI_STRINGS_RU</code>, <code>UI_STRINGS_EN</code>, <code>resolveUiStrings</code>, <code>IUiStrings</code>",
+      "hooksNote": "React: хук <code>useUiStrings()</code> внутри UI. Vue: <code>useUiStrings()</code> через provide/inject."
+    },
+    "themePreset": {
+      "title": "Пресет theme=\"dark\"",
+      "p1": "Встроенная тёмная палитра применяется через prop <code>theme</code>. Переменные записываются на корневой элемент <code>.bb-app</code>.",
+      "coreNote": "Core API (<code>BlockBuilder</code> фасад) UI не рендерит — props <code>theme</code> / <code>locale</code> там не используются."
+    },
+    "themeVars": {
+      "title": "Кастомизация themeVars",
+      "description": "Любые токены <code>--bb-*</code> можно переопределить объектом <code>themeVars</code>."
+    },
+    "teleportedUi": {
+      "title": "Teleported UI (dropdown)",
+      "p1": "Панели <code>CustomDropdown</code> монтируются в <code>body</code> и теряют наследование CSS variables. Пакет автоматически копирует theme vars с ближайшего <code>.bb-app</code> при открытии dropdown (Vue/React <code>CustomDropdown</code>).",
+      "p2": "Для своего teleported UI можно использовать внутренний хелпер <code>readBbThemeVarsFromClosestApp</code> из <code>shared/theme/bbThemeContext</code> (паттерн пакета)."
+    },
+    "seeAlso": {
+      "title": "См. также",
+      "vueComponents": "Vue — BlockBuilderComponent (props)",
+      "reactComponents": "React — BlockBuilderComponent (props)",
+      "changelog": "История изменений 1.11.0"
+    }
+  },
+  "utilities": {
+    "title": "Утилиты",
+    "subtitle": "Вспомогательные функции, экспортируемые из пакета и доступные для использования в вашем приложении",
+    "signatures": "Сигнатуры",
+    "scrollLock": {
+      "title": "Блокировка скролла",
+      "description": "Управление блокировкой прокрутки документа. Экспортируется из <code>@mushket-co/block-builder/core</code>.",
+      "setScrollLockHandlers": "<code>setScrollLockHandlers</code> — глобально переопределяет обработчики блокировки/разблокировки.",
+      "lockBodyScroll": "<code>lockBodyScroll</code>/<code>unlockBodyScroll</code> — дефолтные реализации: добавляют/убирают CSS‑класс, учитывают ширину скроллбара.",
+      "modalComment": "// Пример использования в модалке",
+      "modalOpenComment": "// ... открыта модалка ...",
+      "tipsTitle": "Советы",
+      "tip1": "Задайте одинаковую стратегию для модалок, дропдаунов, оверлеев — не миксуйте подходы.",
+      "tip2": "При кастомной реализации учитывайте компенсацию ширины скроллбара (padding-right).",
+      "importantNote": "Если ваш фреймворк уже управляет блокировкой (например, сторонняя библиотека модалок), переопределите хендлеры через <code>setScrollLockHandlers</code> и делегируйте в библиотеку.",
+      "importantAnchor": "Подробнее — API и пример →"
+    },
+    "blockHierarchy": {
+      "title": "Вспомогательные функции блоков",
+      "description": "Экспортируются из <code>@mushket-co/block-builder/core</code>: <code>buildBlockHierarchy, cloneBlock, getAllChildren, isChildOf</code>.",
+      "buildBlockHierarchy": "<code>buildBlockHierarchy</code> — преобразует плоский список в дерево по полям <code>parent</code>/<code>children</code>.",
+      "cloneBlock": "<code>cloneBlock</code> — глубоко клонирует объект блока (без ссылок на оригинал).",
+      "getAllChildren": "<code>getAllChildren</code> — возвращает всех потомков (в любом уровне вложенности).",
+      "isChildOf": "<code>isChildOf</code> — быстро проверяет отношение принадлежности к родителю.",
+      "normalizeNote": "Рекомендуется нормализовать входные данные: гарантировать уникальные <code>id</code> и согласованность связей <code>parent</code>⇄<code>children</code> перед вызовами вспомогательных функций."
+    },
+    "spacing": {
+      "title": "Утилиты отступов (spacing)",
+      "description": "Экспортируются из <code>@mushket-co/block-builder/core</code>: <code>DEFAULT_BREAKPOINTS, generateSpacingCSS, generateSpacingCSSVariables, getSpacingValue, mergeSpacing, setSpacingValue, validateSpacing</code>.",
+      "generateSpacingCSSVariables": "<code>generateSpacingCSSVariables</code> — удобно для передачи padding через CSS‑переменные в компонент.",
+      "generateSpacingCSS": "<code>generateSpacingCSS</code> — пригодно для SSR/инъекции стилей на страницу (например, тег <code>'<'style'>'</code>).",
+      "mergeSpacing": "<code>mergeSpacing</code> — аккуратно объединяет конфигурации (не затирая отсутствующие ключи).",
+      "validateSpacing": "<code>validateSpacing</code> — используйте в бек‑ или CI‑валидации конфигураций.",
+      "uiNote": "В UI‑версии BlockBuilder применяет spacing автоматически. Эти вспомогательные функции полезны при ручной интеграции (/core) или для генерации стилей вне UI компонентов."
+    },
+    "filterBlocks": {
+      "title": "Видимость блоков",
+      "description": "<code>filterBlocksForDisplay(blocks, isEdit)</code> — экспорт из core. В режиме просмотра скрытые блоки (<code>visible: false</code>) не попадают в DOM; в редактировании остаются с классом <code>bb-opacity-hidden</code>."
+    },
+    "unsavedChanges": {
+      "title": "Несохранённые изменения",
+      "description": "Для кастомного UI без готового <code>BlockBuilderComponent</code> — утилиты и хуки из core / vue / react. Опция <code>warnOnPageLeave</code> в компонентах включает нативное предупреждение браузера."
+    },
+    "reactiveValidation": {
+      "title": "Реактивная валидация формы",
+      "description": "Для кастомного UI форм (без готового <code>BlockBuilderComponent</code>) — трекер и хелпер из <code>@mushket-co/block-builder/core</code>. В <code>BlockBuilderComponent</code> реактивная валидация включена автоматически: после неуспешного submit ошибки обновляются при каждом изменении поля.",
+      "touch": "<code>touch()</code> — вызывайте после неуспешного submit, чтобы включить перевалидацию на каждое изменение.",
+      "revalidateIfTouched": "<code>revalidateIfTouched</code> — возвращает актуальные ошибки или <code>null</code>, если форма ещё не «touched».",
+      "applyFormErrors": "<code>applyFormErrors</code> — атомарно заменяет объект ошибок (удобно для Vue <code>reactive</code> / React state)."
+    },
+    "universalValidator": {
+      "title": "UniversalValidator",
+      "description": "Единый валидатор для форм; экспортируется из <code>@mushket-co/block-builder/core</code>.",
+      "rules": "Поддерживаемые правила: <code>required</code>, <code>email</code>, <code>url</code>, <code>min</code>/<code>max</code>, <code>minLength</code>/<code>maxLength</code>, <code>pattern</code>, <code>custom</code>.",
+      "message": "Поле <code>message</code> необязательно; доступны тексты по умолчанию.",
+      "customNote": "Для сложных случаев используйте правило <code>custom</code> со своей функцией валидации. Возвращайте <code>false</code> при ошибке и задайте <code>message</code> для понятного текста."
+    }
+  }
+}

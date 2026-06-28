@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import { useTranslations } from 'next-intl';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Icon from './Icon';
 
@@ -14,15 +15,21 @@ interface CodeBlockProps {
   code: string;
   language?: string;
   className?: string;
+  copyText?: string;
+  denseTop?: boolean;
 }
 
 export default function CodeBlock({
   code,
   language = 'javascript',
   className = '',
+  copyText,
+  denseTop = false,
 }: CodeBlockProps) {
+  const t = useTranslations('codeBlock');
   const [copied, setCopied] = useState(false);
   const trimmedCode = code.trim();
+  const trimmedCopyText = (copyText ?? code).trim();
   const isRounded = !className.includes('rounded-none');
 
   const getLanguage = () => {
@@ -47,7 +54,7 @@ export default function CodeBlock({
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(trimmedCode);
+      await navigator.clipboard.writeText(trimmedCopyText);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -57,7 +64,7 @@ export default function CodeBlock({
 
   const preStyles = {
     margin: 0,
-    padding: '1rem',
+    padding: denseTop ? '0 1rem 1rem' : '1rem',
     fontSize: '0.875rem',
     lineHeight: '1.5',
     background: '#1e293b',
@@ -70,17 +77,17 @@ export default function CodeBlock({
       <button
         onClick={handleCopy}
         className="absolute top-3 right-3 z-10 px-3 py-1.5 text-xs font-medium text-gray-300 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors opacity-0 group-hover:opacity-100"
-        title={copied ? 'Скопировано!' : 'Копировать'}
+        title={copied ? t('copiedTitle') : t('copyTitle')}
       >
         {copied ? (
           <span className="flex items-center gap-1">
             <span>✓</span>
-            <span className="hidden sm:inline">Скопировано</span>
+            <span className="hidden sm:inline">{t('copied')}</span>
           </span>
         ) : (
           <span className="flex items-center gap-1">
             <Icon name="clipboard" size={14} />
-            <span className="hidden sm:inline">Копировать</span>
+            <span className="hidden sm:inline">{t('copy')}</span>
           </span>
         )}
       </button>
