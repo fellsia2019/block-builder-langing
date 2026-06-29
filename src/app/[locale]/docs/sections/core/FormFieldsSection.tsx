@@ -9,7 +9,7 @@ import { GITHUB_EXAMPLES, GITHUB_EXAMPLES_API_USAGE } from '@/lib/urls';
 import DocHeading from '../../components/DocHeading';
 import DocAnchor from '../../components/DocAnchor';
 import DocImportantNote from '../../components/DocImportantNote';
-import { docRichTags } from '../../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../../components/docRichTags';
 import type { NavigationProps } from '../../types';
 
 function ParamDoc({
@@ -219,7 +219,7 @@ export default function FormFieldsSection(_props: NavigationProps) {
 
       <section className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
         <DocHeading id="overview">{t('overview.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400">{t.rich('overview.description', blueRich)}</p>
+        <p className="text-gray-600 dark:text-gray-400">{renderDocRichString(t.raw('overview.description') as string, blueRich)}</p>
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
@@ -227,7 +227,7 @@ export default function FormFieldsSection(_props: NavigationProps) {
           <Icon name="shield" size={22} className="text-teal-600 dark:text-teal-400" />
           <span>{t('validation.title')}</span>
         </DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('validation.description', tealRich)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('validation.description') as string, tealRich)}</p>
       </section>
 
       <section>
@@ -237,7 +237,7 @@ export default function FormFieldsSection(_props: NavigationProps) {
 
       <section>
         <DocHeading id="field-types">{t('fieldTypes.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('fieldTypes.description', greenRich)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('fieldTypes.description') as string, greenRich)}</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {FIELD_TYPE_CARDS.map(({ key, icon }) => (
             <FieldTypeCard
@@ -253,24 +253,24 @@ export default function FormFieldsSection(_props: NavigationProps) {
 
       <section className="bg-green-50 dark:bg-green-900/20 rounded-xl p-6 border-l-4 border-green-500">
         <DocHeading id="field-params">{t('fieldParams.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-6">{t.rich('fieldParams.intro', greenRich)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-6">{renderDocRichString(t.raw('fieldParams.intro') as string, greenRich)}</p>
 
         <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">{t('fieldParams.basic.title')}</h3>
         <div className="space-y-3 mb-8">
           <ParamDoc name="field" badge={t('fieldParams.basic.field.badge')}>
-            <p>{t.rich('fieldParams.basic.field.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.basic.field.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="label" badge={t('fieldParams.basic.label.badge')}>
-            <p>{t.rich('fieldParams.basic.label.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.basic.label.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="type" badge={t('fieldParams.basic.type.badge')}>
-            <p>{t.rich('fieldParams.basic.type.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.basic.type.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="defaultValue" badge={t('fieldParams.basic.defaultValue.badge')}>
-            <p>{t.rich('fieldParams.basic.defaultValue.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.basic.defaultValue.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="placeholder" badge={t('fieldParams.basic.placeholder.badge')}>
-            <p>{t.rich('fieldParams.basic.placeholder.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.basic.placeholder.description') as string, greenRich)}</p>
           </ParamDoc>
         </div>
 
@@ -279,13 +279,13 @@ export default function FormFieldsSection(_props: NavigationProps) {
         </h3>
         <div className="space-y-3 mb-8">
           <ParamDoc name="options" badge={t('fieldParams.valueSelection.options.badge')}>
-            <p>{t.rich('fieldParams.valueSelection.options.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.valueSelection.options.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="multiple" badge={t('fieldParams.valueSelection.multiple.badge')}>
-            <p>{t.rich('fieldParams.valueSelection.multiple.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.valueSelection.multiple.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="optionsFrom" badge={t('fieldParams.valueSelection.optionsFrom.badge')}>
-            <p>{t.rich('fieldParams.valueSelection.optionsFrom.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.valueSelection.optionsFrom.description') as string, greenRich)}</p>
           </ParamDoc>
         </div>
 
@@ -294,18 +294,18 @@ export default function FormFieldsSection(_props: NavigationProps) {
         </h3>
         <div className="space-y-3 mb-8">
           <ParamDoc name="rules" badge={t('fieldParams.validationVisibility.rules.badge')}>
-            <p className="mb-2">{t.rich('fieldParams.validationVisibility.rules.description', greenRich)}</p>
+            <p className="mb-2">{renderDocRichString(t.raw('fieldParams.validationVisibility.rules.description') as string, greenRich)}</p>
             <ul className="list-disc list-inside space-y-1 text-sm">
               {RULE_ITEM_KEYS.map((key) => (
-                <li key={key}>{t.rich(`fieldParams.validationVisibility.rules.items.${key}`, greenRich)}</li>
+                <li key={key}>{renderDocRichString(t.raw(`fieldParams.validationVisibility.rules.items.${key}`) as string, greenRich)}</li>
               ))}
             </ul>
           </ParamDoc>
           <ParamDoc name="dependsOn" badge={t('fieldParams.validationVisibility.dependsOn.badge')}>
-            <p>{t.rich('fieldParams.validationVisibility.dependsOn.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.validationVisibility.dependsOn.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="persist" badge={t('fieldParams.validationVisibility.persist.badge')}>
-            <p>{t.rich('fieldParams.validationVisibility.persist.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.validationVisibility.persist.description') as string, greenRich)}</p>
           </ParamDoc>
         </div>
 
@@ -313,28 +313,28 @@ export default function FormFieldsSection(_props: NavigationProps) {
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{t('fieldParams.typeConfigs.intro')}</p>
         <div className="space-y-3">
           <ParamDoc name="spacingConfig / spacingOptions">
-            <p>{t.rich('fieldParams.typeConfigs.spacingConfig.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.typeConfigs.spacingConfig.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="repeaterConfig">
-            <p>{t.rich('fieldParams.typeConfigs.repeaterConfig.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.typeConfigs.repeaterConfig.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="fileUploadConfig">
-            <p>{t.rich('fieldParams.typeConfigs.fileUploadConfig.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.typeConfigs.fileUploadConfig.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="fileImportConfig">
-            <p>{t.rich('fieldParams.typeConfigs.fileImportConfig.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.typeConfigs.fileImportConfig.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="blockAnchorConfig">
-            <p>{t.rich('fieldParams.typeConfigs.blockAnchorConfig.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.typeConfigs.blockAnchorConfig.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="matrixTableConfig">
-            <p>{t.rich('fieldParams.typeConfigs.matrixTableConfig.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.typeConfigs.matrixTableConfig.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="apiSelectConfig">
-            <p>{t.rich('fieldParams.typeConfigs.apiSelectConfig.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.typeConfigs.apiSelectConfig.description') as string, greenRich)}</p>
           </ParamDoc>
           <ParamDoc name="customFieldConfig">
-            <p>{t.rich('fieldParams.typeConfigs.customFieldConfig.description', greenRich)}</p>
+            <p>{renderDocRichString(t.raw('fieldParams.typeConfigs.customFieldConfig.description') as string, greenRich)}</p>
           </ParamDoc>
         </div>
       </section>
@@ -345,8 +345,8 @@ export default function FormFieldsSection(_props: NavigationProps) {
         <CodeBlock code={t.raw('select.code')} language="javascript" className="mb-4" />
 
         <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 mb-4">
-          <li>{t.rich('select.items.single', docRichTags)}</li>
-          <li>{t.rich('select.items.multiple', docRichTags)}</li>
+          <li>{renderDocRichString(t.raw('select.items.single') as string, docRichTags)}</li>
+          <li>{renderDocRichString(t.raw('select.items.multiple') as string, docRichTags)}</li>
         </ul>
 
         <CodeBlock code={t.raw('select.displayLabelCode')} language="javascript" className="text-xs" />
@@ -354,18 +354,18 @@ export default function FormFieldsSection(_props: NavigationProps) {
 
       <section className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 border-l-4 border-purple-500">
         <DocHeading id="spacing">{t('spacing.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('spacing.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('spacing.description') as string, docRichTags)}</p>
         <CodeBlock code={t.raw('spacing.code')} language="javascript" className="mb-4" />
-        <p className="text-sm text-gray-600 dark:text-gray-400">{t.rich('spacing.note', docRichTags)}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400">{renderDocRichString(t.raw('spacing.note') as string, docRichTags)}</p>
       </section>
 
       <section className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
         <DocHeading id="repeater">{t('repeater.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('repeater.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('repeater.description') as string, docRichTags)}</p>
 
         <CodeBlock code={t.raw('repeater.code')} language="javascript" className="mb-4" />
 
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{t.rich('repeater.notes', docRichTags)}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{renderDocRichString(t.raw('repeater.notes') as string, docRichTags)}</p>
 
         <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">{t('repeater.nestedTitle')}</h3>
         <CodeBlock code={t.raw('repeater.nestedCode')} language="javascript" />
@@ -373,21 +373,21 @@ export default function FormFieldsSection(_props: NavigationProps) {
 
       <section className="bg-pink-50 dark:bg-pink-900/20 rounded-xl p-6 border-l-4 border-pink-500">
         <DocHeading id="image">{t('image.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('image.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('image.description') as string, docRichTags)}</p>
         <CodeBlock code={t.raw('image.code')} language="javascript" className="mb-4" />
-        <DocImportantNote>{t.rich('image.importantNote', importantRich)}</DocImportantNote>
+        <DocImportantNote>{renderDocRichString(t.raw('image.importantNote') as string, importantRich)}</DocImportantNote>
         <CodeBlock code={t.raw('image.urlHelperCode')} language="javascript" className="text-xs" />
       </section>
 
       <section className="bg-slate-50 dark:bg-slate-900/20 rounded-xl p-6 border-l-4 border-slate-500">
         <DocHeading id="file">{t('file.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('file.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('file.description') as string, docRichTags)}</p>
         <CodeBlock code={t.raw('file.code')} language="javascript" className="mb-4" />
       </section>
 
       <section className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
         <DocHeading id="block-anchor">{t('blockAnchor.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('blockAnchor.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('blockAnchor.description') as string, docRichTags)}</p>
 
         <CodeBlock code={t.raw('blockAnchor.code')} language="javascript" className="mb-4" />
 
@@ -395,38 +395,38 @@ export default function FormFieldsSection(_props: NavigationProps) {
           {t('blockAnchor.scrollExampleTitle')}
         </h3>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
-          {t.rich('blockAnchor.scrollExampleIntro', docRichTags)}
+          {renderDocRichString(t.raw('blockAnchor.scrollExampleIntro') as string, docRichTags)}
         </p>
         <CodeBlock code={t.raw('blockAnchor.scrollExampleCode')} language="vue" className="mb-4" />
       </section>
 
       <section className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-6 border-l-4 border-emerald-500">
         <DocHeading id="matrix-table">{t('matrixTable.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('matrixTable.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('matrixTable.description') as string, docRichTags)}</p>
         <CodeBlock code={t.raw('matrixTable.code')} language="javascript" />
       </section>
 
       <section className="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-6 border-l-4 border-cyan-500">
         <DocHeading id="api-select">{t('apiSelect.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('apiSelect.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('apiSelect.description') as string, docRichTags)}</p>
 
         <CodeBlock code={t.raw('apiSelect.code')} language="javascript" className="mb-4" />
 
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{t('apiSelect.responseFormatLabel')}</p>
         <CodeBlock code={t.raw('apiSelect.responseExample')} language="json" />
-        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{t.rich('apiSelect.notes', docRichTags)}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{renderDocRichString(t.raw('apiSelect.notes') as string, docRichTags)}</p>
       </section>
 
       <section className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-6 border-l-4 border-emerald-500">
         <DocHeading id="depends-on">{t('dependsOn.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('dependsOn.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('dependsOn.description') as string, docRichTags)}</p>
 
         <CodeBlock code={t.raw('dependsOn.code')} language="javascript" className="mb-4" />
 
         <div className="mb-4">
           <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">{t('dependsOn.repeaterTitle')}</h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-            {t.rich('dependsOn.repeaterDescription', docRichTags)}
+            {renderDocRichString(t.raw('dependsOn.repeaterDescription') as string, docRichTags)}
           </p>
           <CodeBlock code={t.raw('dependsOn.repeaterCode')} language="javascript" />
         </div>
@@ -434,13 +434,13 @@ export default function FormFieldsSection(_props: NavigationProps) {
 
       <section className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6 border-l-4 border-orange-500">
         <DocHeading id="custom-renderers">{t('customRenderers.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('customRenderers.description', customRich)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('customRenderers.description') as string, customRich)}</p>
 
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4 mb-4 border border-orange-200 dark:border-orange-800">
           <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">{t('customRenderers.whenTitle')}</h3>
           <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
             {WHEN_ITEM_KEYS.map((key) => (
-              <li key={key}>{t.rich(`customRenderers.whenItems.${key}`, customRich)}</li>
+              <li key={key}>{renderDocRichString(t.raw(`customRenderers.whenItems.${key}`) as string, customRich)}</li>
             ))}
           </ul>
         </div>
@@ -450,7 +450,7 @@ export default function FormFieldsSection(_props: NavigationProps) {
         </DocHeading>
         <ol className="list-decimal list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 mb-4">
           {Array.from({ length: flowStepCount }, (_, index) => (
-            <li key={index}>{t.rich(`customRenderers.flowSteps.${index}`, customRich)}</li>
+            <li key={index}>{renderDocRichString(t.raw(`customRenderers.flowSteps.${index}`) as string, customRich)}</li>
           ))}
         </ol>
 
@@ -459,22 +459,22 @@ export default function FormFieldsSection(_props: NavigationProps) {
         </DocHeading>
         <CodeBlock code={t.raw('customRenderers.interfaceCode')} language="typescript" className="mb-4" />
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          {t.rich('customRenderers.interfaceNote', customRich)}
+          {renderDocRichString(t.raw('customRenderers.interfaceNote') as string, customRich)}
         </p>
 
         <DocHeading id="custom-register" level={3}>
           {t('customRenderers.registerTitle')}
         </DocHeading>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-          {t.rich('customRenderers.registerCoreLabel', customRich)}
+          {renderDocRichString(t.raw('customRenderers.registerCoreLabel') as string, customRich)}
         </p>
         <CodeBlock code={t.raw('customRenderers.registerCoreCode')} language="typescript" className="mb-4" />
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-          {t.rich('customRenderers.registerFrameworkLabel', customRich)}
+          {renderDocRichString(t.raw('customRenderers.registerFrameworkLabel') as string, customRich)}
         </p>
         <CodeBlock code={t.raw('customRenderers.registerFrameworkCode')} language="tsx" className="mb-4" />
 
-        <DocImportantNote>{t.rich('customRenderers.importantNote', importantRich)}</DocImportantNote>
+        <DocImportantNote>{renderDocRichString(t.raw('customRenderers.importantNote') as string, importantRich)}</DocImportantNote>
 
         <DocHeading id="custom-example" level={3}>
           {t('customRenderers.exampleTitle')}
@@ -485,13 +485,13 @@ export default function FormFieldsSection(_props: NavigationProps) {
 
         <ParamDoc name="customFieldConfig">
           <ul className="list-disc list-inside space-y-1 text-sm">
-            <li>{t.rich('customRenderers.customFieldConfig.rendererId', customRich)}</li>
-            <li>{t.rich('customRenderers.customFieldConfig.options', customRich)}</li>
+            <li>{renderDocRichString(t.raw('customRenderers.customFieldConfig.rendererId') as string, customRich)}</li>
+            <li>{renderDocRichString(t.raw('customRenderers.customFieldConfig.options') as string, customRich)}</li>
           </ul>
         </ParamDoc>
 
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
-          {t.rich('customRenderers.footerNote', footerRich)}
+          {renderDocRichString(t.raw('customRenderers.footerNote') as string, footerRich)}
         </p>
       </section>
     </div>

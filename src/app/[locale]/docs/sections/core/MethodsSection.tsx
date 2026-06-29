@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { renderDocRichString } from '../../components/docRichTags';
 import MethodCard from '../../components/MethodCard';
 import type { NavigationProps } from '../../types';
 
@@ -53,7 +54,7 @@ export default function MethodsSection(_props: NavigationProps) {
         </div>
         <div className="mt-4 bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-800">
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-            {t.rich('editMode.note', {
+            {renderDocRichString(t.raw('editMode.note') as string, {
               code: (chunks) => (
                 <code className="text-green-700 dark:text-green-400">{chunks}</code>
               ),

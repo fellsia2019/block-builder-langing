@@ -274,7 +274,7 @@
       "moreAboutCallbacks": "Подробнее о колбэках →",
       "iblockType": "тип IBlock →",
       "moreAboutSpacing": "Подробнее об отступах (spacing) →",
-      "themingLocalization": "Темизация и локализация →",
+      "themingLocalization": "Тема, locale, themeVars →",
       "themingLocaleThemeVars": "Темизация, locale и themeVars →",
       "practicalExamples": "Практические примеры",
       "availableEvents": "Доступные события",
@@ -288,12 +288,14 @@
       "blockStructure": "Структура объекта block",
       "blockComponentExample": "Пример компонента блока",
       "imageComponentExample": "Пример компонента с изображением",
-      "imageFieldNote": "При использовании поля <code>type: 'image'</code> в компоненте нужно обрабатывать как строку (base64), так и объект (серверная загрузка):",
+      "imageFieldNote": "При использовании поля <code>type: \"image\"</code> в компоненте нужно обрабатывать как строку (base64), так и объект (серверная загрузка):",
       "ssrUtils": "SSR-утилиты",
       "ssrGuide": "Подробное руководство по SSR —",
       "liveExamples": "Живые примеры в репозитории",
       "liveExample": "Живой пример в репозитории",
       "formFields": "Поля форм",
+      "linkFormFields": "Поля форм и rules →",
+      "linkReactiveValidation": "Реактивная валидация (core) →",
       "spacing": "spacing",
       "getStarted": "Быстрый старт",
       "and": "и",
@@ -474,7 +476,7 @@
             },
             "customFieldRendererRegistry": {
               "type": "ICustomFieldRendererRegistry, опциональный",
-              "description": "Реестр кастомных рендереров полей (<code>type: 'custom'</code>)"
+              "description": "Реестр кастомных рендереров полей (<code>type: \"custom\"</code>)"
             },
             "initialBlocks": {
               "type": "Array, опциональный",
@@ -502,7 +504,7 @@
             },
             "controlsOffsetVar": {
               "type": "String, опциональный",
-              "description": "CSS переменная для учета высоты шапки/футера (например: <code>'--header-height'</code>)"
+              "description": "CSS переменная для учета высоты шапки/футера (например: <code>--header-height</code>)"
             },
             "locale": {
               "type": "'ru' | 'en', по умолчанию ru",
@@ -513,8 +515,8 @@
               "description": "Точечные переопределения строк поверх пресета <code>locale</code>."
             },
             "theme": {
-              "type": "'dark', опциональный",
-              "description": "Встроенный тёмный пресет — CSS variables на <code>.bb-app</code>."
+              "type": "TUiTheme, опциональный",
+              "description": "Пресет темы UI: <code>default</code> (по умолчанию, если prop не передан) или <code>dark</code>. Переопределение токенов — через <code>themeVars</code> на <code>.bb-app</code>."
             },
             "themeVars": {
               "type": "Record<--bb-*>, опциональный",
@@ -526,8 +528,9 @@
             }
           },
           "notes": {
-            "blockAnchor": "Поле <code>block-anchor</code> сохраняет <code>#block-id</code> или URL; скролл и клик — в ваших компонентах блоков. Отдельный UI для <code>file</code>/<code>files</code>.",
-            "formValidation": "Валидация формы: индикатор ошибок в футере модалки и реактивная перевалидация после submit включены по умолчанию."
+            "title": "Формы создания и редактирования блоков",
+            "formValidation": "Правила из <code>fields[].rules</code> проверяются автоматически в модалке BlockBuilder — отдельно подключать валидатор не нужно. Если пользователь нажал «Сохранить» с ошибками, сообщения появляются у полей и обновляются при каждом изменении.",
+            "blockAnchor": "Поле типа <code>block-anchor</code> сохраняет якорь (<code>#block-id</code> или URL). Скролл и переход по клику реализуйте в своих компонентах блоков. Для полей <code>file</code> и <code>files</code> редактор показывает отдельный UI загрузки."
           },
           "events": {
             "blockAdded": "Создан или продублирован блок — в колбек приходит полный объект блока",
@@ -642,16 +645,77 @@
     "react": {
       "gettingStarted": {
         "title": "Быстрый старт с React",
-        "subtitle": "BlockBuilder UI через <code>@mushket-co/block-builder/react</code> (зависимость: React 18+ / 19)",
-        "stylesNote": "Подключите стили: <code>import '@mushket-co/block-builder/index.esm.css'</code>",
-        "basicExample": "Базовый пример",
-        "vite": {
-          "title": "Vite",
-          "description": "Импортируйте из <code>@mushket-co/block-builder/react</code> — Vite соберёт пакет из npm. Живое демо: <demo>demo-bb</demo>."
+        "subtitle": "Начните использовать BlockBuilder с React — готовый UI и полная интеграция с React-компонентами (<strong>React 18+</strong> / 19)",
+        "install": {
+          "description": "Установите BlockBuilder и подключите стили редактора:",
+          "stylesNote": "<code>import \"@mushket-co/block-builder/index.esm.css\"</code>",
+          "typescriptNote": "TypeScript-типы входят в пакет, отдельная установка @types не нужна."
         },
-        "ssr": {
-          "title": "SSR",
-          "description": "Next.js App Router — <nextLink>Next.js (SSR)</nextLink>. Живые SSR-примеры — <examples>block-builder/examples</examples>."
+        "concepts": {
+          "title": "Основные концепции",
+          "blockBuilderComponent": {
+            "title": "BlockBuilderComponent",
+            "description": "Основной React-компонент с готовым UI для управления блоками"
+          },
+          "yourComponents": {
+            "title": "Ваши компоненты",
+            "description": "React-компоненты для рендеринга конкретных типов блоков; регистрируются через <code>blockManagementUseCase.getComponentRegistry()</code>"
+          },
+          "config": {
+            "title": "Config",
+            "description": "Конфигурация с доступными типами блоков, их полями и компонентами"
+          },
+          "callbacks": {
+            "title": "Колбэки",
+            "description": "Props <code>onBlockAdded</code>, <code>onBlockUpdated</code>, <code>onBlockDeleted</code> для отслеживания изменений"
+          }
+        },
+        "basicExample": {
+          "title": "Базовый пример",
+          "description": "Создайте компонент блока и подключите BlockBuilderComponent:",
+          "step1": {
+            "title": "1. Создайте компонент блока",
+            "spacingNote": "<strong>Важно:</strong> внешние отступы (margin) автоматически применяются на UI блок-обёртку над компонентом. Для внутренних отступов (padding) используйте CSS-переменные, которые устанавливаются автоматически. <link>Подробнее об отступах (spacing) →</link>"
+          },
+          "step2": {
+            "title": "2. Используйте BlockBuilderComponent"
+          }
+        },
+        "multipleTypes": {
+          "title": "Множественные типы блоков",
+          "description": "Вы можете определить несколько типов блоков с разными компонентами и полями:"
+        },
+        "editMode": {
+          "title": "Режим редактирования/просмотра",
+          "description": "BlockBuilder поддерживает два режима работы. Используйте prop <code>isEdit</code> для управления режимом:",
+          "viewMode": {
+            "title": "Что происходит в режиме просмотра?",
+            "items": [
+              "Скрываются все контролы редактирования, добавления и управления блоками",
+              "Остаётся только пользовательская верстка блоков в обёртке BlockBuilder",
+              "На элемент <code>body</code> автоматически добавляется/удаляется CSS класс <code>bb-is-edit-mode</code>"
+            ]
+          }
+        },
+        "tips": {
+          "title": "💡 Важные моменты",
+          "items": [
+            "<strong>Регистрация компонентов</strong> — создайте <code>createBlockManagementUseCase()</code> один раз (например, в <code>useMemo</code>) и зарегистрируйте React-компоненты блоков через <code>getComponentRegistry().register(type, Component)</code>",
+            "<strong>Отступы (spacing)</strong> — BlockBuilder автоматически добавляет поля отступов в форму настроек блока, если указано <code>spacingOptions.enabled: true</code>. Внешние отступы (margin) применяются автоматически на UI блок-обёртку; для внутренних (padding) используйте CSS-переменные: <code>--spacing-padding-top</code> и <code>--spacing-padding-bottom</code>",
+            "<strong>Свойства блока</strong> — ваш компонент получает prop <code>block</code> с полями <code>id</code>, <code>type</code>, <code>props</code>, <code>settings</code>",
+            "<strong>Сохранение</strong> — используйте колбэк <code>onSave</code> для сохранения блоков (localStorage для разработки или API для продакшена)",
+            "<strong>Колбэки</strong> — <code>onBlockAdded</code> / <code>onBlockUpdated</code> / <code>onBlockDeleted</code> для синхронизации с бэкендом",
+            "<strong>Режим просмотра</strong> — используйте <code>isEdit={false}</code> для отображения блоков без возможности редактирования"
+          ]
+        },
+        "coreWithoutComponent": {
+          "title": "Core без BlockBuilderComponent",
+          "description": "Если нужен свой UI редактора, используйте <code>@mushket-co/block-builder/core</code> напрямую. В React создайте экземпляр в <code>useEffect</code>, храните в <code>useRef</code> или state, вызывайте методы через <code>await blockBuilder.createBlock(...)</code>.",
+          "footer": "Справочник методов и типов — <apiOverview>Обзор API</apiOverview>, <methods>Методы</methods>. Пример — <example>examples/react18</example>."
+        },
+        "next": {
+          "title": "Next.js (SSR)",
+          "description": "Для серверного рендеринга с Next.js App Router см. раздел <nextLink>Next.js (SSR)</nextLink>. Живой пример — <nextExample>examples/next</nextExample> в репозитории block-builder (не в demo-bb)."
         },
         "whatsNext": {
           "title": "Что дальше?",
@@ -659,72 +723,117 @@
             "components": "API BlockBuilderComponent",
             "events": "Колбэки onBlockAdded / Updated / Deleted",
             "formFields": "Поля форм",
+            "demo": "Интерактивное демо (demo-bb)",
             "changelog": "История изменений"
           }
         },
         "code": {
+          "textBlockLabel": "Текстовый блок",
           "textLabel": "Текст",
-          "contentLabel": "Содержимое"
+          "contentLabel": "Содержимое",
+          "helloWorldHtml": "<p>Привет, мир!</p>",
+          "logBlockCreated": "Блок создан:",
+          "logBlockUpdated": "Блок обновлен:",
+          "logBlockDeleted": "Блок удален:",
+          "textAlignLabel": "Выравнивание",
+          "alignLeft": "Слева",
+          "alignCenter": "По центру",
+          "alignRight": "Справа",
+          "imageLabel": "Изображение",
+          "altTextLabel": "Альтернативный текст",
+          "widthLabel": "Ширина",
+          "buttonLabel": "Кнопка",
+          "buttonTextLabel": "Текст кнопки",
+          "urlLabel": "Ссылка",
+          "styleLabel": "Стиль",
+          "variantPrimary": "Основной",
+          "variantSecondary": "Вторичный",
+          "variantOutline": "Обводка",
+          "editModeComment": "Режим редактирования (по умолчанию)",
+          "viewModeComment": "Режим только просмотра",
+          "yourConfigComment": "ваша конфигурация"
         }
       },
       "components": {
         "title": "Компоненты",
         "subtitle": "React-компоненты BlockBuilder и их API",
         "blockBuilderComponent": {
-          "description": "Готовый UI редактора: добавление, редактирование, удаление и смена порядка блоков (кнопки вверх/вниз), формы полей, сохранение.",
+          "description": "Основной компонент для работы с BlockBuilder в React. Готовый UI: список блоков, формы создания и редактирования, смена порядка кнопками, удаление.",
           "props": {
             "config": {
-              "description": "Конфигурация с availableBlockTypes"
+              "type": "Object, обязательный",
+              "description": "Конфигурация BlockBuilder с типами блоков и настройками",
+              "iblockTypeLabel": "IBlockType:"
             },
             "blockManagementUseCase": {
-              "description": "Создаётся через createBlockManagementUseCase()"
+              "type": "BlockManagementUseCase, обязательный",
+              "description": "Экземпляр use case для управления блоками. Создаётся через <code>createBlockManagementUseCase()</code>"
             },
             "apiSelectUseCase": {
-              "description": "Для полей type: 'api-select'"
+              "type": "ApiSelectUseCase, опциональный",
+              "description": "Экземпляр use case для работы с полями <code>api-select</code>"
             },
             "customFieldRendererRegistry": {
-              "description": "Реестр кастомных рендереров (type: 'custom')"
+              "type": "ICustomFieldRendererRegistry, опциональный",
+              "description": "Реестр кастомных рендереров полей (<code>type: \"custom\"</code>)"
             },
             "initialBlocks": {
-              "description": "Начальные блоки при монтировании"
+              "type": "Array, опциональный",
+              "description": "Массив начальных блоков для загрузки при инициализации"
             },
             "onSave": {
-              "description": "Обратный вызов сохранения блоков"
+              "type": "Function, опциональный",
+              "description": "Функция обратного вызова для сохранения блоков (например, отправка на сервер)"
             },
             "isEdit": {
-              "description": "Режим редактирования (по умолчанию: true). false — только просмотр блоков"
+              "type": "Boolean, опциональный, по умолчанию: true",
+              "description": "Режим редактирования. Если <code>false</code>, все контролы редактирования скрываются, остаётся только пользовательская верстка блоков в обёртке BlockBuilder."
             },
             "locale": {
-              "description": "Локализация UI BlockBuilder (по умолчанию ru). Подписи полей в block-config — на стороне приложения."
+              "type": "'ru' | 'en', по умолчанию ru",
+              "description": "Встроенная локализация UI BlockBuilder (кнопки, подписи контролов, confirm-тексты). Подписи полей блоков задаёт приложение."
             },
             "uiStrings": {
-              "description": "Переопределение отдельных строк UI поверх locale"
+              "type": "Partial<IUiStrings>, опциональный",
+              "description": "Точечные переопределения строк поверх пресета <code>locale</code>."
             },
             "theme": {
-              "description": "Встроенный тёмный пресет CSS variables на .bb-app"
+              "type": "TUiTheme, опциональный",
+              "description": "Пресет темы UI: <code>default</code> (по умолчанию, если prop не передан) или <code>dark</code>. Переопределение токенов — через <code>themeVars</code> на <code>.bb-app</code>."
             },
             "themeVars": {
-              "description": "Кастомные design tokens (--bb-color-primary, --bb-color-surface, radius…)"
+              "type": "Record<--bb-*>, опциональный",
+              "description": "Переопределение design tokens (<code>--bb-color-primary</code>, <code>--bb-color-surface</code>, radius, spacing…)."
             },
             "warnOnPageLeave": {
-              "description": "Предупреждение при уходе с несохранёнными блоками"
+              "type": "Boolean, опциональный",
+              "description": "Предупреждение при уходе со страницы с несохранёнными блоками"
             },
             "controlsContainerClass": {
-              "description": "CSS-класс контейнера панели управления"
+              "type": "String, опциональный",
+              "description": "Кастомный CSS класс для контейнера контролов (кнопки и статистика)"
             },
             "controlsFixedPosition": {
-              "description": "Фиксация панели управления"
+              "type": "'top' | 'bottom', опциональный",
+              "description": "Фиксирует панель управления (кнопки + статистика) сверху или снизу экрана"
             },
             "controlsOffset": {
-              "description": "Отступ панели от края (px)"
+              "type": "Number, опциональный",
+              "description": "Отступ от края в пикселях (по умолчанию 0)"
             },
             "controlsOffsetVar": {
-              "description": "CSS-переменная для учёта высоты header/footer"
+              "type": "String, опциональный",
+              "description": "CSS переменная для учета высоты шапки/футера (например: <code>--header-height</code>)"
             }
           },
+          "notes": {
+            "title": "Формы создания и редактирования блоков",
+            "formValidation": "Правила из <code>fields[].rules</code> проверяются автоматически в модалке BlockBuilder — отдельно подключать валидатор не нужно. Если пользователь нажал «Сохранить» с ошибками, сообщения появляются у полей и обновляются при каждом изменении.",
+            "blockAnchor": "Поле типа <code>block-anchor</code> сохраняет якорь (<code>#block-id</code> или URL). Скролл и переход по клику реализуйте в своих компонентах блоков. Для полей <code>file</code> и <code>files</code> редактор показывает отдельный UI загрузки."
+          },
           "callbacks": {
-            "onBlockAdded": "Создан или продублирован блок — полный объект блока",
-            "onBlockUpdated": "Обновлён блок — актуальный объект после изменения",
+            "onBlockAdded": "Создан или продублирован блок — в колбек приходит полный объект блока",
+            "onBlockUpdated": "Обновлён блок — актуальный объект после изменения props, settings и т.д.",
             "onBlockDeleted": "Удалён блок — только id (строка), не объект"
           }
         },
@@ -739,9 +848,45 @@
           "footer": "Подробное руководство по SSR —"
         },
         "blockComponents": {
-          "title": "Компоненты блоков",
-          "description": "Каждый тип блока рендерится вашим React-компонентом с prop <code>block</code>.",
-          "footer": "Полный список props типов блоков — в <formFields>Поля форм</formFields>. Отступы (margin/padding) — <spacing>spacing</spacing>."
+          "title": "Ваши компоненты блоков",
+          "description": "Каждый тип блока использует ваш React-компонент для рендеринга. Компонент получает prop <code>block</code> с полной информацией о блоке.",
+          "footer": "Полный список props типов блоков — в <formFields>Поля форм</formFields>. Отступы (margin/padding) — <spacing>spacing</spacing>.",
+          "importantItems": [
+            "Компонент должен принимать prop <code>block</code>",
+            "Отступы применяются автоматически: margin через inline стили, padding через CSS переменные (<code>--spacing-padding-top</code>, <code>--spacing-padding-bottom</code> и т.д.)",
+            "Все кастомные props доступны через <code>block.props</code>",
+            "Компонент должен быть зарегистрирован в <code>getComponentRegistry()</code> до рендера редактора"
+          ]
+        },
+        "code": {
+          "blockTypesArrayComment": "Массив типов блоков",
+          "typeComment": "Уникальный тип блока (обязательно)",
+          "labelComment": "Отображаемое название (обязательно)",
+          "titleComment": "Заголовок блока",
+          "iconComment": "Иконка блока",
+          "renderComment": "Конфигурация рендеринга",
+          "componentComment": "React компонент (для kind: 'component')",
+          "templateComment": "HTML шаблон (для kind: 'html')",
+          "defaultSettingsComment": "Настройки по умолчанию",
+          "defaultPropsComment": "Свойства по умолчанию",
+          "fieldsComment": "Поля формы редактирования",
+          "spacingOptionsComment": "Опции для spacing (опционально)",
+          "saveBlocksComment": "Сохранить блоки на сервер",
+          "orFalseOnError": "или false в случае ошибки",
+          "editModeComment": "Режим редактирования (по умолчанию)",
+          "viewModeComment": "Режим только просмотра",
+          "yourBlockTypesConfigComment": "ваша конфигурация типов блоков",
+          "initialContent": "Начальный контент",
+          "logCreated": "Создан:",
+          "logUpdated": "Обновлен:",
+          "logDeleted": "Удален:",
+          "yourConfigComment": "ваша конфигурация",
+          "loadError": "Ошибка загрузки блоков:",
+          "saveError": "Ошибка сохранения",
+          "genericError": "Ошибка:",
+          "customPropsComment": "Ваши кастомные props",
+          "spacingDataComment": "Опционально: spacing данные",
+          "metadataComment": "Метаданные и настройки"
         }
       },
       "events": {
@@ -1047,20 +1192,33 @@
       },
       "properties": {
         "title": "Свойства",
-        "subtitle": "Публичные свойства и опции инициализации программного API (<code>BlockBuilder</code>)",
-        "initOptions": {
-          "title": "Опции инициализации",
+        "subtitle": "Параметры конструктора <code>BlockBuilder</code>. Полный тип — <typeLink>IBlockBuilderOptions</typeLink>.",
+        "parameters": {
+          "title": "Параметры",
+          "intro": "Опции конструктора <code>new BlockBuilder({ ... })</code>.",
           "blockConfigs": {
-            "required": "(обязательный)",
-            "description": "Конфигурация типов блоков: ключ — <code>type</code>, значение — конфиг полей и метаданных."
+            "description": "Схема типов блоков. Ключ — <code>type</code>, значение — <typeLink>IBlockTypeConfig</typeLink> (поля формы, рендер, отступы).",
+            "seeAlso": "См. также: <classesExampleLink>пример core</classesExampleLink> · <formFieldsLink>поля форм</formFieldsLink> · <vueComponentsLink>Vue / React config</vueComponentsLink>"
           },
           "autoInit": {
-            "description": "Автозагрузка <code>initialBlocks</code> при создании экземпляра (по умолчанию: <code>true</code>)."
+            "description": "Сразу загрузить <code>initialBlocks</code> в репозиторий при создании экземпляра.",
+            "seeAlso": "См. также: <classesImportLink>конструктор</classesImportLink> · <customRegisterLink>autoInit: false перед рендерерами</customRegisterLink>"
           },
           "initialBlocks": {
-            "description": "Начальный набор блоков при инициализации."
+            "description": "Стартовые блоки. Работает вместе с <code>autoInit: true</code>.",
+            "seeAlso": "См. также: <classesExampleLink>пример core</classesExampleLink> · <vueComponentsLink>Vue</vueComponentsLink> · <reactComponentsLink>React</reactComponentsLink>"
           },
-          "uiNote": "UI-опции (<code>onSave</code>, <code>isEdit</code>, панель контролов) — в <code>BlockBuilderComponent</code>, см. разделы компонентов."
+          "theme": {
+            "description": "Пресет оформления UI: <code>default</code> или <code>dark</code>.",
+            "seeAlso": "См. также: <themingLink>темизация и локализация</themingLink> · <themeVarsLink>themeVars</themeVarsLink>"
+          },
+          "locale": {
+            "description": "Язык строк интерфейса пакета.",
+            "seeAlso": "См. также: <themingLink>темизация и локализация</themingLink>"
+          }
+        },
+        "footnote": {
+          "uiNote": "Props компонента (<code>themeVars</code>, <code>uiStrings</code>, <code>onSave</code>, <code>isEdit</code> и др.) — в <componentLink>BlockBuilderComponent</componentLink>."
         }
       },
       "themingLocalization": {
@@ -1075,9 +1233,9 @@
           "hooksNote": "React: хук <code>useUiStrings()</code> внутри UI. Vue: <code>useUiStrings()</code> через provide/inject."
         },
         "themePreset": {
-          "title": "Пресет theme=\"dark\"",
-          "p1": "Встроенная тёмная палитра применяется через prop <code>theme</code>. Переменные записываются на корневой элемент <code>.bb-app</code>.",
-          "coreNote": "Core API (<code>BlockBuilder</code> фасад) UI не рендерит — props <code>theme</code> / <code>locale</code> там не используются."
+          "title": "Пресеты theme",
+          "p1": "Prop <code>theme</code> — тип <code>TUiTheme</code>: <code>default</code> (значение по умолчанию, светлая палитра) или <code>dark</code>. CSS variables записываются на корневой элемент <code>.bb-app</code>.",
+          "coreNote": "В headless core без UI-рендера <code>theme</code> и <code>locale</code> не влияют на поведение. В <code>BlockBuilderComponent</code> передаются вместе с <code>themeVars</code> и <code>uiStrings</code>."
         },
         "themeVars": {
           "title": "Кастомизация themeVars",
@@ -1090,6 +1248,7 @@
         },
         "seeAlso": {
           "title": "См. также",
+          "properties": "Свойства — theme, locale и другие параметры",
           "vueComponents": "Vue — BlockBuilderComponent (props)",
           "reactComponents": "React — BlockBuilderComponent (props)",
           "changelog": "История изменений 1.11.0"
@@ -1125,7 +1284,7 @@
           "title": "Утилиты отступов (spacing)",
           "description": "Экспортируются из <code>@mushket-co/block-builder/core</code>: <code>DEFAULT_BREAKPOINTS, generateSpacingCSS, generateSpacingCSSVariables, getSpacingValue, mergeSpacing, setSpacingValue, validateSpacing</code>.",
           "generateSpacingCSSVariables": "<code>generateSpacingCSSVariables</code> — удобно для передачи padding через CSS‑переменные в компонент.",
-          "generateSpacingCSS": "<code>generateSpacingCSS</code> — пригодно для SSR/инъекции стилей на страницу (например, тег <code>'<'style'>'</code>).",
+          "generateSpacingCSS": "<code>generateSpacingCSS</code> — пригодно для SSR/инъекции стилей на страницу (например, тег <code>\"<\"style\">\"</code>).",
           "mergeSpacing": "<code>mergeSpacing</code> — аккуратно объединяет конфигурации (не затирая отсутствующие ключи).",
           "validateSpacing": "<code>validateSpacing</code> — используйте в бек‑ или CI‑валидации конфигураций.",
           "uiNote": "В UI‑версии BlockBuilder применяет spacing автоматически. Эти вспомогательные функции полезны при ручной интеграции (/core) или для генерации стилей вне UI компонентов."
@@ -1157,8 +1316,8 @@
         "title": "Типы",
         "subtitle": "TypeScript типы и интерфейсы для работы с BlockBuilder",
         "iblockBuilderOptions": {
-          "description": "Опции для создания BlockBuilder",
-          "code": "interface IBlockBuilderOptions {\n  blockConfigs: Record<string, any>\n  repository?: any\n  componentRegistry?: any\n  httpClient?: any\n  customFieldRendererRegistry?: any\n  // theme?: 'light' | 'dark'   // зарезервировано, пока не используется\n  // locale?: string\n  autoInit?: boolean\n  initialBlocks?: IBlockDto[]\n}"
+          "description": "Опции <code>BlockBuilder</code>. <code>theme</code> — <code>TUiTheme</code> (<code>default</code> | <code>dark</code>), <code>locale</code> — <code>ru</code> | <code>en</code>.",
+          "code": "interface IBlockBuilderOptions {\n  blockConfigs: Record<string, any>\n  repository?: any\n  componentRegistry?: any\n  httpClient?: any\n  customFieldRendererRegistry?: any\n  theme?: TUiTheme\n  locale?: 'ru' | 'en'\n  autoInit?: boolean\n  initialBlocks?: IBlockDto[]\n}"
         },
         "iblock": {
           "description": "Основной интерфейс блока (доменная модель)",
@@ -1186,13 +1345,13 @@
         },
         "irepeaterFieldConfig": {
           "description": "Конфигурация для поля типа <code>repeater</code>. Свойство <code>countLabelVariants</code> позволяет локализовать счётчик элементов. Свойство <code>maxNestingDepth</code> ограничивает максимальную глубину вложенности репитеров.",
-          "code": "interface IRepeaterFieldConfig {\n  itemTitle?: string\n  addButtonText?: string\n  removeButtonText?: string\n  min?: number\n  max?: number\n  fields: IFormFieldConfig[]\n  countLabelVariants?: { one: string; few: string; many: string; zero?: string }\n  maxNestingDepth?: number  // Максимальная глубина вложенности (по умолчанию 2)\n}",
+          "code": "interface IRepeaterFieldConfig {\n  itemTitle?: string\n  addButtonText?: string\n  removeButtonText?: string\n  min?: number\n  max?: number\n  fields: IRepeaterItemFieldConfig[]\n  countLabelVariants?: { one: string; few: string; many: string; zero?: string }\n  maxNestingDepth?: number  // Максимальная глубина вложенности (по умолчанию 2)\n}",
           "note": "По умолчанию UI показывает только число. Если указать <code>countLabelVariants</code>, будет показано «число + слово». Свойство <code>maxNestingDepth</code> ограничивает максимальную глубину вложенности репитеров (по умолчанию 2)."
         },
         "irepeaterItemFieldConfig": {
-          "description": "Конфигурация поля внутри репитера. Поля типа <code>repeater</code> внутри репитера могут иметь собственную конфигурацию через свойство <code>repeaterConfig</code> для создания вложенных репитеров.",
-          "code": "interface IRepeaterItemFieldConfig {\n  field: string\n  label: string\n  type: TFieldType\n  placeholder?: string\n  defaultValue?: any\n  rules?: IValidationRule[]\n  repeaterConfig?: IRepeaterFieldConfig  // Для вложенных репитеров\n  dependsOn?: IDependsOnConfig // Условное отображение поля\n  // ... другие свойства полей\n}",
-          "note": "Для создания вложенного репитера укажите поле с типом <code>'repeater'</code> и добавьте конфигурацию через свойство <code>repeaterConfig</code>."
+          "description": "Конфигурация одного поля в массиве <code>repeaterConfig.fields</code>. По форме совпадает с <code>IFormFieldConfig</code> — доступны те же <code>options</code>, <code>apiSelectConfig</code>, <code>matrixTableConfig</code>, <code>dependsOn</code>, <code>persist</code> и остальные свойства полей формы.",
+          "code": "interface IRepeaterItemFieldConfig extends IFormFieldConfig {\n  // type: 'repeater' — вложенный repeater (repeaterConfig типизирован явнее, чем any в IFormFieldConfig)\n  repeaterConfig?: IRepeaterFieldConfig\n}",
+          "note": "Вложенный repeater: <code>type: 'repeater'</code> + <code>repeaterConfig</code>. Остальные типы полей (<code>select</code>, <code>image</code>, <code>custom</code>…) настраиваются так же, как в корневом <code>fields</code> блока."
         },
         "iformGenerationConfig": {
           "description": "Конфигурация для генерации форм",
@@ -1260,8 +1419,13 @@
           "code": "interface IFileImportMergeRule {\n  targetField: string\n  sourceKey?: string\n  mode?: 'append' | 'replace'\n  dedupeBy?: string | string[]\n  mapItem?: (item: any, formData: Record<string, any>) => any\n}\n\ninterface IFileImportConfig {\n  uploadUrl: string\n  accept?: string | string[]\n  formDataKey?: string\n  maxSizeMb?: number\n  responseMapper?: (response: any) => any\n  merge?: IFileImportMergeRule[]\n  onImport?: (ctx: {\n    data: any\n    formScope: ICustomFieldFormScope\n    mergeStats?: Array<{ targetField: string; mode: string; added: number; skipped: number; total: number }>\n  }) => void\n}"
         },
         "iblockFormHooks": {
-          "description": "Lifecycle-хуки модалки create/edit блока. Указываются в конфиге типа блока (<code>availableBlockTypes[]</code>).",
-          "code": "interface IBlockFormOpenContext {\n  mode: 'create' | 'edit'\n  blockId?: TBlockId\n  props: Record<string, unknown>       // block.props при edit; {} при create\n  formData: Record<string, unknown>    // текущее состояние модалки\n  setField: (name: string, value: unknown) => void\n}\n\ninterface IBlockFormSaveContext {\n  mode: 'create' | 'edit'\n  blockId?: TBlockId\n  formData: Record<string, unknown>    // уже прошёл validateForm\n}\n\ninterface IBlockFormSaveResult {\n  props: Record<string, unknown>       // финальные props для block.props\n  cancel?: boolean                       // true — не сохранять, модалка открыта\n}\n\ninterface IBlockFormHooks {\n  onFormOpen?: (ctx: IBlockFormOpenContext) => Promise<void> | void\n  onBeforeSave?: (ctx: IBlockFormSaveContext) => Promise<IBlockFormSaveResult | void> | IBlockFormSaveResult | void\n}\n\ninterface IBlockTypeConfig {\n  type: string\n  label: string\n  fields?: IFormFieldConfig[]\n  formHooks?: IBlockFormHooks\n  // ...render, spacingOptions, defaultProps\n}"
+          "description": "Lifecycle-хуки модалки create/edit блока. Указываются в конфиге типа блока (<code>formHooks</code> в <code>IBlockTypeConfig</code> / <code>IBlockType</code>).",
+          "code": "interface IBlockFormOpenContext {\n  mode: 'create' | 'edit'\n  blockId?: TBlockId\n  props: Record<string, unknown>       // block.props при edit; {} при create\n  formData: Record<string, unknown>    // текущее состояние модалки\n  setField: (name: string, value: unknown) => void\n}\n\ninterface IBlockFormSaveContext {\n  mode: 'create' | 'edit'\n  blockId?: TBlockId\n  formData: Record<string, unknown>    // уже прошёл validateForm\n}\n\ninterface IBlockFormSaveResult {\n  props: Record<string, unknown>       // финальные props для block.props\n  cancel?: boolean                       // true — не сохранять, модалка открыта\n}\n\ninterface IBlockFormHooks {\n  onFormOpen?: (ctx: IBlockFormOpenContext) => Promise<void> | void\n  onBeforeSave?: (ctx: IBlockFormSaveContext) => Promise<IBlockFormSaveResult | void> | IBlockFormSaveResult | void\n}"
+        },
+        "iblockTypeConfig": {
+          "description": "Конфигурация одного типа блока. В Vue/React — элемент <code>availableBlockTypes[]</code> (там же тип <code>IBlockType</code>). В core <code>blockConfigs</code> — тот же набор полей, но ключ Record = <code>type</code>; часто используют <code>title</code> вместо <code>label</code>.",
+          "code": "interface IBlockTypeConfig {\n  type: string\n  label: string\n  title?: string\n  icon?: string\n  description?: string\n  render?: {\n    kind: 'component' | 'html'\n    framework?: 'vue' | 'react'\n    component?: unknown\n    template?: string | ((props: Record<string, unknown>) => string)\n  }\n  defaultSettings?: Record<string, unknown>\n  defaultProps?: Record<string, unknown>\n  fields?: IFormFieldConfig[]\n  formHooks?: IBlockFormHooks\n  spacingOptions?: {\n    enabled?: boolean\n    config?: {\n      breakpoints?: Array<{\n        name: string\n        minWidth?: number\n        maxWidth?: number\n      }>\n    }\n  }\n}",
+          "note": "Поле <code>formHooks</code> — см. <code>IBlockFormHooks</code>. Поля формы — <code>IFormFieldConfig[]</code>."
         },
         "tblockId": {
           "description": "Тип ID блока",
@@ -1286,7 +1450,7 @@
         "interface": {
           "title": "Интерфейс ICustomFieldRenderer",
           "p1": "Кастомный рендерер должен реализовывать интерфейс <code>ICustomFieldRenderer</code>:",
-          "code": "interface ICustomFieldRenderer {\n  readonly id: string;        // Уникальный ID рендерера\n  readonly name: string;      // Название для отображения\n  \n  render(\n    container: HTMLElement,\n    context: ICustomFieldContext\n  ): ICustomFieldRenderResult | Promise<ICustomFieldRenderResult>;\n}\n\ninterface ICustomFieldContext {\n  fieldName: string;          // Имя поля (из field.field)\n  label: string;              // Метка поля\n  value: any;                 // Текущее значение поля\n  required: boolean;          // Обязательно ли поле\n  options?: Record<string, any>; // Дополнительные опции из customFieldConfig.options\n  onChange: (value: any) => void;    // Обратный вызов для обновления значения\n  onError?: (error: string | null) => void;  // Обратный вызов для обработки ошибок\n}\n\ninterface ICustomFieldRenderResult {\n  element: HTMLElement | string;  // DOM элемент или HTML строка\n  getValue?: () => any;           // Получить текущее значение (опционально)\n  setValue?: (value: any) => void; // Установить значение программно (опционально)\n  validate?: () => string | null;  // Валидация (вернуть ошибку или null) (опционально)\n  destroy?: () => void;           // Очистка ресурсов при удалении (опционально)\n}"
+          "code": "interface ICustomFieldRenderer {\n  readonly id: string\n  readonly name: string\n  render(\n    container: HTMLElement,\n    context: ICustomFieldContext\n  ): ICustomFieldRenderResult | Promise<ICustomFieldRenderResult>\n}\n\ninterface ICustomFieldContext {\n  fieldName: string\n  label: string\n  value: unknown\n  required: boolean\n  options?: Record<string, unknown>  // из customFieldConfig.options\n  error?: string                      // текст ошибки валидации\n  formScope?: ICustomFieldFormScope    // formData, setField, repeater\n  onChange: (value: unknown) => void\n  onError?: (error: string | null) => void\n}\n\ninterface ICustomFieldRenderResult {\n  element: HTMLElement | string\n  getValue?: () => unknown\n  setValue?: (value: unknown) => void\n  setError?: (error: string | null) => void  // без пересоздания DOM\n  validate?: () => string | null\n  destroy?: () => void\n}"
         },
         "step1": {
           "title": "Шаг 1: Создание класса рендерера",
@@ -1302,7 +1466,7 @@
         },
         "step3": {
           "title": "Шаг 3: Использование в конфигурации блока",
-          "p1": "Используйте тип поля <code>'custom'</code> и укажите <code>customFieldConfig</code>:",
+          "p1": "Используйте тип поля <code>\"custom\"</code> и укажите <code>customFieldConfig</code>:",
           "code": "const blockConfigs = {\n  richText: {\n    title: 'Rich Text блок',\n    icon: '📝',\n    description: 'Блок с форматированным текстом',\n    fields: [\n      {\n        field: 'content',\n        label: 'Содержимое',\n        type: 'custom',\n        customFieldConfig: {\n          rendererId: 'wysiwyg-editor',  // ID зарегистрированного рендерера\n          options: {                      // Дополнительные опции передаются в context.options\n            height: '300px',\n            toolbar: true\n          }\n        },\n        defaultValue: '',\n        rules: [\n          { type: 'required', message: 'Содержимое обязательно' }\n        ]\n      }\n    ],\n    render: {\n      kind: 'html',\n      template: (props) => '<div class=\"rich-text\">' + (props.content || '') + '</div>'\n    }\n  }\n};"
         },
         "datePicker": {
@@ -1322,7 +1486,7 @@
           "getCustomFieldRenderer": "Получение рендерера по ID. Возвращает <code>ICustomFieldRenderer | null</code>.",
           "hasCustomFieldRenderer": "Проверка существования рендерера по ID. Возвращает <code>boolean</code>.",
           "unregisterCustomFieldRenderer": "Удаление рендерера по ID. Возвращает <code>boolean</code> (успешно ли удалено).",
-          "getAllCustomFieldRenderers": "Получение всех зарегистрированных рендереров. Возвращает <code>Map'<'string, ICustomFieldRenderer'>'</code>."
+          "getAllCustomFieldRenderers": "Получение всех зарегистрированных рендереров. Возвращает <code>Map\"<\"string, ICustomFieldRenderer\">\"</code>."
         },
         "bestPractices": {
           "title": "Рекомендации и лучшие практики",
@@ -1507,7 +1671,7 @@
           },
           "type": {
             "badge": "(обязательный)",
-            "description": "Тип поля: <code>'text'</code>, <code>'textarea'</code>, <code>'number'</code>, <code>'select'</code>, <code>'checkbox'</code>, <code>'radio'</code>, <code>'color'</code>, <code>'image'</code>, <code>'file'</code>, <code>'block-anchor'</code>, <code>'matrix-table'</code>"
+            "description": "Тип поля: <code>\"text\"</code>, <code>\"textarea\"</code>, <code>\"number\"</code>, <code>\"select\"</code>, <code>\"checkbox\"</code>, <code>\"radio\"</code>, <code>\"color\"</code>, <code>\"image\"</code>, <code>\"file\"</code>, <code>\"block-anchor\"</code>, <code>\"matrix-table\"</code>"
           },
           "defaultValue": {
             "badge": "(опциональный)",
@@ -1701,7 +1865,7 @@
             "title": "Конфиги по типам поля",
             "intro": "Дополнительные объекты — только когда стандартных параметров недостаточно:",
             "spacingConfig": {
-              "description": "Отступы блока (padding/margin) по брекпоинтам. <code>spacingOptions</code> на уровне конфига типа блока добавляет поле автоматически; <code>spacingConfig</code> — при ручном <code>type: 'spacing'</code>. См. <anchor>spacing</anchor>."
+              "description": "Отступы блока (padding/margin) по брекпоинтам. <code>spacingOptions</code> на уровне конфига типа блока добавляет поле автоматически; <code>spacingConfig</code> — при ручном <code>type: \"spacing\"</code>. См. <anchor>spacing</anchor>."
             },
             "repeaterConfig": {
               "description": "Структура массива однотипных элементов: вложенные <code>fields</code>, лимиты min/max, подписи кнопок. См. <anchor>repeater</anchor>."
@@ -1739,7 +1903,7 @@
           "title": "Поле - отступы (spacing)",
           "description": "Отступы блока по брекпоинтам. Удобнее подключать через <code>spacingOptions</code> в конфиге типа блока, чем полем <code>spacing</code> в <code>fields</code>.",
           "code": "const blockConfigs = {\n  text: {\n    fields: [/* ... */],\n    spacingOptions: {\n      enabled: true,\n      spacingTypes: ['padding-top', 'padding-bottom', 'margin-top', 'margin-bottom'],\n      config: { min: 0, max: 120, step: 8 }\n    }\n  }\n}",
-          "note": "Явное поле <code>type: 'spacing'</code> в <code>fields</code> игнорируется, если задано <code>spacingOptions</code>. Отступы в UI: margin на обёртку блока, padding — CSS-переменные <code>--spacing-padding-*</code> в вашем компоненте."
+          "note": "Явное поле <code>type: \"spacing\"</code> в <code>fields</code> игнорируется, если задано <code>spacingOptions</code>. Отступы в UI: margin на обёртку блока, padding — CSS-переменные <code>--spacing-padding-*</code> в вашем компоненте."
         },
         "repeater": {
           "title": "Поле - повторитель (repeater)",
@@ -1751,7 +1915,7 @@
         },
         "image": {
           "title": "Поле - изображение (image)",
-          "description": "Загрузка с preview. В <code>props</code> — URL строкой или объект <code>{ src, width, height, size }</code> после серверной загрузки. Base64 только для разработки; в продакшене — <code>fileUploadConfig.uploadUrl</code>.",
+          "description": "Загрузка с preview. В <code>props</code> — URL строкой или объект <code>src, width, height, size</code> после серверной загрузки. Base64 только для разработки; в продакшене — <code>fileUploadConfig.uploadUrl</code>.",
           "code": "{\n  field: 'image',\n  label: 'Изображение',\n  type: 'image',\n  fileUploadConfig: {\n    uploadUrl: '/api/upload',\n    maxFileSize: 5 * 1024 * 1024,\n    accept: 'image/*',\n    responseMapper: (response) => ({\n      src: response.url,\n      width: response.width,\n      height: response.height,\n    }),\n  },\n  defaultValue: ''\n}",
           "importantNote": "<strong>Важно:</strong> при <code>uploadUrl</code> ответ сервера для <code>image</code> должен содержать <code>src</code> с URL. Другой формат API — <code>responseMapper</code> в <code>fileUploadConfig</code>. <anchor>file</anchor>",
           "urlHelperCode": "// URL из string или object.src\nconst imageUrl = typeof props.image === 'string'\n  ? props.image\n  : props.image?.src ?? ''"
@@ -1792,7 +1956,7 @@
         },
         "customRenderers": {
           "title": "Кастомные рендереры полей",
-          "description": "Поле <code>type: 'custom'</code> — когда стандартных типов из раздела <anchor>field-types</anchor> недостаточно: свой виджет, интеграция библиотеки, сложный интерактив. Это <strong>не</strong> отдельный тип блока и не замена компонента блока на канвасе — только UI поля в модалке create/edit.",
+          "description": "Поле <code>type: \"custom\"</code> — когда стандартных типов из раздела <anchor>field-types</anchor> недостаточно: свой виджет, интеграция библиотеки, сложный интерактив. Это <strong>не</strong> отдельный тип блока и не замена компонента блока на канвасе — только UI поля в модалке create/edit.",
           "fieldTypesAnchor": "Стандартные типы полей",
           "whenTitle": "Когда нужен custom",
           "whenItems": {
@@ -1804,7 +1968,7 @@
           "flowSteps": [
             "Класс с <code>ICustomFieldRenderer</code> (уникальный <code>id</code>)",
             "Регистрация в реестре <strong>до</strong> первого открытия формы",
-            "В <code>fields</code> — <code>type: 'custom'</code> и <code>customFieldConfig.rendererId</code>"
+            "В <code>fields</code> — <code>type: \"custom\"</code> и <code>customFieldConfig.rendererId</code>"
           ],
           "interfaceTitle": "ICustomFieldRenderer и контекст",
           "interfaceCode": "interface ICustomFieldRenderer {\n  readonly id: string\n  readonly name: string\n  render(\n    container: HTMLElement,\n    context: ICustomFieldContext\n  ): ICustomFieldRenderResult | Promise<ICustomFieldRenderResult>\n}\n\ninterface ICustomFieldContext {\n  fieldName: string\n  label: string\n  value: unknown\n  required: boolean\n  options?: Record<string, unknown>  // из customFieldConfig.options\n  error?: string                      // текст ошибки валидации\n  formScope?: ICustomFieldFormScope    // formData, setField, repeater\n  onChange: (value: unknown) => void\n  onError?: (error: string | null) => void\n}\n\ninterface ICustomFieldRenderResult {\n  element: HTMLElement | string\n  getValue?: () => unknown\n  setValue?: (value: unknown) => void\n  setError?: (error: string | null) => void  // без пересоздания DOM\n  validate?: () => string | null\n  destroy?: () => void\n}",

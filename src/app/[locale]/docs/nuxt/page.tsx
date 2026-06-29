@@ -10,7 +10,7 @@ import {
   GITHUB_EXAMPLES_NUXT4,
 } from '@/lib/urls';
 import DocHeading from '../components/DocHeading';
-import { docRichTags } from '../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../components/docRichTags';
 
 const COMPOSABLE_ITEMS = [
   'blockManagementUseCase',
@@ -105,12 +105,12 @@ export default defineEventHandler(async () => {
     <div className="space-y-8">
       <div>
         <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{t('title')}</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400">{t.rich('subtitle', docRichTags)}</p>
+        <p className="text-xl text-gray-600 dark:text-gray-400">{renderDocRichString(t.raw('subtitle') as string, docRichTags)}</p>
       </div>
 
       <section className="bg-green-50 dark:bg-green-900/20 rounded-xl p-5 border border-green-200 dark:border-green-800">
         <p className="text-sm text-gray-700 dark:text-gray-300">
-          {t.rich('demoNote', {
+          {renderDocRichString(t.raw('demoNote') as string, {
             ...docRichTags,
             nuxt3: (chunks) => (
               <a href={GITHUB_EXAMPLES_NUXT3} className="text-green-700 dark:text-green-400 hover:underline font-medium" target="_blank" rel="noopener noreferrer">{chunks}</a>
@@ -141,7 +141,7 @@ export default defineEventHandler(async () => {
   },
 })`}
         />
-        <p className="text-gray-600 dark:text-gray-400 mt-4 text-sm">{t.rich('nuxtConfigNote', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mt-4 text-sm">{renderDocRichString(t.raw('nuxtConfigNote') as string, docRichTags)}</p>
       </section>
 
       <section>
@@ -155,18 +155,18 @@ import '@mushket-co/block-builder/index.css'`}
 
       <section>
         <DocHeading id="use-block-builder">{t('headings.useBlockBuilder')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('composable.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('composable.description') as string, docRichTags)}</p>
         <CodeBlock
           language="ts"
           code={useBlockBuilderCode}
         />
         <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 mt-4 mb-4">
           {COMPOSABLE_ITEMS.map((key) => (
-            <li key={key}>{t.rich(`composable.items.${key}`, docRichTags)}</li>
+            <li key={key}>{renderDocRichString(t.raw(`composable.items.${key}`) as string, docRichTags)}</li>
           ))}
         </ul>
         <p className="text-sm text-gray-600 dark:text-gray-400">
-          {t.rich('composable.serializeNote', {
+          {renderDocRichString(t.raw('composable.serializeNote') as string, {
             ...docRichTags,
             example: (chunks) => (
               <a href={`${GITHUB_EXAMPLES_NUXT3}/utils/serializeBlocks.ts`} className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">{chunks}</a>
@@ -211,7 +211,7 @@ const {
 
       <section>
         <DocHeading id="api-save">{t('headings.apiSave')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('apiSave.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('apiSave.description') as string, docRichTags)}</p>
         <CodeBlock
           language="ts"
           code={apiSaveCode}
@@ -220,30 +220,30 @@ const {
 
       <section>
         <DocHeading id="ssr-utils">{t('headings.ssrUtils')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('ssrUtils.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('ssrUtils.description') as string, docRichTags)}</p>
         <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 text-sm">
           {SSR_UTIL_KEYS.map((key) => (
             <li key={key} id={key === 'prepareBlocksForDisplay' ? 'prepare-blocks-for-display' : key === 'enrichBlockForDisplay' ? 'enrich-block-for-display' : key === 'seedRepositoryFromBlocks' ? 'seed-repository-from-blocks' : 'enable-viewport-breakpoint-detection'}>
-              {t.rich(`ssrUtils.items.${key}`, docRichTags)}
+              {renderDocRichString(t.raw(`ssrUtils.items.${key}`) as string, docRichTags)}
             </li>
           ))}
         </ul>
-        <p className="text-gray-600 dark:text-gray-400 mt-4 text-sm">{t.rich('ssrUtils.autoNote', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mt-4 text-sm">{renderDocRichString(t.raw('ssrUtils.autoNote') as string, docRichTags)}</p>
       </section>
 
       <section className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
         <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">{t('liveExamples.title')}</h2>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{t.rich('liveExamples.runNote', docRichTags)}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{renderDocRichString(t.raw('liveExamples.runNote') as string, docRichTags)}</p>
         <ul className="space-y-2 text-sm">
           <li>
-            {t.rich('liveExamples.nuxt3', {
+            {renderDocRichString(t.raw('liveExamples.nuxt3') as string, {
               nuxt3: (chunks) => (
                 <a href={GITHUB_EXAMPLES_NUXT3} className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">{chunks}</a>
               ),
             })}
           </li>
           <li>
-            {t.rich('liveExamples.nuxt4', {
+            {renderDocRichString(t.raw('liveExamples.nuxt4') as string, {
               nuxt4: (chunks) => (
                 <a href={GITHUB_EXAMPLES_NUXT4} className="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">{chunks}</a>
               ),
@@ -251,7 +251,7 @@ const {
           </li>
         </ul>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
-          {t.rich('liveExamples.vueApi', {
+          {renderDocRichString(t.raw('liveExamples.vueApi') as string, {
             vueLink: (chunks) => (
               <Link href="/docs/vue/getting-started" className="text-green-600 hover:underline">{chunks}</Link>
             ),

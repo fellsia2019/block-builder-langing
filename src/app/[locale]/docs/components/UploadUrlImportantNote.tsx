@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import DocImportantNote from './DocImportantNote';
-import { docRichTags } from './docRichTags';
+import { docRichTags, renderDocRichString } from './docRichTags';
 
 interface UploadUrlImportantNoteProps {
   className?: string;
@@ -17,7 +17,7 @@ export default function UploadUrlImportantNote({ className }: UploadUrlImportant
       detailHref="/docs/core/form-fields#image"
       detailLabel={t('detailLabel')}
     >
-      {t.rich('text', {
+      {renderDocRichString(t.raw('text') as string, {
         ...docRichTags,
         strong: (chunks) => <strong>{chunks}</strong>,
       })}

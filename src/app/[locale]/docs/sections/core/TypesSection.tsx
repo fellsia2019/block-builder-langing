@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import CodeBlock from '@/components/CodeBlock';
 import type { NavigationProps } from '../../types';
 import DocHeading from '../../components/DocHeading';
-import { docRichTags } from '../../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../../components/docRichTags';
 
 const tealCode = (chunks: ReactNode) => (
   <code className="text-teal-700 dark:text-teal-400">{chunks}</code>
@@ -25,7 +25,7 @@ export default function TypesSection(_props: NavigationProps) {
         <DocHeading id="iblock-builder-options">
           <code className="text-teal-700 dark:text-teal-400">IBlockBuilderOptions</code>
         </DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t('iblockBuilderOptions.description')}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('iblockBuilderOptions.description') as string, { code: tealCode })}</p>
         <CodeBlock code={t.raw('iblockBuilderOptions.code')} language="typescript" className="mb-4" />
       </section>
 
@@ -82,11 +82,11 @@ export default function TypesSection(_props: NavigationProps) {
           <code className="text-teal-700 dark:text-teal-400">IRepeaterFieldConfig</code>
         </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {t.rich('irepeaterFieldConfig.description', { code: tealCode })}
+          {renderDocRichString(t.raw('irepeaterFieldConfig.description') as string, { code: tealCode })}
         </p>
         <CodeBlock code={t.raw('irepeaterFieldConfig.code')} language="typescript" className="mb-2" />
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          {t.rich('irepeaterFieldConfig.note', { code: tealCode })}
+          {renderDocRichString(t.raw('irepeaterFieldConfig.note') as string, { code: tealCode })}
         </p>
       </section>
 
@@ -95,11 +95,11 @@ export default function TypesSection(_props: NavigationProps) {
           <code className="text-teal-700 dark:text-teal-400">IRepeaterItemFieldConfig</code>
         </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {t.rich('irepeaterItemFieldConfig.description', { code: tealCode })}
+          {renderDocRichString(t.raw('irepeaterItemFieldConfig.description') as string, { code: tealCode })}
         </p>
         <CodeBlock code={t.raw('irepeaterItemFieldConfig.code')} language="typescript" className="mb-2" />
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          {t.rich('irepeaterItemFieldConfig.note', { code: tealCode })}
+          {renderDocRichString(t.raw('irepeaterItemFieldConfig.note') as string, { code: tealCode })}
         </p>
       </section>
 
@@ -180,7 +180,7 @@ export default function TypesSection(_props: NavigationProps) {
           <code className="text-teal-700 dark:text-teal-400">IApiSelectConfig</code>
         </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {t.rich('iapiSelectConfig.description', docRichTags)}
+          {renderDocRichString(t.raw('iapiSelectConfig.description') as string, docRichTags)}
         </p>
         <CodeBlock code={t.raw('iapiSelectConfig.code')} language="typescript" className="mb-4" />
       </section>
@@ -190,7 +190,7 @@ export default function TypesSection(_props: NavigationProps) {
           <code className="text-teal-700 dark:text-teal-400">IBlockAnchorConfig</code>
         </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {t.rich('iblockAnchorConfig.description', docRichTags)}
+          {renderDocRichString(t.raw('iblockAnchorConfig.description') as string, docRichTags)}
         </p>
         <CodeBlock code={t.raw('iblockAnchorConfig.code')} language="typescript" className="mb-4" />
       </section>
@@ -204,10 +204,10 @@ export default function TypesSection(_props: NavigationProps) {
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 mt-4">
           <h4 className="font-bold text-gray-900 dark:text-white mb-2">{t('idependsOnConfig.operatorsTitle')}</h4>
           <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
-            <li>{t.rich('idependsOnConfig.operators.equals', { code: (c) => <code className="text-blue-700 dark:text-blue-400">{c}</code> })}</li>
-            <li>{t.rich('idependsOnConfig.operators.notEquals', { code: (c) => <code className="text-blue-700 dark:text-blue-400">{c}</code> })}</li>
-            <li>{t.rich('idependsOnConfig.operators.in', { code: (c) => <code className="text-blue-700 dark:text-blue-400">{c}</code> })}</li>
-            <li>{t.rich('idependsOnConfig.operators.notIn', { code: (c) => <code className="text-blue-700 dark:text-blue-400">{c}</code> })}</li>
+            <li>{renderDocRichString(t.raw('idependsOnConfig.operators.equals') as string, { code: (c) => <code className="text-blue-700 dark:text-blue-400">{c}</code> })}</li>
+            <li>{renderDocRichString(t.raw('idependsOnConfig.operators.notEquals') as string, { code: (c) => <code className="text-blue-700 dark:text-blue-400">{c}</code> })}</li>
+            <li>{renderDocRichString(t.raw('idependsOnConfig.operators.in') as string, { code: (c) => <code className="text-blue-700 dark:text-blue-400">{c}</code> })}</li>
+            <li>{renderDocRichString(t.raw('idependsOnConfig.operators.notIn') as string, { code: (c) => <code className="text-blue-700 dark:text-blue-400">{c}</code> })}</li>
           </ul>
         </div>
       </section>
@@ -217,7 +217,7 @@ export default function TypesSection(_props: NavigationProps) {
           <code className="text-teal-700 dark:text-teal-400">ICustomFieldFormScope</code>
         </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {t.rich('icustomFieldFormScope.description', docRichTags)}
+          {renderDocRichString(t.raw('icustomFieldFormScope.description') as string, docRichTags)}
         </p>
         <CodeBlock code={t.raw('icustomFieldFormScope.code')} language="typescript" className="mb-4" />
       </section>
@@ -237,11 +237,24 @@ export default function TypesSection(_props: NavigationProps) {
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
+        <DocHeading id="iblock-type-config">
+          <code className="text-teal-700 dark:text-teal-400">IBlockTypeConfig</code>
+        </DocHeading>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          {renderDocRichString(t.raw('iblockTypeConfig.description') as string, { code: tealCode })}
+        </p>
+        <CodeBlock code={t.raw('iblockTypeConfig.code')} language="typescript" className="mb-2" />
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          {renderDocRichString(t.raw('iblockTypeConfig.note') as string, { code: tealCode })}
+        </p>
+      </section>
+
+      <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
         <DocHeading id="iblock-form-hooks">
           <code className="text-teal-700 dark:text-teal-400">IBlockFormHooks</code>
         </DocHeading>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {t.rich('iblockFormHooks.description', docRichTags)}
+          {renderDocRichString(t.raw('iblockFormHooks.description') as string, docRichTags)}
         </p>
         <CodeBlock code={t.raw('iblockFormHooks.code')} language="typescript" className="mb-4" />
       </section>

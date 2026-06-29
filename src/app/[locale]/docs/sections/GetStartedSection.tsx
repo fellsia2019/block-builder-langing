@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import CodeBlock from '@/components/CodeBlock';
 import { DEMO_BB_URL, GITHUB_EXAMPLES } from '@/lib/urls';
-import { docRichTags } from '../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../components/docRichTags';
 
 export default function GetStartedSection() {
   const t = useTranslations('docsPages.getStarted');
@@ -98,7 +98,7 @@ const onSave = async (blocks) => { console.log(blocks); return true }
           <div className="rounded-xl p-5 border-2 border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/10">
             <h3 className="font-bold text-primary-800 dark:text-primary-300 mb-2">{t('architecture.core.title')}</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-              {t.rich('architecture.core.description', docRichTags)}
+              {renderDocRichString(t.raw('architecture.core.description') as string, docRichTags)}
             </p>
             <Link href="/docs/core/classes" className="text-sm text-primary-600 hover:underline">
               {t('architecture.core.link')}
@@ -107,7 +107,7 @@ const onSave = async (blocks) => { console.log(blocks); return true }
           <div className="rounded-xl p-5 border-2 border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-900/10">
             <h3 className="font-bold text-purple-800 dark:text-purple-300 mb-2">{t('architecture.vue.title')}</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-              {t.rich('architecture.vue.description', docRichTags)}
+              {renderDocRichString(t.raw('architecture.vue.description') as string, docRichTags)}
             </p>
             <Link href="/docs/vue/getting-started" className="text-sm text-purple-600 hover:underline">
               {t('architecture.vue.link')}
@@ -116,7 +116,7 @@ const onSave = async (blocks) => { console.log(blocks); return true }
           <div className="rounded-xl p-5 border-2 border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-900/10">
             <h3 className="font-bold text-blue-800 dark:text-blue-300 mb-2">{t('architecture.react.title')}</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-              {t.rich('architecture.react.description', docRichTags)}
+              {renderDocRichString(t.raw('architecture.react.description') as string, docRichTags)}
             </p>
             <Link href="/docs/react/getting-started" className="text-sm text-blue-600 hover:underline">
               {t('architecture.react.link')}
@@ -129,13 +129,13 @@ const onSave = async (blocks) => { console.log(blocks); return true }
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{t('minimalExample.title')}</h2>
         <CodeBlock language="vue" code={minimalExampleCode} />
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
-          {t.rich('minimalExample.afterNote', richTags)}
+          {renderDocRichString(t.raw('minimalExample.afterNote') as string, richTags)}
         </p>
       </section>
 
       <section>
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{t('ssr.title')}</h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('ssr.description', richTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('ssr.description') as string, richTags)}</p>
         <div className="flex flex-wrap gap-3">
           <Link
             href="/docs/nuxt"
@@ -157,7 +157,7 @@ const onSave = async (blocks) => { console.log(blocks); return true }
         <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
           <li>
             →{' '}
-            <Link href="/docs/core/theming-localization" className="text-primary-600 hover:underline">
+            <Link href="/docs/core/theming-localization#locale-ui-strings" className="text-primary-600 hover:underline">
               {t('whatsNext.theming')}
             </Link>
           </li>

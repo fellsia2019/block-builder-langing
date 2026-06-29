@@ -7,7 +7,7 @@ import Icon from '@/components/Icon';
 import DocHeading from '../../components/DocHeading';
 import DocImportantNote from '../../components/DocImportantNote';
 import DocAnchor from '../../components/DocAnchor';
-import { docRichTags } from '../../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../../components/docRichTags';
 import type { NavigationProps } from '../../types';
 
 export default function UtilitiesSection(_props: NavigationProps) {
@@ -40,7 +40,7 @@ unlockBodyScroll();`,
           <Icon name="lock" size={22} className="text-emerald-600 dark:text-emerald-400" />
           {t('scrollLock.title')}
         </DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-3">{t.rich('scrollLock.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-3">{renderDocRichString(t.raw('scrollLock.description') as string, docRichTags)}</p>
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 mb-3">
           <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">{t('signatures')}</h3>
           <CodeBlock
@@ -51,8 +51,8 @@ function unlockBodyScroll(): void`}
             className="mb-2"
           />
           <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
-            <li>{t.rich('scrollLock.setScrollLockHandlers', docRichTags)}</li>
-            <li>{t.rich('scrollLock.lockBodyScroll', docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('scrollLock.setScrollLockHandlers') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('scrollLock.lockBodyScroll') as string, docRichTags)}</li>
           </ul>
         </div>
         <CodeBlock code={scrollLockExampleCode} language="javascript" className="mb-3" />
@@ -65,7 +65,7 @@ function unlockBodyScroll(): void`}
             </ul>
           </div>
           <DocImportantNote className="">
-            {t.rich('scrollLock.importantNote', docRichTags)}{' '}
+            {renderDocRichString(t.raw('scrollLock.importantNote') as string, docRichTags)}{' '}
             <DocAnchor id="scroll-lock">{t('scrollLock.importantAnchor')}</DocAnchor>
           </DocImportantNote>
         </div>
@@ -76,7 +76,7 @@ function unlockBodyScroll(): void`}
           <Icon name="layers" size={22} className="text-blue-600 dark:text-blue-400" />
           {t('blockHierarchy.title')}
         </DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-3">{t.rich('blockHierarchy.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-3">{renderDocRichString(t.raw('blockHierarchy.description') as string, docRichTags)}</p>
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 mb-3">
           <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">{t('signatures')}</h3>
           <CodeBlock
@@ -88,10 +88,10 @@ function isChildOf(blocks: IBlockDto[], childId: string, parentId: string): bool
             className="mb-2"
           />
           <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
-            <li>{t.rich('blockHierarchy.buildBlockHierarchy', docRichTags)}</li>
-            <li>{t.rich('blockHierarchy.cloneBlock', docRichTags)}</li>
-            <li>{t.rich('blockHierarchy.getAllChildren', docRichTags)}</li>
-            <li>{t.rich('blockHierarchy.isChildOf', docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('blockHierarchy.buildBlockHierarchy') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('blockHierarchy.cloneBlock') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('blockHierarchy.getAllChildren') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('blockHierarchy.isChildOf') as string, docRichTags)}</li>
           </ul>
         </div>
         <CodeBlock
@@ -105,7 +105,7 @@ const inside = isChildOf(blocks, childId, parentId);`}
           className="mb-3"
         />
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border-l-4 border-blue-400">
-          <p className="text-xs text-gray-700 dark:text-gray-300">{t.rich('blockHierarchy.normalizeNote', docRichTags)}</p>
+          <p className="text-xs text-gray-700 dark:text-gray-300">{renderDocRichString(t.raw('blockHierarchy.normalizeNote') as string, docRichTags)}</p>
         </div>
       </section>
 
@@ -114,7 +114,7 @@ const inside = isChildOf(blocks, childId, parentId);`}
           <Icon name="settings" size={22} className="text-indigo-600 dark:text-indigo-400" />
           {t('spacing.title')}
         </DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-3">{t.rich('spacing.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-3">{renderDocRichString(t.raw('spacing.description') as string, docRichTags)}</p>
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 mb-3">
           <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">{t('signatures')}</h3>
           <CodeBlock
@@ -129,10 +129,10 @@ function validateSpacing(spacing: any): { valid: boolean; errors: string[] }`}
             className="mb-2"
           />
           <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
-            <li>{t.rich('spacing.generateSpacingCSSVariables', docRichTags)}</li>
-            <li>{t.rich('spacing.generateSpacingCSS', docRichTags)}</li>
-            <li>{t.rich('spacing.mergeSpacing', docRichTags)}</li>
-            <li>{t.rich('spacing.validateSpacing', docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('spacing.generateSpacingCSSVariables') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('spacing.generateSpacingCSS') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('spacing.mergeSpacing') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('spacing.validateSpacing') as string, docRichTags)}</li>
           </ul>
         </div>
         <CodeBlock
@@ -153,7 +153,7 @@ const merged = mergeSpacing(baseSpacing, patch);`}
           <Icon name="target" size={22} className="text-amber-600 dark:text-amber-400" />
           {t('filterBlocks.title')}
         </DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-3">{t.rich('filterBlocks.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-3">{renderDocRichString(t.raw('filterBlocks.description') as string, docRichTags)}</p>
         <CodeBlock
           code={`import { filterBlocksForDisplay } from '@mushket-co/block-builder/core'
 
@@ -167,7 +167,7 @@ const visibleBlocks = filterBlocksForDisplay(blocks, isEdit)`}
           <Icon name="warning" size={22} className="text-rose-600 dark:text-rose-400" />
           {t('unsavedChanges.title')}
         </DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-3">{t.rich('unsavedChanges.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-3">{renderDocRichString(t.raw('unsavedChanges.description') as string, docRichTags)}</p>
         <CodeBlock
           code={`import {
   haveBlocksChanged,
@@ -187,7 +187,7 @@ const visibleBlocks = filterBlocksForDisplay(blocks, isEdit)`}
           <Icon name="shield" size={22} className="text-teal-600 dark:text-teal-400" />
           {t('reactiveValidation.title')}
         </DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-3">{t.rich('reactiveValidation.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-3">{renderDocRichString(t.raw('reactiveValidation.description') as string, docRichTags)}</p>
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 mb-3">
           <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">{t('signatures')}</h3>
           <CodeBlock
@@ -210,9 +210,9 @@ function applyFormErrors(
             className="mb-2"
           />
           <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
-            <li>{t.rich('reactiveValidation.touch', docRichTags)}</li>
-            <li>{t.rich('reactiveValidation.revalidateIfTouched', docRichTags)}</li>
-            <li>{t.rich('reactiveValidation.applyFormErrors', docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('reactiveValidation.touch') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('reactiveValidation.revalidateIfTouched') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('reactiveValidation.applyFormErrors') as string, docRichTags)}</li>
           </ul>
         </div>
         <CodeBlock
@@ -248,7 +248,7 @@ function onFieldChange(formData, formFields) {
           <Icon name="shield" size={22} className="text-purple-600 dark:text-purple-400" />
           {t('universalValidator.title')}
         </DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-3">{t.rich('universalValidator.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-3">{renderDocRichString(t.raw('universalValidator.description') as string, docRichTags)}</p>
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 mb-3">
           <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">{t('signatures')}</h3>
           <CodeBlock
@@ -260,8 +260,8 @@ function onFieldChange(formData, formFields) {
             className="mb-2"
           />
           <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
-            <li>{t.rich('universalValidator.rules', docRichTags)}</li>
-            <li>{t.rich('universalValidator.message', docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('universalValidator.rules') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('universalValidator.message') as string, docRichTags)}</li>
           </ul>
         </div>
         <CodeBlock
@@ -273,7 +273,7 @@ const { isValid, errors } = validator.validate(values);`}
           className="mb-3"
         />
         <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3 border-l-4 border-purple-500">
-          <p className="text-xs text-gray-700 dark:text-gray-300">{t.rich('universalValidator.customNote', docRichTags)}</p>
+          <p className="text-xs text-gray-700 dark:text-gray-300">{renderDocRichString(t.raw('universalValidator.customNote') as string, docRichTags)}</p>
         </div>
       </section>
     </div>

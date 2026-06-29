@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import type { NavigationProps } from '../../types';
-import { docRichTags } from '../../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../../components/docRichTags';
 
 function FieldTypeCard({
   name,
@@ -105,7 +105,7 @@ export default function FieldTypesSection(_props: NavigationProps) {
       <section className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{t('whatIs.title')}</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {t.rich('whatIs.p1', {
+          {renderDocRichString(t.raw('whatIs.p1') as string, {
             strong: (chunks) => <strong>{chunks}</strong>,
             code: (chunks) => <code className="text-blue-700 dark:text-blue-400">{chunks}</code>,
           })}
@@ -115,7 +115,7 @@ export default function FieldTypesSection(_props: NavigationProps) {
           <li>{t('whatIs.uses.create')}</li>
           <li>{t('whatIs.uses.edit')}</li>
           <li>
-            {t.rich('whatIs.uses.props', {
+            {renderDocRichString(t.raw('whatIs.uses.props') as string, {
               code: (chunks) => <code className="text-blue-700 dark:text-blue-400">{chunks}</code>,
             })}
           </li>
@@ -157,20 +157,20 @@ export default function FieldTypesSection(_props: NavigationProps) {
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 {key === 'type' || key === 'placeholder' || key === 'options' || key === 'multiple' || key === 'rules'
-                  ? t.rich(`commonParams.${key}.description`, { code: greenCode })
-                  : t.rich(`commonParams.${key}.description`, docRichTags)}
+                  ? renderDocRichString(t.raw(`commonParams.${key}.description`) as string, { code: greenCode })
+                  : renderDocRichString(t.raw(`commonParams.${key}.description`) as string, docRichTags)}
               </p>
               {key === 'options' ? (
                 <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-4 mt-2">
-                  <li>{t.rich('commonParams.options.items.value', { strong: (c) => <strong>{c}</strong>, code: greenCode })}</li>
-                  <li>{t.rich('commonParams.options.items.label', { strong: (c) => <strong>{c}</strong> })}</li>
-                  <li>{t.rich('commonParams.options.items.disabled', { strong: (c) => <strong>{c}</strong> })}</li>
+                  <li>{renderDocRichString(t.raw('commonParams.options.items.value') as string, { strong: (c) => <strong>{c}</strong>, code: greenCode })}</li>
+                  <li>{renderDocRichString(t.raw('commonParams.options.items.label') as string, { strong: (c) => <strong>{c}</strong> })}</li>
+                  <li>{renderDocRichString(t.raw('commonParams.options.items.disabled') as string, { strong: (c) => <strong>{c}</strong> })}</li>
                 </ul>
               ) : null}
               {key === 'multiple' ? (
                 <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 ml-4 mt-2">
-                  <li>{t.rich('commonParams.multiple.items.select', { strong: (c) => <strong>{c}</strong>, code: greenCode })}</li>
-                  <li>{t.rich('commonParams.multiple.items.file', { strong: (c) => <strong>{c}</strong> })}</li>
+                  <li>{renderDocRichString(t.raw('commonParams.multiple.items.select') as string, { strong: (c) => <strong>{c}</strong>, code: greenCode })}</li>
+                  <li>{renderDocRichString(t.raw('commonParams.multiple.items.file') as string, { strong: (c) => <strong>{c}</strong> })}</li>
                 </ul>
               ) : null}
               {key === 'rules' ? (

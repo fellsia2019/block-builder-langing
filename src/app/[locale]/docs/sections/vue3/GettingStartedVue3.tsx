@@ -7,7 +7,7 @@ import CodeBlock from '@/components/CodeBlock';
 import { GITHUB_EXAMPLES_VUE3_CORE_API } from '@/lib/urls';
 import type { NavigationProps } from '../../types';
 import UploadUrlImportantNote from '../../components/UploadUrlImportantNote';
-import { docRichTags } from '../../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../../components/docRichTags';
 
 export default function GettingStartedVue3(_props: NavigationProps) {
   const t = useTranslations('docsPages.vue3.gettingStarted');
@@ -15,6 +15,8 @@ export default function GettingStartedVue3(_props: NavigationProps) {
 
   const tipItems = t.raw('tips.items') as string[];
   const viewModeItems = t.raw('editMode.viewMode.items') as string[];
+
+  const helloWorldHtml = t.raw('code.helloWorldHtml') as string;
 
   const step2Code = useMemo(
     () => `<template>
@@ -46,11 +48,11 @@ const config = {
           label: '${t('code.contentLabel')}',
           type: 'textarea',
           rules: [{ type: 'required', field: 'content' }],
-          defaultValue: '${t('code.helloWorldHtml')}'
+          defaultValue: '${helloWorldHtml}'
         }
       ],
       defaultProps: {
-        content: '${t('code.helloWorldHtml')}'
+        content: '${helloWorldHtml}'
       },
       spacingOptions: {
         enabled: true,
@@ -72,7 +74,7 @@ const handleBlockDeleted = (blockId) => {
   console.log('${t('code.logBlockDeleted')}', blockId)
 }
 </script>`,
-    [t],
+    [t, helloWorldHtml],
   );
 
   const multipleTypesCode = useMemo(
@@ -262,7 +264,7 @@ const config = {
         <div className="mb-6">
           <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">{t('basicExample.step1.title')}</h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-            {t.rich('basicExample.step1.spacingNote', {
+            {renderDocRichString(t.raw('basicExample.step1.spacingNote') as string, {
               ...docRichTags,
               link: (chunks) => (
                 <Link href="/docs/core/form-fields#spacing" className="text-primary-600 dark:text-primary-400 hover:underline">
@@ -324,7 +326,7 @@ const props = defineProps({
 
       <section>
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{t('editMode.title')}</h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('editMode.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('editMode.description') as string, docRichTags)}</p>
         <CodeBlock
           code={editModeCode}
           language="vue"
@@ -334,7 +336,7 @@ const props = defineProps({
           <h4 className="font-bold text-gray-900 dark:text-white mb-2">{t('editMode.viewMode.title')}</h4>
           <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
             {viewModeItems.map((_, index) => (
-              <li key={index}>{t.rich(`editMode.viewMode.items.${index}`, docRichTags)}</li>
+              <li key={index}>{renderDocRichString(t.raw(`editMode.viewMode.items.${index}`) as string, docRichTags)}</li>
             ))}
           </ul>
         </div>
@@ -346,7 +348,7 @@ const props = defineProps({
           {tipItems.map((_, index) => (
             <li key={index} className="flex items-start">
               <span className="text-blue-500 mr-2">•</span>
-              <span>{t.rich(`tips.items.${index}`, docRichTags)}</span>
+              <span>{renderDocRichString(t.raw(`tips.items.${index}`) as string, docRichTags)}</span>
             </li>
           ))}
         </ul>
@@ -354,7 +356,7 @@ const props = defineProps({
 
       <section className="rounded-xl p-6 border border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/10">
         <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">{t('coreWithoutComponent.title')}</h2>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{t.rich('coreWithoutComponent.description', docRichTags)}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('coreWithoutComponent.description') as string, docRichTags)}</p>
         <CodeBlock
           language="vue"
           className="mb-4 text-xs"
@@ -370,7 +372,7 @@ onMounted(() => {
 </script>`}
         />
         <p className="text-sm text-gray-600 dark:text-gray-400">
-          {t.rich('coreWithoutComponent.footer', {
+          {renderDocRichString(t.raw('coreWithoutComponent.footer') as string, {
             apiOverview: (chunks) => (
               <Link href="/docs/core/classes" className="text-primary-600 hover:underline">{chunks}</Link>
             ),
@@ -387,7 +389,7 @@ onMounted(() => {
       <section className="bg-green-50 dark:bg-green-900/20 rounded-xl p-6 border border-green-200 dark:border-green-800">
         <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">{t('nuxt.title')}</h2>
         <p className="text-sm text-gray-600 dark:text-gray-400">
-          {t.rich('nuxt.description', {
+          {renderDocRichString(t.raw('nuxt.description') as string, {
             nuxtLink: (chunks) => (
               <Link href="/docs/nuxt" className="text-green-600 hover:underline">{chunks}</Link>
             ),

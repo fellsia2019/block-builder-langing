@@ -5,7 +5,7 @@ import { Link } from '@/i18n/navigation';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import DocHeading from '../../components/DocHeading';
-import { docRichTags } from '../../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../../components/docRichTags';
 import type { NavigationProps } from '../../types';
 
 export default function ThemingLocalizationSection(_props: NavigationProps) {
@@ -15,16 +15,20 @@ export default function ThemingLocalizationSection(_props: NavigationProps) {
     <div className="space-y-8">
       <div>
         <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{t('title')}</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400">{t.rich('subtitle', docRichTags)}</p>
+        <p className="text-xl text-gray-600 dark:text-gray-400">
+          {renderDocRichString(t.raw('subtitle') as string, docRichTags)}
+        </p>
       </div>
 
       <section className="bg-violet-50 dark:bg-violet-900/20 rounded-xl p-6 border-l-4 border-violet-500">
         <DocHeading id="locale-ui-strings">{t('locale.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('locale.p1', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          {renderDocRichString(t.raw('locale.p1') as string, docRichTags)}
+        </p>
         <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400 mb-4">
-          <li>{t.rich('locale.localeItem', docRichTags)}</li>
-          <li>{t.rich('locale.uiStringsItem', docRichTags)}</li>
-          <li>{t.rich('locale.exportsItem', docRichTags)}</li>
+          <li>{renderDocRichString(t.raw('locale.localeItem') as string, docRichTags)}</li>
+          <li>{renderDocRichString(t.raw('locale.uiStringsItem') as string, docRichTags)}</li>
+          <li>{renderDocRichString(t.raw('locale.exportsItem') as string, docRichTags)}</li>
         </ul>
         <CodeBlock
           language="vue"
@@ -43,19 +47,27 @@ export default function ThemingLocalizationSection(_props: NavigationProps) {
   ...
 />`}
         />
-        <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">{t.rich('locale.hooksNote', docRichTags)}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
+          {renderDocRichString(t.raw('locale.hooksNote') as string, docRichTags)}
+        </p>
       </section>
 
       <section className="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-6 border-l-4 border-cyan-500">
         <DocHeading id="theme-presets">{t('themePreset.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('themePreset.p1', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          {renderDocRichString(t.raw('themePreset.p1') as string, docRichTags)}
+        </p>
         <CodeBlock language="vue" code={`<BlockBuilderComponent theme="dark" ... />`} />
-        <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">{t.rich('themePreset.coreNote', docRichTags)}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
+          {renderDocRichString(t.raw('themePreset.coreNote') as string, docRichTags)}
+        </p>
       </section>
 
       <section className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
         <DocHeading id="theme-vars">{t('themeVars.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('themeVars.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          {renderDocRichString(t.raw('themeVars.description') as string, docRichTags)}
+        </p>
         <CodeBlock
           language="typescript"
           code={`import {
@@ -84,8 +96,12 @@ const brandVars = {
 
       <section className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-6 border-l-4 border-emerald-500">
         <DocHeading id="teleported-ui">{t('teleportedUi.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('teleportedUi.p1', docRichTags)}</p>
-        <p className="text-sm text-gray-600 dark:text-gray-400">{t.rich('teleportedUi.p2', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          {renderDocRichString(t.raw('teleportedUi.p1') as string, docRichTags)}
+        </p>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          {renderDocRichString(t.raw('teleportedUi.p2') as string, docRichTags)}
+        </p>
       </section>
 
       <section className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
@@ -94,6 +110,11 @@ const brandVars = {
           {t('seeAlso.title')}
         </h2>
         <ul className="space-y-2 text-sm">
+          <li>
+            <Link href="/docs/core/properties" className="text-primary-600 hover:underline">
+              {t('seeAlso.properties')}
+            </Link>
+          </li>
           <li>
             <Link href="/docs/vue/components" className="text-primary-600 hover:underline">
               {t('seeAlso.vueComponents')}

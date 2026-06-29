@@ -6,12 +6,13 @@ import { Link } from '@/i18n/navigation';
 import CodeBlock from '@/components/CodeBlock';
 import { GITHUB_EXAMPLES_API_USAGE, GITHUB_EXAMPLES_VUE3_CORE_API } from '@/lib/urls';
 import DocHeading from '../../components/DocHeading';
-import { docRichTags } from '../../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../../components/docRichTags';
 import type { NavigationProps } from '../../types';
 
 export default function ClassesSection(_props: NavigationProps) {
   const t = useTranslations('docsPages.core.classes');
   const tSidebar = useTranslations('docs.sidebar');
+  const sampleContent = t.raw('example.code.sampleContent') as string;
 
   const importCode = useMemo(
     () => `import { BlockBuilder } from '@mushket-co/block-builder/core'
@@ -44,12 +45,12 @@ const blockBuilder = new BlockBuilder({ blockConfigs, initialBlocks: [] })
 
 const block = await blockBuilder.createBlock({
   type: 'text',
-  props: { content: '${t('example.code.sampleContent')}' },
+  props: { content: '${sampleContent}' },
 })
 
 const all = await blockBuilder.getAllBlocks()
 const json = blockBuilder.exportBlocks()`,
-    [t],
+    [t, sampleContent],
   );
 
   return (
@@ -57,13 +58,13 @@ const json = blockBuilder.exportBlocks()`,
       <div>
         <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{t('title')}</h1>
         <p className="text-xl text-gray-600 dark:text-gray-400">
-          {t.rich('subtitle', docRichTags)}
+          {renderDocRichString(t.raw('subtitle') as string, docRichTags)}
         </p>
       </div>
 
       <section className="bg-green-50 dark:bg-green-900/20 rounded-xl p-6 border-l-4 border-green-500">
         <DocHeading id="why">{t('why.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('why.p1', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('why.p1') as string, docRichTags)}</p>
         <p className="text-sm text-gray-600 dark:text-gray-400">{t('why.p2')}</p>
       </section>
 
@@ -182,7 +183,7 @@ const json = blockBuilder.exportBlocks()`,
             <Link href="/docs/core/properties" className="text-primary-600 hover:underline">
               {tSidebar('properties')}
             </Link>{' '}
-            {t.rich('map.properties', docRichTags)}
+            {renderDocRichString(t.raw('map.properties') as string, docRichTags)}
           </li>
           <li>
             →{' '}

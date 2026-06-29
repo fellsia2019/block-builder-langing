@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import CodeBlock from '@/components/CodeBlock';
 import DocImportantNote from '../../components/DocImportantNote';
 import type { NavigationProps } from '../../types';
-import { docRichTags } from '../../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../../components/docRichTags';
 
 const orangeCode = (chunks: ReactNode) => (
   <code className="text-orange-700 dark:text-orange-400">{chunks}</code>
@@ -40,7 +40,7 @@ export default function CustomRenderersSection(_props: NavigationProps) {
       <section className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6 border-l-4 border-orange-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{t('interface.title')}</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {t.rich('interface.p1', { code: orangeCode })}
+          {renderDocRichString(t.raw('interface.p1') as string, { code: orangeCode })}
         </p>
         <CodeBlock code={t.raw('interface.code')} language="typescript" className="mb-4" />
       </section>
@@ -48,11 +48,11 @@ export default function CustomRenderersSection(_props: NavigationProps) {
       <section className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6 border-l-4 border-orange-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{t('step1.title')}</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {t.rich('step1.p1', { code: orangeCode })}
+          {renderDocRichString(t.raw('step1.p1') as string, { code: orangeCode })}
         </p>
         <CodeBlock code={t.raw('step1.code')} language="typescript" className="mb-4" />
         <DocImportantNote>
-          {t.rich('step1.important', {
+          {renderDocRichString(t.raw('step1.important') as string, {
             ...docRichTags,
             strong: (chunks) => <strong>{chunks}</strong>,
             link: (chunks) => (
@@ -72,7 +72,7 @@ export default function CustomRenderersSection(_props: NavigationProps) {
         <p className="text-gray-600 dark:text-gray-400 mb-4">{t('step2.p1')}</p>
         <CodeBlock code={t.raw('step2.code')} language="typescript" className="mb-4" />
         <DocImportantNote>
-          {t.rich('step2.important', {
+          {renderDocRichString(t.raw('step2.important') as string, {
             ...docRichTags,
             strong: (chunks) => <strong>{chunks}</strong>,
             link: (chunks) => (
@@ -90,7 +90,7 @@ export default function CustomRenderersSection(_props: NavigationProps) {
       <section className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6 border-l-4 border-orange-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{t('step3.title')}</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {t.rich('step3.p1', { code: orangeCode })}
+          {renderDocRichString(t.raw('step3.p1') as string, { code: orangeCode })}
         </p>
         <CodeBlock code={t.raw('step3.code')} language="typescript" className="mb-4" />
       </section>
@@ -104,7 +104,7 @@ export default function CustomRenderersSection(_props: NavigationProps) {
       <section className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6 border-l-4 border-orange-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{t('async.title')}</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {t.rich('async.p1', { code: orangeCode })}
+          {renderDocRichString(t.raw('async.p1') as string, { code: orangeCode })}
         </p>
         <CodeBlock code={t.raw('async.code')} language="typescript" className="mb-4" />
       </section>
@@ -127,7 +127,7 @@ export default function CustomRenderersSection(_props: NavigationProps) {
                 <code className="text-orange-700 dark:text-orange-400">{key}(…)</code>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                {t.rich(`api.${key}`, { code: orangeCode })}
+                {renderDocRichString(t.raw(`api.${key}`) as string, { code: orangeCode })}
               </p>
             </div>
           ))}
@@ -149,7 +149,7 @@ export default function CustomRenderersSection(_props: NavigationProps) {
           ).map((key) => (
             <li key={key} className="flex items-start">
               <span className="text-orange-500 mr-2">•</span>
-              <span>{t.rich(`bestPractices.${key}`, { code: orangeCode })}</span>
+              <span>{renderDocRichString(t.raw(`bestPractices.${key}`) as string, { code: orangeCode })}</span>
             </li>
           ))}
         </ul>

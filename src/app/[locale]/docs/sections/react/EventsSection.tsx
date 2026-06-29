@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import CodeBlock from '@/components/CodeBlock';
-import { docRichTags } from '../../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../../components/docRichTags';
 import type { NavigationProps } from '../../types';
 
 function CallbackCard({
@@ -115,6 +115,7 @@ export function Editor() {
   const syncBackendCode = useMemo(
     () => `export function Editor() {
   const [isLoading, setIsLoading] = useState(false)
+  const blockManagementUseCase = useMemo(() => createBlockManagementUseCase(), [])
 
   const syncToBackend = async (block: IBlock) => {
     setIsLoading(true)
@@ -179,19 +180,19 @@ export function Editor() {
     <div className="space-y-8">
       <div>
         <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{t('title')}</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400">{t.rich('subtitle', docRichTags)}</p>
+        <p className="text-xl text-gray-600 dark:text-gray-400">{renderDocRichString(t.raw('subtitle') as string, docRichTags)}</p>
       </div>
 
       <section className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border-l-4 border-blue-500">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{tCommon('generalUsage')}</h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('generalUsageIntro', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('generalUsageIntro') as string, docRichTags)}</p>
         <CodeBlock
           language="tsx"
           code={generalUsageCode}
           className="mb-4"
         />
         <p className="text-sm text-gray-600 dark:text-gray-400">
-          {t.rich('typesNote', {
+          {renderDocRichString(t.raw('typesNote') as string, {
             iblock: (chunks) => (
               <Link href="/docs/core/types#iblock" className="text-primary-600 dark:text-primary-400 hover:underline">
                 {chunks}
@@ -270,7 +271,7 @@ const savePendingBlocks = async () => {
         <div className="mb-6">
           <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">{tCommon('onSaveVsCallbacks')}</h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-            {t.rich('onSaveVsCallbacks.description', docRichTags)}
+            {renderDocRichString(t.raw('onSaveVsCallbacks.description') as string, docRichTags)}
           </p>
           <CodeBlock
             language="tsx"
@@ -283,6 +284,39 @@ const savePendingBlocks = async () => {
 }}`}
           />
         </div>
+
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">{tCommon('analyticsLogging')}</h3>
+          <CodeBlock
+            language="tsx"
+            code={`const handleBlockAdded = (block: IBlock) => {
+  gtag('event', 'block_created', {
+    block_type: block.type,
+    event_category: 'block_builder',
+  })
+
+  logUserAction({
+    action: 'create_block',
+    blockType: block.type,
+    timestamp: Date.now(),
+  })
+}
+
+const handleBlockUpdated = (block: IBlock) => {
+  gtag('event', 'block_updated', {
+    block_type: block.type,
+    event_category: 'block_builder',
+  })
+}
+
+const handleBlockDeleted = (blockId: TBlockId) => {
+  gtag('event', 'block_deleted', {
+    event_category: 'block_builder',
+  })
+}`}
+            className="mb-4"
+          />
+        </div>
       </section>
 
       <section className="bg-green-50 dark:bg-green-900/20 rounded-xl p-6 border-l-4 border-green-500">
@@ -291,7 +325,7 @@ const savePendingBlocks = async () => {
           {tipItems.map((_, index) => (
             <li key={index} className="flex items-start">
               <span className="text-green-500 mr-2">•</span>
-              <span>{t.rich(`tips.items.${index}`, docRichTags)}</span>
+              <span>{renderDocRichString(t.raw(`tips.items.${index}`) as string, docRichTags)}</span>
             </li>
           ))}
         </ul>

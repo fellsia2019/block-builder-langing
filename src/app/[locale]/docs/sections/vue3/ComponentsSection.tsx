@@ -8,7 +8,7 @@ import type { NavigationProps } from '../../types';
 import DocHeading from '../../components/DocHeading';
 import UploadUrlImportantNote from '../../components/UploadUrlImportantNote';
 import { Link } from '@/i18n/navigation';
-import { docRichTags } from '../../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../../components/docRichTags';
 
 const PROP_KEYS = [
   'blockManagementUseCase',
@@ -84,10 +84,16 @@ export default function ComponentsSection(_props: NavigationProps) {
 
   const isEditExampleCode = useMemo(
     () => `// ${t('code.editModeComment')}
-<BlockBuilderComponent :config="config" :isEdit="true" />
+<BlockBuilderComponent
+  :config="config"
+  :isEdit="true"
+/>
 
 // ${t('code.viewModeComment')}
-<BlockBuilderComponent :config="config" :isEdit="false" />`,
+<BlockBuilderComponent
+  :config="config"
+  :isEdit="false"
+/>`,
     [t],
   );
 
@@ -278,11 +284,13 @@ onMounted(() => {
                 <h4 className="font-bold mb-2 text-gray-900 dark:text-white">
                   <code className="text-purple-700 dark:text-purple-400">{key}</code>
                   <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">
-                    {t(`blockBuilderComponent.props.${key}.type`)}
+                    {t.raw(`blockBuilderComponent.props.${key}.type`) as string}
                   </span>
                 </h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                  {t.rich(`blockBuilderComponent.props.${key}.description`, docRichTags)}
+                  {renderDocRichString(
+                    t.raw(`blockBuilderComponent.props.${key}.description`) as string,
+                  )}
                 </p>
                 {key === 'onSave' && (
                   <CodeBlock
@@ -300,7 +308,7 @@ onMounted(() => {
                 )}
                 {key === 'themeVars' && (
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    <Link href="/docs/core/theming-localization" className="text-primary-600 dark:text-primary-400 hover:underline">
+                    <Link href="/docs/core/theming-localization#theme-vars" className="text-primary-600 dark:text-primary-400 hover:underline">
                       {tCommon('themingLocalization')}
                     </Link>
                   </p>
@@ -310,11 +318,20 @@ onMounted(() => {
           </div>
 
           <div className="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-4 border border-teal-200 dark:border-teal-800 mt-4">
-            <p className="text-sm text-gray-600 dark:text-gray-400">{t.rich('blockBuilderComponent.notes.blockAnchor', docRichTags)}</p>
-          </div>
-
-          <div className="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-4 border border-teal-200 dark:border-teal-800 mt-4">
-            <p className="text-sm text-gray-600 dark:text-gray-400">{t('blockBuilderComponent.notes.formValidation')}</p>
+            <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">{t('blockBuilderComponent.notes.title')}</h4>
+            <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
+              <li>{renderDocRichString(t.raw('blockBuilderComponent.notes.formValidation') as string)}</li>
+              <li>{renderDocRichString(t.raw('blockBuilderComponent.notes.blockAnchor') as string)}</li>
+            </ul>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
+              <Link href="/docs/core/form-fields" className="text-primary-600 dark:text-primary-400 hover:underline">
+                {tCommon('linkFormFields')}
+              </Link>
+              {' · '}
+              <Link href="/docs/core/utilities#reactive-validation" className="text-primary-600 dark:text-primary-400 hover:underline">
+                {tCommon('linkReactiveValidation')}
+              </Link>
+            </p>
           </div>
         </div>
 
@@ -366,7 +383,7 @@ onMounted(() => {
 
       <section>
         <DocHeading id="block-components">{t('blockComponents.title')}</DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t.rich('blockComponents.description', docRichTags)}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">{renderDocRichString(t.raw('blockComponents.description') as string, docRichTags)}</p>
 
         <div className="mb-6">
           <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">{tCommon('blockStructure')}</h3>
@@ -420,7 +437,9 @@ const props = defineProps({
 
         <div className="mb-6">
           <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">{tCommon('imageComponentExample')}</h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-3">{tCommon.rich('imageFieldNote', docRichTags)}</p>
+          <p className="text-gray-600 dark:text-gray-400 mb-3">
+            {renderDocRichString(tCommon.raw('imageFieldNote') as string)}
+          </p>
           <CodeBlock
             code={`<!-- components/ImageBlock.vue -->
 <template>
@@ -476,7 +495,7 @@ const imageUrl = computed(() => {
             {importantItems.map((_, index) => (
               <li key={index} className="flex items-start">
                 <span className="text-blue-500 mr-2">•</span>
-                <span>{t.rich(`blockComponents.importantItems.${index}`, docRichTags)}</span>
+                <span>{renderDocRichString(t.raw(`blockComponents.importantItems.${index}`) as string, docRichTags)}</span>
               </li>
             ))}
           </ul>

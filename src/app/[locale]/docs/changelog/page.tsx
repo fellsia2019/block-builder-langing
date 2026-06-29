@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { docRichTags } from '../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../components/docRichTags';
 
 type Release = {
   version: string;
@@ -19,7 +19,7 @@ export default function ChangelogPage() {
       <div>
         <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{t('title')}</h1>
         <p className="text-xl text-gray-600 dark:text-gray-400">
-          {t.rich('subtitle', {
+          {renderDocRichString(t.raw('subtitle') as string, {
             ...docRichTags,
             changelog: (chunks) => (
               <a
@@ -55,7 +55,7 @@ export default function ChangelogPage() {
       </div>
 
       <p className="text-sm text-gray-600 dark:text-gray-400">
-        {t.rich('getStarted', {
+        {renderDocRichString(t.raw('getStarted') as string, {
           link: (chunks) => (
             <Link href="/docs/get-started" className="text-primary-600 hover:underline">
               {chunks}

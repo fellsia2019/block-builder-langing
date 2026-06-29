@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import CodeBlock from '@/components/CodeBlock';
-import { docRichTags } from '../../components/docRichTags';
+import { docRichTags, renderDocRichString } from '../../components/docRichTags';
 import type { NavigationProps } from '../../types';
 
 function EventCard({
@@ -336,7 +336,7 @@ const handleBlockDeleted = (blockId) => {
           {tipItems.map((_, index) => (
             <li key={index} className="flex items-start">
               <span className="text-green-500 mr-2">•</span>
-              <span>{t.rich(`tips.items.${index}`, docRichTags)}</span>
+              <span>{renderDocRichString(t.raw(`tips.items.${index}`) as string, docRichTags)}</span>
             </li>
           ))}
         </ul>
