@@ -38,11 +38,15 @@ body.scrollbar-is-locked {
   will-change: scroll-position;
 }
 
+.docs-content {
+  overflow-anchor: none;
+}
+
 .docs-content h2[id],
 .docs-content h3[id],
 .docs-content li[id],
 .docs-content div[id] {
-  scroll-margin-top: var(--docs-scroll-offset, 5rem);
+  scroll-margin-top: var(--docs-scroll-offset, 80px);
 }
 
 .docs-content li.docs-anchor-highlight {

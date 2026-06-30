@@ -123,7 +123,9 @@ export default function TypesSection(_props: NavigationProps) {
         <DocHeading id="ivalidation-rule">
           <code className="text-teal-700 dark:text-teal-400">IValidationRule</code>
         </DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{t('ivalidationRule.description')}</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          {renderDocRichString(t.raw('ivalidationRule.description') as string, { code: tealCode })}
+        </p>
         <CodeBlock code={t.raw('ivalidationRule.code')} language="typescript" className="mb-4" />
       </section>
 

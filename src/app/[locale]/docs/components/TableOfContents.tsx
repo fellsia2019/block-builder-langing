@@ -20,6 +20,30 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
   const ids = items.map((item) => item.id);
   const activeId = useScrollSpy(ids);
   const navRef = useRef<HTMLElement>(null);
+  const canSyncHash = useRef(false);
+  const initialHash = useRef('');
+
+  useEffect(() => {
+    initialHash.current = window.location.hash.slice(1);
+    canSyncHash.current = false;
+
+    const enable = () => {
+      canSyncHash.current = true;
+    };
+
+    window.addEventListener('wheel', enable, { once: true, passive: true });
+    window.addEventListener('touchstart', enable, { once: true, passive: true });
+    window.addEventListener('keydown', enable, { once: true, passive: true });
+
+    const timer = window.setTimeout(enable, 3000);
+
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener('wheel', enable);
+      window.removeEventListener('touchstart', enable);
+      window.removeEventListener('keydown', enable);
+    };
+  }, [ids.join('|')]);
 
   useEffect(() => {
     const nav = navRef.current;
@@ -38,9 +62,30 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
     }
   }, [activeId]);
 
+  useEffect(() => {
+    if (!activeId || !canSyncHash.current) return;
+
+    const initial = initialHash.current;
+    if (initial) {
+      const initialIdx = ids.indexOf(initial);
+      const activeIdx = ids.indexOf(activeId);
+      if (initialIdx !== -1 && activeIdx !== -1 && activeIdx < initialIdx) return;
+    }
+
+    const timer = window.setTimeout(() => {
+      const currentHash = window.location.hash.slice(1);
+      if (currentHash !== activeId) {
+        history.replaceState(null, '', `#${activeId}`);
+      }
+      initialHash.current = '';
+    }, 400);
+    return () => window.clearTimeout(timer);
+  }, [activeId, ids]);
+
   if (items.length === 0) return null;
 
   const scrollToHeading = (id: string) => {
+    canSyncHash.current = true;
     if (!scrollToDocHeading(id)) return;
     history.replaceState(null, '', `#${id}`);
   };
@@ -51,8 +96,8 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
       aria-label={t('onThisPage')}
       className="docs-search-scroll hidden xl:block fixed z-30 w-52 overflow-y-auto right-6 bg-white dark:bg-slate-900"
       style={{
-        top: 'var(--docs-scroll-offset, 5rem)',
-        maxHeight: 'calc(100vh - var(--docs-scroll-offset, 5rem) - 1.5rem)',
+        top: 'var(--docs-scroll-offset, 80px)',
+        maxHeight: 'calc(100vh - var(--docs-scroll-offset, 80px) - 1.5rem)',
       }}
     >
       <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-3">

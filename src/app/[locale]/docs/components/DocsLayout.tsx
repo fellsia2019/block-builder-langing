@@ -6,7 +6,7 @@ import DocsTopNav from './DocsTopNav';
 import Sidebar from './Sidebar';
 import TableOfContents from './TableOfContents';
 import { useAutoToc } from './useAutoToc';
-import { getDocsScrollOffset } from './docsScrollOffset';
+import { syncDocsScrollOffset } from './docsScrollOffset';
 import { useHashScroll } from './useHashScroll';
 
 interface DocsLayoutProps {
@@ -14,10 +14,11 @@ interface DocsLayoutProps {
 }
 
 export default function DocsLayout({ children }: DocsLayoutProps) {
+  useHashScroll();
+
   const contentRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const toc = useAutoToc(contentRef, pathname);
-  useHashScroll();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -33,17 +34,8 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
   }, []);
 
   useEffect(() => {
-    const syncOffset = () => {
-      document.documentElement.style.setProperty(
-        '--docs-scroll-offset',
-        `${getDocsScrollOffset()}px`
-      );
-    };
-
-    syncOffset();
-    window.addEventListener('resize', syncOffset, { passive: true });
-    return () => window.removeEventListener('resize', syncOffset);
-  }, [pathname]);
+    syncDocsScrollOffset();
+  }, []);
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
