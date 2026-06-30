@@ -472,7 +472,8 @@ export default function FormFieldsSection(_props: NavigationProps) {
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
           {renderDocRichString(t.raw('customRenderers.registerFrameworkLabel') as string, customRich)}
         </p>
-        <CodeBlock code={t.raw('customRenderers.registerFrameworkCode')} language="tsx" className="mb-4" />
+        <CodeBlock code={t.raw('customRenderers.registerVueCode')} language="vue" className="mb-4" />
+        <CodeBlock code={t.raw('customRenderers.registerReactCode')} language="tsx" className="mb-4" />
 
         <DocImportantNote>{renderDocRichString(t.raw('customRenderers.importantNote') as string, importantRich)}</DocImportantNote>
 

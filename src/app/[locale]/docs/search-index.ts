@@ -12,6 +12,7 @@ const SIDEBAR_ENTRIES: DocsSearchEntry[] = [
   { title: 'Методы', href: '/docs/core/methods', group: 'Справочник API' },
   { title: 'Свойства', href: '/docs/core/properties', group: 'Справочник API' },
   { title: 'Поля форм', href: '/docs/core/form-fields', group: 'Справочник API' },
+  { title: 'Темизация и локализация', href: '/docs/core/theming-localization', group: 'Справочник API' },
   { title: 'Утилиты', href: '/docs/core/utilities', group: 'Справочник API' },
   { title: 'Типы', href: '/docs/core/types', group: 'Справочник API' },
   { title: 'Быстрый старт', href: '/docs/vue/getting-started', group: 'Vue 3' },
@@ -111,8 +112,6 @@ const EXTRA_ENTRIES: DocsSearchEntry[] = [
   method('duplicateBlock', 'дублировать копировать'),
   method('exportBlocks', 'экспорт json'),
   method('importBlocks', 'импорт json'),
-  method('setIsEdit', 'режим редактирования isEdit preview просмотр'),
-  method('getIsEdit', 'режим редактирования isEdit'),
   method('registerCustomFieldRenderer', 'кастомный рендерер поля'),
   method('registerCustomFieldRenderers', 'кастомные рендереры массово'),
 
@@ -121,11 +120,12 @@ const EXTRA_ENTRIES: DocsSearchEntry[] = [
   util('buildBlockHierarchy', 'block-hierarchy-utils', 'hierarchy parent children cloneBlock getAllChildren isChildOf'),
   util('generateSpacingCSS', 'spacing-utils', 'spacing margin padding breakpoints css variables validateSpacing'),
   util('filterBlocksForDisplay', 'filter-blocks', 'visible hidden isEdit opacity'),
-  util('haveBlocksChanged', 'unsaved-changes', 'несохранённые изменения page leave warnOnPageLeave tracker'),
-  util('usePageLeaveWarning', 'unsaved-changes', 'vue react warn leave beforeunload'),
+  util('haveBlocksChanged', 'unsaved-changes', 'несохранённые изменения page leave warnOnPageLeave tracker attachPageLeaveWarning'),
 
   // —— Темизация / локализация ——
   { title: 'Темизация и локализация UI', href: '/docs/core/theming-localization', group: 'Справочник API', keywords: 'theme themeVars locale uiStrings dark glass css variables i18n' },
+  { title: 'Справочник CSS-токенов темы', href: '/docs/core/theming-localization#token-reference', group: 'Справочник API', keywords: 'bb-color-primary spacing radius form modal shadow --bb-' },
+  { title: 'Что можно кастомизировать в теме', href: '/docs/core/theming-localization#customizable-ui', group: 'Справочник API', keywords: 'modal form dropdown upload repeater matrix controls' },
   { title: 'themeVars', href: '/docs/core/theming-localization#theme-vars', group: 'Справочник API', keywords: 'bb-color-primary surface custom theme' },
   { title: 'locale uiStrings', href: '/docs/core/theming-localization#locale-ui-strings', group: 'Справочник API', keywords: 'локализация i18n ru en UI_STRINGS' },
 
@@ -179,6 +179,8 @@ const TITLE_EN: Record<string, string> = {
   'Поля форм': 'Form fields',
   'Темизация и локализация': 'Theming & localization',
   'Темизация и локализация UI': 'UI theming & localization',
+  'Справочник CSS-токенов темы': 'Theme CSS token reference',
+  'Что можно кастомизировать в теме': 'What you can customize in the theme',
   'Утилиты': 'Utilities',
   'Типы': 'Types',
   'Компоненты': 'Components',

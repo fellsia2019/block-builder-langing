@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useCoreNavigation } from '../../hooks/useNavigation';
 import type { CoreSubSection } from '../../types';
 import DocsSectionFallback from '../../components/DocsSectionFallback';
@@ -33,19 +34,28 @@ const ThemingLocalizationSection = dynamic(
 
 export default function CoreSectionPage() {
   const params = useParams();
+  const tNav = useTranslations('docs.nav');
   const section = params.section as string;
   const subSection = section as CoreSubSection;
   const { nextSection, nextTitle } = useCoreNavigation(subSection);
 
-  const getNextHref = (next: string | null) => (next ? `/docs/core/${next}` : null);
+  const nextHref =
+    subSection === 'types'
+      ? '/docs/vue/getting-started'
+      : nextSection
+        ? `/docs/core/${nextSection}`
+        : null;
+  const resolvedNextTitle =
+    subSection === 'types' ? `${tNav('vue')} — ${tNav('getStarted')}` : nextTitle;
+  const resolvedNextSection = subSection === 'types' ? 'vue-getting-started' : nextSection;
 
   return (
     <>
       {getContent(subSection)}
       <NextPageLink
-        nextSection={nextSection}
-        nextTitle={nextTitle}
-        nextHref={getNextHref(nextSection)}
+        nextSection={resolvedNextSection}
+        nextTitle={resolvedNextTitle}
+        nextHref={nextHref}
         color="primary"
       />
     </>

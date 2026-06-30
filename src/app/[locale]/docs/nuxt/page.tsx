@@ -10,10 +10,12 @@ import {
   GITHUB_EXAMPLES_NUXT4,
 } from '@/lib/urls';
 import DocHeading from '../components/DocHeading';
+import NextPageLink from '../components/NextPageLink';
 import { docRichTags, renderDocRichString } from '../components/docRichTags';
 
 const COMPOSABLE_ITEMS = [
   'blockManagementUseCase',
+  'apiSelectUseCase',
   'availableBlockTypes',
   'initialBlocks',
   'isEdit',
@@ -25,20 +27,33 @@ const SSR_UTIL_KEYS = [
   'enrichBlockForDisplay',
   'seedRepositoryFromBlocks',
   'enableViewportBreakpointDetection',
+  'canRenderVueBlock',
+  'resolveVueComponentForBlock',
+  'getDefaultBreakpoint',
+  'isClient',
+  'isServer',
+  'isViewportBreakpointDetectionEnabled',
+  'resetViewportBreakpointDetection',
 ] as const;
 
 export default function NuxtPage() {
   const t = useTranslations('docsPages.nuxt');
+  const tSidebar = useTranslations('docs.sidebar');
 
   const useBlockBuilderCode = useMemo(
     () => `// composables/useBlockBuilder.ts
 import { type Ref, ref } from 'vue'
-import { createBlockManagementUseCase } from '@mushket-co/block-builder/vue'
+import {
+  ApiSelectUseCase,
+  createBlockManagementUseCase,
+  FetchHttpClient,
+} from '@mushket-co/block-builder/vue'
 import { blockConfigs } from '~/block-config'
 import { serializeBlocksForStorage } from '~/utils/serializeBlocks'
 
 export function useBlockBuilder(initialBlocks: Ref<unknown[] | null | undefined>) {
   const blockManagementUseCase = createBlockManagementUseCase()
+  const apiSelectUseCase = new ApiSelectUseCase(new FetchHttpClient())
 
   const componentRegistry = blockManagementUseCase.getComponentRegistry()
   for (const [type, config] of Object.entries(blockConfigs)) {
@@ -78,6 +93,7 @@ export function useBlockBuilder(initialBlocks: Ref<unknown[] | null | undefined>
 
   return {
     blockManagementUseCase,
+    apiSelectUseCase,
     availableBlockTypes,
     initialBlocks,
     isEdit,
@@ -149,7 +165,7 @@ export default defineEventHandler(async () => {
         <CodeBlock
           language="ts"
           code={`// plugins/block-builder.client.ts
-import '@mushket-co/block-builder/index.css'`}
+import '@mushket-co/block-builder/index.esm.css'`}
         />
       </section>
 
@@ -184,6 +200,7 @@ import '@mushket-co/block-builder/index.css'`}
   <BlockBuilderComponent
     :config="{ availableBlockTypes }"
     :block-management-use-case="blockManagementUseCase"
+    :api-select-use-case="apiSelectUseCase"
     :on-save="handleSave"
     :initial-blocks="initialBlocks"
     :is-edit="isEdit"
@@ -201,6 +218,7 @@ const { data: initialBlocks } = await useAsyncData('bb-blocks', () =>
 
 const {
   blockManagementUseCase,
+  apiSelectUseCase,
   availableBlockTypes,
   isEdit,
   handleSave,
@@ -258,6 +276,13 @@ const {
           })}
         </p>
       </section>
+
+      <NextPageLink
+        nextSection="vue-components"
+        nextTitle={tSidebar('components')}
+        nextHref="/docs/vue/components"
+        color="purple"
+      />
     </div>
   );
 }

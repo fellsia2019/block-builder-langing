@@ -20,8 +20,9 @@ export default function GettingStartedVue3(_props: NavigationProps) {
 
   const step2Code = useMemo(
     () => `<template>
-  <BlockBuilderComponent 
+  <BlockBuilderComponent
     :config="config"
+    :block-management-use-case="blockManagementUseCase"
     @block-added="handleBlockAdded"
     @block-updated="handleBlockUpdated"
     @block-deleted="handleBlockDeleted"
@@ -29,8 +30,15 @@ export default function GettingStartedVue3(_props: NavigationProps) {
 </template>
 
 <script setup>
-import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
+import '@mushket-co/block-builder/index.esm.css'
+import {
+  BlockBuilderComponent,
+  createBlockManagementUseCase,
+} from '@mushket-co/block-builder/vue'
 import TextBlock from './components/TextBlock.vue'
+
+const blockManagementUseCase = createBlockManagementUseCase()
+blockManagementUseCase.getComponentRegistry().register('text', TextBlock)
 
 const config = {
   availableBlockTypes: [
@@ -79,10 +87,19 @@ const handleBlockDeleted = (blockId) => {
 
   const multipleTypesCode = useMemo(
     () => `<script setup>
-import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
+import '@mushket-co/block-builder/index.esm.css'
+import {
+  BlockBuilderComponent,
+  createBlockManagementUseCase,
+} from '@mushket-co/block-builder/vue'
 import TextBlock from './components/TextBlock.vue'
 import ImageBlock from './components/ImageBlock.vue'
 import ButtonBlock from './components/ButtonBlock.vue'
+
+const blockManagementUseCase = createBlockManagementUseCase()
+blockManagementUseCase.getComponentRegistry().register('text', TextBlock)
+blockManagementUseCase.getComponentRegistry().register('image', ImageBlock)
+blockManagementUseCase.getComponentRegistry().register('button', ButtonBlock)
 
 const config = {
   availableBlockTypes: [
@@ -190,20 +207,29 @@ const config = {
   const editModeCode = useMemo(
     () => `<template>
   <!-- ${t('code.editModeComment')} -->
-  <BlockBuilderComponent 
+  <BlockBuilderComponent
     :config="config"
+    :block-management-use-case="blockManagementUseCase"
     :isEdit="true"
   />
 
   <!-- ${t('code.viewModeComment')} -->
-  <BlockBuilderComponent 
+  <BlockBuilderComponent
     :config="config"
+    :block-management-use-case="blockManagementUseCase"
     :isEdit="false"
   />
 </template>
 
 <script setup>
-import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
+import '@mushket-co/block-builder/index.esm.css'
+import {
+  BlockBuilderComponent,
+  createBlockManagementUseCase,
+} from '@mushket-co/block-builder/vue'
+
+const blockManagementUseCase = createBlockManagementUseCase()
+// blockManagementUseCase.getComponentRegistry().register(...)
 
 const config = {
   availableBlockTypes: [
@@ -229,10 +255,7 @@ const config = {
           language="bash"
           className="mb-4"
         />
-        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-          {t('install.typescriptNote')}{' '}
-          <code className="text-purple-700 dark:text-purple-400">npm install -D @types/node</code>
-        </p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{t('install.typescriptNote')}</p>
       </section>
 
       <section>

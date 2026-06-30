@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useParams, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useVue3Navigation } from '../../hooks/useNavigation';
 import type { Vue3SubSection } from '../../types';
 import DocsSectionFallback from '../../components/DocsSectionFallback';
@@ -21,22 +22,23 @@ const EventsSection = dynamic(() => import('../../sections/vue3/EventsSection'),
 export default function VueSectionPage() {
   const params = useParams();
   const router = useRouter();
+  const tSidebar = useTranslations('docs.sidebar');
   const section = params.section as string;
   const subSection = section as Vue3SubSection;
   const { nextSection, nextTitle } = useVue3Navigation(subSection);
 
-  const getNextHref = (next: string | null) => {
-    if (!next) return null;
-    return `/docs/vue/${next}`;
-  };
+  const nextHref =
+    subSection === 'events' ? '/docs/nuxt' : nextSection ? `/docs/vue/${nextSection}` : null;
+  const resolvedNextTitle = subSection === 'events' ? tSidebar('nuxt') : nextTitle;
+  const resolvedNextSection = subSection === 'events' ? 'nuxt' : nextSection;
 
   return (
     <>
-      {getContent(subSection, nextSection, nextTitle, (sub) => router.push(`/docs/vue/${sub}`))}
+      {getContent(subSection, resolvedNextSection, resolvedNextTitle, (sub) => router.push(`/docs/vue/${sub}`))}
       <NextPageLink
-        nextSection={nextSection}
-        nextTitle={nextTitle}
-        nextHref={getNextHref(nextSection)}
+        nextSection={resolvedNextSection}
+        nextTitle={resolvedNextTitle}
+        nextHref={nextHref}
         color="purple"
       />
     </>

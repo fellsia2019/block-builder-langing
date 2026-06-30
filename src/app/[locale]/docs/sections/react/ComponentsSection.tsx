@@ -39,6 +39,15 @@ const SSR_UTIL_KEYS = [
   'enrichBlockForDisplay',
   'seedRepositoryFromBlocks',
   'enableViewportBreakpointDetection',
+  'canRenderVueBlock',
+  'canRenderReactBlock',
+  'resolveVueComponentForBlock',
+  'resolveReactComponentForBlock',
+  'getDefaultBreakpoint',
+  'isClient',
+  'isServer',
+  'isViewportBreakpointDetectionEnabled',
+  'resetViewportBreakpointDetection',
 ] as const;
 
 export default function ReactComponentsSection(_props: NavigationProps) {
@@ -71,6 +80,7 @@ export default function ReactComponentsSection(_props: NavigationProps) {
   formHooks?: IBlockFormHooks,
   spacingOptions?: {                      // ${t('code.spacingOptionsComment')}
     enabled?: boolean,
+    spacingTypes?: Array<'padding-top' | 'padding-bottom' | 'margin-top' | 'margin-bottom'>,
     config?: { breakpoints?: Array<IBreakpoint> }
   }
 }`,
@@ -205,13 +215,18 @@ export function Editor() {
     /* ${t('code.customPropsComment')} */
     spacing?: {
       /* ${t('code.spacingDataComment')} */
-      'padding-top': { 'desktop': '20px' },
-      'margin-bottom': { 'mobile': '10px' }
+      desktop: { 'padding-top': 20, 'margin-bottom': 16 },
+      mobile: { 'padding-top': 12 }
     }
   },
   settings: {
     /* ${t('code.metadataComment')} */
-  }
+  },
+  visible?: boolean,
+  locked?: boolean,
+  order?: number,
+  metadata?: { createdAt: Date, updatedAt: Date, version: number },
+  render?: { kind: 'component', framework: 'vue' | 'react', component: unknown }
 }`,
     [t],
   );
@@ -249,7 +264,7 @@ export function Editor() {
                 </span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                {t('blockBuilderComponent.props.config.description')}
+                {renderDocRichString(t.raw('blockBuilderComponent.props.config.description') as string, docRichTags)}
               </p>
               <CodeBlock code={configTypeCode} language="typescript" className="mb-2 text-xs" />
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
@@ -299,7 +314,7 @@ export function Editor() {
                 {tCommon('linkFormFields')}
               </Link>
               {' · '}
-              <Link href="/docs/core/utilities#reactive-validation" className="text-primary-600 dark:text-primary-400 hover:underline">
+              <Link href="/docs/core/utilities#reactive-form-validation" className="text-primary-600 dark:text-primary-400 hover:underline">
                 {tCommon('linkReactiveValidation')}
               </Link>
             </p>
@@ -358,7 +373,9 @@ export function Editor() {
                     ? 'enrich-block-for-display'
                     : key === 'seedRepositoryFromBlocks'
                       ? 'seed-repository-from-blocks'
-                      : 'enable-viewport-breakpoint-detection'
+                      : key === 'enableViewportBreakpointDetection'
+                        ? 'enable-viewport-breakpoint-detection'
+                        : undefined
               }
             >
               {renderDocRichString(t.raw(`ssrUtils.items.${key}`) as string, docRichTags)}

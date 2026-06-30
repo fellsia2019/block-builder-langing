@@ -94,8 +94,9 @@ const handleBlockDeleted = (blockId) => {
 
   const generalUsageCode = useMemo(
     () => `<template>
-  <BlockBuilderComponent 
+  <BlockBuilderComponent
     :config="config"
+    :block-management-use-case="blockManagementUseCase"
     @block-added="handleBlockAdded"
     @block-updated="handleBlockUpdated"
     @block-deleted="handleBlockDeleted"
@@ -103,7 +104,13 @@ const handleBlockDeleted = (blockId) => {
 </template>
 
 <script setup>
-import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
+import {
+  BlockBuilderComponent,
+  createBlockManagementUseCase,
+} from '@mushket-co/block-builder/vue'
+
+const blockManagementUseCase = createBlockManagementUseCase()
+// blockManagementUseCase.getComponentRegistry().register(...)
 
 // ${t('code.eventHandlersComment')}
 const handleBlockAdded = (block) => {
@@ -125,8 +132,9 @@ const handleBlockDeleted = (blockId) => {
 
   const syncBackendCode = useMemo(
     () => `<template>
-  <BlockBuilderComponent 
+  <BlockBuilderComponent
     :config="config"
+    :block-management-use-case="blockManagementUseCase"
     @block-added="syncToBackend"
     @block-updated="syncToBackend"
     @block-deleted="removeFromBackend"
@@ -134,8 +142,14 @@ const handleBlockDeleted = (blockId) => {
 </template>
 
 <script setup>
-import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
 import { ref } from 'vue'
+import {
+  BlockBuilderComponent,
+  createBlockManagementUseCase,
+} from '@mushket-co/block-builder/vue'
+
+const blockManagementUseCase = createBlockManagementUseCase()
+// blockManagementUseCase.getComponentRegistry().register(...)
 
 const isLoading = ref(false)
 

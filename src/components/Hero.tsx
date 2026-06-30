@@ -88,7 +88,7 @@ export default function Hero() {
         <AnimateOnScroll animationName="SCALE_UP" animationDelay={800} animationTime={600} rootMargin="-50px 0px">
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <a
-              href="#installation"
+              href="#what-is"
               className="px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transform hover:scale-105 transition-all shadow-lg hover:shadow-xl"
             >
               {t('ctaStart')}
@@ -105,20 +105,12 @@ export default function Hero() {
         <AnimateOnScroll animationName="FADE_IN_UP" animationDelay={1000} animationTime={800} rootMargin="-50px 0px">
           <div className="flex flex-wrap gap-3 justify-center text-sm">
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
-              <Icon name="sparkles" size={16} className="text-primary-600 dark:text-primary-400" />
-              Clean Architecture
+              <Icon name="layers" size={16} className="text-primary-600 dark:text-primary-400" />
+              {t('badges.pageBuilder')}
             </span>
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
-              <Icon name="target" size={16} className="text-primary-600 dark:text-primary-400" />
-              {t('badges.solid')}
-            </span>
-            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
-              <Icon name="flask" size={16} className="text-primary-600 dark:text-primary-400" />
-              {t('badges.tests')}
-            </span>
-            <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
-              <Icon name="star" size={16} className="text-primary-600 dark:text-primary-400" />
-              v1.11.0
+              <Icon name="github" size={16} className="text-primary-600 dark:text-primary-400" />
+              {t('badges.openSource')} · MIT
             </span>
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
               <Icon name="package" size={16} className="text-primary-600 dark:text-primary-400" />
@@ -126,11 +118,11 @@ export default function Hero() {
             </span>
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
               <Icon name="zap" size={16} className="text-primary-600 dark:text-primary-400" />
-              Vue3 Support
+              Vue 3
             </span>
             <span className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-md border border-gray-200 dark:border-slate-700 hover:scale-105 transition-transform flex items-center gap-2">
               <Icon name="zap" size={16} className="text-primary-600 dark:text-primary-400" />
-              React 18+ Support
+              React 18+
             </span>
           </div>
         </AnimateOnScroll>

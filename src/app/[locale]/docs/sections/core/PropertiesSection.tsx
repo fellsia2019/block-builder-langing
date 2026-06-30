@@ -88,8 +88,6 @@ export default function PropertiesSection(_props: NavigationProps) {
   const blockConfigs = renderParam('parameters.blockConfigs');
   const autoInit = renderParam('parameters.autoInit');
   const initialBlocks = renderParam('parameters.initialBlocks');
-  const theme = renderParam('parameters.theme');
-  const locale = renderParam('parameters.locale');
 
   return (
     <div className="space-y-8">
@@ -136,24 +134,35 @@ export default function PropertiesSection(_props: NavigationProps) {
             seeAlso={initialBlocks.seeAlso}
           />
           <PropertyCard
-            name="theme"
-            type="TUiTheme"
-            defaultValue="default"
-            description={theme.description}
-            seeAlso={theme.seeAlso}
+            name="repository"
+            type="IBlockRepository"
+            description={renderParam('parameters.repository').description}
+            seeAlso={renderParam('parameters.repository').seeAlso}
           />
           <PropertyCard
-            name="locale"
-            type="'ru' | 'en'"
-            defaultValue="ru"
-            description={locale.description}
-            seeAlso={locale.seeAlso}
+            name="componentRegistry"
+            type="IComponentRegistry"
+            description={renderParam('parameters.componentRegistry').description}
+            seeAlso={renderParam('parameters.componentRegistry').seeAlso}
+          />
+          <PropertyCard
+            name="httpClient"
+            type="IHttpClient"
+            description={renderParam('parameters.httpClient').description}
+            seeAlso={renderParam('parameters.httpClient').seeAlso}
+          />
+          <PropertyCard
+            name="customFieldRendererRegistry"
+            type="ICustomFieldRendererRegistry"
+            description={renderParam('parameters.customFieldRendererRegistry').description}
+            seeAlso={renderParam('parameters.customFieldRendererRegistry').seeAlso}
           />
         </div>
       </section>
 
-      <div className="text-sm text-gray-600 dark:text-gray-400">
+      <div className="text-sm text-gray-600 dark:text-gray-400 space-y-2">
         <p>{renderDocRichString(t.raw('footnote.uiNote') as string, rich)}</p>
+        <p>{renderDocRichString(t.raw('footnote.themeLocaleNote') as string, rich)}</p>
       </div>
     </div>
   );

@@ -157,6 +157,24 @@ const onSave = async (blocks) => { console.log(blocks); return true }
         <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
           <li>
             →{' '}
+            <Link href="/docs/core/classes" className="text-primary-600 hover:underline">
+              {t('whatsNext.api')}
+            </Link>
+          </li>
+          <li>
+            →{' '}
+            <Link href="/docs/vue/getting-started" className="text-primary-600 hover:underline">
+              {t('whatsNext.vue')}
+            </Link>
+          </li>
+          <li>
+            →{' '}
+            <Link href="/docs/react/getting-started" className="text-primary-600 hover:underline">
+              {t('whatsNext.react')}
+            </Link>
+          </li>
+          <li>
+            →{' '}
             <Link href="/docs/core/theming-localization#locale-ui-strings" className="text-primary-600 hover:underline">
               {t('whatsNext.theming')}
             </Link>

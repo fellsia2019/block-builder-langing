@@ -475,16 +475,10 @@ interface IBlockTypeConfig {
   };
 }
 
-import { buildCustomRenderers } from './build-custom-renderers.mjs';
-import { buildFieldTypes } from './build-field-types.mjs';
 import { buildFormFields } from './build-form-fields.mjs';
 
 ru.core.types = buildTypes('ru');
 en.core.types = buildTypes('en');
-ru.core.customRenderers = buildCustomRenderers('ru');
-en.core.customRenderers = buildCustomRenderers('en');
-ru.core.fieldTypes = buildFieldTypes('ru');
-en.core.fieldTypes = buildFieldTypes('en');
 ru.core.formFields = buildFormFields('ru');
 en.core.formFields = buildFormFields('en');
 
@@ -500,6 +494,6 @@ console.log('Breakdown:');
 for (const section of ['components', 'common', 'core']) {
   console.log(`  ${section}: RU=${countKeys(ru[section])} EN=${countKeys(en[section])}`);
 }
-for (const section of ['types', 'customRenderers', 'fieldTypes', 'formFields']) {
+for (const section of ['types', 'formFields']) {
   console.log(`  core.${section}: RU=${countKeys(ru.core[section])} EN=${countKeys(en.core[section])}`);
 }

@@ -46,10 +46,11 @@ const blockBuilder = new BlockBuilder({ blockConfigs, initialBlocks: [] })
 const block = await blockBuilder.createBlock({
   type: 'text',
   props: { content: '${sampleContent}' },
+  settings: {},
 })
 
 const all = await blockBuilder.getAllBlocks()
-const json = blockBuilder.exportBlocks()`,
+const json = await blockBuilder.exportBlocks()`,
     [t, sampleContent],
   );
 

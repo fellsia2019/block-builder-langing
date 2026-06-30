@@ -4,6 +4,7 @@
     "description": "A library for building block-based editors with clean architecture. Vue 3, React 18+, TypeScript."
   },
   "nav": {
+    "about": "About",
     "features": "Features",
     "examples": "Examples",
     "architecture": "Architecture",
@@ -23,13 +24,90 @@
     "copiedTitle": "Copied!"
   },
   "hero": {
-    "subtitle": "Block builder with clean architecture",
-    "description": "Build powerful no-code editors with proper architecture. Vue 3, React 18+, SSR (Nuxt, Next.js). MIT, no restrictions.",
-    "ctaStart": "Get started",
+    "subtitle": "Open-source library for editing your custom page blocks",
+    "description": "Embed a block editor in your Vue or React app — you define block types and components, BlockBuilder provides forms, validation, and admin UI. Free, MIT licensed.",
+    "ctaStart": "What is it?",
     "ctaExamples": "View examples",
     "badges": {
+      "pageBuilder": "Your blocks, our editor",
+      "openSource": "Open source",
       "solid": "SOLID principles",
-      "tests": "100% test coverage"
+      "tests": "Automated tests"
+    }
+  },
+  "whatIs": {
+    "title": "What is BlockBuilder?",
+    "lead": "BlockBuilder is a free npm package for embedding a block editor into your web app. You define your own block types and write Vue or React components for them — we do not ship any ready-made blocks. The package provides the editor UI: end users add, reorder, and edit content in your blocks through auto-generated forms, then save the result as JSON for you to render.",
+    "problem": {
+      "title": "The problem",
+      "description": "Building a block editor from scratch is months of work: managing your block types, auto-generating forms for each one, validation, modals, saving state. Most teams either buy an expensive SaaS or ship a half-baked custom solution."
+    },
+    "solution": {
+      "title": "The solution",
+      "description": "BlockBuilder gives you a ready-made editor shell and typed Core API. You bring your block types, fields, and render components — BlockBuilder handles the editor UI, forms, validation, and block list management."
+    },
+    "whatYouGet": {
+      "title": "What you get",
+      "items": {
+        "readyUi": {
+          "title": "Ready-made editor UI",
+          "description": "Editor shell for your block types — forms, validation, and modals generated from your config. Works out of the box for Vue 3 and React 18+."
+        },
+        "blockConfig": {
+          "title": "Declarative block config",
+          "description": "Describe your block types and fields in JSON — the editor UI is generated automatically from your schema."
+        },
+        "coreApi": {
+          "title": "Core API without UI",
+          "description": "Programmatic block management via @mushket-co/block-builder/core when you need full control."
+        },
+        "ssr": {
+          "title": "SSR support",
+          "description": "Server-side rendering for Nuxt and Next.js — block content renders on the server."
+        }
+      }
+    },
+    "useCases": {
+      "title": "Where it's used",
+      "items": {
+        "cms": {
+          "title": "CMS & content platforms",
+          "description": "Editors compose pages from your block types — changing text, images, and settings without touching code."
+        },
+        "landing": {
+          "title": "Landing page builders",
+          "description": "Clients fill in your predefined block types in an admin panel — hero, features, CTA, whatever you built."
+        },
+        "admin": {
+          "title": "Admin panels",
+          "description": "Add a visual editor for your custom blocks to an existing dashboard or back-office."
+        },
+        "marketing": {
+          "title": "Marketing sites",
+          "description": "Marketers update content in your blocks — banners, texts, sections — without developer involvement."
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "steps": {
+        "1": {
+          "title": "Define your block types",
+          "description": "Create a config with your block types, fields (text, image, repeater…), and default values."
+        },
+        "2": {
+          "title": "Write render components",
+          "description": "Build Vue or React components that display each of your blocks on the public page."
+        },
+        "3": {
+          "title": "Embed the editor",
+          "description": "Add BlockBuilderComponent to your admin — users manage and edit your blocks through a visual UI."
+        },
+        "4": {
+          "title": "Save and render",
+          "description": "Store blocks as JSON on the server and render them on the frontend or via SSR."
+        }
+      }
     }
   },
   "githubNpm": {
@@ -41,7 +119,7 @@
   },
   "features": {
     "title": "Why BlockBuilder?",
-    "subtitle": "A library that helps you build block editors with proper architecture",
+    "subtitle": "A library for building editors around your own block types",
     "items": {
       "cleanArchitecture": {
         "title": "Clean architecture",
@@ -60,12 +138,12 @@
         "description": "Server-side rendering of block content. Live SSR examples in <link>block-builder/examples</link> (Nuxt 3/4, Next.js)."
       },
       "plugins": {
-        "title": "Plugin system",
-        "description": "Extend functionality easily with custom field types and renderers."
+        "title": "Custom field renderers",
+        "description": "Extend forms with custom field types via ICustomFieldRenderer and customFieldRendererRegistry."
       },
       "autoUi": {
         "title": "Automatic UI",
-        "description": "Built-in UI with forms, validation, and modals works out of the box."
+        "description": "Built-in UI generates forms for your block fields — validation and modals work out of the box."
       }
     }
   },
@@ -136,11 +214,12 @@
     "ui": {
       "title": "UI Layer",
       "components": "UI Components — ready-made components",
-      "controllers": "Controllers — UI orchestration",
+      "controllers": "Hooks & composables — BlockBuilder UI logic",
       "services": "Services — UI services"
     },
     "diagram": {
       "title": "Dependency direction",
+      "uiSublabel": "Components & hooks",
       "benefits": "Benefits",
       "benefit1": "Core does not depend on outer layers",
       "benefit2": "Easy to test and mock",
@@ -148,7 +227,8 @@
       "benefit4": "Clear separation of concerns"
     },
     "stats": {
-      "tests": "Test coverage",
+      "tests": "Automated tests",
+      "testsValue": "Jest",
       "typescript": "Full TypeScript",
       "solid": "Development principles"
     }
@@ -350,6 +430,9 @@
       },
       "whatsNext": {
         "title": "What's next?",
+        "api": "API reference (core)",
+        "vue": "Vue 3 — quick start",
+        "react": "React — quick start",
         "theming": "Theming and UI localization (1.11)",
         "formFields": "Form fields and custom renderers",
         "demo": "Interactive demo (demo-bb)",
@@ -362,7 +445,7 @@
         "subtitle": "Start using BlockBuilder with Vue 3 — ready-made UI and full integration with Vue components",
         "install": {
           "description": "Install BlockBuilder and make sure you have Vue 3:",
-          "typescriptNote": "For TypeScript, add types:"
+          "typescriptNote": "TypeScript types are included in the package; no separate @types install needed."
         },
         "concepts": {
           "title": "Core concepts",
@@ -406,7 +489,7 @@
             "items": [
               "All edit, add and block management controls are hidden",
               "Only custom block markup remains inside the BlockBuilder wrapper",
-              "The <code>body</code> element automatically gets/removes the CSS class <code>bb-is-edit-mode</code>"
+              "The <code>body</code> element removes the CSS class <code>bb-is-edit-mode</code> (it is added only in edit mode)"
             ]
           }
         },
@@ -462,8 +545,8 @@
           "description": "The main component for working with BlockBuilder in Vue 3. Ready-made UI: block list, create and edit forms, reorder with buttons, delete.",
           "props": {
             "config": {
-              "type": "Object, required",
-              "description": "BlockBuilder configuration with block types and settings",
+              "type": "Object, optional",
+              "description": "BlockBuilder configuration with block types and settings. Defaults to <code>{ availableBlockTypes: [] }</code>",
               "iblockTypeLabel": "IBlockType:"
             },
             "blockManagementUseCase": {
@@ -530,7 +613,7 @@
           "notes": {
             "title": "Create and edit block forms",
             "formValidation": "Rules from <code>fields[].rules</code> are validated automatically in the BlockBuilder modal — no separate validator wiring needed. If the user clicks Save with errors, messages appear next to fields and update on every change.",
-            "blockAnchor": "A <code>block-anchor</code> field stores an anchor (<code>#block-id</code> or URL). Implement scroll and click navigation in your block components. Fields <code>file</code> and <code>files</code> use a dedicated upload UI in the editor."
+            "blockAnchor": "A <code>block-anchor</code> field stores an anchor (<code>#block-id</code> or URL). Implement scroll and click navigation in your block components. Field <code>file</code> with <code>multiple: true</code> uses a dedicated upload UI in the editor."
           },
           "events": {
             "blockAdded": "Block created or duplicated — full block object passed to callback",
@@ -693,7 +776,7 @@
             "items": [
               "All edit, add and block management controls are hidden",
               "Only your block markup remains inside the BlockBuilder wrapper",
-              "CSS class <code>bb-is-edit-mode</code> is added/removed on <code>body</code> automatically"
+              "CSS class <code>bb-is-edit-mode</code> is removed from <code>body</code> (added only in edit mode)"
             ]
           }
         },
@@ -761,8 +844,8 @@
           "description": "Main component for BlockBuilder in React. Ready-made UI: block list, create/edit forms, reorder with buttons, delete.",
           "props": {
             "config": {
-              "type": "Object, required",
-              "description": "BlockBuilder configuration with block types and settings",
+              "type": "Object, optional",
+              "description": "BlockBuilder configuration with block types and settings. Defaults to <code>{ availableBlockTypes: [] }</code>",
               "iblockTypeLabel": "IBlockType:"
             },
             "blockManagementUseCase": {
@@ -829,7 +912,7 @@
           "notes": {
             "title": "Create and edit block forms",
             "formValidation": "Rules from <code>fields[].rules</code> are validated automatically in the BlockBuilder modal — no separate validator wiring needed. If the user clicks Save with errors, messages appear next to fields and update on every change.",
-            "blockAnchor": "A <code>block-anchor</code> field stores an anchor (<code>#block-id</code> or URL). Implement scroll and click navigation in your block components. Fields <code>file</code> and <code>files</code> use a dedicated upload UI in the editor."
+            "blockAnchor": "A <code>block-anchor</code> field stores an anchor (<code>#block-id</code> or URL). Implement scroll and click navigation in your block components. Field <code>file</code> with <code>multiple: true</code> uses a dedicated upload UI in the editor."
           },
           "callbacks": {
             "onBlockAdded": "Block created or duplicated — full block object in the callback",
@@ -843,7 +926,16 @@
             "prepareBlocksForDisplay": "<code>prepareBlocksForDisplay</code> — restores render from type configuration",
             "enrichBlockForDisplay": "<code>enrichBlockForDisplay</code> — enriches a single block",
             "seedRepositoryFromBlocks": "<code>seedRepositoryFromBlocks</code> — syncs repository after hydration",
-            "enableViewportBreakpointDetection": "<code>enableViewportBreakpointDetection</code> — spacing after hydration"
+            "enableViewportBreakpointDetection": "<code>enableViewportBreakpointDetection</code> — spacing after hydration",
+            "canRenderVueBlock": "<code>canRenderVueBlock</code> — checks whether a block can be rendered as Vue component",
+            "canRenderReactBlock": "<code>canRenderReactBlock</code> — checks whether a block can be rendered as React component",
+            "resolveVueComponentForBlock": "<code>resolveVueComponentForBlock</code> — resolves Vue component from block + registry",
+            "resolveReactComponentForBlock": "<code>resolveReactComponentForBlock</code> — resolves React component from block + registry",
+            "getDefaultBreakpoint": "<code>getDefaultBreakpoint</code> — default breakpoint name for spacing",
+            "isClient": "<code>isClient</code> — true in browser environment",
+            "isServer": "<code>isServer</code> — true during SSR",
+            "isViewportBreakpointDetectionEnabled": "<code>isViewportBreakpointDetectionEnabled</code> — whether viewport breakpoint detection is active",
+            "resetViewportBreakpointDetection": "<code>resetViewportBreakpointDetection</code> — resets breakpoint detection state"
           },
           "footer": "Detailed SSR guide —"
         },
@@ -953,6 +1045,7 @@
         "description": "You <strong>create this file yourself</strong> — the package has no composable. It assembles dependencies for <code>BlockBuilderComponent</code>: use case, block types from <code>block-config</code>, edit mode and API save.",
         "items": {
           "blockManagementUseCase": "<code>blockManagementUseCase</code> — create, update, delete blocks",
+          "apiSelectUseCase": "<code>apiSelectUseCase</code> — required for <code>api-select</code> fields (<code>ApiSelectUseCase</code> + <code>FetchHttpClient</code>)",
           "availableBlockTypes": "<code>availableBlockTypes</code> — type config for palette and forms",
           "initialBlocks": "<code>initialBlocks</code> — ref from <code>useAsyncData</code>, page initial data",
           "isEdit": "<code>isEdit</code> — editor mode (<code>false</code> — view only)",
@@ -972,7 +1065,14 @@
           "prepareBlocksForDisplay": "<code>prepareBlocksForDisplay</code> — restores <code>render</code> from <code>availableBlockTypes</code>",
           "enrichBlockForDisplay": "<code>enrichBlockForDisplay</code> — enriches a single block",
           "seedRepositoryFromBlocks": "<code>seedRepositoryFromBlocks</code> — syncs in-memory repository",
-          "enableViewportBreakpointDetection": "<code>enableViewportBreakpointDetection</code> — recalculates spacing after hydration"
+          "enableViewportBreakpointDetection": "<code>enableViewportBreakpointDetection</code> — recalculates spacing after hydration",
+          "canRenderVueBlock": "<code>canRenderVueBlock</code> — checks whether a block can be rendered as Vue component",
+          "resolveVueComponentForBlock": "<code>resolveVueComponentForBlock</code> — resolves Vue component from block + registry",
+          "getDefaultBreakpoint": "<code>getDefaultBreakpoint</code> — default breakpoint name for spacing",
+          "isClient": "<code>isClient</code> — true in browser environment",
+          "isServer": "<code>isServer</code> — true during SSR",
+          "isViewportBreakpointDetectionEnabled": "<code>isViewportBreakpointDetectionEnabled</code> — whether viewport breakpoint detection is active",
+          "resetViewportBreakpointDetection": "<code>resetViewportBreakpointDetection</code> — resets breakpoint detection state"
         },
         "autoNote": "<code>prepareBlocksForDisplay</code> and <code>seedRepositoryFromBlocks</code> are called inside the component automatically."
       },
@@ -1010,7 +1110,16 @@
           "prepareBlocksForDisplay": "<code>prepareBlocksForDisplay</code> — restores <code>render</code> from type configuration",
           "enrichBlockForDisplay": "<code>enrichBlockForDisplay</code> — enriches a single block",
           "seedRepositoryFromBlocks": "<code>seedRepositoryFromBlocks</code> — syncs repository after hydration",
-          "enableViewportBreakpointDetection": "<code>enableViewportBreakpointDetection</code> — spacing after hydration"
+          "enableViewportBreakpointDetection": "<code>enableViewportBreakpointDetection</code> — spacing after hydration",
+          "canRenderVueBlock": "<code>canRenderVueBlock</code> — checks whether a block can be rendered as Vue component",
+          "canRenderReactBlock": "<code>canRenderReactBlock</code> — checks whether a block can be rendered as React component",
+          "resolveVueComponentForBlock": "<code>resolveVueComponentForBlock</code> — resolves Vue component from block + registry",
+          "resolveReactComponentForBlock": "<code>resolveReactComponentForBlock</code> — resolves React component from block + registry",
+          "getDefaultBreakpoint": "<code>getDefaultBreakpoint</code> — default breakpoint name for spacing",
+          "isClient": "<code>isClient</code> — true in browser environment",
+          "isServer": "<code>isServer</code> — true during SSR",
+          "isViewportBreakpointDetectionEnabled": "<code>isViewportBreakpointDetectionEnabled</code> — whether viewport breakpoint detection is active",
+          "resetViewportBreakpointDetection": "<code>resetViewportBreakpointDetection</code> — resets breakpoint detection state"
         },
         "enrichNote": "<code>enrichBlocksForSsr</code> in the example is a project function for preloading api-select data (newsList, etc.) on the server."
       },
@@ -1032,6 +1141,13 @@
       "subtitle": "Brief release history. Full list — in the repository <changelog>CHANGELOG.md</changelog>.",
       "getStarted": "Get started — <link>Getting started</link>.",
       "releases": [
+        {
+          "version": "1.11.1",
+          "date": "2026-06-28",
+          "highlights": [
+            "Minor UI fix"
+          ]
+        },
         {
           "version": "1.11.0",
           "date": "2026-06-28",
@@ -1142,7 +1258,7 @@
         },
         "map": {
           "title": "API Reference map",
-          "methods": "— CRUD, edit mode, custom renderers",
+          "methods": "— CRUD, block state, import/export, custom renderers",
           "properties": "— constructor options (<code>blockConfigs</code>, <code>initialBlocks</code>, …)",
           "types": "— TypeScript interfaces",
           "formFields": "— field types, validation, custom renderers",
@@ -1161,18 +1277,46 @@
           "deleteBlock": "Deletes a block by identifier"
         },
         "utility": {
-          "title": "Utilities",
+          "title": "Data utilities",
           "duplicateBlock": "Duplicates a block",
           "getBlocksCount": "Returns the number of blocks",
           "getBlocksByType": "Returns blocks by type",
-          "exportBlocks": "Exports blocks to JSON",
-          "importBlocks": "Imports blocks from JSON"
+          "clearAllBlocks": "Removes all blocks from the repository",
+          "exportBlocks": "Exports blocks to a formatted JSON string (async)",
+          "importBlocks": "Replaces all blocks from JSON (async). Returns false on invalid data"
+        },
+        "blockState": {
+          "title": "Block state and order",
+          "setBlockLocked": "Sets the locked flag on a block. API-only — the built-in editor has no UI toggle for locked; use programmatically or in your own UI.",
+          "setBlockVisible": "Sets the visible flag on a block",
+          "reorderBlocks": "Reorders blocks by an array of IDs"
+        },
+        "config": {
+          "title": "Block type config",
+          "getBlockConfigs": "Returns a copy of all blockConfigs passed to the constructor",
+          "getBlockConfig": "Returns the config for a single block type",
+          "hasBlockType": "Checks whether a block type exists in blockConfigs",
+          "getAvailableBlockTypes": "Returns all block type keys from blockConfigs"
+        },
+        "components": {
+          "title": "Component registry",
+          "registerComponent": "Registers a render component by name",
+          "registerComponents": "Bulk-registers render components",
+          "getComponent": "Returns a registered component by name",
+          "hasComponent": "Checks whether a component is registered",
+          "getAllComponents": "Returns all registered components",
+          "unregisterComponent": "Removes a component from the registry"
+        },
+        "vueHelpers": {
+          "title": "Vue helpers (legacy)",
+          "createVueBlock": "Creates a block with Vue component reference in render metadata",
+          "updateVueComponent": "Updates Vue component name and props on an existing block",
+          "note": "Prefer declarative block config with render.kind: 'component'. These helpers remain for programmatic core usage."
         },
         "editMode": {
           "title": "Edit/view mode",
-          "setIsEdit": "Toggles edit mode. When false, all edit controls are hidden; only custom block markup remains",
-          "getIsEdit": "Returns the current edit mode (true — edit mode, false — view mode)",
-          "note": "In view mode (<code>isEdit: false</code>) all edit, add, and block management controls are automatically hidden. Only custom block markup remains inside the BlockBuilder wrapper. The <code>body</code> element automatically gets the CSS class <code>bb-is-edit-mode</code> for style customization."
+          "coreNote": "Core BlockBuilder has no setIsEdit/getIsEdit methods. Edit mode is only available in BlockBuilderComponent (Vue/React) via the isEdit prop.",
+          "note": "In edit mode (<code>isEdit: true</code>) the <code>body</code> element gets the CSS class <code>bb-is-edit-mode</code>; in view mode (<code>isEdit: false</code>) the class is removed and edit, add, and block management controls are hidden. Only your block markup remains inside the BlockBuilder wrapper. See <vueLink>Vue</vueLink> and <reactLink>React</reactLink> component docs."
         },
         "customRenderers": {
           "title": "Custom renderers",
@@ -1202,47 +1346,313 @@
             "description": "Starting blocks. Used with <code>autoInit: true</code>.",
             "seeAlso": "See also: <classesExampleLink>core example</classesExampleLink> · <vueComponentsLink>Vue</vueComponentsLink> · <reactComponentsLink>React</reactComponentsLink>"
           },
-          "theme": {
-            "description": "UI theme preset: <code>default</code> or <code>dark</code>.",
-            "seeAlso": "See also: <themingLink>UI theming & localization</themingLink> · <themeVarsLink>themeVars</themeVarsLink>"
+          "repository": {
+            "description": "Optional block storage implementation. Defaults to in-memory repository.",
+            "seeAlso": "See also: <classesImportLink>constructor</classesImportLink>"
           },
-          "locale": {
-            "description": "Package UI language.",
-            "seeAlso": "See also: <themingLink>UI theming & localization</themingLink>"
+          "componentRegistry": {
+            "description": "Optional component registry for block render components. Populated automatically from <code>blockConfigs</code> when <code>render.kind: 'component'</code> is set.",
+            "seeAlso": "See also: <vueComponentsLink>Vue / React components</vueComponentsLink>"
+          },
+          "httpClient": {
+            "description": "Optional HTTP client for <code>api-select</code> fields and other network calls.",
+            "seeAlso": "See also: <formFieldsLink>form fields</formFieldsLink>"
+          },
+          "customFieldRendererRegistry": {
+            "description": "Optional registry for custom field renderers. Can also be filled via <code>registerCustomFieldRenderer</code> after construction.",
+            "seeAlso": "See also: <customRegisterLink>custom renderers</customRegisterLink>"
           }
         },
         "footnote": {
-          "uiNote": "Component props (<code>themeVars</code>, <code>uiStrings</code>, <code>onSave</code>, <code>isEdit</code>, etc.) — in <componentLink>BlockBuilderComponent</componentLink>."
+          "uiNote": "Component props (<code>themeVars</code>, <code>uiStrings</code>, <code>onSave</code>, <code>isEdit</code>, etc.) — in <componentLink>BlockBuilderComponent</componentLink>.",
+          "themeLocaleNote": "<code>theme</code> and <code>locale</code> are component props only — not part of <typeLink>IBlockBuilderOptions</typeLink>. See <themingLink>UI theming & localization</themingLink>."
         }
       },
       "themingLocalization": {
         "title": "UI theming and localization",
-        "subtitle": "BlockBuilder (Vue/React) supports built-in string localization and appearance overrides via CSS custom properties on <code>.bb-app</code>.",
+        "subtitle": "BlockBuilder (Vue/React) styles the built-in editor UI with CSS custom properties on <code>.bb-app</code>. You can switch presets, override tokens, or localize UI strings — without forking components.",
+        "howItWorks": {
+          "title": "How theming works",
+          "p1": "<code>BlockBuilderComponent</code> renders a root <code>.bb-app</code> wrapper. Theme tokens are applied as inline <code>style</code> via <code>resolveThemeVars(theme, themeVars)</code> and consumed by package SCSS through <code>var(--bb-*)</code>.",
+          "p2": "The root also gets <code>data-bb-theme=\"default\"</code> or <code>data-bb-theme=\"dark\"</code> for optional app-level selectors. Import package styles: <code>@mushket-co/block-builder/index.esm.css</code>.",
+          "items": {
+            "scope": "<strong>Scope</strong> — tokens affect only Block Builder UI (modals, forms, controls). Your block components on the canvas are not styled by these variables.",
+            "notCore": "<strong>Not in core API</strong> — <code>theme</code>, <code>themeVars</code>, <code>locale</code>, <code>uiStrings</code> are props of <code>BlockBuilderComponent</code> (Vue/React), not <code>IBlockBuilderOptions</code>.",
+            "merge": "<strong>Merge order</strong> — <code>UI_THEME_COLORS_DEFAULT</code> → dark preset (if <code>theme=\"dark\"</code>) → your <code>themeVars</code> overrides."
+          }
+        },
+        "customizableUi": {
+          "title": "What you can customize",
+          "description": "All built-in editor chrome reads <code>--bb-*</code> tokens. Typical areas:",
+          "items": {
+            "controls": "Fixed controls panel — save, clear, block counter, add block",
+            "blockToolbar": "Per-block toolbar — edit, reorder, duplicate, delete, collapse",
+            "modals": "Create/edit block modal — header, overlay, width, corner radius",
+            "forms": "Form fields — inputs, labels, validation errors, focus rings",
+            "dropdowns": "Select, ApiSelect, CustomDropdown — list surface, hover, loading states",
+            "upload": "Image/file upload — dropzone, preview overlay, error state",
+            "repeater": "Repeater rows — add/remove, item counter",
+            "matrix": "Matrix table control — tabs, grid headers, active cell",
+            "spacing": "Spacing editor — breakpoint labels, padding/margin fields",
+            "confirm": "Confirm dialogs — delete block, clear all"
+          }
+        },
+        "themeMethods": {
+          "title": "Three ways to set a theme",
+          "preset": {
+            "title": "1. Built-in preset",
+            "description": "Pass <code>theme=\"dark\"</code> for the package dark palette (<code>UI_THEME_COLORS_DARK</code>). Omit <code>theme</code> for the default light palette."
+          },
+          "themeVars": {
+            "title": "2. themeVars prop",
+            "description": "Pass a partial map of <code>--bb-*</code> tokens. Only listed keys are overridden; the rest stay from default or dark preset."
+          },
+          "css": {
+            "title": "3. CSS on .bb-app",
+            "description": "Override variables in your stylesheet — useful for static branding or when several editors share one theme class."
+          }
+        },
         "locale": {
           "title": "UI localization",
           "p1": "The package localizes only its UI (buttons, control labels, validation messages). Field labels in <code>block-config</code> are set by the application.",
           "localeItem": "<code>locale</code> — <code>'ru'</code> (default) or <code>'en'</code>",
-          "uiStringsItem": "<code>uiStrings</code> / <code>:ui-strings</code> — point overrides for individual strings",
-          "exportsItem": "Exports: <code>UI_STRINGS_RU</code>, <code>UI_STRINGS_EN</code>, <code>resolveUiStrings</code>, <code>IUiStrings</code>",
-          "hooksNote": "React: <code>useUiStrings()</code> inside UI. Vue: <code>useUiStrings()</code> via provide/inject."
+          "uiStringsItem": "<code>uiStrings</code> / <code>:ui-strings</code> — point overrides for individual keys from <code>IUiStrings</code>",
+          "exportsItem": "Exports from <code>/vue</code> and <code>/react</code>: <code>UI_STRINGS_RU</code>, <code>UI_STRINGS_EN</code>, <code>resolveUiStrings</code>, <code>IUiStrings</code>",
+          "hooksNote": "Built-in UI strings are resolved inside the component tree. Override via <code>uiStrings</code> prop; custom field renderers can use <code>useUiStrings()</code> (Vue inject / React context)."
+        },
+        "uiStringGroups": {
+          "title": "IUiStrings keys",
+          "description": "Full list of overridable UI string keys (see <code>IUiStrings</code> in the package). Grouped by area:",
+          "toolbar": "Toolbar & panel",
+          "blockActions": "Block actions",
+          "modals": "Modals & confirms",
+          "forms": "Form controls",
+          "repeater": "Repeater",
+          "matrix": "Matrix",
+          "spacing": "Spacing editor",
+          "errors": "Errors & toasts"
         },
         "themePreset": {
           "title": "theme presets",
-          "p1": "The <code>theme</code> prop is <code>TUiTheme</code>: <code>default</code> (default value, light palette) or <code>dark</code>. CSS variables are written to the root <code>.bb-app</code> element.",
-          "coreNote": "In headless core without UI rendering, <code>theme</code> and <code>locale</code> have no behavioral effect. In <code>BlockBuilderComponent</code> they are passed together with <code>themeVars</code> and <code>uiStrings</code>."
+          "p1": "The <code>theme</code> prop is <code>TUiTheme</code>: omit or <code>default</code> (light palette) or <code>dark</code>. CSS variables are written to the root <code>.bb-app</code> element.",
+          "darkNote": "Dark preset overrides brand, surface, neutrals, overlays, and danger/warning backgrounds — not every token. Combine with <code>themeVars</code> for a complete dark brand.",
+          "coreNote": "In headless core without UI rendering, <code>theme</code> and <code>locale</code> have no behavioral effect."
         },
         "themeVars": {
           "title": "themeVars customization",
-          "description": "Any <code>--bb-*</code> tokens can be overridden with a <code>themeVars</code> object."
+          "description": "Type <code>IUiThemeVars</code> — partial record <code>{ '--bb-color-primary'?: string, ... }</code>. Any token from the reference below can be overridden.",
+          "exportsTitle": "Package exports",
+          "exports": "From <code>@mushket-co/block-builder/vue</code> or <code>/react</code>: <code>UI_THEME_COLORS_DEFAULT</code>, <code>UI_THEME_COLORS_DARK</code>, <code>resolveThemeVars</code>, <code>IUiThemeVars</code>, <code>IUiThemeColorKey</code>, <code>TUiTheme</code>.",
+          "tipsTitle": "Practical tips",
+          "tips": {
+            "brand": "Start with <code>--bb-color-primary</code>, <code>--bb-color-primary-dark</code>, <code>--bb-color-surface</code>, <code>--bb-color-neutral-8</code> (main text) for a quick brand match.",
+            "forms": "Tune form density with <code>--bb-form-control-height</code>, <code>--bb-form-control-radius</code>, <code>--bb-font-family</code>.",
+            "glass": "Semi-transparent surfaces work: set <code>--bb-color-surface</code> to <code>rgba(...)</code> and add <code>backdrop-filter</code> in your app CSS on panels around the editor.",
+            "alpha": "Use <code>--bb-color-primary-alpha-*</code> for hover/focus backgrounds — they are referenced across buttons and tabs."
+          }
+        },
+        "tokenReference": {
+          "title": "CSS token reference",
+          "description": "Default values are for the light theme (<code>theme</code> omitted). Dark preset replaces a subset — override the rest via <code>themeVars</code>.",
+          "columns": {
+            "token": "Token",
+            "default": "Default (light)",
+            "usage": "Used for"
+          }
+        },
+        "tokenGroups": {
+          "brand": {
+            "title": "Brand",
+            "description": "Primary accent — buttons, links, active states, focus rings.",
+            "tokens": {
+              "colorPrimary": "Primary buttons, active tabs, links, focus outline",
+              "colorPrimaryDark": "Button hover, pressed states",
+              "colorPrimaryLight": "Selected/hover backgrounds, upload dropzone highlight",
+              "colorPrimaryAlpha10": "Subtle hover backgrounds",
+              "colorPrimaryAlpha15": "Light tinted panels",
+              "colorPrimaryAlpha20": "Focus ring, tab indicator shadow",
+              "colorPrimaryAlpha30": "Stronger emphasis backgrounds"
+            }
+          },
+          "surfaces": {
+            "title": "Surfaces & neutrals",
+            "description": "Backgrounds, borders, text hierarchy.",
+            "tokens": {
+              "colorWhite": "Text on dark overlays, inverse surfaces",
+              "colorSurface": "Modal body, dropdown list, card backgrounds",
+              "colorBlack": "Rare solid black references",
+              "colorNeutral1": "Subtle section backgrounds, table headers",
+              "colorNeutral2": "Borders, dividers, disabled backgrounds",
+              "colorNeutral3": "Input borders, dashed upload zones",
+              "colorNeutral4": "Stronger borders, scrollbar tracks",
+              "colorNeutral5": "Placeholder-like muted text",
+              "colorNeutral6": "Secondary labels, hints",
+              "colorNeutral7": "Body text secondary",
+              "colorNeutral8": "Primary text, headings",
+              "colorNeutral8Rgb": "RGB components for rgba() mixes in SCSS",
+              "colorNeutralAlpha30": "Disabled overlays",
+              "colorNeutralAlpha50": "Semi-transparent masks"
+            }
+          },
+          "accent": {
+            "title": "Accent",
+            "description": "Secondary actions and dark accents.",
+            "tokens": {
+              "colorDark": "Dark UI accents",
+              "colorDarkAlpha20": "Dark translucent overlays",
+              "colorSecondary": "Secondary buttons",
+              "colorSecondaryDark": "Secondary button hover"
+            }
+          },
+          "status": {
+            "title": "Status colors",
+            "description": "Validation, success states, warnings.",
+            "tokens": {
+              "colorDanger": "Error text, destructive actions",
+              "colorDangerDark": "Danger button hover",
+              "colorDangerLight": "Error field background tint",
+              "colorDangerBorder": "Error input border",
+              "colorDangerBg": "Error message background",
+              "colorDangerAlpha10": "Subtle error highlight",
+              "colorSuccess": "Success indicators",
+              "colorSuccessDark": "Success hover",
+              "colorSuccessAlpha30": "Success glow/shadow",
+              "colorSuccessAlpha40": "Gradient success accents",
+              "colorWarning": "Warning icons",
+              "colorWarningBorder": "Warning borders",
+              "colorWarningBg": "Warning banners",
+              "colorWarningText": "Warning message text",
+              "colorInfo": "Informational accents"
+            }
+          },
+          "overlays": {
+            "title": "Overlays",
+            "description": "Modal backdrops and image preview scrims.",
+            "tokens": {
+              "colorOverlay": "Modal backdrop",
+              "colorOverlayMedium": "Image preview overlay",
+              "colorOverlayDark": "Strong scrim on hover",
+              "colorOverlayAlpha10": "Light inset shadows, tab backgrounds"
+            }
+          },
+          "utility": {
+            "title": "Utility",
+            "description": "Code blocks and gradient accents.",
+            "tokens": {
+              "colorCode1": "Code block background",
+              "colorCode2": "Code block text",
+              "colorGradient1": "Gradient start (decorative)",
+              "colorGradient2": "Gradient end",
+              "colorGradientSuccess1": "Success gradient start",
+              "colorGradientSuccess2": "Success gradient end"
+            }
+          },
+          "spacing": {
+            "title": "Spacing",
+            "description": "Internal gaps in toolbars, form groups, modals.",
+            "tokens": {
+              "spacingXs": "Tight gaps (icon padding)",
+              "spacingSm": "Compact spacing",
+              "spacingMd": "Default gap between controls",
+              "spacingLg": "Section spacing",
+              "spacingXl": "Modal section padding",
+              "spacing2xl": "Large section gaps"
+            }
+          },
+          "radius": {
+            "title": "Border radius",
+            "description": "Corners for cards, inputs, modals.",
+            "tokens": {
+              "radiusSm": "Small chips, tags",
+              "radiusMd": "Inputs, buttons, dropdowns",
+              "radiusLg": "Modals, large cards"
+            }
+          },
+          "typography": {
+            "title": "Typography",
+            "description": "Font family and size scale for editor UI.",
+            "tokens": {
+              "fontFamily": "All editor UI text",
+              "fontSizeXs": "Error messages, badges",
+              "fontSizeSm": "Labels, buttons, inputs",
+              "fontSizeMd": "Body in modals",
+              "fontSizeLg": "Section titles",
+              "fontSizeXl": "Modal headings"
+            }
+          },
+          "shadows": {
+            "title": "Shadows",
+            "description": "Elevation for dropdowns, modals, primary buttons.",
+            "tokens": {
+              "shadowSm": "Subtle elevation",
+              "shadowMd": "Dropdowns, floating panels",
+              "shadowLg": "Modals",
+              "shadowSmLight": "Light cards",
+              "shadowPrimary": "Primary button glow"
+            }
+          },
+          "motion": {
+            "title": "Motion",
+            "description": "Transition timing for hover/focus.",
+            "tokens": {
+              "transitionFast": "Quick feedback (checkbox, icon)",
+              "transitionBase": "Default hover transitions",
+              "transitionSlow": "Modal/panel animations"
+            }
+          },
+          "zIndex": {
+            "title": "Z-index",
+            "description": "Stacking for dropdowns, modals, tooltips.",
+            "tokens": {
+              "zIndexDropdown": "Select/dropdown panels",
+              "zIndexModal": "Block create/edit modal",
+              "zIndexTooltip": "Tooltips above modals"
+            }
+          },
+          "form": {
+            "title": "Form controls",
+            "description": "Shared sizing for inputs, selects, textareas.",
+            "tokens": {
+              "formControlHeight": "Input/select height",
+              "formControlBorderWidth": "Input border thickness",
+              "formControlPaddingX": "Horizontal padding inside inputs",
+              "formControlRadius": "Input corner radius (often links to --bb-radius-md)",
+              "formControlFontSize": "Input text size",
+              "formLabelFontSize": "Field label size",
+              "formLabelFontWeight": "Field label weight",
+              "formErrorFontSize": "Validation error text size"
+            }
+          },
+          "modal": {
+            "title": "Modal",
+            "description": "Create/edit block dialog dimensions.",
+            "tokens": {
+              "modalMaxWidth": "Maximum modal width",
+              "modalRadius": "Modal corner radius"
+            }
+          },
+          "buttons": {
+            "title": "Buttons",
+            "description": "Padding for primary/secondary actions.",
+            "tokens": {
+              "btnPaddingY": "Vertical button padding",
+              "btnPaddingX": "Horizontal button padding"
+            }
+          }
+        },
+        "examples": {
+          "title": "Examples",
+          "liveExample": "Live theme switcher demo — <link>examples/vue3-theme</link> in the block-builder repository (default, dark, brand overrides, frosted glass).",
+          "cssCodeComment": "/* Static brand on all editors */"
         },
         "teleportedUi": {
           "title": "Teleported UI (dropdown)",
           "p1": "<code>CustomDropdown</code> panels mount to <code>body</code> and lose CSS variable inheritance. The package automatically copies theme vars from the nearest <code>.bb-app</code> when opening a dropdown (Vue/React <code>CustomDropdown</code>).",
-          "p2": "For your own teleported UI you can use the internal helper <code>readBbThemeVarsFromClosestApp</code> from <code>shared/theme/bbThemeContext</code> (package pattern)."
+          "p2": "For your own teleported UI the package uses an internal helper <code>readBbThemeVarsFromClosestApp</code> (not part of the public npm exports). Copy the same pattern from <code>CustomDropdown</code> in the repo or duplicate theme vars onto the teleported root manually."
         },
         "seeAlso": {
           "title": "See also",
-          "properties": "Properties — theme, locale, and other parameters",
+          "properties": "Properties — constructor options (blockConfigs, repository, …)",
           "vueComponents": "Vue — BlockBuilderComponent (props)",
           "reactComponents": "React — BlockBuilderComponent (props)",
           "changelog": "Changelog 1.11.0"
@@ -1269,9 +1679,9 @@
           "title": "Block helper functions",
           "description": "Exported from <code>@mushket-co/block-builder/core</code>: <code>buildBlockHierarchy, cloneBlock, getAllChildren, isChildOf</code>.",
           "buildBlockHierarchy": "<code>buildBlockHierarchy</code> — converts a flat list into a tree by <code>parent</code>/<code>children</code> fields.",
-          "cloneBlock": "<code>cloneBlock</code> — deep-clones a block object (no references to the original).",
-          "getAllChildren": "<code>getAllChildren</code> — returns all descendants (at any nesting level).",
-          "isChildOf": "<code>isChildOf</code> — quickly checks parent-child relationship.",
+          "cloneBlock": "<code>cloneBlock</code> — deep-clones a block and assigns a new <code>id</code>; metadata timestamps and version are reset.",
+          "getAllChildren": "<code>getAllChildren</code> — returns all descendants of a block from a flat list (any nesting depth).",
+          "isChildOf": "<code>isChildOf</code> — checks whether <code>childBlock</code> is a descendant of <code>parentBlock</code> in the flat list.",
           "normalizeNote": "Normalize input data: ensure unique <code>id</code> values and consistent <code>parent</code>⇄<code>children</code> links before calling helper functions."
         },
         "spacing": {
@@ -1289,7 +1699,18 @@
         },
         "unsavedChanges": {
           "title": "Unsaved changes",
-          "description": "For custom UI without ready-made <code>BlockBuilderComponent</code> — utilities and hooks from core / vue / react. The <code>warnOnPageLeave</code> option in components enables native browser warning."
+          "description": "Native browser warning on page leave when blocks were edited but not saved (<code>beforeunload</code>). <code>BlockBuilderComponent</code> handles this out of the box; core exports low-level helpers if you build your own editor UI.",
+          "builtInTitle": "BlockBuilderComponent",
+          "builtInDescription": "Enable <code>warnOnPageLeave</code> — see <vueLink>Vue props</vueLink> / <reactLink>React props</reactLink>. Works only in edit mode (<code>isEdit !== false</code>). After successful <code>onSave</code> the internal baseline updates and the warning clears until the next edit.",
+          "builtInExample": "<BlockBuilderComponent\n  :warn-on-page-leave=\"true\"\n  :is-edit=\"true\"\n  :on-save=\"handleSave\"\n  ...\n/>",
+          "customTitle": "Custom editor (core utilities)",
+          "customDescription": "Compare block snapshots and attach a <code>beforeunload</code> listener yourself — the same primitives used inside the Vue/React components.",
+          "haveBlocksChanged": "<code>haveBlocksChanged(initial, current)</code> — compares block lists (id, type, props, settings, order, visible, locked, parent).",
+          "shouldActivate": "<code>shouldActivatePageLeaveWarning({ warnOnPageLeave, isEdit })</code> — <code>true</code> only when enabled and not in view-only mode.",
+          "attach": "<code>attachPageLeaveWarning(() => boolean)</code> — registers listener; returns detach. No-op during SSR.",
+          "tracker": "<code>createUnsavedChangesTracker(initial?)</code> — <code>setBaseline</code>, <code>resetBaseline</code>, <code>isDirty(current)</code>.",
+          "customExample": "import {\n  attachPageLeaveWarning,\n  createUnsavedChangesTracker,\n  shouldActivatePageLeaveWarning,\n} from '@mushket-co/block-builder/core'\n\nconst tracker = createUnsavedChangesTracker(initialBlocks)\nlet detachGuard = () => {}\n\nfunction syncPageLeaveGuard(isEdit, getBlocks) {\n  detachGuard()\n  detachGuard = () => {}\n\n  if (!shouldActivatePageLeaveWarning({ warnOnPageLeave: true, isEdit })) {\n    return\n  }\n\n  detachGuard = attachPageLeaveWarning(() => tracker.isDirty(getBlocks()))\n}\n\nasync function handleSave(blocks) {\n  const ok = await saveToApi(blocks)\n  if (ok) {\n    tracker.resetBaseline(blocks)\n    syncPageLeaveGuard(true, () => blocks)\n  }\n}\n\n// on mount / when isEdit or blocks change:\nsyncPageLeaveGuard(isEdit, () => blockBuilder.getAllBlocks())\n\n// on unmount:\ndetachGuard()",
+          "note": "Browsers show a generic leave confirmation — custom <code>beforeunload</code> text is intentionally restricted."
         },
         "reactiveValidation": {
           "title": "Reactive form validation",
@@ -1304,30 +1725,34 @@
           "rules": "Supported rules: <code>required</code>, <code>email</code>, <code>url</code>, <code>min</code>/<code>max</code>, <code>minLength</code>/<code>maxLength</code>, <code>pattern</code>, <code>custom</code>.",
           "message": "The <code>message</code> field is optional; default texts are available.",
           "customNote": "For complex cases use the <code>custom</code> rule with your own validation function. Return <code>false</code> on failure and set <code>message</code> for a readable error."
+        },
+        "fileImportMerge": {
+          "title": "File import merge",
+          "description": "Helpers for <code>file-import</code> fields: apply merge rules after parsing JSON/CSV, merge arrays, format user-facing stats. Exported from <code>@mushket-co/block-builder/core</code>."
         }
       },
       "types": {
         "title": "Types",
         "subtitle": "TypeScript types and interfaces for working with BlockBuilder",
         "iblockBuilderOptions": {
-          "description": "<code>BlockBuilder</code> options. <code>theme</code> — <code>TUiTheme</code> (<code>default</code> | <code>dark</code>), <code>locale</code> — <code>ru</code> | <code>en</code>.",
-          "code": "interface IBlockBuilderOptions {\n  blockConfigs: Record<string, any>\n  repository?: any\n  componentRegistry?: any\n  httpClient?: any\n  customFieldRendererRegistry?: any\n  theme?: TUiTheme\n  locale?: 'ru' | 'en'\n  autoInit?: boolean\n  initialBlocks?: IBlockDto[]\n}"
+          "description": "Constructor options for core <code>BlockBuilder</code>. Does not include <code>theme</code> or <code>locale</code> — those are <code>BlockBuilderComponent</code> props.",
+          "code": "interface IBlockBuilderOptions {\n  blockConfigs: Record<string, IBlockTypeConfig>\n  repository?: IBlockRepository\n  componentRegistry?: IComponentRegistry\n  httpClient?: IHttpClient\n  customFieldRendererRegistry?: ICustomFieldRendererRegistry\n  autoInit?: boolean\n  initialBlocks?: IBlockDto[]\n}"
         },
         "iblock": {
           "description": "Main block interface (domain model)",
-          "code": "interface IBlock {\n  id: TBlockId\n  type: string\n  settings: Record<string, any>\n  props: Record<string, any>\n  style?: Record<string, string | number>\n  render?: any // Internal TRenderRef type (not exported)\n  visible?: boolean\n  formConfig?: IFormGenerationConfig\n  metadata?: IBlockMetadata\n  children?: IBlock[]\n  parent?: TBlockId\n}"
+          "code": "interface IBlock {\n  id: TBlockId\n  type: string\n  settings: Record<string, any>\n  props: Record<string, any>\n  style?: Record<string, string | number>\n  render?: any // Internal TRenderRef type (not exported)\n  visible?: boolean\n  locked?: boolean\n  formConfig?: IFormGenerationConfig\n  metadata?: IBlockMetadata\n  children?: IBlock[]\n  parent?: TBlockId\n}"
         },
         "iblockDto": {
           "description": "DTO for transferring block data (no business logic)",
-          "code": "interface IBlockDto {\n  id: string\n  type: string\n  settings: Record<string, any>\n  props: Record<string, any>\n  style?: Record<string, string | number>\n  render?: any // Internal TRenderRef type (not exported)\n  visible?: boolean\n  formConfig?: IFormGenerationConfig\n  metadata?: IBlockMetadata\n  children?: string[] // Child block IDs\n  parent?: string\n  order?: number\n}"
+          "code": "interface IBlockDto {\n  id: string\n  type: string\n  settings: Record<string, any>\n  props: Record<string, any>\n  style?: Record<string, string | number>\n  render?: any // Internal TRenderRef type (not exported)\n  visible?: boolean\n  locked?: boolean\n  formConfig?: IFormGenerationConfig\n  metadata?: IBlockMetadata\n  children?: string[] // Child block IDs\n  parent?: string\n  order?: number\n}"
         },
         "icreateBlockDto": {
           "description": "DTO for creating a block (without ID and metadata)",
-          "code": "interface ICreateBlockDto {\n  type: string\n  settings: Record<string, any>\n  props: Record<string, any>\n  style?: Record<string, string | number>\n  render?: any // Internal TRenderRef type (not exported)\n  visible?: boolean\n  formConfig?: IFormGenerationConfig\n  parent?: string\n  order?: number\n  metadata?: IBlockMetadata\n}"
+          "code": "interface ICreateBlockDto {\n  type: string\n  settings: Record<string, any>\n  props: Record<string, any>\n  style?: Record<string, string | number>\n  render?: any // Internal TRenderRef type (not exported)\n  visible?: boolean\n  locked?: boolean\n  formConfig?: IFormGenerationConfig\n  parent?: string\n  order?: number\n  metadata?: IBlockMetadata\n}"
         },
         "iupdateBlockDto": {
           "description": "DTO for updating a block",
-          "code": "interface IUpdateBlockDto {\n  settings?: Partial<Record<string, any>>\n  props?: Partial<Record<string, any>>\n  style?: Partial<Record<string, string | number>>\n  order?: number\n  render?: any // Internal TRenderRef type (not exported)\n  visible?: boolean\n  formConfig?: IFormGenerationConfig\n}"
+          "code": "interface IUpdateBlockDto {\n  settings?: Partial<Record<string, any>>\n  props?: Partial<Record<string, any>>\n  style?: Partial<Record<string, string | number>>\n  order?: number\n  render?: any // Internal TRenderRef type (not exported)\n  visible?: boolean\n  locked?: boolean\n  formConfig?: IFormGenerationConfig\n}"
         },
         "iblockMetadata": {
           "description": "Block metadata",
@@ -1335,16 +1760,16 @@
         },
         "iformFieldConfig": {
           "description": "Form field configuration",
-          "code": "interface IFormFieldConfig {\n  field: string\n  label: string\n  type: TFieldType\n  placeholder?: string\n  defaultValue?: any\n  options?: { value: string; label: string }[]\n  rules?: IValidationRule[]\n  spacingConfig?: any // Internal type (not exported)\n  repeaterConfig?: any // Internal type (not exported)\n  apiSelectConfig?: IApiSelectConfig\n  customFieldConfig?: any // Internal type (not exported)\n  fileUploadConfig?: any // Internal IFileUploadConfig type (not exported)\n  blockAnchorConfig?: IBlockAnchorConfig // type: 'block-anchor'\n  matrixTableConfig?: IMatrixTableFieldConfig // type: 'matrix-table'\n  optionsFrom?: IOptionsFromConfig // select — dynamic options\n  fileImportConfig?: IFileImportConfig // type: 'file-import'\n  persist?: boolean // false — do not save to block.props\n  multiple?: boolean // image, file; select with multiple: true\n  dependsOn?: IDependsOnConfig // Conditional field visibility\n}"
+          "code": "interface IFormFieldConfig {\n  field: string\n  label: string\n  type: TFieldType\n  placeholder?: string\n  defaultValue?: any\n  options?: { value: string | number; label: string; disabled?: boolean }[]\n  rules?: IValidationRule[]\n  spacingConfig?: any // Internal type (not exported)\n  repeaterConfig?: any // Internal type (not exported)\n  apiSelectConfig?: IApiSelectConfig\n  customFieldConfig?: any // Internal type (not exported)\n  fileUploadConfig?: any // Internal IFileUploadConfig type (not exported)\n  blockAnchorConfig?: IBlockAnchorConfig // type: 'block-anchor'\n  matrixTableConfig?: IMatrixTableFieldConfig // type: 'matrix-table'\n  optionsFrom?: IOptionsFromConfig // select — dynamic options\n  fileImportConfig?: IFileImportConfig // type: 'file-import'\n  persist?: boolean // false — do not save to block.props\n  multiple?: boolean // image, file; select with multiple: true\n  dependsOn?: IDependsOnConfig // Conditional field visibility\n}"
         },
         "irepeaterFieldConfig": {
           "description": "Configuration for a <code>repeater</code> field. The <code>countLabelVariants</code> property localizes the item counter. The <code>maxNestingDepth</code> property limits maximum repeater nesting depth.",
-          "code": "interface IRepeaterFieldConfig {\n  itemTitle?: string\n  addButtonText?: string\n  removeButtonText?: string\n  min?: number\n  max?: number\n  fields: IRepeaterItemFieldConfig[]\n  countLabelVariants?: { one: string; few: string; many: string; zero?: string }\n  maxNestingDepth?: number  // Maximum nesting depth (default 2)\n}",
+          "code": "interface IRepeaterFieldConfig {\n  itemTitle?: string\n  addButtonText?: string\n  removeButtonText?: string\n  min?: number\n  max?: number\n  fields: IRepeaterItemFieldConfig[]\n  countLabelVariants?: { one: string; few: string; many: string; zero?: string }\n  defaultItemValue?: Record<string, unknown>\n  maxNestingDepth?: number\n}",
           "note": "By default the UI shows only the number. If <code>countLabelVariants</code> is set, it shows \"number + word\". The <code>maxNestingDepth</code> property limits maximum repeater nesting depth (default 2)."
         },
         "irepeaterItemFieldConfig": {
-          "description": "Configuration of a single field in the <code>repeaterConfig.fields</code> array. Same shape as <code>IFormFieldConfig</code> — supports <code>options</code>, <code>apiSelectConfig</code>, <code>matrixTableConfig</code>, <code>dependsOn</code>, <code>persist</code>, and all other form field properties.",
-          "code": "interface IRepeaterItemFieldConfig extends IFormFieldConfig {\n  // For type: 'repeater' — nested repeater (repeaterConfig is typed more strictly than any on IFormFieldConfig)\n  repeaterConfig?: IRepeaterFieldConfig\n}",
+          "description": "Configuration of a single field in the <code>repeaterConfig.fields</code> array. Same properties as <code>IFormFieldConfig</code>, but <code>type</code> excludes <code>'spacing'</code> and <code>'matrix-table'</code>.",
+          "code": "interface IRepeaterItemFieldConfig {\n  field: string\n  label: string\n  type: Exclude<TFieldType, 'spacing' | 'matrix-table'>\n  // ...same optional props as IFormFieldConfig\n  repeaterConfig?: IRepeaterFieldConfig  // nested repeater\n}",
           "note": "Nested repeater: <code>type: 'repeater'</code> + <code>repeaterConfig</code>. Other field types (<code>select</code>, <code>image</code>, <code>custom</code>, etc.) are configured the same way as in the block's root <code>fields</code>."
         },
         "iformGenerationConfig": {
@@ -1353,10 +1778,10 @@
         },
         "tfieldType": {
           "description": "Form field types",
-          "code": "type TFieldType = \n  | 'text' \n  | 'number' \n  | 'email' \n  | 'url' \n  | 'textarea' \n  | 'select' \n  | 'checkbox' \n  | 'color' \n  | 'file' \n  | 'file-import'\n  | 'image' \n  | 'block-anchor'\n  | 'matrix-table'\n  | 'spacing'\n  | 'repeater' \n  | 'api-select' \n  | 'custom'"
+          "code": "type TFieldType = \n  | 'text' \n  | 'number' \n  | 'email' \n  | 'url' \n  | 'textarea' \n  | 'select' \n  | 'checkbox' \n  | 'radio' \n  | 'color' \n  | 'file' \n  | 'file-import'\n  | 'image' \n  | 'block-anchor'\n  | 'matrix-table'\n  | 'spacing'\n  | 'repeater' \n  | 'api-select' \n  | 'custom'"
         },
         "ivalidationRule": {
-          "description": "Field validation rule",
+          "description": "Field validation rule. The <code>field</code> property is required in the TypeScript interface; in block config examples it is often omitted — the validator uses the parent field's <code>field</code> key at runtime.",
           "code": "interface IValidationRule {\n  type: TValidationRuleType\n  field: string\n  value?: any\n  message?: string\n  validator?: (value: any) => boolean\n}\n\ntype TValidationRuleType = \n  | 'required' \n  | 'email' \n  | 'url' \n  | 'min' \n  | 'max' \n  | 'minLength' \n  | 'maxLength' \n  | 'pattern' \n  | 'custom'"
         },
         "iapiSelectItem": {
@@ -1393,7 +1818,7 @@
         },
         "idependsOnConfig": {
           "description": "Conditional field visibility configuration based on another field value",
-          "code": "interface IDependsOnConfig {\n  field: string                    // Field name that controls visibility\n  value: boolean | string | number // Expected value of dependent field\n  operator?: 'equals' | 'notEquals' | 'in' | 'notIn' // Comparison operator (default 'equals')\n}",
+          "code": "interface IDependsOnConfig {\n  field: string                    // Field name that controls visibility\n  value: boolean | string | number | unknown[] // Expected value (array for in/notIn)\n  operator?: 'equals' | 'notEquals' | 'in' | 'notIn' // Comparison operator (default 'equals')\n}",
           "operatorsTitle": "Operators:",
           "operators": {
             "equals": "<code>equals</code> (default) — field is visible when value equals <code>value</code>",
@@ -1404,13 +1829,13 @@
         },
         "icustomFieldFormScope": {
           "description": "Form context in <code>ICustomFieldContext.formScope</code> and in <code>fileImportConfig.onImport</code>.",
-          "code": "interface ICustomFieldFormScope {\n  formData: Record<string, any>\n  setField: (name: string, value: any) => void\n  repeater?: ICustomFieldRepeaterScope\n}\n\ninterface ICustomFieldRepeaterScope {\n  itemIndex: number\n  updateItemField: (fieldName: string, value: any) => void\n}"
+          "code": "interface ICustomFieldFormScope {\n  formData: Record<string, any>\n  setField: (name: string, value: any) => void\n  repeater?: ICustomFieldRepeaterScope\n}\n\ninterface ICustomFieldRepeaterScope {\n  fieldName: string\n  index: number\n  item: Record<string, unknown>\n  updateItemField: (field: string, value: unknown) => void\n}"
         },
         "ioptionsFromConfig": {
-          "code": "interface IOptionsFromConfig {\n  source: string\n  when?: (formData: Record<string, any>) => boolean\n  map: (item: any, formData: Record<string, any>) => ISelectOption | IOptionsFromGroup\n}\n\ninterface IOptionsFromGroup {\n  label: string\n  options: ISelectOption[]\n}"
+          "code": "interface IOptionsFromConfig {\n  source: string\n  when?: { field: string; value: boolean | string | number | unknown[]; operator?: 'equals' | 'notEquals' | 'in' | 'notIn' }\n  map?: (item: unknown, index: number, sourceArray: unknown[]) => { value: string | number; label: string } | IOptionsFromGroup\n}\n\ninterface IOptionsFromGroup {\n  group: string\n  options: { value: string | number; label: string }[]\n}"
         },
         "ifileImportConfig": {
-          "code": "interface IFileImportMergeRule {\n  targetField: string\n  sourceKey?: string\n  mode?: 'append' | 'replace'\n  dedupeBy?: string | string[]\n  mapItem?: (item: any, formData: Record<string, any>) => any\n}\n\ninterface IFileImportConfig {\n  uploadUrl: string\n  accept?: string | string[]\n  formDataKey?: string\n  maxSizeMb?: number\n  responseMapper?: (response: any) => any\n  merge?: IFileImportMergeRule[]\n  onImport?: (ctx: {\n    data: any\n    formScope: ICustomFieldFormScope\n    mergeStats?: Array<{ targetField: string; mode: string; added: number; skipped: number; total: number }>\n  }) => void\n}"
+          "code": "interface IFileImportMergeRule {\n  targetField: string\n  sourceKey?: string\n  mode?: 'append' | 'replace'\n  dedupeBy?: string\n  normalizeDedupeKey?: (value: unknown) => string\n  mapItem?: (item: unknown, index: number, sourceArray: unknown[]) => Record<string, unknown>\n}\n\ninterface IFileImportConfig {\n  uploadUrl: string\n  accept?: string[]\n  formDataKey?: string\n  maxSizeMb?: number\n  uploadHeaders?: Record<string, string>\n  responseMapper?: (response: unknown) => unknown\n  merge?: IFileImportMergeRule[]\n  onImport?: (ctx: {\n    data: unknown\n    formScope: ICustomFieldFormScope\n    mergeStats?: IFileImportMergeStat[]\n  }) => void | Promise<void>\n}"
         },
         "iblockFormHooks": {
           "description": "Create/edit block modal lifecycle hooks. Set on the block type config via <code>formHooks</code> in <code>IBlockTypeConfig</code> / <code>IBlockType</code>.",
@@ -1418,291 +1843,12 @@
         },
         "iblockTypeConfig": {
           "description": "Configuration of a single block type. In Vue/React — an item in <code>availableBlockTypes[]</code> (exported there as <code>IBlockType</code>). In core <code>blockConfigs</code> — the same fields, but the Record key is the <code>type</code>; <code>title</code> is often used instead of <code>label</code>.",
-          "code": "interface IBlockTypeConfig {\n  type: string\n  label: string\n  title?: string\n  icon?: string\n  description?: string\n  render?: {\n    kind: 'component' | 'html'\n    framework?: 'vue' | 'react'\n    component?: unknown\n    template?: string | ((props: Record<string, unknown>) => string)\n  }\n  defaultSettings?: Record<string, unknown>\n  defaultProps?: Record<string, unknown>\n  fields?: IFormFieldConfig[]\n  formHooks?: IBlockFormHooks\n  spacingOptions?: {\n    enabled?: boolean\n    config?: {\n      breakpoints?: Array<{\n        name: string\n        minWidth?: number\n        maxWidth?: number\n      }>\n    }\n  }\n}",
-          "note": "See <code>IBlockFormHooks</code> for <code>formHooks</code>. Form fields — <code>IFormFieldConfig[]</code>."
+          "code": "interface IBlockTypeConfig {\n  type: string\n  label: string\n  title?: string\n  icon?: string\n  render?: {\n    kind: 'component' | 'html'\n    framework?: 'vue' | 'react'\n    component?: unknown\n    template?: string | ((props: Record<string, unknown>) => string)\n  }\n  defaultSettings?: Record<string, unknown>\n  defaultProps?: Record<string, unknown>\n  fields?: IFormFieldConfig[]\n  formHooks?: IBlockFormHooks\n  spacingOptions?: {\n    enabled?: boolean\n    spacingTypes?: Array<'padding-top' | 'padding-bottom' | 'margin-top' | 'margin-bottom'>\n    config?: { breakpoints?: Array<{ name: string; label: string; maxWidth?: number }> }\n  }\n  [key: string]: unknown  // e.g. description in app configs\n}",
+          "note": "See <code>IBlockFormHooks</code> for <code>formHooks</code>. Form fields — <code>IFormFieldConfig[]</code>. Extra keys like <code>description</code> are allowed via index signature."
         },
         "tblockId": {
           "description": "Block ID type",
           "code": "type TBlockId = string"
-        }
-      },
-      "customRenderers": {
-        "title": "Custom renderers",
-        "subtitle": "Creating custom field renderers to extend form functionality",
-        "whatIs": {
-          "title": "What is a custom renderer?",
-          "p1": "A custom renderer lets you create your own UI component for editing a field in a block form. This is especially useful when standard field types are not enough for your needs.",
-          "whenTitle": "When to use:",
-          "whenItems": {
-            "wysiwyg": "WYSIWYG editor for formatted text",
-            "datePicker": "Date and time selection (date/time picker)",
-            "libraries": "Integration with third-party libraries (e.g. Chart.js, CodeMirror)",
-            "complexSelect": "Complex selection components (multi-level menus, tree select)",
-            "customControls": "Custom interactive controls"
-          }
-        },
-        "interface": {
-          "title": "ICustomFieldRenderer interface",
-          "p1": "A custom renderer must implement the <code>ICustomFieldRenderer</code> interface:",
-          "code": "interface ICustomFieldRenderer {\n  readonly id: string\n  readonly name: string\n  render(\n    container: HTMLElement,\n    context: ICustomFieldContext\n  ): ICustomFieldRenderResult | Promise<ICustomFieldRenderResult>\n}\n\ninterface ICustomFieldContext {\n  fieldName: string\n  label: string\n  value: unknown\n  required: boolean\n  options?: Record<string, unknown>  // from customFieldConfig.options\n  error?: string                      // validation error text\n  formScope?: ICustomFieldFormScope    // formData, setField, repeater\n  onChange: (value: unknown) => void\n  onError?: (error: string | null) => void\n}\n\ninterface ICustomFieldRenderResult {\n  element: HTMLElement | string\n  getValue?: () => unknown\n  setValue?: (value: unknown) => void\n  setError?: (error: string | null) => void  // without recreating DOM\n  validate?: () => string | null\n  destroy?: () => void\n}"
-        },
-        "step1": {
-          "title": "Step 1: Create renderer class",
-          "p1": "Create a class implementing the <code>ICustomFieldRenderer</code> interface:",
-          "code": "class WysiwygFieldRenderer implements ICustomFieldRenderer {\n  readonly id = 'wysiwyg-editor';\n  readonly name = 'WYSIWYG Editor';\n\n  render(container: HTMLElement, context: ICustomFieldContext) {\n    const { value, onChange, onError, required, options } = context;\n    \n    // Create editor element\n    const editorElement = document.createElement('div');\n    editorElement.className = 'wysiwyg-editor';\n    editorElement.contentEditable = 'true';\n    editorElement.innerHTML = value || '';\n    \n    // Apply styles from options if present\n    if (options?.height) {\n      editorElement.style.height = options.height;\n    }\n    \n    // Handle changes\n    editorElement.addEventListener('input', () => {\n      try {\n        const newValue = editorElement.innerHTML;\n        onChange(newValue);\n        onError?.(null); // Clear error on successful change\n      } catch (error) {\n        onError?.(error.message);\n      }\n    });\n    \n    // Handle blur for validation\n    editorElement.addEventListener('blur', () => {\n      if (required && !editorElement.innerHTML.trim()) {\n        onError?.('Field is required');\n      }\n    });\n    \n    container.appendChild(editorElement);\n    \n    return {\n      element: editorElement,\n      getValue: () => editorElement.innerHTML,\n      setValue: (val: string) => {\n        editorElement.innerHTML = val || '';\n      },\n      validate: () => {\n        if (required && !editorElement.innerHTML.trim()) {\n          return 'Field is required';\n        }\n        return null;\n      },\n      destroy: () => {\n        // Cleanup event listeners and resources\n        editorElement.remove();\n      }\n    };\n  }\n}",
-          "important": "<strong>Important for external libraries:</strong> store the editor instance locally in <code>render()</code>, not as a class property — critical for repeater. ControlManager guarantees DOM when <code>render()</code> is called: initialize synchronously, without <code>setTimeout</code>. <link>More — custom renderers →</link>"
-        },
-        "step2": {
-          "title": "Step 2: Register renderer",
-          "p1": "After creating a BlockBuilder instance, register your renderer:",
-          "code": "import { BlockBuilder } from '@mushket-co/block-builder';\n\n// Create BlockBuilder instance\nconst blockBuilder = new BlockBuilder({\n  blockConfigs: {\n    // your block configs\n  },\n});\n\n// Register single renderer\nblockBuilder.registerCustomFieldRenderer(new WysiwygFieldRenderer());\n\n// Or bulk register multiple renderers\nblockBuilder.registerCustomFieldRenderers([\n  new WysiwygFieldRenderer(),\n  new DatePickerFieldRenderer(),\n  new ColorPickerFieldRenderer()\n]);",
-          "important": "<strong>Important:</strong> register renderers <strong>BEFORE</strong> UI initialization (before <code>autoInit: true</code> or creating components). With <code>autoInit: false</code> — before the first form render. <link>More — registration →</link>"
-        },
-        "step3": {
-          "title": "Step 3: Use in block configuration",
-          "p1": "Use field type <code>\"custom\"</code> and specify <code>customFieldConfig</code>:",
-          "code": "const blockConfigs = {\n  richText: {\n    title: 'Rich Text block',\n    icon: '📝',\n    description: 'Block with formatted text',\n    fields: [\n      {\n        field: 'content',\n        label: 'Content',\n        type: 'custom',\n        customFieldConfig: {\n          rendererId: 'wysiwyg-editor',  // Registered renderer ID\n          options: {                      // Additional options passed to context.options\n            height: '300px',\n            toolbar: true\n          }\n        },\n        defaultValue: '',\n        rules: [\n          { type: 'required', message: 'Content is required' }\n        ]\n      }\n    ],\n    render: {\n      kind: 'html',\n      template: (props) => '<div class=\"rich-text\">' + (props.content || '') + '</div>'\n    }\n  }\n};"
-        },
-        "datePicker": {
-          "title": "Full example: Date Picker",
-          "p1": "Example of creating a custom renderer for date selection:",
-          "code": "class DatePickerFieldRenderer implements ICustomFieldRenderer {\n  readonly id = 'date-picker';\n  readonly name = 'Date Picker';\n\n  render(container: HTMLElement, context: ICustomFieldContext) {\n    const { value, onChange, onError, required, options } = context;\n    \n    // Create input element\n    const input = document.createElement('input');\n    input.type = 'date';\n    input.value = value || '';\n    input.className = 'date-picker-input';\n    input.required = required;\n    \n    // Apply options\n    if (options?.minDate) {\n      input.min = options.minDate;\n    }\n    if (options?.maxDate) {\n      input.max = options.maxDate;\n    }\n    \n    // Handle changes\n    input.addEventListener('change', (e) => {\n      const newValue = (e.target as HTMLInputElement).value;\n      onChange(newValue);\n      \n      // Validation\n      if (required && !newValue) {\n        onError?.('Field is required');\n      } else {\n        onError?.(null);\n      }\n    });\n    \n    container.appendChild(input);\n    \n    return {\n      element: input,\n      getValue: () => input.value,\n      setValue: (val: string) => {\n        input.value = val || '';\n      },\n      validate: () => {\n        if (required && !input.value) {\n          return 'Field is required';\n        }\n        return null;\n      },\n      destroy: () => {\n        input.remove();\n      }\n    };\n  }\n}\n\n// Registration\nblockBuilder.registerCustomFieldRenderer(new DatePickerFieldRenderer());\n\n// Usage in configuration\nconst blockConfigs = {\n  event: {\n    title: 'Event',\n    fields: [\n      {\n        field: 'date',\n        label: 'Event date',\n        type: 'custom',\n        customFieldConfig: {\n          rendererId: 'date-picker',\n          options: {\n            minDate: new Date().toISOString().split('T')[0] // Minimum today\n          }\n        },\n        defaultValue: '',\n        rules: [\n          { type: 'required', message: 'Date is required' }\n        ]\n      }\n    ]\n  }\n};"
-        },
-        "async": {
-          "title": "Async initialization",
-          "p1": "If your renderer requires async initialization (e.g. loading libraries), the <code>render</code> method can return a Promise:",
-          "code": "class AsyncCodeEditorRenderer implements ICustomFieldRenderer {\n  readonly id = 'code-editor';\n  readonly name = 'Code Editor';\n\n  async render(container: HTMLElement, context: ICustomFieldContext): Promise<ICustomFieldRenderResult> {\n    const { value, onChange, options } = context;\n    \n    // Dynamic library loading\n    const CodeMirror = await import('codemirror');\n    await import('codemirror/mode/javascript/javascript');\n    \n    // Create editor\n    const textarea = document.createElement('textarea');\n    container.appendChild(textarea);\n    \n    const editor = CodeMirror.fromTextArea(textarea, {\n      mode: options?.mode || 'javascript',\n      lineNumbers: true,\n      theme: options?.theme || 'default'\n    });\n    \n    editor.setValue(value || '');\n    editor.on('change', () => {\n      onChange(editor.getValue());\n    });\n    \n    return {\n      element: container,\n      getValue: () => editor.getValue(),\n      setValue: (val: string) => editor.setValue(val),\n      destroy: () => {\n        editor.toTextArea();\n      }\n    };\n  }\n}"
-        },
-        "api": {
-          "title": "Renderer API",
-          "registerCustomFieldRenderer": "Register a single custom field renderer. Accepts an object implementing <code>ICustomFieldRenderer</code>.",
-          "registerCustomFieldRenderers": "Bulk register multiple renderers. Accepts an array of renderers.",
-          "getCustomFieldRenderer": "Get renderer by ID. Returns <code>ICustomFieldRenderer | null</code>.",
-          "hasCustomFieldRenderer": "Check if renderer exists by ID. Returns <code>boolean</code>.",
-          "unregisterCustomFieldRenderer": "Remove renderer by ID. Returns <code>boolean</code> (whether removal succeeded).",
-          "getAllCustomFieldRenderers": "Get all registered renderers. Returns <code>Map\"<\"string, ICustomFieldRenderer\">\"</code>."
-        },
-        "bestPractices": {
-          "title": "Recommendations and best practices",
-          "destroy": "Always clean up resources in <code>destroy</code> (remove event listeners, timers, etc.)",
-          "onChange": "Use <code>onChange</code> to notify about value changes",
-          "onError": "Use <code>onError</code> to display validation errors",
-          "validate": "The <code>validate</code> method should return <code>null</code> when validation succeeds",
-          "asyncRender": "For complex components use async <code>render</code> with Promise",
-          "options": "Use <code>options</code> to pass additional configuration parameters"
-        }
-      },
-      "fieldTypes": {
-        "title": "Field types",
-        "subtitle": "Supported field types for block editing and creation forms",
-        "whatIs": {
-          "title": "What are field types?",
-          "p1": "Field types are UI elements used in <strong>block editing and creation forms</strong>. When configuring a block type you specify a <code>fields</code> array, and BlockBuilder automatically generates a form with the corresponding controls.",
-          "p2": "These forms are used for:",
-          "uses": {
-            "create": "Creating new blocks via UI",
-            "edit": "Editing existing blocks",
-            "props": "Configuring block <code>props</code>"
-          }
-        },
-        "usageExample": {
-          "title": "Usage example",
-          "code": "const blockConfigs = {\n  text: {\n    title: 'Text block',\n    fields: [\n      {\n        field: 'content',\n        label: 'Content',\n        type: 'textarea',          // Field type\n        placeholder: 'Enter text...',\n        defaultValue: '',\n        rules: [\n          { type: 'required', message: 'Text is required' },\n          { type: 'minLength', value: 1, message: 'Text cannot be empty' }\n        ]\n      },\n      {\n        field: 'fontSize',\n        label: 'Font size',\n        type: 'number',\n        defaultValue: 16,\n        rules: [\n          { type: 'required', message: 'Size is required' },\n          { type: 'min', value: 8, message: 'Minimum: 8px' },\n          { type: 'max', value: 72, message: 'Maximum: 72px' }\n        ]\n      },\n      {\n        field: 'color',\n        label: 'Text color',\n        type: 'color',\n        defaultValue: '#333333'\n      },\n      {\n        field: 'textAlign',\n        label: 'Alignment',\n        type: 'select',\n        options: [\n          { value: 'left', label: 'Left' },\n          { value: 'center', label: 'Center' },\n          { value: 'right', label: 'Right' }\n        ],\n        defaultValue: 'left'\n      }\n    ]\n  }\n}"
-        },
-        "availableTypes": {
-          "title": "Available field types"
-        },
-        "parametersLabel": "Parameters:",
-        "cards": {
-          "text": {
-            "description": "Single-line text field for short text (headings, titles)",
-            "icon": "📝",
-            "example": "{\n  field: 'title',\n  label: 'Title',\n  type: 'text',\n  placeholder: 'Enter title...',\n  defaultValue: ''\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "placeholder",
-              "defaultValue",
-              "rules"
-            ]
-          },
-          "textarea": {
-            "description": "Multi-line text field for long text (descriptions, content)",
-            "icon": "📄",
-            "example": "{\n  field: 'content',\n  label: 'Content',\n  type: 'textarea',\n  placeholder: 'Enter text...',\n  defaultValue: ''\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "placeholder",
-              "defaultValue",
-              "rules"
-            ]
-          },
-          "number": {
-            "description": "Number field for numeric input (sizes, counts, values)",
-            "icon": "🔢",
-            "example": "{\n  field: 'fontSize',\n  label: 'Font size',\n  type: 'number',\n  defaultValue: 16,\n  rules: [\n    { type: 'min', value: 8 },\n    { type: 'max', value: 72 }\n  ]\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "defaultValue",
-              "rules"
-            ]
-          },
-          "select": {
-            "description": "Dropdown for selecting one or multiple values from options. Multiple selection: multiple: true.",
-            "icon": "📋",
-            "example": "// Single selection\n{\n  field: 'textAlign',\n  label: 'Alignment',\n  type: 'select',\n  options: [\n    { value: 'left', label: 'Left' },\n    { value: 'center', label: 'Center' },\n    { value: 'right', label: 'Right', disabled: true }\n  ],\n  defaultValue: 'left'\n}\n\n// Multiple selection\n{\n  field: 'topics',\n  label: 'Topics',\n  type: 'select',\n  multiple: true,\n  options: [\n    { value: 'dev', label: 'Development' },\n    { value: 'design', label: 'Design' }\n  ],\n  defaultValue: ['dev']\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "options",
-              "multiple",
-              "defaultValue",
-              "rules"
-            ]
-          },
-          "checkbox": {
-            "description": "Checkbox for boolean values (true/false)",
-            "icon": "☑️",
-            "example": "{\n  field: 'visible',\n  label: 'Visible',\n  type: 'checkbox',\n  defaultValue: true\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "defaultValue"
-            ]
-          },
-          "radio": {
-            "description": "Radio buttons for selecting one value from a limited set",
-            "icon": "🔘",
-            "example": "{\n  field: 'position',\n  label: 'Position',\n  type: 'radio',\n  options: [\n    { value: 'top', label: 'Top' },\n    { value: 'bottom', label: 'Bottom' }\n  ],\n  defaultValue: 'top'\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "options",
-              "defaultValue"
-            ]
-          },
-          "color": {
-            "description": "Color selection via color picker (HEX format)",
-            "icon": "🎨",
-            "example": "{\n  field: 'backgroundColor',\n  label: 'Background color',\n  type: 'color',\n  defaultValue: '#ffffff'\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "defaultValue"
-            ]
-          },
-          "image": {
-            "description": "Image upload with base64 and server upload support, automatic preview and validation",
-            "icon": "🖼️",
-            "example": "{\n  field: 'image',\n  label: 'Image',\n  type: 'image',\n  defaultValue: '',\n  fileUploadConfig: {\n    uploadUrl: '/api/upload',\n    maxFileSize: 5 * 1024 * 1024,\n    accept: 'image/*',\n    responseMapper: (response) => ({\n      src: response.url\n    })\n  }\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "defaultValue",
-              "fileUploadConfig",
-              "multiple",
-              "rules"
-            ]
-          },
-          "file": {
-            "description": "File upload with separate UI (name list, no preview). multiple and maxCount.",
-            "icon": "📄",
-            "example": "{\n  field: 'files',\n  label: 'Files',\n  type: 'file',\n  multiple: true,\n  fileUploadConfig: { uploadUrl: '/api/upload', maxCount: 5 }\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "multiple",
-              "fileUploadConfig",
-              "rules"
-            ]
-          },
-          "blockAnchor": {
-            "description": "Anchor #block-id or URL in form. Scroll, preventDefault and link behavior — in user block component.",
-            "icon": "🔗",
-            "example": "{\n  field: 'url',\n  type: 'block-anchor',\n  blockAnchorConfig: { allowCustomUrl: true }\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "blockAnchorConfig",
-              "rules"
-            ]
-          },
-          "matrixTable": {
-            "description": "Table editor (columns + rows)",
-            "icon": "📋",
-            "example": "{\n  field: 'tableMatrix',\n  type: 'matrix-table',\n  matrixTableConfig: { imageUploadConfig: { maxFileSize: 5242880 } }\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "matrixTableConfig",
-              "defaultValue",
-              "rules"
-            ]
-          }
-        },
-        "commonParams": {
-          "title": "Common field parameters",
-          "field": {
-            "badge": "(required)",
-            "description": "Field name used in block <code>props</code>. Must be unique within the block configuration."
-          },
-          "label": {
-            "badge": "(required)",
-            "description": "Display name of the field in the form. Used for the user interface."
-          },
-          "type": {
-            "badge": "(required)",
-            "description": "Field type: <code>\"text\"</code>, <code>\"textarea\"</code>, <code>\"number\"</code>, <code>\"select\"</code>, <code>\"checkbox\"</code>, <code>\"radio\"</code>, <code>\"color\"</code>, <code>\"image\"</code>, <code>\"file\"</code>, <code>\"block-anchor\"</code>, <code>\"matrix-table\"</code>"
-          },
-          "defaultValue": {
-            "badge": "(optional)",
-            "description": "Default value used when creating a new block."
-          },
-          "placeholder": {
-            "badge": "(optional)",
-            "description": "Hint displayed in an empty field (for <code>text</code> and <code>textarea</code> types)."
-          },
-          "options": {
-            "badge": "(for select, radio)",
-            "description": "Array of options in format [value, label, disabled?] — e.g. [{ value: '...', label: '...', disabled?: boolean }].",
-            "items": {
-              "value": "<strong>value</strong> — value saved in props (string | number)",
-              "label": "<strong>label</strong> — display text (string)",
-              "disabled": "<strong>disabled</strong> — optional, disables option for selection (boolean)"
-            }
-          },
-          "multiple": {
-            "badge": "(for select, image, file; optional)",
-            "description": "Enables multiple mode. Defaults to <code>false</code>.",
-            "items": {
-              "select": "<strong>select:</strong> in <code>props</code> — array of <code>value</code>; <code>defaultValue: []</code> or array of initial values",
-              "file": "<strong>image / file:</strong> multiple uploaded files"
-            }
-          },
-          "rules": {
-            "badge": "(optional)",
-            "description": "Array of validation rules. Supported types:",
-            "items": {
-              "required": "field is required",
-              "minLength": "minimum length",
-              "maxLength": "maximum length",
-              "min": "minimum value (for number)",
-              "max": "maximum value (for number)"
-            }
-          }
         }
       },
       "formFields": {
@@ -1971,7 +2117,8 @@
           "registerCoreLabel": "<strong>Core / custom UI:</strong>",
           "registerCoreCode": "import { BlockBuilder } from '@mushket-co/block-builder/core'\n\nconst blockBuilder = new BlockBuilder({ blockConfigs })\nblockBuilder.registerCustomFieldRenderer(new StarRatingRenderer())",
           "registerFrameworkLabel": "<strong>Vue / React</strong> — separate registry, <code>customFieldRendererRegistry</code> prop on <code>BlockBuilderComponent</code>:",
-          "registerFrameworkCode": "import {\n  BlockBuilderComponent,\n  createBlockManagementUseCase,\n  CustomFieldRendererRegistry,\n} from '@mushket-co/block-builder/vue' // or /react\n\nconst registry = new CustomFieldRendererRegistry()\nregistry.register(new StarRatingRenderer())\n\n<BlockBuilderComponent\n  customFieldRendererRegistry={registry}\n  blockManagementUseCase={createBlockManagementUseCase()}\n  /* ... */\n/>",
+          "registerVueCode": "<template>\n  <BlockBuilderComponent\n    :custom-field-renderer-registry=\"registry\"\n    :block-management-use-case=\"blockManagementUseCase\"\n  />\n</template>\n\n<script setup>\nimport {\n  BlockBuilderComponent,\n  createBlockManagementUseCase,\n  CustomFieldRendererRegistry,\n} from '@mushket-co/block-builder/vue'\n\nconst registry = new CustomFieldRendererRegistry()\nregistry.register(new StarRatingRenderer())\nconst blockManagementUseCase = createBlockManagementUseCase()\n</script>",
+          "registerReactCode": "import {\n  BlockBuilderComponent,\n  createBlockManagementUseCase,\n  CustomFieldRendererRegistry,\n} from '@mushket-co/block-builder/react'\n\nconst registry = new CustomFieldRendererRegistry()\nregistry.register(new StarRatingRenderer())\nconst blockManagementUseCase = createBlockManagementUseCase()\n\n<BlockBuilderComponent\n  customFieldRendererRegistry={registry}\n  blockManagementUseCase={blockManagementUseCase}\n/>",
           "importantNote": "<strong>Important:</strong> register renderers <strong>before</strong> first form open. With external libraries store instance locally in <code>render()</code>, not as class property; initialize synchronously — without <code>setTimeout</code>. <anchor>custom-register</anchor>",
           "exampleTitle": "Example: star-rating",
           "exampleCode": "class StarRatingRenderer implements ICustomFieldRenderer {\n  readonly id = 'star-rating'\n  readonly name = 'Star Rating'\n\n  render(container: HTMLElement, context: ICustomFieldContext): ICustomFieldRenderResult {\n    const { value, onChange, options } = context\n    const max = Number(options?.max ?? 5)\n    const root = document.createElement('div')\n    root.className = 'flex gap-1'\n\n    const setRating = (n: number) => {\n      root.querySelectorAll('button').forEach((btn, i) => {\n        btn.setAttribute('aria-pressed', String(i < n))\n      })\n      onChange(n)\n    }\n\n    for (let i = 1; i <= max; i++) {\n      const btn = document.createElement('button')\n      btn.type = 'button'\n      btn.textContent = '★'\n      btn.addEventListener('click', () => setRating(i))\n      root.appendChild(btn)\n    }\n\n    setRating(Number(value ?? 0))\n    container.appendChild(root)\n\n    return {\n      element: root,\n      getValue: () => Number(value ?? 0),\n      destroy: () => root.remove(),\n    }\n  }\n}",

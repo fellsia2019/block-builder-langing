@@ -4,7 +4,7 @@ interface MethodCardProps {
   name: string;
   signature: string;
   description: string;
-  color?: 'blue' | 'purple' | 'orange' | 'green';
+  color?: 'blue' | 'purple' | 'orange' | 'green' | 'teal' | 'indigo' | 'slate';
 }
 
 export default function MethodCard({ 
@@ -18,6 +18,9 @@ export default function MethodCard({
     purple: 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800',
     orange: 'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800',
     green: 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
+    teal: 'bg-teal-50 dark:bg-teal-900/20 border-teal-200 dark:border-teal-800',
+    indigo: 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800',
+    slate: 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700',
   };
 
   return (

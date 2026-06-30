@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useReactNavigation } from '../../hooks/useNavigation';
 import type { ReactSubSection } from '../../types';
 import DocsSectionFallback from '../../components/DocsSectionFallback';
@@ -20,19 +21,23 @@ const ReactEventsSection = dynamic(() => import('../../sections/react/EventsSect
 
 export default function ReactSectionPage() {
   const params = useParams();
+  const tSidebar = useTranslations('docs.sidebar');
   const section = params.section as string;
   const subSection = section as ReactSubSection;
   const { nextSection, nextTitle } = useReactNavigation(subSection);
 
-  const getNextHref = (next: string | null) => (next ? `/docs/react/${next}` : null);
+  const nextHref =
+    subSection === 'events' ? '/docs/next' : nextSection ? `/docs/react/${nextSection}` : null;
+  const resolvedNextTitle = subSection === 'events' ? tSidebar('next') : nextTitle;
+  const resolvedNextSection = subSection === 'events' ? 'next' : nextSection;
 
   return (
     <>
       {getContent(subSection)}
       <NextPageLink
-        nextSection={nextSection}
-        nextTitle={nextTitle}
-        nextHref={getNextHref(nextSection)}
+        nextSection={resolvedNextSection}
+        nextTitle={resolvedNextTitle}
+        nextHref={nextHref}
         color="blue"
       />
     </>

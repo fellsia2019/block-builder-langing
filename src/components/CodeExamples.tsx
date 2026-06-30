@@ -38,6 +38,7 @@ function buildExamples(samples: LocalizedSamples) {
 
 <script setup>
 import { ref } from 'vue'
+import '@mushket-co/block-builder/index.esm.css'
 import {
   BlockBuilderComponent,
   createBlockManagementUseCase,

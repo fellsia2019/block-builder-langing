@@ -1,7 +1,9 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import CodeBlock from '@/components/CodeBlock';
 import Icon from '@/components/Icon';
 import DocHeading from '../../components/DocHeading';
@@ -12,6 +14,20 @@ import type { NavigationProps } from '../../types';
 
 export default function UtilitiesSection(_props: NavigationProps) {
   const t = useTranslations('docsPages.core.utilities');
+
+  const unsavedRich = {
+    ...docRichTags,
+    vueLink: (chunks: ReactNode) => (
+      <Link href="/docs/vue/components#block-builder-component" className="text-primary-600 dark:text-primary-400 hover:underline">
+        {chunks}
+      </Link>
+    ),
+    reactLink: (chunks: ReactNode) => (
+      <Link href="/docs/react/components#block-builder-component" className="text-primary-600 dark:text-primary-400 hover:underline">
+        {chunks}
+      </Link>
+    ),
+  };
 
   const scrollLockExampleCode = useMemo(
     () => `import { setScrollLockHandlers, lockBodyScroll, unlockBodyScroll } from '@mushket-co/block-builder/core';
@@ -81,9 +97,9 @@ function unlockBodyScroll(): void`}
           <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">{t('signatures')}</h3>
           <CodeBlock
             code={`function buildBlockHierarchy(blocks: IBlockDto[]): Array<IBlockDto & { children: IBlockDto[] }>
-function cloneBlock<T extends object>(block: T): T
-function getAllChildren(blocks: IBlockDto[], parentId: string): IBlockDto[]
-function isChildOf(blocks: IBlockDto[], childId: string, parentId: string): boolean`}
+function cloneBlock(block: IBlockDto, newId: string): IBlockDto
+function getAllChildren(block: IBlockDto, allBlocks: IBlockDto[]): IBlockDto[]
+function isChildOf(childBlock: IBlockDto, parentBlock: IBlockDto, allBlocks: IBlockDto[]): boolean`}
             language="typescript"
             className="mb-2"
           />
@@ -98,9 +114,9 @@ function isChildOf(blocks: IBlockDto[], childId: string, parentId: string): bool
           code={`import { buildBlockHierarchy, cloneBlock, getAllChildren, isChildOf } from '@mushket-co/block-builder/core';
 
 const hierarchy = buildBlockHierarchy(blocks);
-const copy = cloneBlock(block);
-const children = getAllChildren(blocks, parentId);
-const inside = isChildOf(blocks, childId, parentId);`}
+const copy = cloneBlock(block, 'block-copy-id');
+const children = getAllChildren(block, blocks);
+const inside = isChildOf(childBlock, parentBlock, blocks);`}
           language="javascript"
           className="mb-3"
         />
@@ -167,19 +183,50 @@ const visibleBlocks = filterBlocksForDisplay(blocks, isEdit)`}
           <Icon name="warning" size={22} className="text-rose-600 dark:text-rose-400" />
           {t('unsavedChanges.title')}
         </DocHeading>
-        <p className="text-gray-600 dark:text-gray-400 mb-3">{renderDocRichString(t.raw('unsavedChanges.description') as string, docRichTags)}</p>
-        <CodeBlock
-          code={`import {
-  haveBlocksChanged,
-  attachPageLeaveWarning,
-  createUnsavedChangesTracker,
-  shouldActivatePageLeaveWarning,
-} from '@mushket-co/block-builder/core'
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          {renderDocRichString(t.raw('unsavedChanges.description') as string, docRichTags)}
+        </p>
 
-// Vue: usePageLeaveWarning
-// React: usePageLeaveWarning`}
-          language="typescript"
-        />
+        <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">{t('unsavedChanges.builtInTitle')}</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+          {renderDocRichString(t.raw('unsavedChanges.builtInDescription') as string, unsavedRich)}
+        </p>
+        <CodeBlock code={t.raw('unsavedChanges.builtInExample') as string} language="vue" className="mb-6" />
+
+        <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">{t('unsavedChanges.customTitle')}</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+          {renderDocRichString(t.raw('unsavedChanges.customDescription') as string, docRichTags)}
+        </p>
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 mb-3">
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">{t('signatures')}</h4>
+          <CodeBlock
+            code={`function shouldActivatePageLeaveWarning(options: {
+  warnOnPageLeave?: boolean
+  isEdit?: boolean
+}): boolean
+
+function haveBlocksChanged(
+  initialBlocks: ReadonlyArray<IBlock | IBlockDto> | undefined,
+  currentBlocks: ReadonlyArray<IBlock | IBlockDto>
+): boolean
+
+function attachPageLeaveWarning(shouldWarn: () => boolean): () => void
+
+function createUnsavedChangesTracker(
+  initialBlocks?: ReadonlyArray<IBlock | IBlockDto>
+): IUnsavedChangesTracker`}
+            language="typescript"
+            className="mb-2"
+          />
+          <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
+            <li>{renderDocRichString(t.raw('unsavedChanges.shouldActivate') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('unsavedChanges.haveBlocksChanged') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('unsavedChanges.attach') as string, docRichTags)}</li>
+            <li>{renderDocRichString(t.raw('unsavedChanges.tracker') as string, docRichTags)}</li>
+          </ul>
+        </div>
+        <CodeBlock code={t.raw('unsavedChanges.customExample') as string} language="javascript" className="mb-3" />
+        <DocImportantNote>{renderDocRichString(t.raw('unsavedChanges.note') as string, docRichTags)}</DocImportantNote>
       </section>
 
       <section className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-6 border-l-4 border-teal-500">
@@ -243,6 +290,44 @@ function onFieldChange(formData, formFields) {
         />
       </section>
 
+      <section className="bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-6 border-l-4 border-cyan-500">
+        <DocHeading id="file-import-merge" level={2} className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+          <Icon name="save" size={22} className="text-cyan-600 dark:text-cyan-400" />
+          {t('fileImportMerge.title')}
+        </DocHeading>
+        <p className="text-gray-600 dark:text-gray-400 mb-3">{renderDocRichString(t.raw('fileImportMerge.description') as string, docRichTags)}</p>
+        <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 mb-3">
+          <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">{t('signatures')}</h3>
+          <CodeBlock
+            code={`function applyFileImportMergeRules(
+  formData: Record<string, unknown>,
+  data: unknown,
+  rules: IFileImportMergeRule[]
+): { formData: Record<string, unknown>; stats: IFileImportMergeStat[] }
+
+function mergeImportedArray(
+  existing: unknown[],
+  incoming: unknown[],
+  rule: IFileImportMergeRule
+): IMergeImportedArrayResult
+
+function formatFileImportMergeMessage(stats: IFileImportMergeStat[]): string
+function getImportDataPath(data: unknown, sourceKey?: string): unknown[]`}
+            language="typescript"
+            className="mb-2"
+          />
+        </div>
+        <CodeBlock
+          code={`import {
+  applyFileImportMergeRules,
+  formatFileImportMergeMessage,
+  getImportDataPath,
+  mergeImportedArray,
+} from '@mushket-co/block-builder/core'`}
+          language="javascript"
+        />
+      </section>
+
       <section className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 border-l-4 border-purple-500">
         <DocHeading id="universal-validator" level={2} className="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
           <Icon name="shield" size={22} className="text-purple-600 dark:text-purple-400" />
@@ -252,9 +337,11 @@ function onFieldChange(formData, formFields) {
         <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 mb-3">
           <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">{t('signatures')}</h3>
           <CodeBlock
-            code={`class UniversalValidator {
-  constructor(rules: IValidationRule[])
-  validate(values: Record<string, any>): { isValid: boolean; errors: Record<string, string[]> }
+            code={`const UniversalValidator = {
+  validateField(value, rules): string[]
+  validateForm(formData, formFields): { isValid: boolean; errors: Record<string, string[]> }
+  createFieldValidator(rules): (value) => string[]
+  createFormValidator(formFields): (formData) => { isValid: boolean; errors: Record<string, string[]> }
 }`}
             language="typescript"
             className="mb-2"
@@ -267,8 +354,8 @@ function onFieldChange(formData, formFields) {
         <CodeBlock
           code={`import { UniversalValidator } from '@mushket-co/block-builder/core';
 
-const validator = new UniversalValidator(rules);
-const { isValid, errors } = validator.validate(values);`}
+const { isValid, errors } = UniversalValidator.validateForm(formData, formFields);
+const fieldErrors = UniversalValidator.validateField(value, rules);`}
           language="javascript"
           className="mb-3"
         />

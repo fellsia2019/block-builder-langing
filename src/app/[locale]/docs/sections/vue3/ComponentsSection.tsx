@@ -64,6 +64,7 @@ export default function ComponentsSection(_props: NavigationProps) {
   formHooks?: IBlockFormHooks,
   spacingOptions?: {                      // ${t('code.spacingOptionsComment')}
     enabled?: boolean,
+    spacingTypes?: Array<'padding-top' | 'padding-bottom' | 'margin-top' | 'margin-bottom'>,
     config?: { breakpoints?: Array<IBreakpoint> }
   }
 }`,
@@ -86,12 +87,14 @@ export default function ComponentsSection(_props: NavigationProps) {
     () => `// ${t('code.editModeComment')}
 <BlockBuilderComponent
   :config="config"
+  :block-management-use-case="blockManagementUseCase"
   :isEdit="true"
 />
 
 // ${t('code.viewModeComment')}
 <BlockBuilderComponent
   :config="config"
+  :block-management-use-case="blockManagementUseCase"
   :isEdit="false"
 />`,
     [t],
@@ -99,8 +102,9 @@ export default function ComponentsSection(_props: NavigationProps) {
 
   const basicUsageCode = useMemo(
     () => `<template>
-  <BlockBuilderComponent 
+  <BlockBuilderComponent
     :config="config"
+    :block-management-use-case="blockManagementUseCase"
     :initialBlocks="initialBlocks"
     @block-added="handleBlockAdded"
     @block-updated="handleBlockUpdated"
@@ -110,7 +114,14 @@ export default function ComponentsSection(_props: NavigationProps) {
 
 <script setup>
 import { ref } from 'vue'
-import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
+import '@mushket-co/block-builder/index.esm.css'
+import {
+  BlockBuilderComponent,
+  createBlockManagementUseCase,
+} from '@mushket-co/block-builder/vue'
+
+const blockManagementUseCase = createBlockManagementUseCase()
+// blockManagementUseCase.getComponentRegistry().register(...)
 
 const config = {
   availableBlockTypes: [
@@ -144,8 +155,9 @@ const handleBlockDeleted = (blockId) => {
 
   const serverSaveCode = useMemo(
     () => `<template>
-  <BlockBuilderComponent 
+  <BlockBuilderComponent
     :config="config"
+    :block-management-use-case="blockManagementUseCase"
     :initialBlocks="initialBlocks"
     :onSave="saveBlocks"
   />
@@ -153,7 +165,14 @@ const handleBlockDeleted = (blockId) => {
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { BlockBuilderComponent } from '@mushket-co/block-builder/vue'
+import '@mushket-co/block-builder/index.esm.css'
+import {
+  BlockBuilderComponent,
+  createBlockManagementUseCase,
+} from '@mushket-co/block-builder/vue'
+
+const blockManagementUseCase = createBlockManagementUseCase()
+// blockManagementUseCase.getComponentRegistry().register(...)
 
 const config = {
   availableBlockTypes: [
@@ -218,13 +237,18 @@ onMounted(() => {
     /* ${t('code.customPropsComment')} */
     spacing?: {
       /* ${t('code.spacingDataComment')} */
-      'padding-top': { 'desktop': '20px' },
-      'margin-bottom': { 'mobile': '10px' }
+      desktop: { 'padding-top': 20, 'margin-bottom': 16 },
+      mobile: { 'padding-top': 12 }
     }
   },
   settings: {
     /* ${t('code.metadataComment')} */
-  }
+  },
+  visible?: boolean,
+  locked?: boolean,
+  order?: number,
+  metadata?: { createdAt: Date, updatedAt: Date, version: number },
+  render?: { kind: 'component', framework: 'vue' | 'react', component: unknown }
 }`,
     [t],
   );
@@ -262,7 +286,7 @@ onMounted(() => {
                 </span>
               </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                {t('blockBuilderComponent.props.config.description')}
+                {renderDocRichString(t.raw('blockBuilderComponent.props.config.description') as string, docRichTags)}
               </p>
               <CodeBlock
                 code={configTypeCode}
@@ -328,7 +352,7 @@ onMounted(() => {
                 {tCommon('linkFormFields')}
               </Link>
               {' · '}
-              <Link href="/docs/core/utilities#reactive-validation" className="text-primary-600 dark:text-primary-400 hover:underline">
+              <Link href="/docs/core/utilities#reactive-form-validation" className="text-primary-600 dark:text-primary-400 hover:underline">
                 {tCommon('linkReactiveValidation')}
               </Link>
             </p>

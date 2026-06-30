@@ -83,7 +83,8 @@ export default function ReactEventsSection(_props: NavigationProps) {
   );
 
   const generalUsageCode = useMemo(
-    () => `import {
+    () => `import { useMemo } from 'react'
+import {
   BlockBuilderComponent,
   createBlockManagementUseCase,
 } from '@mushket-co/block-builder/react'
@@ -113,7 +114,14 @@ export function Editor() {
   );
 
   const syncBackendCode = useMemo(
-    () => `export function Editor() {
+    () => `import { useMemo, useState } from 'react'
+import {
+  BlockBuilderComponent,
+  createBlockManagementUseCase,
+} from '@mushket-co/block-builder/react'
+import type { IBlock } from '@mushket-co/block-builder/react'
+
+export function Editor() {
   const [isLoading, setIsLoading] = useState(false)
   const blockManagementUseCase = useMemo(() => createBlockManagementUseCase(), [])
 

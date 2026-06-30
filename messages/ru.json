@@ -4,6 +4,7 @@
     "description": "Библиотека для создания блочных конструкторов с правильной чистой архитектурой. Vue 3, React 18+, TypeScript."
   },
   "nav": {
+    "about": "О пакете",
     "features": "Возможности",
     "examples": "Примеры",
     "architecture": "Архитектура",
@@ -23,13 +24,90 @@
     "copiedTitle": "Скопировано!"
   },
   "hero": {
-    "subtitle": "Блочный конструктор с чистой архитектурой",
-    "description": "Создавайте мощные no-code конструкторы с правильной архитектурой. Vue 3, React 18+, SSR (Nuxt, Next.js). MIT, без ограничений.",
-    "ctaStart": "Начать работу",
+    "subtitle": "Open-source библиотека для редактирования ваших собственных блоков",
+    "description": "Встраивайте блочный редактор в Vue или React приложение — вы описываете типы блоков и компоненты, BlockBuilder даёт формы, валидацию и UI для админки. Бесплатно, лицензия MIT.",
+    "ctaStart": "Что это?",
     "ctaExamples": "Посмотреть примеры",
     "badges": {
+      "pageBuilder": "Ваши блоки — наш редактор",
+      "openSource": "Open source",
       "solid": "SOLID принципы",
-      "tests": "100% покрытие тестами"
+      "tests": "Автотесты"
+    }
+  },
+  "whatIs": {
+    "title": "Что такое BlockBuilder?",
+    "lead": "BlockBuilder — бесплатный npm-пакет для встраивания блочного редактора в ваше приложение. Вы сами описываете типы блоков и пишете Vue/React-компоненты для них — мы не поставляем готовые блоки. Пакет даёт UI редактора: конечные пользователи добавляют, упорядочивают и редактируют контент в ваших блоках через автогенерируемые формы, а результат сохраняется в JSON для рендера на фронтенде.",
+    "problem": {
+      "title": "Проблема",
+      "description": "Создать блочный редактор с нуля — месяцы работы: управление вашими типами блоков, автогенерация форм для каждого, валидация, модалки, сохранение состояния. Большинство команд либо покупают дорогой SaaS, либо делают сырой кастомный вариант."
+    },
+    "solution": {
+      "title": "Решение",
+      "description": "BlockBuilder даёт готовую оболочку редактора и типизированный Core API. Вы приносите свои типы блоков, поля и компоненты рендера — BlockBuilder берёт на себя UI редактора, формы, валидацию и управление списком блоков."
+    },
+    "whatYouGet": {
+      "title": "Что вы получаете",
+      "items": {
+        "readyUi": {
+          "title": "Готовый UI редактора",
+          "description": "Оболочка редактора для ваших типов блоков — формы, валидация и модалки генерируются из вашего конфига. Из коробки для Vue 3 и React 18+."
+        },
+        "blockConfig": {
+          "title": "Декларативный конфиг блоков",
+          "description": "Описываете свои типы блоков и поля в JSON — UI редактора генерируется автоматически из вашей схемы."
+        },
+        "coreApi": {
+          "title": "Core API без UI",
+          "description": "Программная работа с блоками через @mushket-co/block-builder/core, когда нужен полный контроль."
+        },
+        "ssr": {
+          "title": "Поддержка SSR",
+          "description": "Серверный рендеринг для Nuxt и Next.js — контент блоков отображается на сервере."
+        }
+      }
+    },
+    "useCases": {
+      "title": "Где применяется",
+      "items": {
+        "cms": {
+          "title": "CMS и контент-платформы",
+          "description": "Редакторы собирают страницы из ваших типов блоков — меняют текст, изображения и настройки без участия разработчиков."
+        },
+        "landing": {
+          "title": "Конструкторы лендингов",
+          "description": "Клиенты заполняют ваши типы блоков в админ-панели — hero, преимущества, CTA, что угодно, что вы сами разработали."
+        },
+        "admin": {
+          "title": "Админ-панели",
+          "description": "Визуальный редактор ваших кастомных блоков в существующем дашборде или бэк-офисе."
+        },
+        "marketing": {
+          "title": "Маркетинговые сайты",
+          "description": "Маркетологи обновляют контент в ваших блоках — баннеры, тексты, секции — без привлечения разработчиков."
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "Как это работает",
+      "steps": {
+        "1": {
+          "title": "Опишите свои типы блоков",
+          "description": "Создайте конфиг с вашими типами блоков, полями (текст, изображение, repeater…) и значениями по умолчанию."
+        },
+        "2": {
+          "title": "Напишите компоненты рендера",
+          "description": "Создайте Vue или React компоненты, которые отображают каждый из ваших блоков на публичной странице."
+        },
+        "3": {
+          "title": "Встройте редактор",
+          "description": "Добавьте BlockBuilderComponent в админку — пользователи управляют и редактируют ваши блоки через визуальный UI."
+        },
+        "4": {
+          "title": "Сохраняйте и рендерите",
+          "description": "Храните блоки как JSON на сервере и отображайте на фронтенде или через SSR."
+        }
+      }
     }
   },
   "githubNpm": {
@@ -41,7 +119,7 @@
   },
   "features": {
     "title": "Почему BlockBuilder?",
-    "subtitle": "Библиотека, которая позволяет создавать блочные конструкторы с правильной архитектурой",
+    "subtitle": "Библиотека для создания редакторов вокруг ваших собственных типов блоков",
     "items": {
       "cleanArchitecture": {
         "title": "Чистая архитектура",
@@ -60,12 +138,12 @@
         "description": "Серверный рендеринг контента блоков. Живые SSR-примеры — в <link>block-builder/examples</link> (Nuxt 3/4, Next.js)."
       },
       "plugins": {
-        "title": "Плагинная система",
-        "description": "Легко расширяйте функциональность через кастомные типы полей и рендереры."
+        "title": "Кастомные рендереры полей",
+        "description": "Расширяйте формы через ICustomFieldRenderer и customFieldRendererRegistry."
       },
       "autoUi": {
         "title": "Автоматический UI",
-        "description": "Встроенный UI с формами, валидацией и модальными окнами работает из коробки."
+        "description": "Встроенный UI генерирует формы для полей ваших блоков — валидация и модалки работают из коробки."
       }
     }
   },
@@ -136,11 +214,12 @@
     "ui": {
       "title": "UI Layer",
       "components": "UI Components — готовые компоненты",
-      "controllers": "Controllers — управление UI",
+      "controllers": "Hooks и composables — логика UI BlockBuilder",
       "services": "Services — UI сервисы"
     },
     "diagram": {
       "title": "Направление зависимостей",
+      "uiSublabel": "Компоненты и hooks",
       "benefits": "Преимущества",
       "benefit1": "Core не зависит от внешних слоев",
       "benefit2": "Легко тестировать и мокать",
@@ -148,7 +227,8 @@
       "benefit4": "Четкое разделение ответственности"
     },
     "stats": {
-      "tests": "Покрытие тестами",
+      "tests": "Автотесты",
+      "testsValue": "Jest",
       "typescript": "Полная типизация",
       "solid": "Принципы разработки"
     }
@@ -350,6 +430,9 @@
       },
       "whatsNext": {
         "title": "Что дальше?",
+        "api": "Справочник API (core)",
+        "vue": "Vue 3 — быстрый старт",
+        "react": "React — быстрый старт",
         "theming": "Темизация и локализация UI (1.11)",
         "formFields": "Поля форм и кастомные рендереры",
         "demo": "Интерактивное демо (demo-bb)",
@@ -362,7 +445,7 @@
         "subtitle": "Начните использовать BlockBuilder с Vue3 — готовый UI и полная интеграция с Vue компонентами",
         "install": {
           "description": "Установите BlockBuilder и убедитесь, что у вас установлен Vue 3:",
-          "typescriptNote": "Для TypeScript добавьте типы:"
+          "typescriptNote": "TypeScript-типы входят в пакет, отдельная установка @types не нужна."
         },
         "concepts": {
           "title": "Основные концепции",
@@ -406,7 +489,7 @@
             "items": [
               "Скрываются все контролы редактирования, добавления и управления блоками",
               "Остаётся только пользовательская верстка блоков в обёртке BlockBuilder",
-              "На элемент <code>body</code> автоматически добавляется/удаляется CSS класс <code>bb-is-edit-mode</code>"
+              "С элемента <code>body</code> снимается CSS-класс <code>bb-is-edit-mode</code> (добавляется только в режиме редактирования)"
             ]
           }
         },
@@ -462,8 +545,8 @@
           "description": "Основной компонент для работы с BlockBuilder в Vue3. Готовый UI: список блоков, формы создания и редактирования, смена порядка кнопками, удаление.",
           "props": {
             "config": {
-              "type": "Object, обязательный",
-              "description": "Конфигурация BlockBuilder с типами блоков и настройками",
+              "type": "Object, опциональный",
+              "description": "Конфигурация BlockBuilder с типами блоков и настройками. По умолчанию <code>{ availableBlockTypes: [] }</code>",
               "iblockTypeLabel": "IBlockType:"
             },
             "blockManagementUseCase": {
@@ -530,7 +613,7 @@
           "notes": {
             "title": "Формы создания и редактирования блоков",
             "formValidation": "Правила из <code>fields[].rules</code> проверяются автоматически в модалке BlockBuilder — отдельно подключать валидатор не нужно. Если пользователь нажал «Сохранить» с ошибками, сообщения появляются у полей и обновляются при каждом изменении.",
-            "blockAnchor": "Поле типа <code>block-anchor</code> сохраняет якорь (<code>#block-id</code> или URL). Скролл и переход по клику реализуйте в своих компонентах блоков. Для полей <code>file</code> и <code>files</code> редактор показывает отдельный UI загрузки."
+            "blockAnchor": "Поле типа <code>block-anchor</code> сохраняет якорь (<code>#block-id</code> или URL). Скролл и переход по клику реализуйте в своих компонентах блоков. Для поля <code>file</code> с <code>multiple: true</code> редактор показывает отдельный UI загрузки."
           },
           "events": {
             "blockAdded": "Создан или продублирован блок — в колбек приходит полный объект блока",
@@ -693,7 +776,7 @@
             "items": [
               "Скрываются все контролы редактирования, добавления и управления блоками",
               "Остаётся только пользовательская верстка блоков в обёртке BlockBuilder",
-              "На элемент <code>body</code> автоматически добавляется/удаляется CSS класс <code>bb-is-edit-mode</code>"
+              "С элемента <code>body</code> снимается CSS-класс <code>bb-is-edit-mode</code> (добавляется только в режиме редактирования)"
             ]
           }
         },
@@ -761,8 +844,8 @@
           "description": "Основной компонент для работы с BlockBuilder в React. Готовый UI: список блоков, формы создания и редактирования, смена порядка кнопками, удаление.",
           "props": {
             "config": {
-              "type": "Object, обязательный",
-              "description": "Конфигурация BlockBuilder с типами блоков и настройками",
+              "type": "Object, опциональный",
+              "description": "Конфигурация BlockBuilder с типами блоков и настройками. По умолчанию <code>{ availableBlockTypes: [] }</code>",
               "iblockTypeLabel": "IBlockType:"
             },
             "blockManagementUseCase": {
@@ -829,7 +912,7 @@
           "notes": {
             "title": "Формы создания и редактирования блоков",
             "formValidation": "Правила из <code>fields[].rules</code> проверяются автоматически в модалке BlockBuilder — отдельно подключать валидатор не нужно. Если пользователь нажал «Сохранить» с ошибками, сообщения появляются у полей и обновляются при каждом изменении.",
-            "blockAnchor": "Поле типа <code>block-anchor</code> сохраняет якорь (<code>#block-id</code> или URL). Скролл и переход по клику реализуйте в своих компонентах блоков. Для полей <code>file</code> и <code>files</code> редактор показывает отдельный UI загрузки."
+            "blockAnchor": "Поле типа <code>block-anchor</code> сохраняет якорь (<code>#block-id</code> или URL). Скролл и переход по клику реализуйте в своих компонентах блоков. Для поля <code>file</code> с <code>multiple: true</code> редактор показывает отдельный UI загрузки."
           },
           "callbacks": {
             "onBlockAdded": "Создан или продублирован блок — в колбек приходит полный объект блока",
@@ -843,7 +926,16 @@
             "prepareBlocksForDisplay": "<code>prepareBlocksForDisplay</code> — восстанавливает render из конфигурации типов",
             "enrichBlockForDisplay": "<code>enrichBlockForDisplay</code> — обогащение одного блока",
             "seedRepositoryFromBlocks": "<code>seedRepositoryFromBlocks</code> — синхронизация репозитория после гидрации",
-            "enableViewportBreakpointDetection": "<code>enableViewportBreakpointDetection</code> — spacing после гидрации"
+            "enableViewportBreakpointDetection": "<code>enableViewportBreakpointDetection</code> — spacing после гидрации",
+            "canRenderVueBlock": "<code>canRenderVueBlock</code> — можно ли отрендерить блок как Vue-компонент",
+            "canRenderReactBlock": "<code>canRenderReactBlock</code> — можно ли отрендерить блок как React-компонент",
+            "resolveVueComponentForBlock": "<code>resolveVueComponentForBlock</code> — резолв Vue-компонента из блока и реестра",
+            "resolveReactComponentForBlock": "<code>resolveReactComponentForBlock</code> — резолв React-компонента из блока и реестра",
+            "getDefaultBreakpoint": "<code>getDefaultBreakpoint</code> — имя брейкпоинта по умолчанию для spacing",
+            "isClient": "<code>isClient</code> — true в браузере",
+            "isServer": "<code>isServer</code> — true при SSR",
+            "isViewportBreakpointDetectionEnabled": "<code>isViewportBreakpointDetectionEnabled</code> — активно ли определение брейкпоинта по viewport",
+            "resetViewportBreakpointDetection": "<code>resetViewportBreakpointDetection</code> — сброс состояния определения брейкпоинта"
           },
           "footer": "Подробное руководство по SSR —"
         },
@@ -953,6 +1045,7 @@
         "description": "Файл <strong>создаёте сами</strong> — в пакете composable нет. Он собирает зависимости для <code>BlockBuilderComponent</code>: use case, типы блоков из <code>block-config</code>, режим редактирования и сохранение на API.",
         "items": {
           "blockManagementUseCase": "<code>blockManagementUseCase</code> — создание, обновление, удаление блоков",
+          "apiSelectUseCase": "<code>apiSelectUseCase</code> — нужен для полей <code>api-select</code> (<code>ApiSelectUseCase</code> + <code>FetchHttpClient</code>)",
           "availableBlockTypes": "<code>availableBlockTypes</code> — конфиг типов для палитры и форм",
           "initialBlocks": "<code>initialBlocks</code> — ref из <code>useAsyncData</code>, стартовые данные страницы",
           "isEdit": "<code>isEdit</code> — режим редактора (<code>false</code> — только просмотр)",
@@ -972,7 +1065,14 @@
           "prepareBlocksForDisplay": "<code>prepareBlocksForDisplay</code> — восстанавливает <code>render</code> из <code>availableBlockTypes</code>",
           "enrichBlockForDisplay": "<code>enrichBlockForDisplay</code> — обогащение одного блока",
           "seedRepositoryFromBlocks": "<code>seedRepositoryFromBlocks</code> — синхронизация in-memory репозитория",
-          "enableViewportBreakpointDetection": "<code>enableViewportBreakpointDetection</code> — пересчёт spacing после гидрации"
+          "enableViewportBreakpointDetection": "<code>enableViewportBreakpointDetection</code> — пересчёт spacing после гидрации",
+          "canRenderVueBlock": "<code>canRenderVueBlock</code> — можно ли отрендерить блок как Vue-компонент",
+          "resolveVueComponentForBlock": "<code>resolveVueComponentForBlock</code> — резолв Vue-компонента из блока и реестра",
+          "getDefaultBreakpoint": "<code>getDefaultBreakpoint</code> — имя брейкпоинта по умолчанию для spacing",
+          "isClient": "<code>isClient</code> — true в браузере",
+          "isServer": "<code>isServer</code> — true при SSR",
+          "isViewportBreakpointDetectionEnabled": "<code>isViewportBreakpointDetectionEnabled</code> — активно ли определение брейкпоинта по viewport",
+          "resetViewportBreakpointDetection": "<code>resetViewportBreakpointDetection</code> — сброс состояния определения брейкпоинта"
         },
         "autoNote": "<code>prepareBlocksForDisplay</code> и <code>seedRepositoryFromBlocks</code> вызываются внутри компонента автоматически."
       },
@@ -1010,7 +1110,16 @@
           "prepareBlocksForDisplay": "<code>prepareBlocksForDisplay</code> — восстанавливает <code>render</code> из конфигурации типов",
           "enrichBlockForDisplay": "<code>enrichBlockForDisplay</code> — обогащение одного блока",
           "seedRepositoryFromBlocks": "<code>seedRepositoryFromBlocks</code> — синхронизация репозитория после гидрации",
-          "enableViewportBreakpointDetection": "<code>enableViewportBreakpointDetection</code> — spacing после гидрации"
+          "enableViewportBreakpointDetection": "<code>enableViewportBreakpointDetection</code> — spacing после гидрации",
+          "canRenderVueBlock": "<code>canRenderVueBlock</code> — можно ли отрендерить блок как Vue-компонент",
+          "canRenderReactBlock": "<code>canRenderReactBlock</code> — можно ли отрендерить блок как React-компонент",
+          "resolveVueComponentForBlock": "<code>resolveVueComponentForBlock</code> — резолв Vue-компонента из блока и реестра",
+          "resolveReactComponentForBlock": "<code>resolveReactComponentForBlock</code> — резолв React-компонента из блока и реестра",
+          "getDefaultBreakpoint": "<code>getDefaultBreakpoint</code> — имя брейкпоинта по умолчанию для spacing",
+          "isClient": "<code>isClient</code> — true в браузере",
+          "isServer": "<code>isServer</code> — true при SSR",
+          "isViewportBreakpointDetectionEnabled": "<code>isViewportBreakpointDetectionEnabled</code> — активно ли определение брейкпоинта по viewport",
+          "resetViewportBreakpointDetection": "<code>resetViewportBreakpointDetection</code> — сброс состояния определения брейкпоинта"
         },
         "enrichNote": "<code>enrichBlocksForSsr</code> в примере — проектная функция для предзагрузки api-select данных (newsList и т.п.) на сервере."
       },
@@ -1032,6 +1141,13 @@
       "subtitle": "Краткая история релизов. Полный список — в <changelog>CHANGELOG.md</changelog> репозитория.",
       "getStarted": "Начать работу — <link>Быстрый старт</link>.",
       "releases": [
+        {
+          "version": "1.11.1",
+          "date": "2026-06-28",
+          "highlights": [
+            "Незначительное исправление UI"
+          ]
+        },
         {
           "version": "1.11.0",
           "date": "2026-06-28",
@@ -1148,7 +1264,7 @@
         },
         "map": {
           "title": "Карта раздела «Справочник API»",
-          "methods": "— CRUD, режим редактирования, кастомные рендереры",
+          "methods": "— CRUD, состояние блоков, импорт/экспорт, кастомные рендереры",
           "properties": "— опции конструктора (<code>blockConfigs</code>, <code>initialBlocks</code>, …)",
           "types": "— TypeScript-интерфейсы",
           "formFields": "— типы полей, валидация, кастомные рендереры",
@@ -1167,18 +1283,46 @@
           "deleteBlock": "Удаляет блок по идентификатору"
         },
         "utility": {
-          "title": "Утилиты",
+          "title": "Работа с данными",
           "duplicateBlock": "Дублирует блок",
           "getBlocksCount": "Возвращает количество блоков",
           "getBlocksByType": "Возвращает блоки по типу",
-          "exportBlocks": "Экспортирует блоки в JSON",
-          "importBlocks": "Импортирует блоки из JSON"
+          "clearAllBlocks": "Удаляет все блоки из репозитория",
+          "exportBlocks": "Экспортирует блоки в форматированную JSON-строку (async)",
+          "importBlocks": "Заменяет все блоки из JSON (async). Возвращает false при невалидных данных"
+        },
+        "blockState": {
+          "title": "Состояние и порядок блоков",
+          "setBlockLocked": "Устанавливает флаг locked у блока. Только API — встроенный редактор не имеет UI-переключателя locked; используйте программно или в своём UI.",
+          "setBlockVisible": "Устанавливает флаг visible у блока",
+          "reorderBlocks": "Меняет порядок блоков по массиву id"
+        },
+        "config": {
+          "title": "Конфиг типов блоков",
+          "getBlockConfigs": "Возвращает копию всех blockConfigs, переданных в конструктор",
+          "getBlockConfig": "Возвращает конфиг одного типа блока",
+          "hasBlockType": "Проверяет наличие типа блока в blockConfigs",
+          "getAvailableBlockTypes": "Возвращает все ключи типов из blockConfigs"
+        },
+        "components": {
+          "title": "Реестр компонентов",
+          "registerComponent": "Регистрирует компонент рендера по имени",
+          "registerComponents": "Массовая регистрация компонентов рендера",
+          "getComponent": "Возвращает зарегистрированный компонент по имени",
+          "hasComponent": "Проверяет наличие компонента в реестре",
+          "getAllComponents": "Возвращает все зарегистрированные компоненты",
+          "unregisterComponent": "Удаляет компонент из реестра"
+        },
+        "vueHelpers": {
+          "title": "Vue-хелперы (legacy)",
+          "createVueBlock": "Создаёт блок с ссылкой на Vue-компонент в render metadata",
+          "updateVueComponent": "Обновляет имя Vue-компонента и props у существующего блока",
+          "note": "Предпочтительнее декларативный конфиг с render.kind: 'component'. Эти методы остаются для программного core API."
         },
         "editMode": {
           "title": "Режим редактирования/просмотра",
-          "setIsEdit": "Переключает режим редактирования. При false скрываются все контролы редактирования, остаётся только пользовательская верстка блоков",
-          "getIsEdit": "Возвращает текущий режим редактирования (true — режим редактирования, false — режим просмотра)",
-          "note": "В режиме просмотра (<code>isEdit: false</code>) автоматически скрываются все контролы редактирования, добавления и управления блоками. Остаётся только пользовательская верстка блоков в обёртке BlockBuilder. На элемент <code>body</code> автоматически добавляется CSS класс <code>bb-is-edit-mode</code> для кастомизации стилей."
+          "coreNote": "У core BlockBuilder нет методов setIsEdit/getIsEdit. Режим редактирования доступен только в BlockBuilderComponent (Vue/React) через prop isEdit.",
+          "note": "В режиме редактирования (<code>isEdit: true</code>) на <code>body</code> добавляется CSS-класс <code>bb-is-edit-mode</code>; в режиме просмотра (<code>isEdit: false</code>) класс снимается, контролы редактирования, добавления и управления блоками скрыты. Остаётся только ваша вёрстка блоков в обёртке BlockBuilder. См. документацию <vueLink>Vue</vueLink> и <reactLink>React</reactLink> компонентов."
         },
         "customRenderers": {
           "title": "Кастомные рендереры",
@@ -1208,47 +1352,313 @@
             "description": "Стартовые блоки. Работает вместе с <code>autoInit: true</code>.",
             "seeAlso": "См. также: <classesExampleLink>пример core</classesExampleLink> · <vueComponentsLink>Vue</vueComponentsLink> · <reactComponentsLink>React</reactComponentsLink>"
           },
-          "theme": {
-            "description": "Пресет оформления UI: <code>default</code> или <code>dark</code>.",
-            "seeAlso": "См. также: <themingLink>темизация и локализация</themingLink> · <themeVarsLink>themeVars</themeVarsLink>"
+          "repository": {
+            "description": "Опциональная реализация хранилища блоков. По умолчанию — in-memory репозиторий.",
+            "seeAlso": "См. также: <classesImportLink>конструктор</classesImportLink>"
           },
-          "locale": {
-            "description": "Язык строк интерфейса пакета.",
-            "seeAlso": "См. также: <themingLink>темизация и локализация</themingLink>"
+          "componentRegistry": {
+            "description": "Опциональный реестр компонентов рендера. Заполняется автоматически из <code>blockConfigs</code>, если задан <code>render.kind: 'component'</code>.",
+            "seeAlso": "См. также: <vueComponentsLink>Vue / React компоненты</vueComponentsLink>"
+          },
+          "httpClient": {
+            "description": "Опциональный HTTP-клиент для полей <code>api-select</code> и других сетевых вызовов.",
+            "seeAlso": "См. также: <formFieldsLink>поля форм</formFieldsLink>"
+          },
+          "customFieldRendererRegistry": {
+            "description": "Опциональный реестр кастомных рендереров полей. Можно также заполнить через <code>registerCustomFieldRenderer</code> после создания экземпляра.",
+            "seeAlso": "См. также: <customRegisterLink>кастомные рендереры</customRegisterLink>"
           }
         },
         "footnote": {
-          "uiNote": "Props компонента (<code>themeVars</code>, <code>uiStrings</code>, <code>onSave</code>, <code>isEdit</code> и др.) — в <componentLink>BlockBuilderComponent</componentLink>."
+          "uiNote": "Props компонента (<code>themeVars</code>, <code>uiStrings</code>, <code>onSave</code>, <code>isEdit</code> и др.) — в <componentLink>BlockBuilderComponent</componentLink>.",
+          "themeLocaleNote": "<code>theme</code> и <code>locale</code> — только props компонента, не входят в <typeLink>IBlockBuilderOptions</typeLink>. См. <themingLink>темизация и локализация UI</themingLink>."
         }
       },
       "themingLocalization": {
         "title": "Темизация и локализация UI",
-        "subtitle": "BlockBuilder (Vue/React) поддерживает встроенную локализацию строк и переопределение внешнего вида через CSS custom properties на <code>.bb-app</code>.",
+        "subtitle": "BlockBuilder (Vue/React) стилизует встроенный UI редактора через CSS custom properties на <code>.bb-app</code>. Можно переключать пресеты, переопределять токены и локализовать строки — без форка компонентов.",
+        "howItWorks": {
+          "title": "Как устроена темизация",
+          "p1": "<code>BlockBuilderComponent</code> рендерит корневой контейнер <code>.bb-app</code>. Токены темы применяются как inline <code>style</code> через <code>resolveThemeVars(theme, themeVars)</code> и используются в SCSS пакета через <code>var(--bb-*)</code>.",
+          "p2": "На корень также ставится <code>data-bb-theme=\"default\"</code> или <code>data-bb-theme=\"dark\"</code> для селекторов на стороне приложения. Подключите стили: <code>@mushket-co/block-builder/index.esm.css</code>.",
+          "items": {
+            "scope": "<strong>Область действия</strong> — токены влияют только на UI Block Builder (модалки, формы, контролы). Ваши компоненты блоков на канвасе этими переменными не стилизуются.",
+            "notCore": "<strong>Не в core API</strong> — <code>theme</code>, <code>themeVars</code>, <code>locale</code>, <code>uiStrings</code> — props <code>BlockBuilderComponent</code> (Vue/React), а не <code>IBlockBuilderOptions</code>.",
+            "merge": "<strong>Порядок слияния</strong> — <code>UI_THEME_COLORS_DEFAULT</code> → тёмный пресет (если <code>theme=\"dark\"</code>) → ваши переопределения в <code>themeVars</code>."
+          }
+        },
+        "customizableUi": {
+          "title": "Что можно кастомизировать",
+          "description": "Весь встроенный chrome редактора читает токены <code>--bb-*</code>. Типичные зоны:",
+          "items": {
+            "controls": "Фиксированная панель — сохранить, очистить, счётчик блоков, добавить блок",
+            "blockToolbar": "Тулбар блока — редактировать, переместить, дублировать, удалить, свернуть",
+            "modals": "Модалка create/edit — заголовок, оверлей, ширина, скругления",
+            "forms": "Поля форм — инпуты, лейблы, ошибки валидации, focus ring",
+            "dropdowns": "Select, ApiSelect, CustomDropdown — список, hover, загрузка",
+            "upload": "Загрузка image/file — dropzone, превью, ошибки",
+            "repeater": "Repeater — добавить/удалить строку, счётчик элементов",
+            "matrix": "Matrix — вкладки, заголовки сетки, активная ячейка",
+            "spacing": "Редактор spacing — брейкпоинты, padding/margin",
+            "confirm": "Диалоги подтверждения — удаление блока, очистка всех"
+          }
+        },
+        "themeMethods": {
+          "title": "Три способа задать тему",
+          "preset": {
+            "title": "1. Встроенный пресет",
+            "description": "Передайте <code>theme=\"dark\"</code> для тёмной палитры пакета (<code>UI_THEME_COLORS_DARK</code>). Без <code>theme</code> — светлая палитра по умолчанию."
+          },
+          "themeVars": {
+            "title": "2. Prop themeVars",
+            "description": "Частичная карта токенов <code>--bb-*</code>. Переопределяются только переданные ключи; остальные берутся из default или dark."
+          },
+          "css": {
+            "title": "3. CSS на .bb-app",
+            "description": "Переопределение переменных в своём stylesheet — удобно для статичного брендинга или нескольких редакторов с одним классом темы."
+          }
+        },
         "locale": {
           "title": "Локализация UI",
           "p1": "Пакет локализует только свой UI (кнопки, подписи контролов, сообщения валидации). Подписи полей в <code>block-config</code> задаёт приложение.",
           "localeItem": "<code>locale</code> — <code>'ru'</code> (по умолчанию) или <code>'en'</code>",
-          "uiStringsItem": "<code>uiStrings</code> / <code>:ui-strings</code> — точечные переопределения отдельных строк",
-          "exportsItem": "Экспорт: <code>UI_STRINGS_RU</code>, <code>UI_STRINGS_EN</code>, <code>resolveUiStrings</code>, <code>IUiStrings</code>",
-          "hooksNote": "React: хук <code>useUiStrings()</code> внутри UI. Vue: <code>useUiStrings()</code> через provide/inject."
+          "uiStringsItem": "<code>uiStrings</code> / <code>:ui-strings</code> — точечные переопределения отдельных ключей из <code>IUiStrings</code>",
+          "exportsItem": "Экспорт из <code>/vue</code> и <code>/react</code>: <code>UI_STRINGS_RU</code>, <code>UI_STRINGS_EN</code>, <code>resolveUiStrings</code>, <code>IUiStrings</code>",
+          "hooksNote": "Строки UI резолвятся внутри дерева компонента. Переопределяйте через prop <code>uiStrings</code>; в кастомных рендерерах — <code>useUiStrings()</code> (Vue inject / React context)."
+        },
+        "uiStringGroups": {
+          "title": "Ключи IUiStrings",
+          "description": "Полный список переопределяемых ключей (см. <code>IUiStrings</code> в пакете). Сгруппировано по зонам:",
+          "toolbar": "Панель и тулбар",
+          "blockActions": "Действия с блоком",
+          "modals": "Модалки и подтверждения",
+          "forms": "Контролы форм",
+          "repeater": "Repeater",
+          "matrix": "Matrix",
+          "spacing": "Редактор spacing",
+          "errors": "Ошибки и уведомления"
         },
         "themePreset": {
           "title": "Пресеты theme",
-          "p1": "Prop <code>theme</code> — тип <code>TUiTheme</code>: <code>default</code> (значение по умолчанию, светлая палитра) или <code>dark</code>. CSS variables записываются на корневой элемент <code>.bb-app</code>.",
-          "coreNote": "В headless core без UI-рендера <code>theme</code> и <code>locale</code> не влияют на поведение. В <code>BlockBuilderComponent</code> передаются вместе с <code>themeVars</code> и <code>uiStrings</code>."
+          "p1": "Prop <code>theme</code> — тип <code>TUiTheme</code>: не указывать или <code>default</code> (светлая палитра) или <code>dark</code>. CSS variables записываются на корневой <code>.bb-app</code>.",
+          "darkNote": "Тёмный пресет переопределяет brand, surface, neutrals, overlays и danger/warning фоны — не все токены. Для полного тёмного бренда дополните <code>themeVars</code>.",
+          "coreNote": "В headless core без UI-рендера <code>theme</code> и <code>locale</code> не влияют на поведение."
         },
         "themeVars": {
           "title": "Кастомизация themeVars",
-          "description": "Любые токены <code>--bb-*</code> можно переопределить объектом <code>themeVars</code>."
+          "description": "Тип <code>IUiThemeVars</code> — частичная запись <code>{ '--bb-color-primary'?: string, ... }</code>. Можно переопределить любой токен из справочника ниже.",
+          "exportsTitle": "Экспорты пакета",
+          "exports": "Из <code>@mushket-co/block-builder/vue</code> или <code>/react</code>: <code>UI_THEME_COLORS_DEFAULT</code>, <code>UI_THEME_COLORS_DARK</code>, <code>resolveThemeVars</code>, <code>IUiThemeVars</code>, <code>IUiThemeColorKey</code>, <code>TUiTheme</code>.",
+          "tipsTitle": "Практические советы",
+          "tips": {
+            "brand": "Для быстрого бренда начните с <code>--bb-color-primary</code>, <code>--bb-color-primary-dark</code>, <code>--bb-color-surface</code>, <code>--bb-color-neutral-8</code> (основной текст).",
+            "forms": "Плотность форм — <code>--bb-form-control-height</code>, <code>--bb-form-control-radius</code>, <code>--bb-font-family</code>.",
+            "glass": "Полупрозрачные поверхности: <code>--bb-color-surface</code> как <code>rgba(...)</code> и <code>backdrop-filter</code> в CSS приложения на панелях вокруг редактора.",
+            "alpha": "Для hover/focus фонов используйте <code>--bb-color-primary-alpha-*</code> — они задействованы в кнопках и вкладках."
+          }
+        },
+        "tokenReference": {
+          "title": "Справочник CSS-токенов",
+          "description": "Значения по умолчанию — для светлой темы (<code>theme</code> не указан). Dark preset заменяет подмножество — остальное через <code>themeVars</code>.",
+          "columns": {
+            "token": "Токен",
+            "default": "По умолчанию (light)",
+            "usage": "Где используется"
+          }
+        },
+        "tokenGroups": {
+          "brand": {
+            "title": "Бренд",
+            "description": "Основной акцент — кнопки, ссылки, активные состояния, focus ring.",
+            "tokens": {
+              "colorPrimary": "Primary-кнопки, активные вкладки, ссылки, focus outline",
+              "colorPrimaryDark": "Hover и pressed у кнопок",
+              "colorPrimaryLight": "Фон выделения, подсветка dropzone загрузки",
+              "colorPrimaryAlpha10": "Лёгкий hover-фон",
+              "colorPrimaryAlpha15": "Слегка тонированные панели",
+              "colorPrimaryAlpha20": "Focus ring, тень индикатора вкладки",
+              "colorPrimaryAlpha30": "Более насыщенные акцентные фоны"
+            }
+          },
+          "surfaces": {
+            "title": "Поверхности и нейтрали",
+            "description": "Фоны, границы, иерархия текста.",
+            "tokens": {
+              "colorWhite": "Текст на тёмных оверлеях",
+              "colorSurface": "Тело модалки, список dropdown, карточки",
+              "colorBlack": "Редкие ссылки на чёрный",
+              "colorNeutral1": "Фон секций, заголовки таблиц",
+              "colorNeutral2": "Границы, разделители, disabled фон",
+              "colorNeutral3": "Границы инпутов, пунктир dropzone",
+              "colorNeutral4": "Усиленные границы",
+              "colorNeutral5": "Приглушённый текст, placeholder",
+              "colorNeutral6": "Вторичные подписи, hints",
+              "colorNeutral7": "Вторичный body-текст",
+              "colorNeutral8": "Основной текст, заголовки",
+              "colorNeutral8Rgb": "RGB-компоненты для rgba() в SCSS",
+              "colorNeutralAlpha30": "Disabled оверлеи",
+              "colorNeutralAlpha50": "Полупрозрачные маски"
+            }
+          },
+          "accent": {
+            "title": "Акцент",
+            "description": "Вторичные действия и тёмные акценты.",
+            "tokens": {
+              "colorDark": "Тёмные UI-акценты",
+              "colorDarkAlpha20": "Тёмные полупрозрачные оверлеи",
+              "colorSecondary": "Secondary-кнопки",
+              "colorSecondaryDark": "Hover secondary-кнопок"
+            }
+          },
+          "status": {
+            "title": "Статусные цвета",
+            "description": "Валидация, успех, предупреждения.",
+            "tokens": {
+              "colorDanger": "Текст ошибок, деструктивные действия",
+              "colorDangerDark": "Hover danger-кнопок",
+              "colorDangerLight": "Фон поля с ошибкой",
+              "colorDangerBorder": "Граница поля с ошибкой",
+              "colorDangerBg": "Фон сообщения об ошибке",
+              "colorDangerAlpha10": "Лёгкая подсветка ошибки",
+              "colorSuccess": "Индикаторы успеха",
+              "colorSuccessDark": "Hover success",
+              "colorSuccessAlpha30": "Свечение success",
+              "colorSuccessAlpha40": "Градиентные success-акценты",
+              "colorWarning": "Иконки предупреждений",
+              "colorWarningBorder": "Границы warning",
+              "colorWarningBg": "Баннеры warning",
+              "colorWarningText": "Текст warning",
+              "colorInfo": "Информационные акценты"
+            }
+          },
+          "overlays": {
+            "title": "Оверлеи",
+            "description": "Подложки модалок и превью изображений.",
+            "tokens": {
+              "colorOverlay": "Фон модалки",
+              "colorOverlayMedium": "Оверлей превью изображения",
+              "colorOverlayDark": "Плотный scrim при hover",
+              "colorOverlayAlpha10": "Лёгкие inset-тени, фон вкладок"
+            }
+          },
+          "utility": {
+            "title": "Утилиты",
+            "description": "Code blocks и градиентные акценты.",
+            "tokens": {
+              "colorCode1": "Фон code block",
+              "colorCode2": "Текст code block",
+              "colorGradient1": "Начало градиента (декор)",
+              "colorGradient2": "Конец градиента",
+              "colorGradientSuccess1": "Начало success-градиента",
+              "colorGradientSuccess2": "Конец success-градиента"
+            }
+          },
+          "spacing": {
+            "title": "Отступы",
+            "description": "Внутренние gap в тулбарах, формах, модалках.",
+            "tokens": {
+              "spacingXs": "Плотные gap (padding иконок)",
+              "spacingSm": "Компактные отступы",
+              "spacingMd": "Стандартный gap между контролами",
+              "spacingLg": "Отступы секций",
+              "spacingXl": "Padding секций модалки",
+              "spacing2xl": "Крупные gap между секциями"
+            }
+          },
+          "radius": {
+            "title": "Скругления",
+            "description": "Углы карточек, инпутов, модалок.",
+            "tokens": {
+              "radiusSm": "Мелкие chips, теги",
+              "radiusMd": "Инпуты, кнопки, dropdown",
+              "radiusLg": "Модалки, крупные карточки"
+            }
+          },
+          "typography": {
+            "title": "Типографика",
+            "description": "Шрифт и шкала размеров UI редактора.",
+            "tokens": {
+              "fontFamily": "Весь текст UI редактора",
+              "fontSizeXs": "Ошибки, badges",
+              "fontSizeSm": "Лейблы, кнопки, инпуты",
+              "fontSizeMd": "Body в модалках",
+              "fontSizeLg": "Заголовки секций",
+              "fontSizeXl": "Заголовки модалок"
+            }
+          },
+          "shadows": {
+            "title": "Тени",
+            "description": "Elevation для dropdown, модалок, primary-кнопок.",
+            "tokens": {
+              "shadowSm": "Лёгкое elevation",
+              "shadowMd": "Dropdown, плавающие панели",
+              "shadowLg": "Модалки",
+              "shadowSmLight": "Светлые карточки",
+              "shadowPrimary": "Свечение primary-кнопки"
+            }
+          },
+          "motion": {
+            "title": "Анимации",
+            "description": "Длительность transition для hover/focus.",
+            "tokens": {
+              "transitionFast": "Быстрый feedback (checkbox, иконка)",
+              "transitionBase": "Стандартный hover",
+              "transitionSlow": "Анимации модалок и панелей"
+            }
+          },
+          "zIndex": {
+            "title": "Z-index",
+            "description": "Слои dropdown, модалок, tooltip.",
+            "tokens": {
+              "zIndexDropdown": "Панели select/dropdown",
+              "zIndexModal": "Модалка create/edit",
+              "zIndexTooltip": "Tooltip поверх модалок"
+            }
+          },
+          "form": {
+            "title": "Контролы форм",
+            "description": "Общие размеры инпутов, select, textarea.",
+            "tokens": {
+              "formControlHeight": "Высота инпута/select",
+              "formControlBorderWidth": "Толщина границы инпута",
+              "formControlPaddingX": "Горизонтальный padding внутри инпута",
+              "formControlRadius": "Скругление инпута (часто ссылается на --bb-radius-md)",
+              "formControlFontSize": "Размер текста в инпуте",
+              "formLabelFontSize": "Размер лейбла поля",
+              "formLabelFontWeight": "Жирность лейбла",
+              "formErrorFontSize": "Размер текста ошибки валидации"
+            }
+          },
+          "modal": {
+            "title": "Модалка",
+            "description": "Размеры диалога create/edit.",
+            "tokens": {
+              "modalMaxWidth": "Максимальная ширина модалки",
+              "modalRadius": "Скругление модалки"
+            }
+          },
+          "buttons": {
+            "title": "Кнопки",
+            "description": "Padding primary/secondary действий.",
+            "tokens": {
+              "btnPaddingY": "Вертикальный padding кнопки",
+              "btnPaddingX": "Горизонтальный padding кнопки"
+            }
+          }
+        },
+        "examples": {
+          "title": "Примеры",
+          "liveExample": "Живое демо переключения тем — <link>examples/vue3-theme</link> в репозитории block-builder (default, dark, brand overrides, frosted glass).",
+          "cssCodeComment": "/* Статичный бренд для всех редакторов */"
         },
         "teleportedUi": {
           "title": "Teleported UI (dropdown)",
           "p1": "Панели <code>CustomDropdown</code> монтируются в <code>body</code> и теряют наследование CSS variables. Пакет автоматически копирует theme vars с ближайшего <code>.bb-app</code> при открытии dropdown (Vue/React <code>CustomDropdown</code>).",
-          "p2": "Для своего teleported UI можно использовать внутренний хелпер <code>readBbThemeVarsFromClosestApp</code> из <code>shared/theme/bbThemeContext</code> (паттерн пакета)."
+          "p2": "Для своего teleported UI пакет использует внутренний хелпер <code>readBbThemeVarsFromClosestApp</code> (не входит в публичные npm-экспорты). Скопируйте паттерн из <code>CustomDropdown</code> в репозитории или продублируйте theme vars на корень teleported-элемента вручную."
         },
         "seeAlso": {
           "title": "См. также",
-          "properties": "Свойства — theme, locale и другие параметры",
+          "properties": "Свойства — опции конструктора (blockConfigs, repository, …)",
           "vueComponents": "Vue — BlockBuilderComponent (props)",
           "reactComponents": "React — BlockBuilderComponent (props)",
           "changelog": "История изменений 1.11.0"
@@ -1275,9 +1685,9 @@
           "title": "Вспомогательные функции блоков",
           "description": "Экспортируются из <code>@mushket-co/block-builder/core</code>: <code>buildBlockHierarchy, cloneBlock, getAllChildren, isChildOf</code>.",
           "buildBlockHierarchy": "<code>buildBlockHierarchy</code> — преобразует плоский список в дерево по полям <code>parent</code>/<code>children</code>.",
-          "cloneBlock": "<code>cloneBlock</code> — глубоко клонирует объект блока (без ссылок на оригинал).",
-          "getAllChildren": "<code>getAllChildren</code> — возвращает всех потомков (в любом уровне вложенности).",
-          "isChildOf": "<code>isChildOf</code> — быстро проверяет отношение принадлежности к родителю.",
+          "cloneBlock": "<code>cloneBlock</code> — глубоко клонирует блок и назначает новый <code>id</code>; метаданные (даты, version) сбрасываются.",
+          "getAllChildren": "<code>getAllChildren</code> — все потомки блока из плоского списка (любая глубина вложенности).",
+          "isChildOf": "<code>isChildOf</code> — проверяет, является ли <code>childBlock</code> потомком <code>parentBlock</code> в плоском списке.",
           "normalizeNote": "Рекомендуется нормализовать входные данные: гарантировать уникальные <code>id</code> и согласованность связей <code>parent</code>⇄<code>children</code> перед вызовами вспомогательных функций."
         },
         "spacing": {
@@ -1295,7 +1705,18 @@
         },
         "unsavedChanges": {
           "title": "Несохранённые изменения",
-          "description": "Для кастомного UI без готового <code>BlockBuilderComponent</code> — утилиты и хуки из core / vue / react. Опция <code>warnOnPageLeave</code> в компонентах включает нативное предупреждение браузера."
+          "description": "Нативное предупреждение браузера при уходе со страницы, если блоки менялись, но не сохранены (<code>beforeunload</code>). В <code>BlockBuilderComponent</code> это уже встроено; для своего UI — низкоуровневые утилиты из core.",
+          "builtInTitle": "BlockBuilderComponent",
+          "builtInDescription": "Включите <code>warnOnPageLeave</code> — см. <vueLink>props Vue</vueLink> / <reactLink>props React</reactLink>. Работает только в режиме редактирования (<code>isEdit !== false</code>). После успешного <code>onSave</code> внутренний baseline обновляется — предупреждение снимается до следующего изменения.",
+          "builtInExample": "<BlockBuilderComponent\n  :warn-on-page-leave=\"true\"\n  :is-edit=\"true\"\n  :on-save=\"handleSave\"\n  ...\n/>",
+          "customTitle": "Свой редактор (утилиты core)",
+          "customDescription": "Сравнение снимков блоков и подписка на <code>beforeunload</code> вручную — те же примитивы, что внутри Vue/React компонентов.",
+          "haveBlocksChanged": "<code>haveBlocksChanged(initial, current)</code> — сравнивает списки блоков (id, type, props, settings, order, visible, locked, parent).",
+          "shouldActivate": "<code>shouldActivatePageLeaveWarning({ warnOnPageLeave, isEdit })</code> — <code>true</code> только если включено и не режим просмотра.",
+          "attach": "<code>attachPageLeaveWarning(() => boolean)</code> — подписка на уход; возвращает detach. На SSR — noop.",
+          "tracker": "<code>createUnsavedChangesTracker(initial?)</code> — <code>setBaseline</code>, <code>resetBaseline</code>, <code>isDirty(current)</code>.",
+          "customExample": "import {\n  attachPageLeaveWarning,\n  createUnsavedChangesTracker,\n  shouldActivatePageLeaveWarning,\n} from '@mushket-co/block-builder/core'\n\nconst tracker = createUnsavedChangesTracker(initialBlocks)\nlet detachGuard = () => {}\n\nfunction syncPageLeaveGuard(isEdit, getBlocks) {\n  detachGuard()\n  detachGuard = () => {}\n\n  if (!shouldActivatePageLeaveWarning({ warnOnPageLeave: true, isEdit })) {\n    return\n  }\n\n  detachGuard = attachPageLeaveWarning(() => tracker.isDirty(getBlocks()))\n}\n\nasync function handleSave(blocks) {\n  const ok = await saveToApi(blocks)\n  if (ok) {\n    tracker.resetBaseline(blocks)\n    syncPageLeaveGuard(true, () => blocks)\n  }\n}\n\n// при mount / смене isEdit или блоков:\nsyncPageLeaveGuard(isEdit, () => blockBuilder.getAllBlocks())\n\n// при unmount:\ndetachGuard()",
+          "note": "Браузер показывает стандартный диалог — свой текст в <code>beforeunload</code> намеренно ограничен."
         },
         "reactiveValidation": {
           "title": "Реактивная валидация формы",
@@ -1310,30 +1731,34 @@
           "rules": "Поддерживаемые правила: <code>required</code>, <code>email</code>, <code>url</code>, <code>min</code>/<code>max</code>, <code>minLength</code>/<code>maxLength</code>, <code>pattern</code>, <code>custom</code>.",
           "message": "Поле <code>message</code> необязательно; доступны тексты по умолчанию.",
           "customNote": "Для сложных случаев используйте правило <code>custom</code> со своей функцией валидации. Возвращайте <code>false</code> при ошибке и задайте <code>message</code> для понятного текста."
+        },
+        "fileImportMerge": {
+          "title": "Слияние при file-import",
+          "description": "Хелперы для полей <code>file-import</code>: применение правил слияния после разбора JSON/CSV, объединение массивов, форматирование статистики для пользователя. Экспорт из <code>@mushket-co/block-builder/core</code>."
         }
       },
       "types": {
         "title": "Типы",
         "subtitle": "TypeScript типы и интерфейсы для работы с BlockBuilder",
         "iblockBuilderOptions": {
-          "description": "Опции <code>BlockBuilder</code>. <code>theme</code> — <code>TUiTheme</code> (<code>default</code> | <code>dark</code>), <code>locale</code> — <code>ru</code> | <code>en</code>.",
-          "code": "interface IBlockBuilderOptions {\n  blockConfigs: Record<string, any>\n  repository?: any\n  componentRegistry?: any\n  httpClient?: any\n  customFieldRendererRegistry?: any\n  theme?: TUiTheme\n  locale?: 'ru' | 'en'\n  autoInit?: boolean\n  initialBlocks?: IBlockDto[]\n}"
+          "description": "Опции конструктора core <code>BlockBuilder</code>. Не включает <code>theme</code> и <code>locale</code> — это props <code>BlockBuilderComponent</code>.",
+          "code": "interface IBlockBuilderOptions {\n  blockConfigs: Record<string, IBlockTypeConfig>\n  repository?: IBlockRepository\n  componentRegistry?: IComponentRegistry\n  httpClient?: IHttpClient\n  customFieldRendererRegistry?: ICustomFieldRendererRegistry\n  autoInit?: boolean\n  initialBlocks?: IBlockDto[]\n}"
         },
         "iblock": {
           "description": "Основной интерфейс блока (доменная модель)",
-          "code": "interface IBlock {\n  id: TBlockId\n  type: string\n  settings: Record<string, any>\n  props: Record<string, any>\n  style?: Record<string, string | number>\n  render?: any // Внутренний тип TRenderRef (не экспортируется)\n  visible?: boolean\n  formConfig?: IFormGenerationConfig\n  metadata?: IBlockMetadata\n  children?: IBlock[]\n  parent?: TBlockId\n}"
+          "code": "interface IBlock {\n  id: TBlockId\n  type: string\n  settings: Record<string, any>\n  props: Record<string, any>\n  style?: Record<string, string | number>\n  render?: any // Внутренний тип TRenderRef (не экспортируется)\n  visible?: boolean\n  locked?: boolean\n  formConfig?: IFormGenerationConfig\n  metadata?: IBlockMetadata\n  children?: IBlock[]\n  parent?: TBlockId\n}"
         },
         "iblockDto": {
           "description": "DTO для передачи данных блока (без бизнес-логики)",
-          "code": "interface IBlockDto {\n  id: string\n  type: string\n  settings: Record<string, any>\n  props: Record<string, any>\n  style?: Record<string, string | number>\n  render?: any // Внутренний тип TRenderRef (не экспортируется)\n  visible?: boolean\n  formConfig?: IFormGenerationConfig\n  metadata?: IBlockMetadata\n  children?: string[] // IDs дочерних блоков\n  parent?: string\n  order?: number\n}"
+          "code": "interface IBlockDto {\n  id: string\n  type: string\n  settings: Record<string, any>\n  props: Record<string, any>\n  style?: Record<string, string | number>\n  render?: any // Внутренний тип TRenderRef (не экспортируется)\n  visible?: boolean\n  locked?: boolean\n  formConfig?: IFormGenerationConfig\n  metadata?: IBlockMetadata\n  children?: string[] // IDs дочерних блоков\n  parent?: string\n  order?: number\n}"
         },
         "icreateBlockDto": {
           "description": "DTO для создания блока (без ID и метаданных)",
-          "code": "interface ICreateBlockDto {\n  type: string\n  settings: Record<string, any>\n  props: Record<string, any>\n  style?: Record<string, string | number>\n  render?: any // Внутренний тип TRenderRef (не экспортируется)\n  visible?: boolean\n  formConfig?: IFormGenerationConfig\n  parent?: string\n  order?: number\n  metadata?: IBlockMetadata\n}"
+          "code": "interface ICreateBlockDto {\n  type: string\n  settings: Record<string, any>\n  props: Record<string, any>\n  style?: Record<string, string | number>\n  render?: any // Внутренний тип TRenderRef (не экспортируется)\n  visible?: boolean\n  locked?: boolean\n  formConfig?: IFormGenerationConfig\n  parent?: string\n  order?: number\n  metadata?: IBlockMetadata\n}"
         },
         "iupdateBlockDto": {
           "description": "DTO для обновления блока",
-          "code": "interface IUpdateBlockDto {\n  settings?: Partial<Record<string, any>>\n  props?: Partial<Record<string, any>>\n  style?: Partial<Record<string, string | number>>\n  order?: number\n  render?: any // Внутренний тип TRenderRef (не экспортируется)\n  visible?: boolean\n  formConfig?: IFormGenerationConfig\n}"
+          "code": "interface IUpdateBlockDto {\n  settings?: Partial<Record<string, any>>\n  props?: Partial<Record<string, any>>\n  style?: Partial<Record<string, string | number>>\n  order?: number\n  render?: any // Внутренний тип TRenderRef (не экспортируется)\n  visible?: boolean\n  locked?: boolean\n  formConfig?: IFormGenerationConfig\n}"
         },
         "iblockMetadata": {
           "description": "Метаданные блока",
@@ -1341,16 +1766,16 @@
         },
         "iformFieldConfig": {
           "description": "Конфигурация поля формы",
-          "code": "interface IFormFieldConfig {\n  field: string\n  label: string\n  type: TFieldType\n  placeholder?: string\n  defaultValue?: any\n  options?: { value: string; label: string }[]\n  rules?: IValidationRule[]\n  spacingConfig?: any // Внутренний тип (не экспортируется)\n  repeaterConfig?: any // Внутренний тип (не экспортируется)\n  apiSelectConfig?: IApiSelectConfig\n  customFieldConfig?: any // Внутренний тип (не экспортируется)\n  fileUploadConfig?: any // Внутренний тип IFileUploadConfig (не экспортируется)\n  blockAnchorConfig?: IBlockAnchorConfig // type: 'block-anchor'\n  matrixTableConfig?: IMatrixTableFieldConfig // type: 'matrix-table'\n  optionsFrom?: IOptionsFromConfig // select — динамические options\n  fileImportConfig?: IFileImportConfig // type: 'file-import'\n  persist?: boolean // false — не сохранять в block.props\n  multiple?: boolean // image, file; select с multiple: true\n  dependsOn?: IDependsOnConfig // Условное отображение полей\n}"
+          "code": "interface IFormFieldConfig {\n  field: string\n  label: string\n  type: TFieldType\n  placeholder?: string\n  defaultValue?: any\n  options?: { value: string | number; label: string; disabled?: boolean }[]\n  rules?: IValidationRule[]\n  spacingConfig?: any // Внутренний тип (не экспортируется)\n  repeaterConfig?: any // Внутренний тип (не экспортируется)\n  apiSelectConfig?: IApiSelectConfig\n  customFieldConfig?: any // Внутренний тип (не экспортируется)\n  fileUploadConfig?: any // Внутренний тип IFileUploadConfig (не экспортируется)\n  blockAnchorConfig?: IBlockAnchorConfig // type: 'block-anchor'\n  matrixTableConfig?: IMatrixTableFieldConfig // type: 'matrix-table'\n  optionsFrom?: IOptionsFromConfig // select — динамические options\n  fileImportConfig?: IFileImportConfig // type: 'file-import'\n  persist?: boolean // false — не сохранять в block.props\n  multiple?: boolean // image, file; select с multiple: true\n  dependsOn?: IDependsOnConfig // Условное отображение полей\n}"
         },
         "irepeaterFieldConfig": {
           "description": "Конфигурация для поля типа <code>repeater</code>. Свойство <code>countLabelVariants</code> позволяет локализовать счётчик элементов. Свойство <code>maxNestingDepth</code> ограничивает максимальную глубину вложенности репитеров.",
-          "code": "interface IRepeaterFieldConfig {\n  itemTitle?: string\n  addButtonText?: string\n  removeButtonText?: string\n  min?: number\n  max?: number\n  fields: IRepeaterItemFieldConfig[]\n  countLabelVariants?: { one: string; few: string; many: string; zero?: string }\n  maxNestingDepth?: number  // Максимальная глубина вложенности (по умолчанию 2)\n}",
+          "code": "interface IRepeaterFieldConfig {\n  itemTitle?: string\n  addButtonText?: string\n  removeButtonText?: string\n  min?: number\n  max?: number\n  fields: IRepeaterItemFieldConfig[]\n  countLabelVariants?: { one: string; few: string; many: string; zero?: string }\n  defaultItemValue?: Record<string, unknown>\n  maxNestingDepth?: number\n}",
           "note": "По умолчанию UI показывает только число. Если указать <code>countLabelVariants</code>, будет показано «число + слово». Свойство <code>maxNestingDepth</code> ограничивает максимальную глубину вложенности репитеров (по умолчанию 2)."
         },
         "irepeaterItemFieldConfig": {
-          "description": "Конфигурация одного поля в массиве <code>repeaterConfig.fields</code>. По форме совпадает с <code>IFormFieldConfig</code> — доступны те же <code>options</code>, <code>apiSelectConfig</code>, <code>matrixTableConfig</code>, <code>dependsOn</code>, <code>persist</code> и остальные свойства полей формы.",
-          "code": "interface IRepeaterItemFieldConfig extends IFormFieldConfig {\n  // type: 'repeater' — вложенный repeater (repeaterConfig типизирован явнее, чем any в IFormFieldConfig)\n  repeaterConfig?: IRepeaterFieldConfig\n}",
+          "description": "Конфигурация одного поля в массиве <code>repeaterConfig.fields</code>. Те же свойства, что у <code>IFormFieldConfig</code>, но <code>type</code> не может быть <code>'spacing'</code> или <code>'matrix-table'</code>.",
+          "code": "interface IRepeaterItemFieldConfig {\n  field: string\n  label: string\n  type: Exclude<TFieldType, 'spacing' | 'matrix-table'>\n  // ...остальные опциональные свойства как у IFormFieldConfig\n  repeaterConfig?: IRepeaterFieldConfig  // вложенный repeater\n}",
           "note": "Вложенный repeater: <code>type: 'repeater'</code> + <code>repeaterConfig</code>. Остальные типы полей (<code>select</code>, <code>image</code>, <code>custom</code>…) настраиваются так же, как в корневом <code>fields</code> блока."
         },
         "iformGenerationConfig": {
@@ -1359,10 +1784,10 @@
         },
         "tfieldType": {
           "description": "Типы полей форм",
-          "code": "type TFieldType = \n  | 'text' \n  | 'number' \n  | 'email' \n  | 'url' \n  | 'textarea' \n  | 'select' \n  | 'checkbox' \n  | 'color' \n  | 'file' \n  | 'file-import'\n  | 'image' \n  | 'block-anchor'\n  | 'matrix-table'\n  | 'spacing'\n  | 'repeater' \n  | 'api-select' \n  | 'custom'"
+          "code": "type TFieldType = \n  | 'text' \n  | 'number' \n  | 'email' \n  | 'url' \n  | 'textarea' \n  | 'select' \n  | 'checkbox' \n  | 'radio' \n  | 'color' \n  | 'file' \n  | 'file-import'\n  | 'image' \n  | 'block-anchor'\n  | 'matrix-table'\n  | 'spacing'\n  | 'repeater' \n  | 'api-select' \n  | 'custom'"
         },
         "ivalidationRule": {
-          "description": "Правило валидации поля",
+          "description": "Правило валидации поля. В TypeScript-интерфейсе свойство <code>field</code> обязательно; в примерах конфигурации блоков его часто опускают — валидатор на runtime берёт ключ из родительского <code>field</code>.",
           "code": "interface IValidationRule {\n  type: TValidationRuleType\n  field: string\n  value?: any\n  message?: string\n  validator?: (value: any) => boolean\n}\n\ntype TValidationRuleType = \n  | 'required' \n  | 'email' \n  | 'url' \n  | 'min' \n  | 'max' \n  | 'minLength' \n  | 'maxLength' \n  | 'pattern' \n  | 'custom'"
         },
         "iapiSelectItem": {
@@ -1399,7 +1824,7 @@
         },
         "idependsOnConfig": {
           "description": "Конфигурация условного отображения поля на основе значения другого поля",
-          "code": "interface IDependsOnConfig {\n  field: string                    // Имя поля, от которого зависит видимость\n  value: boolean | string | number // Ожидаемое значение зависимого поля\n  operator?: 'equals' | 'notEquals' | 'in' | 'notIn' // Оператор сравнения (по умолчанию 'equals')\n}",
+          "code": "interface IDependsOnConfig {\n  field: string                    // Имя поля, от которого зависит видимость\n  value: boolean | string | number | unknown[] // Ожидаемое значение (массив для in/notIn)\n  operator?: 'equals' | 'notEquals' | 'in' | 'notIn' // Оператор сравнения (по умолчанию 'equals')\n}",
           "operatorsTitle": "Операторы:",
           "operators": {
             "equals": "<code>equals</code> (по умолчанию) - поле видимо, если значение равно <code>value</code>",
@@ -1410,13 +1835,13 @@
         },
         "icustomFieldFormScope": {
           "description": "Контекст формы в <code>ICustomFieldContext.formScope</code> и в <code>fileImportConfig.onImport</code>.",
-          "code": "interface ICustomFieldFormScope {\n  formData: Record<string, any>\n  setField: (name: string, value: any) => void\n  repeater?: ICustomFieldRepeaterScope\n}\n\ninterface ICustomFieldRepeaterScope {\n  itemIndex: number\n  updateItemField: (fieldName: string, value: any) => void\n}"
+          "code": "interface ICustomFieldFormScope {\n  formData: Record<string, any>\n  setField: (name: string, value: any) => void\n  repeater?: ICustomFieldRepeaterScope\n}\n\ninterface ICustomFieldRepeaterScope {\n  fieldName: string\n  index: number\n  item: Record<string, unknown>\n  updateItemField: (field: string, value: unknown) => void\n}"
         },
         "ioptionsFromConfig": {
-          "code": "interface IOptionsFromConfig {\n  source: string\n  when?: (formData: Record<string, any>) => boolean\n  map: (item: any, formData: Record<string, any>) => ISelectOption | IOptionsFromGroup\n}\n\ninterface IOptionsFromGroup {\n  label: string\n  options: ISelectOption[]\n}"
+          "code": "interface IOptionsFromConfig {\n  source: string\n  when?: { field: string; value: boolean | string | number | unknown[]; operator?: 'equals' | 'notEquals' | 'in' | 'notIn' }\n  map?: (item: unknown, index: number, sourceArray: unknown[]) => { value: string | number; label: string } | IOptionsFromGroup\n}\n\ninterface IOptionsFromGroup {\n  group: string\n  options: { value: string | number; label: string }[]\n}"
         },
         "ifileImportConfig": {
-          "code": "interface IFileImportMergeRule {\n  targetField: string\n  sourceKey?: string\n  mode?: 'append' | 'replace'\n  dedupeBy?: string | string[]\n  mapItem?: (item: any, formData: Record<string, any>) => any\n}\n\ninterface IFileImportConfig {\n  uploadUrl: string\n  accept?: string | string[]\n  formDataKey?: string\n  maxSizeMb?: number\n  responseMapper?: (response: any) => any\n  merge?: IFileImportMergeRule[]\n  onImport?: (ctx: {\n    data: any\n    formScope: ICustomFieldFormScope\n    mergeStats?: Array<{ targetField: string; mode: string; added: number; skipped: number; total: number }>\n  }) => void\n}"
+          "code": "interface IFileImportMergeRule {\n  targetField: string\n  sourceKey?: string\n  mode?: 'append' | 'replace'\n  dedupeBy?: string\n  normalizeDedupeKey?: (value: unknown) => string\n  mapItem?: (item: unknown, index: number, sourceArray: unknown[]) => Record<string, unknown>\n}\n\ninterface IFileImportConfig {\n  uploadUrl: string\n  accept?: string[]\n  formDataKey?: string\n  maxSizeMb?: number\n  uploadHeaders?: Record<string, string>\n  responseMapper?: (response: unknown) => unknown\n  merge?: IFileImportMergeRule[]\n  onImport?: (ctx: {\n    data: unknown\n    formScope: ICustomFieldFormScope\n    mergeStats?: IFileImportMergeStat[]\n  }) => void | Promise<void>\n}"
         },
         "iblockFormHooks": {
           "description": "Lifecycle-хуки модалки create/edit блока. Указываются в конфиге типа блока (<code>formHooks</code> в <code>IBlockTypeConfig</code> / <code>IBlockType</code>).",
@@ -1424,291 +1849,12 @@
         },
         "iblockTypeConfig": {
           "description": "Конфигурация одного типа блока. В Vue/React — элемент <code>availableBlockTypes[]</code> (там же тип <code>IBlockType</code>). В core <code>blockConfigs</code> — тот же набор полей, но ключ Record = <code>type</code>; часто используют <code>title</code> вместо <code>label</code>.",
-          "code": "interface IBlockTypeConfig {\n  type: string\n  label: string\n  title?: string\n  icon?: string\n  description?: string\n  render?: {\n    kind: 'component' | 'html'\n    framework?: 'vue' | 'react'\n    component?: unknown\n    template?: string | ((props: Record<string, unknown>) => string)\n  }\n  defaultSettings?: Record<string, unknown>\n  defaultProps?: Record<string, unknown>\n  fields?: IFormFieldConfig[]\n  formHooks?: IBlockFormHooks\n  spacingOptions?: {\n    enabled?: boolean\n    config?: {\n      breakpoints?: Array<{\n        name: string\n        minWidth?: number\n        maxWidth?: number\n      }>\n    }\n  }\n}",
-          "note": "Поле <code>formHooks</code> — см. <code>IBlockFormHooks</code>. Поля формы — <code>IFormFieldConfig[]</code>."
+          "code": "interface IBlockTypeConfig {\n  type: string\n  label: string\n  title?: string\n  icon?: string\n  render?: {\n    kind: 'component' | 'html'\n    framework?: 'vue' | 'react'\n    component?: unknown\n    template?: string | ((props: Record<string, unknown>) => string)\n  }\n  defaultSettings?: Record<string, unknown>\n  defaultProps?: Record<string, unknown>\n  fields?: IFormFieldConfig[]\n  formHooks?: IBlockFormHooks\n  spacingOptions?: {\n    enabled?: boolean\n    spacingTypes?: Array<'padding-top' | 'padding-bottom' | 'margin-top' | 'margin-bottom'>\n    config?: { breakpoints?: Array<{ name: string; label: string; maxWidth?: number }> }\n  }\n  [key: string]: unknown  // напр. description в конфигах приложения\n}",
+          "note": "Поле <code>formHooks</code> — см. <code>IBlockFormHooks</code>. Поля формы — <code>IFormFieldConfig[]</code>. Доп. ключи вроде <code>description</code> — через index signature."
         },
         "tblockId": {
           "description": "Тип ID блока",
           "code": "type TBlockId = string"
-        }
-      },
-      "customRenderers": {
-        "title": "Кастомные рендереры",
-        "subtitle": "Создание собственных рендереров полей для расширения функциональности форм",
-        "whatIs": {
-          "title": "Что такое кастомный рендерер?",
-          "p1": "Кастомный рендерер позволяет создать собственный UI компонент для редактирования поля в форме блока. Это особенно полезно когда стандартных типов полей недостаточно для ваших задач.",
-          "whenTitle": "Когда использовать:",
-          "whenItems": {
-            "wysiwyg": "WYSIWYG-редактор для форматированного текста",
-            "datePicker": "Выбор даты и времени (date/time picker)",
-            "libraries": "Интеграция со сторонними библиотеками (например, Chart.js, CodeMirror)",
-            "complexSelect": "Сложные компоненты выбора (многоуровневые меню, древовидный select)",
-            "customControls": "Собственные интерактивные элементы управления"
-          }
-        },
-        "interface": {
-          "title": "Интерфейс ICustomFieldRenderer",
-          "p1": "Кастомный рендерер должен реализовывать интерфейс <code>ICustomFieldRenderer</code>:",
-          "code": "interface ICustomFieldRenderer {\n  readonly id: string\n  readonly name: string\n  render(\n    container: HTMLElement,\n    context: ICustomFieldContext\n  ): ICustomFieldRenderResult | Promise<ICustomFieldRenderResult>\n}\n\ninterface ICustomFieldContext {\n  fieldName: string\n  label: string\n  value: unknown\n  required: boolean\n  options?: Record<string, unknown>  // из customFieldConfig.options\n  error?: string                      // текст ошибки валидации\n  formScope?: ICustomFieldFormScope    // formData, setField, repeater\n  onChange: (value: unknown) => void\n  onError?: (error: string | null) => void\n}\n\ninterface ICustomFieldRenderResult {\n  element: HTMLElement | string\n  getValue?: () => unknown\n  setValue?: (value: unknown) => void\n  setError?: (error: string | null) => void  // без пересоздания DOM\n  validate?: () => string | null\n  destroy?: () => void\n}"
-        },
-        "step1": {
-          "title": "Шаг 1: Создание класса рендерера",
-          "p1": "Создайте класс, реализующий интерфейс <code>ICustomFieldRenderer</code>:",
-          "code": "class WysiwygFieldRenderer implements ICustomFieldRenderer {\n  readonly id = 'wysiwyg-editor';\n  readonly name = 'WYSIWYG Editor';\n\n  render(container: HTMLElement, context: ICustomFieldContext) {\n    const { value, onChange, onError, required, options } = context;\n    \n    // Создаем элемент для редактора\n    const editorElement = document.createElement('div');\n    editorElement.className = 'wysiwyg-editor';\n    editorElement.contentEditable = 'true';\n    editorElement.innerHTML = value || '';\n    \n    // Применяем стили из options если есть\n    if (options?.height) {\n      editorElement.style.height = options.height;\n    }\n    \n    // Обработка изменений\n    editorElement.addEventListener('input', () => {\n      try {\n        const newValue = editorElement.innerHTML;\n        onChange(newValue);\n        onError?.(null); // Очищаем ошибку при успешном изменении\n      } catch (error) {\n        onError?.(error.message);\n      }\n    });\n    \n    // Обработка потери фокуса для валидации\n    editorElement.addEventListener('blur', () => {\n      if (required && !editorElement.innerHTML.trim()) {\n        onError?.('Поле обязательно для заполнения');\n      }\n    });\n    \n    container.appendChild(editorElement);\n    \n    return {\n      element: editorElement,\n      getValue: () => editorElement.innerHTML,\n      setValue: (val: string) => {\n        editorElement.innerHTML = val || '';\n      },\n      validate: () => {\n        if (required && !editorElement.innerHTML.trim()) {\n          return 'Поле обязательно для заполнения';\n        }\n        return null;\n      },\n      destroy: () => {\n        // Очистка event listeners и ресурсов\n        editorElement.remove();\n      }\n    };\n  }\n}",
-          "important": "<strong>Важно для внешних библиотек:</strong> храните экземпляр редактора локально в методе <code>render()</code>, а не как свойство класса — критично для repeater. ControlManager гарантирует DOM при вызове <code>render()</code>: инициализируйте синхронно, без <code>setTimeout</code>. <link>Подробнее — кастомные рендереры →</link>"
-        },
-        "step2": {
-          "title": "Шаг 2: Регистрация рендерера",
-          "p1": "После создания экземпляра BlockBuilder зарегистрируйте ваш рендерер:",
-          "code": "import { BlockBuilder } from '@mushket-co/block-builder';\n\n// Создание экземпляра BlockBuilder\nconst blockBuilder = new BlockBuilder({\n  blockConfigs: {\n    // ваши конфигурации блоков\n  },\n});\n\n// Регистрация одного рендерера\nblockBuilder.registerCustomFieldRenderer(new WysiwygFieldRenderer());\n\n// Или массовая регистрация нескольких рендереров\nblockBuilder.registerCustomFieldRenderers([\n  new WysiwygFieldRenderer(),\n  new DatePickerFieldRenderer(),\n  new ColorPickerFieldRenderer()\n]);",
-          "important": "<strong>Важно:</strong> регистрируйте рендереры <strong>ДО</strong> инициализации UI (до <code>autoInit: true</code> или создания компонентов). При <code>autoInit: false</code> — перед первым рендерингом формы. <link>Подробнее — регистрация →</link>"
-        },
-        "step3": {
-          "title": "Шаг 3: Использование в конфигурации блока",
-          "p1": "Используйте тип поля <code>\"custom\"</code> и укажите <code>customFieldConfig</code>:",
-          "code": "const blockConfigs = {\n  richText: {\n    title: 'Rich Text блок',\n    icon: '📝',\n    description: 'Блок с форматированным текстом',\n    fields: [\n      {\n        field: 'content',\n        label: 'Содержимое',\n        type: 'custom',\n        customFieldConfig: {\n          rendererId: 'wysiwyg-editor',  // ID зарегистрированного рендерера\n          options: {                      // Дополнительные опции передаются в context.options\n            height: '300px',\n            toolbar: true\n          }\n        },\n        defaultValue: '',\n        rules: [\n          { type: 'required', message: 'Содержимое обязательно' }\n        ]\n      }\n    ],\n    render: {\n      kind: 'html',\n      template: (props) => '<div class=\"rich-text\">' + (props.content || '') + '</div>'\n    }\n  }\n};"
-        },
-        "datePicker": {
-          "title": "Полный пример: Date Picker",
-          "p1": "Пример создания кастомного рендерера для выбора даты:",
-          "code": "class DatePickerFieldRenderer implements ICustomFieldRenderer {\n  readonly id = 'date-picker';\n  readonly name = 'Date Picker';\n\n  render(container: HTMLElement, context: ICustomFieldContext) {\n    const { value, onChange, onError, required, options } = context;\n    \n    // Создаем input элемент\n    const input = document.createElement('input');\n    input.type = 'date';\n    input.value = value || '';\n    input.className = 'date-picker-input';\n    input.required = required;\n    \n    // Применяем опции\n    if (options?.minDate) {\n      input.min = options.minDate;\n    }\n    if (options?.maxDate) {\n      input.max = options.maxDate;\n    }\n    \n    // Обработка изменений\n    input.addEventListener('change', (e) => {\n      const newValue = (e.target as HTMLInputElement).value;\n      onChange(newValue);\n      \n      // Валидация\n      if (required && !newValue) {\n        onError?.('Поле обязательно для заполнения');\n      } else {\n        onError?.(null);\n      }\n    });\n    \n    container.appendChild(input);\n    \n    return {\n      element: input,\n      getValue: () => input.value,\n      setValue: (val: string) => {\n        input.value = val || '';\n      },\n      validate: () => {\n        if (required && !input.value) {\n          return 'Поле обязательно для заполнения';\n        }\n        return null;\n      },\n      destroy: () => {\n        input.remove();\n      }\n    };\n  }\n}\n\n// Регистрация\nblockBuilder.registerCustomFieldRenderer(new DatePickerFieldRenderer());\n\n// Использование в конфигурации\nconst blockConfigs = {\n  event: {\n    title: 'Событие',\n    fields: [\n      {\n        field: 'date',\n        label: 'Дата события',\n        type: 'custom',\n        customFieldConfig: {\n          rendererId: 'date-picker',\n          options: {\n            minDate: new Date().toISOString().split('T')[0] // Минимум сегодня\n          }\n        },\n        defaultValue: '',\n        rules: [\n          { type: 'required', message: 'Дата обязательна' }\n        ]\n      }\n    ]\n  }\n};"
-        },
-        "async": {
-          "title": "Асинхронная инициализация",
-          "p1": "Если ваш рендерер требует асинхронной инициализации (например, загрузка библиотек), метод <code>render</code> может возвращать Promise:",
-          "code": "class AsyncCodeEditorRenderer implements ICustomFieldRenderer {\n  readonly id = 'code-editor';\n  readonly name = 'Code Editor';\n\n  async render(container: HTMLElement, context: ICustomFieldContext): Promise<ICustomFieldRenderResult> {\n    const { value, onChange, options } = context;\n    \n    // Динамическая загрузка библиотеки\n    const CodeMirror = await import('codemirror');\n    await import('codemirror/mode/javascript/javascript');\n    \n    // Создание редактора\n    const textarea = document.createElement('textarea');\n    container.appendChild(textarea);\n    \n    const editor = CodeMirror.fromTextArea(textarea, {\n      mode: options?.mode || 'javascript',\n      lineNumbers: true,\n      theme: options?.theme || 'default'\n    });\n    \n    editor.setValue(value || '');\n    editor.on('change', () => {\n      onChange(editor.getValue());\n    });\n    \n    return {\n      element: container,\n      getValue: () => editor.getValue(),\n      setValue: (val: string) => editor.setValue(val),\n      destroy: () => {\n        editor.toTextArea();\n      }\n    };\n  }\n}"
-        },
-        "api": {
-          "title": "API для работы с рендерерами",
-          "registerCustomFieldRenderer": "Регистрация одного кастомного рендерера поля. Принимает объект, реализующий <code>ICustomFieldRenderer</code>.",
-          "registerCustomFieldRenderers": "Массовая регистрация нескольких рендереров. Принимает массив рендереров.",
-          "getCustomFieldRenderer": "Получение рендерера по ID. Возвращает <code>ICustomFieldRenderer | null</code>.",
-          "hasCustomFieldRenderer": "Проверка существования рендерера по ID. Возвращает <code>boolean</code>.",
-          "unregisterCustomFieldRenderer": "Удаление рендерера по ID. Возвращает <code>boolean</code> (успешно ли удалено).",
-          "getAllCustomFieldRenderers": "Получение всех зарегистрированных рендереров. Возвращает <code>Map\"<\"string, ICustomFieldRenderer\">\"</code>."
-        },
-        "bestPractices": {
-          "title": "Рекомендации и лучшие практики",
-          "destroy": "Всегда очищайте ресурсы в методе <code>destroy</code> (удаляйте event listeners, таймеры и т.д.)",
-          "onChange": "Используйте <code>onChange</code> для уведомления об изменениях значения",
-          "onError": "Используйте <code>onError</code> для отображения ошибок валидации",
-          "validate": "Метод <code>validate</code> должен возвращать <code>null</code> если валидация прошла успешно",
-          "asyncRender": "Для сложных компонентов используйте асинхронный <code>render</code> с Promise",
-          "options": "Используйте <code>options</code> для передачи дополнительных параметров конфигурации"
-        }
-      },
-      "fieldTypes": {
-        "title": "Типы полей",
-        "subtitle": "Поддерживаемые типы полей для форм редактирования и создания блоков",
-        "whatIs": {
-          "title": "Что такое типы полей?",
-          "p1": "Типы полей — это элементы интерфейса, которые используются в <strong>формах редактирования и создания блоков</strong>. При конфигурации типа блока вы указываете массив полей (<code>fields</code>), и BlockBuilder автоматически генерирует форму с соответствующими элементами управления.",
-          "p2": "Эти формы используются для:",
-          "uses": {
-            "create": "Создания новых блоков через UI",
-            "edit": "Редактирования существующих блоков",
-            "props": "Настройки свойств (<code>props</code>) блока"
-          }
-        },
-        "usageExample": {
-          "title": "Пример использования",
-          "code": "const blockConfigs = {\n  text: {\n    title: 'Текстовый блок',\n    fields: [\n      {\n        field: 'content',\n        label: 'Содержимое',\n        type: 'textarea',          // Тип поля\n        placeholder: 'Введите текст...',\n        defaultValue: '',\n        rules: [\n          { type: 'required', message: 'Текст обязателен' },\n          { type: 'minLength', value: 1, message: 'Текст не может быть пустым' }\n        ]\n      },\n      {\n        field: 'fontSize',\n        label: 'Размер шрифта',\n        type: 'number',\n        defaultValue: 16,\n        rules: [\n          { type: 'required', message: 'Размер обязателен' },\n          { type: 'min', value: 8, message: 'Минимум: 8px' },\n          { type: 'max', value: 72, message: 'Максимум: 72px' }\n        ]\n      },\n      {\n        field: 'color',\n        label: 'Цвет текста',\n        type: 'color',\n        defaultValue: '#333333'\n      },\n      {\n        field: 'textAlign',\n        label: 'Выравнивание',\n        type: 'select',\n        options: [\n          { value: 'left', label: 'По левому краю' },\n          { value: 'center', label: 'По центру' },\n          { value: 'right', label: 'По правому краю' }\n        ],\n        defaultValue: 'left'\n      }\n    ]\n  }\n}"
-        },
-        "availableTypes": {
-          "title": "Доступные типы полей"
-        },
-        "parametersLabel": "Параметры:",
-        "cards": {
-          "text": {
-            "description": "Однострочное текстовое поле для ввода короткого текста (заголовки, названия)",
-            "icon": "📝",
-            "example": "{\n  field: 'title',\n  label: 'Заголовок',\n  type: 'text',\n  placeholder: 'Введите заголовок...',\n  defaultValue: ''\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "placeholder",
-              "defaultValue",
-              "rules"
-            ]
-          },
-          "textarea": {
-            "description": "Многострочное текстовое поле для длинного текста (описания, контент)",
-            "icon": "📄",
-            "example": "{\n  field: 'content',\n  label: 'Содержимое',\n  type: 'textarea',\n  placeholder: 'Введите текст...',\n  defaultValue: ''\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "placeholder",
-              "defaultValue",
-              "rules"
-            ]
-          },
-          "number": {
-            "description": "Числовое поле для ввода чисел (размеры, количество, значения)",
-            "icon": "🔢",
-            "example": "{\n  field: 'fontSize',\n  label: 'Размер шрифта',\n  type: 'number',\n  defaultValue: 16,\n  rules: [\n    { type: 'min', value: 8 },\n    { type: 'max', value: 72 }\n  ]\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "defaultValue",
-              "rules"
-            ]
-          },
-          "select": {
-            "description": "Выпадающий список для выбора одного или нескольких значений из options. Множественный выбор: multiple: true.",
-            "icon": "📋",
-            "example": "// Одиночный выбор\n{\n  field: 'textAlign',\n  label: 'Выравнивание',\n  type: 'select',\n  options: [\n    { value: 'left', label: 'По левому краю' },\n    { value: 'center', label: 'По центру' },\n    { value: 'right', label: 'По правому краю', disabled: true }\n  ],\n  defaultValue: 'left'\n}\n\n// Множественный выбор\n{\n  field: 'topics',\n  label: 'Темы',\n  type: 'select',\n  multiple: true,\n  options: [\n    { value: 'dev', label: 'Разработка' },\n    { value: 'design', label: 'Дизайн' }\n  ],\n  defaultValue: ['dev']\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "options",
-              "multiple",
-              "defaultValue",
-              "rules"
-            ]
-          },
-          "checkbox": {
-            "description": "Чекбокс для булевых значений (true/false)",
-            "icon": "☑️",
-            "example": "{\n  field: 'visible',\n  label: 'Видимый',\n  type: 'checkbox',\n  defaultValue: true\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "defaultValue"
-            ]
-          },
-          "radio": {
-            "description": "Радио-кнопки для выбора одного значения из ограниченного набора",
-            "icon": "🔘",
-            "example": "{\n  field: 'position',\n  label: 'Позиция',\n  type: 'radio',\n  options: [\n    { value: 'top', label: 'Сверху' },\n    { value: 'bottom', label: 'Снизу' }\n  ],\n  defaultValue: 'top'\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "options",
-              "defaultValue"
-            ]
-          },
-          "color": {
-            "description": "Выбор цвета через color picker (HEX формат)",
-            "icon": "🎨",
-            "example": "{\n  field: 'backgroundColor',\n  label: 'Цвет фона',\n  type: 'color',\n  defaultValue: '#ffffff'\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "defaultValue"
-            ]
-          },
-          "image": {
-            "description": "Загрузка изображения с поддержкой base64 и серверной загрузки, автоматическим preview и валидацией",
-            "icon": "🖼️",
-            "example": "{\n  field: 'image',\n  label: 'Изображение',\n  type: 'image',\n  defaultValue: '',\n  fileUploadConfig: {\n    uploadUrl: '/api/upload',\n    maxFileSize: 5 * 1024 * 1024,\n    accept: 'image/*',\n    responseMapper: (response) => ({\n      src: response.url\n    })\n  }\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "defaultValue",
-              "fileUploadConfig",
-              "multiple",
-              "rules"
-            ]
-          },
-          "file": {
-            "description": "Загрузка файлов с отдельным UI (список имён, не превью). multiple и maxCount.",
-            "icon": "📄",
-            "example": "{\n  field: 'files',\n  label: 'Файлы',\n  type: 'file',\n  multiple: true,\n  fileUploadConfig: { uploadUrl: '/api/upload', maxCount: 5 }\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "multiple",
-              "fileUploadConfig",
-              "rules"
-            ]
-          },
-          "blockAnchor": {
-            "description": "Якорь #block-id или URL в форме. Скролл, preventDefault и поведение ссылки — в компоненте блока пользователя.",
-            "icon": "🔗",
-            "example": "{\n  field: 'url',\n  type: 'block-anchor',\n  blockAnchorConfig: { allowCustomUrl: true }\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "blockAnchorConfig",
-              "rules"
-            ]
-          },
-          "matrixTable": {
-            "description": "Редактор таблицы (колонки + строки)",
-            "icon": "📋",
-            "example": "{\n  field: 'tableMatrix',\n  type: 'matrix-table',\n  matrixTableConfig: { imageUploadConfig: { maxFileSize: 5242880 } }\n}",
-            "parameters": [
-              "field",
-              "label",
-              "type",
-              "matrixTableConfig",
-              "defaultValue",
-              "rules"
-            ]
-          }
-        },
-        "commonParams": {
-          "title": "Общие параметры полей",
-          "field": {
-            "badge": "(обязательный)",
-            "description": "Имя поля, которое будет использоваться в <code>props</code> блока. Должно быть уникальным в рамках конфигурации блока."
-          },
-          "label": {
-            "badge": "(обязательный)",
-            "description": "Отображаемое название поля в форме. Используется для пользовательского интерфейса."
-          },
-          "type": {
-            "badge": "(обязательный)",
-            "description": "Тип поля: <code>\"text\"</code>, <code>\"textarea\"</code>, <code>\"number\"</code>, <code>\"select\"</code>, <code>\"checkbox\"</code>, <code>\"radio\"</code>, <code>\"color\"</code>, <code>\"image\"</code>, <code>\"file\"</code>, <code>\"block-anchor\"</code>, <code>\"matrix-table\"</code>"
-          },
-          "defaultValue": {
-            "badge": "(опциональный)",
-            "description": "Значение по умолчанию, которое будет использоваться при создании нового блока."
-          },
-          "placeholder": {
-            "badge": "(опциональный)",
-            "description": "Подсказка, отображаемая в пустом поле (для типов <code>text</code> и <code>textarea</code>)."
-          },
-          "options": {
-            "badge": "(для select, radio)",
-            "description": "Массив опций в формате [{ value: '...', label: '...', disabled?: boolean }].",
-            "items": {
-              "value": "<strong>value</strong> — значение, сохраняемое в props (string | number)",
-              "label": "<strong>label</strong> — отображаемый текст (string)",
-              "disabled": "<strong>disabled</strong> — опционально, отключает опцию для выбора (boolean)"
-            }
-          },
-          "multiple": {
-            "badge": "(для select, image, file; опционально)",
-            "description": "Включает множественный режим. По умолчанию <code>false</code>.",
-            "items": {
-              "select": "<strong>select:</strong> в <code>props</code> — массив <code>value</code>; <code>defaultValue: []</code> или массив начальных значений",
-              "file": "<strong>image / file:</strong> несколько загруженных файлов"
-            }
-          },
-          "rules": {
-            "badge": "(опциональный)",
-            "description": "Массив правил валидации. Поддерживаемые типы:",
-            "items": {
-              "required": "поле обязательно",
-              "minLength": "минимальная длина",
-              "maxLength": "максимальная длина",
-              "min": "минимальное значение (для number)",
-              "max": "максимальное значение (для number)"
-            }
-          }
         }
       },
       "formFields": {
@@ -1977,7 +2123,8 @@
           "registerCoreLabel": "<strong>Core / свой UI:</strong>",
           "registerCoreCode": "import { BlockBuilder } from '@mushket-co/block-builder/core'\n\nconst blockBuilder = new BlockBuilder({ blockConfigs })\nblockBuilder.registerCustomFieldRenderer(new StarRatingRenderer())",
           "registerFrameworkLabel": "<strong>Vue / React</strong> — отдельный реестр, проп <code>customFieldRendererRegistry</code> у <code>BlockBuilderComponent</code>:",
-          "registerFrameworkCode": "import {\n  BlockBuilderComponent,\n  createBlockManagementUseCase,\n  CustomFieldRendererRegistry,\n} from '@mushket-co/block-builder/vue' // или /react\n\nconst registry = new CustomFieldRendererRegistry()\nregistry.register(new StarRatingRenderer())\n\n<BlockBuilderComponent\n  customFieldRendererRegistry={registry}\n  blockManagementUseCase={createBlockManagementUseCase()}\n  /* ... */\n/>",
+          "registerVueCode": "<template>\n  <BlockBuilderComponent\n    :custom-field-renderer-registry=\"registry\"\n    :block-management-use-case=\"blockManagementUseCase\"\n  />\n</template>\n\n<script setup>\nimport {\n  BlockBuilderComponent,\n  createBlockManagementUseCase,\n  CustomFieldRendererRegistry,\n} from '@mushket-co/block-builder/vue'\n\nconst registry = new CustomFieldRendererRegistry()\nregistry.register(new StarRatingRenderer())\nconst blockManagementUseCase = createBlockManagementUseCase()\n</script>",
+          "registerReactCode": "import {\n  BlockBuilderComponent,\n  createBlockManagementUseCase,\n  CustomFieldRendererRegistry,\n} from '@mushket-co/block-builder/react'\n\nconst registry = new CustomFieldRendererRegistry()\nregistry.register(new StarRatingRenderer())\nconst blockManagementUseCase = createBlockManagementUseCase()\n\n<BlockBuilderComponent\n  customFieldRendererRegistry={registry}\n  blockManagementUseCase={blockManagementUseCase}\n/>",
           "importantNote": "<strong>Важно:</strong> регистрируйте рендереры <strong>до</strong> первого открытия формы. При внешних библиотеках храните инстанс локально в <code>render()</code>, не в свойстве класса; инициализируйте синхронно — без <code>setTimeout</code>. <anchor>custom-register</anchor>",
           "exampleTitle": "Пример: star-rating",
           "exampleCode": "class StarRatingRenderer implements ICustomFieldRenderer {\n  readonly id = 'star-rating'\n  readonly name = 'Star Rating'\n\n  render(container: HTMLElement, context: ICustomFieldContext): ICustomFieldRenderResult {\n    const { value, onChange, options } = context\n    const max = Number(options?.max ?? 5)\n    const root = document.createElement('div')\n    root.className = 'flex gap-1'\n\n    const setRating = (n: number) => {\n      root.querySelectorAll('button').forEach((btn, i) => {\n        btn.setAttribute('aria-pressed', String(i < n))\n      })\n      onChange(n)\n    }\n\n    for (let i = 1; i <= max; i++) {\n      const btn = document.createElement('button')\n      btn.type = 'button'\n      btn.textContent = '★'\n      btn.addEventListener('click', () => setRating(i))\n      root.appendChild(btn)\n    }\n\n    setRating(Number(value ?? 0))\n    container.appendChild(root)\n\n    return {\n      element: root,\n      getValue: () => Number(value ?? 0),\n      destroy: () => root.remove(),\n    }\n  }\n}",

@@ -5,6 +5,7 @@ import CodeBlock from '@/components/CodeBlock';
 import { Link } from '@/i18n/navigation';
 import { GITHUB_EXAMPLES, GITHUB_EXAMPLES_NEXT } from '@/lib/urls';
 import DocHeading from '../components/DocHeading';
+import NextPageLink from '../components/NextPageLink';
 import { docRichTags, renderDocRichString } from '../components/docRichTags';
 
 const SSR_UTIL_KEYS = [
@@ -12,10 +13,20 @@ const SSR_UTIL_KEYS = [
   'enrichBlockForDisplay',
   'seedRepositoryFromBlocks',
   'enableViewportBreakpointDetection',
+  'canRenderVueBlock',
+  'canRenderReactBlock',
+  'resolveVueComponentForBlock',
+  'resolveReactComponentForBlock',
+  'getDefaultBreakpoint',
+  'isClient',
+  'isServer',
+  'isViewportBreakpointDetectionEnabled',
+  'resetViewportBreakpointDetection',
 ] as const;
 
 export default function NextPage() {
   const t = useTranslations('docsPages.next');
+  const tSidebar = useTranslations('docs.sidebar');
 
   return (
     <div className="space-y-8">
@@ -184,6 +195,13 @@ export async function POST(request: Request) {
           })}
         </p>
       </section>
+
+      <NextPageLink
+        nextSection="react-components"
+        nextTitle={tSidebar('components')}
+        nextHref="/docs/react/components"
+        color="blue"
+      />
     </div>
   );
 }

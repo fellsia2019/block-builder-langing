@@ -41,6 +41,12 @@ export default function Navigation() {
 
           <div className="hidden md:flex items-center space-x-6">
             <Link
+              href="/#what-is"
+              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+            >
+              {t('about')}
+            </Link>
+            <Link
               href="/#features"
               className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >

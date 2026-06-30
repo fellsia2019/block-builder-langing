@@ -78,7 +78,7 @@ export default function Architecture() {
                 <div className="flex items-center justify-center space-x-4">
                   <div className="flex-1 p-4 bg-pink-100 dark:bg-pink-900 rounded-lg text-center">
                     <div className="font-semibold text-pink-700 dark:text-pink-300">UI</div>
-                    <div className="text-xs text-pink-600 dark:text-pink-400 mt-1">Controllers, Components</div>
+                    <div className="text-xs text-pink-600 dark:text-pink-400 mt-1">{t('diagram.uiSublabel')}</div>
                   </div>
                   <div className="text-2xl text-gray-400">→</div>
                   <div className="flex-1 p-4 bg-primary-100 dark:bg-primary-900 rounded-lg text-center">
@@ -122,7 +122,7 @@ export default function Architecture() {
               <div className="mb-2 transform hover:scale-110 transition-transform flex justify-center">
                 <Icon name="flask" size={48} className="text-primary-600 dark:text-primary-400" />
               </div>
-              <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-2">100%</div>
+              <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-2">{t('stats.testsValue')}</div>
               <div className="text-gray-600 dark:text-gray-400">{t('stats.tests')}</div>
             </div>
           </AnimateOnScroll>
